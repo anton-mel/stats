@@ -12,10 +12,10 @@ on:
   workflow_dispatch:
     inputs:
       pie_commit: { description: "pie commit (empty: pie main)", required: false, default: "" }
-      models: { description: "comma-separated pie model ids (empty: config.json)", required: false, default: "" }
+      models: { description: "comma-separated pie model ids (empty: config.json); their Ollama arms follow", required: false, default: "" }
       macs: { description: "comma-separated Mac ids (empty: config.json)", required: false, default: "" }
       benchmarks: { description: "comma-separated workload ids (empty: config.json)", required: false, default: "" }
-      engines: { description: "engines to run", required: false, default: "pie" }
+      engines: { description: "pie,ollama (default both)", required: false, default: "pie,ollama" }
 
 env:
   PIE_REPO: ${{ vars.PIE_REPO || 'pie-project/pie' }}
@@ -46,9 +46,9 @@ jobs:
           [ -n "$COMMIT" ] || COMMIT=$(gh api "repos/$PIE_REPO/commits/main" --jq .sha)
           [[ "$COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::pie_commit must be a full sha, got '$COMMIT'"; exit 1; }
           models=$(jq -r '.models // [] | join(",")' config.json); macs=$(jq -r '.machines // [] | join(",")' config.json); workloads=$(jq -r '.benchmarks // [] | join(",")' config.json)
-          engines=pie
+          engines=pie,ollama
           if [ "${{ github.event_name }}" = workflow_dispatch ]; then
-            [ -n "$IN_MODELS" ] && models=$IN_MODELS; [ -n "$IN_MACS" ] && macs=$IN_MACS; [ -n "$IN_WORKLOADS" ] && workloads=$IN_WORKLOADS; engines=${IN_ENGINES:-pie}
+            [ -n "$IN_MODELS" ] && models=$IN_MODELS; [ -n "$IN_MACS" ] && macs=$IN_MACS; [ -n "$IN_WORKLOADS" ] && workloads=$IN_WORKLOADS; engines=${IN_ENGINES:-pie,ollama}
           fi
           [[ "$models$macs$workloads$engines" =~ ^[a-z0-9.,-]*$ ]] || { echo "::error::bad input"; exit 1; }
           artifacts=$(.venv/bin/python -c "import sys,yaml; want=set(filter(None,sys.argv[1].split(','))); arts=yaml.safe_load(open('matrix/models.yaml'))['artifacts']; print(','.join(a['id'] for a in arts if a['id'] in want or a.get('baseline_of') in want))" "$models")

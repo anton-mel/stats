@@ -4,3 +4,10 @@ engines:
     formats: [hf_safetensors, gguf, mlx]
     tiers: [targeted]
     recipe: default
+  - id: ollama
+    os: [macos]
+    formats: [ollama]
+    tiers: [targeted]
+    recipe: competitive
+    pin: "0.34.4"
+    release_source: github:ollama/ollama

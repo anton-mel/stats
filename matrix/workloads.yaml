@@ -4,6 +4,23 @@ workloads:
     params: {prefill: 128, decode: 64, rounds: 2}
     est_minutes: 0.5
 
+  - id: ob-story-200
+    kind: single_stream
+    params:
+      prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
+      decode: 200
+      requests: 6
+      warmup: 1
+    est_minutes: 1
+  - id: ob-512-200
+    kind: single_stream
+    params: {prefill: 512, decode: 200, requests: 6, warmup: 1}
+    est_minutes: 1
+  - id: ob-2048-200
+    kind: single_stream
+    params: {prefill: 2048, decode: 200, requests: 6, warmup: 1}
+    est_minutes: 1.5
+
   - id: ss-128-64
     kind: single_stream
     params: {prefill: 128, decode: 64}

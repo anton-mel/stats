@@ -56,6 +56,11 @@ jobs:
           else python3 -m venv .venv && .venv/bin/pip install -q -e "."; fi
       - name: pie root
         run: echo "PIE_ROOT=${PIE_ROOT:-$HOME/pie-stats}" >> "$GITHUB_ENV"
+      - name: ollama
+        run: |
+          bin=$(command -v ollama || echo /usr/local/bin/ollama)
+          if [ -x "$bin" ]; then echo "OLLAMA_BIN=$bin" >> "$GITHUB_ENV"; "$bin" --version || true
+          else echo "::warning::ollama is not installed on this Mac; its cells will fail to load"; fi
       - name: run
         run: env ${{ inputs.pie_env }} .venv/bin/pie-evals-node run --job "jobs/${{ matrix.job_id }}.json" --pie-root "$PIE_ROOT" --out "out/${{ matrix.job_id }}" --download
         env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}" }

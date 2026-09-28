@@ -6,6 +6,16 @@ artifacts:
     source_format: mlx
     pie_sku: gemma4-26b-a4b-u4g64-kv-bf16
     expected_gib: 14.29
+  - id: gemma-4-26b-a4b-ollama
+    base_model: mlx-community/gemma-4-26b-a4b-it-4bit
+    family: gemma4_moe
+    scheme: gguf_q4_k_m
+    source_format: ollama
+    ollama_tag: gemma4:26b
+    baseline_of: gemma-4-26b-a4b-mlx4
+    baseline_label: Ollama
+    expected_gib: 15.78
+
   - id: muse-glimmer-30b-mlx4
     base_model: mlx-community/Muse-Glimmer-30B-4bit
     family: muse_glimmer
@@ -13,6 +23,16 @@ artifacts:
     source_format: mlx
     pie_sku: muse-glimmer-30b-u4g64-kv-bf16
     expected_gib: 18.08
+  - id: muse-glimmer-30b-ollama
+    base_model: mlx-community/Muse-Glimmer-30B-4bit
+    family: muse_glimmer
+    scheme: gguf_q4_k_m
+    source_format: ollama
+    ollama_tag: muse-glimmer:30b
+    baseline_of: muse-glimmer-30b-mlx4
+    baseline_label: Ollama
+    expected_gib: 15.61
+
   - id: qwen3.6-27b-mlx4
     base_model: mlx-community/Qwen3.6-27B-4bit
     family: qwen3_6
@@ -20,9 +40,29 @@ artifacts:
     source_format: mlx
     expected_gib: 14.09
     max_context: 4096
+  - id: qwen3.6-27b-ollama
+    base_model: mlx-community/Qwen3.6-27B-4bit
+    family: qwen3_6
+    scheme: gguf_q4_k_m
+    source_format: ollama
+    ollama_tag: qwen3.6:27b
+    baseline_of: qwen3.6-27b-mlx4
+    baseline_label: Ollama
+    expected_gib: 15.68
+    max_context: 4096
+
   - id: gemma-4-e4b-bf16
     base_model: google/gemma-4-E4B-it
     family: gemma4
     scheme: bf16
     pie_sku: gemma4-e4b-bf16-kv-bf16
     expected_gib: 8.0
+  - id: gemma-4-e4b-ollama-bf16
+    base_model: google/gemma-4-E4B-it
+    family: gemma4
+    scheme: bf16
+    source_format: ollama
+    ollama_tag: gemma4:e4b-it-bf16
+    baseline_of: gemma-4-e4b-bf16
+    baseline_label: Ollama
+    expected_gib: 14.94
