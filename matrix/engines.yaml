@@ -1,0 +1,6 @@
+engines:
+  - id: pie
+    os: [macos]
+    formats: [hf_safetensors, gguf, mlx]
+    tiers: [targeted]
+    recipe: default
