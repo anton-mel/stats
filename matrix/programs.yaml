@@ -1,0 +1,6 @@
+programs:
+  - id: text-completion-bench
+    path: examples/text-completion-bench
+    category: serving
+    pie_only: false
+    accuracy_gate: none

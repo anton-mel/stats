@@ -1,0 +1,41 @@
+platforms:
+  - id: m1-max-32g
+    os: macos
+    backend: metal
+    accelerator: Apple M1 Max
+    arch: apple7
+    memory_gib: 32
+    interconnect: uma
+    runner_labels: [self-hosted, macos, m1-max-32g]
+  - id: m2-max
+    os: macos
+    backend: metal
+    accelerator: Apple M2 Max
+    arch: apple8
+    memory_gib: 64
+    interconnect: uma
+    runner_labels: [self-hosted, macos, m2-max]
+  - id: m4-pro-48g
+    os: macos
+    backend: metal
+    accelerator: Apple M4 Pro
+    arch: apple9
+    memory_gib: 48
+    interconnect: uma
+    runner_labels: [self-hosted, macos, m4-pro-48g]
+  - id: m5-max-48g
+    os: macos
+    backend: metal
+    accelerator: Apple M5 Max
+    arch: apple10
+    memory_gib: 48
+    interconnect: uma
+    runner_labels: [self-hosted, macos, m5-max-48g]
+  - id: m5-max-128g
+    os: macos
+    backend: metal
+    accelerator: Apple M5 Max
+    arch: apple10
+    memory_gib: 128
+    interconnect: uma
+    runner_labels: [self-hosted, macos, m5-max-128g]

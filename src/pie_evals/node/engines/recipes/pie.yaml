@@ -1,0 +1,18 @@
+default:
+  knobs:
+    report_timing:
+      value: true
+      rationale: Client stamps for TTFT and token gaps, same points the Ollama client stamps.
+    pretokenized_prompts:
+      value: false
+      rationale: pie tokenizes in the guest, Ollama in its server.
+  family:
+    qwen3_6:
+      knobs: {}
+      backend:
+        metal:
+          knobs:
+            total_pages:
+              value: 1024
+            engine_option:
+              value: {max_state_slots: 8}

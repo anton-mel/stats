@@ -1,0 +1,7 @@
+job_budget_minutes: 60
+kill_factor: 2.0
+
+suites:
+  targeted:
+    max_jobs_per_platform: 20
+    enforce_budget: false
