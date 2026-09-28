@@ -1,0 +1,14 @@
+{
+  "models": [
+    "gemma-4-26b-a4b-mlx4",
+    "muse-glimmer-30b-mlx4"
+  ],
+  "machines": [
+    "m5-max-48g"
+  ],
+  "benchmarks": [
+    "ss-128-64",
+    "lc-2k-128",
+    "c8"
+  ]
+}

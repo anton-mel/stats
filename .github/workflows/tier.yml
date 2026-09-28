@@ -1,0 +1,93 @@
+name: tier
+on:
+  workflow_call:
+    inputs:
+      tier: { type: string, required: true }
+      pie_commit: { type: string, required: true }
+      platforms: { type: string, required: false, default: "" }
+      engines: { type: string, required: false, default: "" }
+      artifacts: { type: string, required: false, default: "" }
+      workloads: { type: string, required: false, default: "" }
+      persist: { type: boolean, required: false, default: true }
+      skip_recorded: { type: boolean, required: false, default: true }
+      pie_env: { type: string, required: false, default: "" }
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.jobs.outputs.matrix }}
+      bench_timeout_minutes: ${{ steps.jobs.outputs.bench_timeout_minutes }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv venv && uv pip install -e ".[orchestrate]"
+      - run: .venv/bin/pie-evals check
+      - name: job specs
+        id: jobs
+        env: { GH_TOKEN: "${{ secrets.GH_RUNNER_PAT || github.token }}" }
+        run: |
+          ARGS=""
+          for p in $(echo "${{ inputs.platforms }}" | tr ',' ' '); do ARGS="$ARGS --platform $p"; done
+          for e in $(echo "${{ inputs.engines }}" | tr ',' ' '); do ARGS="$ARGS --engine $e"; done
+          for a in $(echo "${{ inputs.artifacts }}" | tr ',' ' '); do ARGS="$ARGS --artifact $a"; done
+          for w in $(echo "${{ inputs.workloads }}" | tr ',' ' '); do ARGS="$ARGS --workload $w"; done
+          [ "${{ inputs.skip_recorded }}" = "true" ] && ARGS="$ARGS --skip-recorded"
+          .venv/bin/pie-evals jobs --tier "${{ inputs.tier }}" --pie-commit "${{ inputs.pie_commit }}" --out jobs --skip-unavailable $ARGS
+          echo "matrix=$(cat jobs/gh-matrix.json)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with: { name: jobs, path: jobs/ }
+
+  bench:
+    needs: expand
+    if: fromJson(needs.expand.outputs.matrix).include[0] != null
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.expand.outputs.matrix) }}
+    runs-on: ${{ matrix.labels }}
+    timeout-minutes: ${{ fromJSON(needs.expand.outputs.bench_timeout_minutes) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: jobs, path: jobs }
+      - name: install harness
+        run: |
+          if command -v uv >/dev/null; then uv venv --quiet .venv && uv pip install --quiet --python .venv/bin/python -e "."
+          else python3 -m venv .venv && .venv/bin/pip install -q -e "."; fi
+      - name: pie root
+        run: echo "PIE_ROOT=${PIE_ROOT:-$HOME/pie-stats}" >> "$GITHUB_ENV"
+      - name: run
+        run: env ${{ inputs.pie_env }} .venv/bin/pie-evals-node run --job "jobs/${{ matrix.job_id }}.json" --pie-root "$PIE_ROOT" --out "out/${{ matrix.job_id }}" --download
+        env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}" }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "out-${{ matrix.job_id }}", path: "out/${{ matrix.job_id }}", retention-days: 30 }
+
+  collect:
+    needs: [expand, bench]
+    if: always() && needs.expand.result == 'success'
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, fetch-depth: 0 }
+      - uses: astral-sh/setup-uv@v3
+      - run: uv venv && uv pip install -e ".[orchestrate]"
+      - uses: actions/download-artifact@v4
+        with: { pattern: "out-*", path: out }
+      - name: import into store
+        run: |
+          shopt -s nullglob
+          dirs=(out/out-*)
+          if [ ${#dirs[@]} -gt 0 ]; then .venv/bin/pie-evals collect --tier "${{ inputs.tier }}" "${dirs[@]}"; else echo "::warning::no node outputs"; fi
+      - name: reports
+        id: report
+        run: .venv/bin/pie-evals report --tier "${{ inputs.tier }}" --out reports
+      - name: commit store and reports
+        if: inputs.persist
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p store/records reports
+          git add -A -- store reports
+          git diff --cached --quiet || git commit -m "store: ${{ inputs.tier }} run ${{ github.run_id }}"
+          git pull --rebase --quiet origin main && git push --quiet origin HEAD:main

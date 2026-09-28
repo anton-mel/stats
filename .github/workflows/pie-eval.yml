@@ -1,0 +1,70 @@
+name: pie eval
+run-name: pie eval ${{ github.event.client_payload.pie_commit || inputs.pie_commit || 'pie main' }}
+permissions: { contents: write, actions: read }
+concurrency:
+  group: pie-eval-${{ github.event.client_payload.pie_commit || github.event.inputs.pie_commit || 'main' }}
+  cancel-in-progress: false
+on:
+  repository_dispatch:
+    types: [pie-eval]
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      pie_commit: { description: "pie commit (empty: pie main)", required: false, default: "" }
+      models: { description: "comma-separated pie model ids (empty: config.json)", required: false, default: "" }
+      macs: { description: "comma-separated Mac ids (empty: config.json)", required: false, default: "" }
+      benchmarks: { description: "comma-separated workload ids (empty: config.json)", required: false, default: "" }
+      engines: { description: "engines to run", required: false, default: "pie" }
+
+env:
+  PIE_REPO: ${{ vars.PIE_REPO || 'pie-project/pie' }}
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    outputs:
+      commit: ${{ steps.p.outputs.commit }}
+      artifacts: ${{ steps.p.outputs.artifacts }}
+      macs: ${{ steps.p.outputs.macs }}
+      skip: ${{ steps.p.outputs.skip }}
+      workloads: ${{ steps.p.outputs.workloads }}
+      engines: ${{ steps.p.outputs.engines }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv venv && uv pip install -e ".[orchestrate]"
+      - id: p
+        env:
+          GH_TOKEN: ${{ secrets.GH_RUNNER_PAT || github.token }}
+          COMMIT: ${{ github.event.client_payload.pie_commit || github.event.inputs.pie_commit }}
+          IN_MODELS: ${{ github.event.inputs.models }}
+          IN_MACS: ${{ github.event.inputs.macs }}
+          IN_WORKLOADS: ${{ github.event.inputs.benchmarks }}
+          IN_ENGINES: ${{ github.event.inputs.engines }}
+        run: |
+          [ -n "$COMMIT" ] || COMMIT=$(gh api "repos/$PIE_REPO/commits/main" --jq .sha)
+          [[ "$COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::pie_commit must be a full sha, got '$COMMIT'"; exit 1; }
+          models=$(jq -r '.models // [] | join(",")' config.json); macs=$(jq -r '.machines // [] | join(",")' config.json); workloads=$(jq -r '.benchmarks // [] | join(",")' config.json)
+          engines=pie
+          if [ "${{ github.event_name }}" = workflow_dispatch ]; then
+            [ -n "$IN_MODELS" ] && models=$IN_MODELS; [ -n "$IN_MACS" ] && macs=$IN_MACS; [ -n "$IN_WORKLOADS" ] && workloads=$IN_WORKLOADS; engines=${IN_ENGINES:-pie}
+          fi
+          [[ "$models$macs$workloads$engines" =~ ^[a-z0-9.,-]*$ ]] || { echo "::error::bad input"; exit 1; }
+          artifacts=$(.venv/bin/python -c "import sys,yaml; want=set(filter(None,sys.argv[1].split(','))); arts=yaml.safe_load(open('matrix/models.yaml'))['artifacts']; print(','.join(a['id'] for a in arts if a['id'] in want or a.get('baseline_of') in want))" "$models")
+          skip=false; [ -n "$artifacts" ] && [ -n "$workloads" ] || skip=true
+          echo "commit=$COMMIT models=$models artifacts=$artifacts macs=${macs:-every connected Mac} benchmarks=$workloads engines=$engines skip=$skip" | tee -a "$GITHUB_STEP_SUMMARY"
+          { echo "commit=$COMMIT"; echo "artifacts=$artifacts"; echo "macs=$macs"; echo "workloads=$workloads"; echo "engines=$engines"; echo "skip=$skip"; } >> "$GITHUB_OUTPUT"
+
+  run:
+    needs: start
+    if: needs.start.outputs.skip != 'true'
+    uses: ./.github/workflows/tier.yml
+    with:
+      tier: targeted
+      pie_commit: ${{ needs.start.outputs.commit }}
+      artifacts: ${{ needs.start.outputs.artifacts }}
+      platforms: ${{ needs.start.outputs.macs }}
+      workloads: ${{ needs.start.outputs.workloads }}
+      engines: ${{ needs.start.outputs.engines }}
+    secrets: inherit
