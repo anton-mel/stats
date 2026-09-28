@@ -270,6 +270,10 @@ class NodeRunner:
             snapshot = None
             try:
                 snapshot = self.snapshot_dir(cells[0])
+                if cells[0].artifact.ollama_tag and self.download:
+                    from .engines.ollama import ensure_ollama_model
+
+                    ensure_ollama_model(cells[0].artifact.ollama_tag, pull=True, log=self.log)
             except EngineLaunchError as e:
                 for c in cells:
                     self.emit(self._failed(c, e.error_class, str(e), fingerprint))

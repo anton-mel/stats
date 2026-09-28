@@ -99,6 +99,10 @@ def prepare_cmd(tier, matrix_dir, platforms, engines_f, programs_f, pie_root, pi
     for aid, art in sorted(arts.items()):
         try:
             p = ensure_snapshot(art, cache, log=say)
+            if art.ollama_tag:
+                from .engines.ollama import ensure_ollama_model
+
+                ensure_ollama_model(art.ollama_tag, pull=True, log=say)
             if pie_commit and needs_import(art) and pie_bin.exists():
                 p = ensure_artifact(art, p, pie_bin, pie_commit, log=say)
             click.echo(f"ok    {aid}: {p}")

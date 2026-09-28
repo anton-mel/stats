@@ -13,9 +13,10 @@ import json
 import os
 from pathlib import Path
 
-from pie_evals.schema import ArtifactSpec
+from pie_evals.schema import ArtifactSpec, SourceFormat
 
 WEIGHT_PATTERNS = ["*.json", "*.safetensors", "*.txt", "*.model", "*.tiktoken", "tokenizer*", "*.py", "*.jinja"]
+TOKENIZER_PATTERNS = ["*.json", "*.txt", "*.model", "*.tiktoken", "tokenizer*", "*.jinja"]
 
 
 def num_layers_of(snapshot_dir: str | Path) -> int | None:
@@ -52,6 +53,8 @@ def has_weights(snapshot: Path, artifact: ArtifactSpec) -> bool:
     carries its config.json and would be served: vLLM then boots into
     "Cannot find any model weights". ``exists`` follows the symlink. An
     Ollama artifact needs only the tokenizer."""
+    if artifact.source_format == SourceFormat.OLLAMA:
+        return any((snapshot / f).exists() for f in ("tokenizer.json", "tokenizer.model", "tokenizer_config.json"))
     if artifact.gguf_file:
         return (snapshot / artifact.gguf_file).exists()
     return any(f.exists() for f in snapshot.glob("*.safetensors"))
@@ -73,7 +76,9 @@ def ensure_snapshot(artifact: ArtifactSpec, hf_cache: Path, *, download: bool = 
 
     log(f"download: {artifact.base_model}@{artifact.revision or 'main'} -> {hf_cache}")
     kw = {"revision": artifact.revision} if artifact.revision else {}
-    if artifact.gguf_file:
+    if artifact.source_format == SourceFormat.OLLAMA:
+        kw["allow_patterns"] = TOKENIZER_PATTERNS
+    elif artifact.gguf_file:
         kw["allow_patterns"] = ["*.json", artifact.gguf_file]
     else:
         kw["allow_patterns"] = WEIGHT_PATTERNS

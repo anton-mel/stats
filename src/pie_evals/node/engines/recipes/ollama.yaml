@@ -1,0 +1,33 @@
+default:
+  knobs:
+    num_parallel:
+      value: null
+      rationale: Ollama default, 1 slot at 0.34.
+    context_length:
+      value: null
+      rationale: Ollama default context for the model.
+    flash_attention:
+      value: null
+      rationale: Ollama default, off at 0.34.
+    kv_cache_type:
+      value: null
+      rationale: Ollama default, f16.
+    keep_alive:
+      value: 30m
+      rationale: Model stays loaded across the cells of one process.
+    options:
+      value: {}
+      rationale: Modelfile defaults stay as shipped, including gemma4 MTP drafting.
+    flush_cache:
+      value: true
+      rationale: Single stream prefill must not be a prefix cache hit; pie keeps no prefix across requests.
+
+competitive:
+  extends: default
+  knobs:
+    num_parallel:
+      value: "$serve_concurrency"
+      rationale: One slot per concurrent client, as pie admits every request.
+    context_length:
+      value: "$serve_context"
+      rationale: Longest shape of the process, rounded like pie max-model-len; the model default does not fit KV on 48 GB.
