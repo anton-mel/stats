@@ -496,10 +496,7 @@ async function addMac() {
     `<p>Open Terminal on the Mac you want to add and run:</p>` +
     `<div class="cmd"><code id="cmd">${esc(cmd)}</code><button class="act" id="copy">Copy</button></div>` +
     `<p class="muted">The token works once and expires at ${esc(expires)}. The script finds the chip and memory, installs the GitHub runner as a service and registers it here.</p>` +
-    `<ul class="steps" id="steps">` +
-    `<li class="now" data-s="wait"><span class="st"></span><span>Waiting for the Mac to register</span></li>` +
-    `<li data-s="reg"><span class="st"></span><span>Registered</span></li>` +
-    `<li data-s="online"><span class="st"></span><span>Connected and ready for benchmarks</span></li></ul>`);
+    `<ul class="steps" id="steps"><li class="now" data-s="mac"><span class="st"></span><span>Waiting for the Mac to connect</span></li></ul>`);
   document.getElementById("copy").onclick = async e => {
     try { await navigator.clipboard.writeText(cmd); e.target.textContent = "Copied"; } catch { e.target.textContent = "Select and copy"; }
   };
@@ -516,14 +513,13 @@ async function addMac() {
     if (!fresh) return;
     const labels = fresh.labels.map(l => l.name);
     const plat = labels.find(l => DATA.platforms.includes(l));
-    set("wait", "done", "Mac found");
-    set("reg", "done", `Registered as <code>${esc(fresh.name)}</code>` + (plat ? ` on platform <code>${esc(plat)}</code>` : ` <span class="muted">(its platform is not in matrix/platforms.yaml yet)</span>`));
+    const where = plat ? ` on <code>${esc(plat)}</code>` : ` <span class="muted">(platform not in matrix/platforms.yaml yet)</span>`;
     if (fresh.status === "online") {
-      set("online", "done", fresh.busy ? "Connected, running a job now" : "Connected and idle, ready for benchmarks");
+      set("mac", "done", `<code>${esc(fresh.name)}</code> connected${where}`);
       stopMacPoll();
       await refreshPool();
       draw();
-    } else set("online", "now", "Registered, waiting for the service to come online");
+    } else set("mac", "now", `<code>${esc(fresh.name)}</code> registered, starting${where}`);
   };
   macPoll = setInterval(tick, 3000);
 }
