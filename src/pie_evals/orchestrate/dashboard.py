@@ -200,7 +200,19 @@ const TABS = ["Pipeline", "History", "Machines", "People"];
 const NL = String.fromCharCode(10);
 const REPO_NAME = DATA.repo.split("/").pop();
 const esc = x => String(x ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-const RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m.id, m])).values()];
+let RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m.id, m])).values()];
+async function refreshPool() {
+  const runners = (await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners;
+  if (!runners) return;
+  DATA.pool = runners.flatMap(r => {
+    const id = r.labels.map(l => l.name).find(l => DATA.specs[l]);
+    if (!id) return [];
+    const spec = DATA.specs[id];
+    return [{ name: spec.accelerator, id, kind: "self-hosted", os: spec.os, memory_gib: spec.memory_gib,
+      status: r.status !== "online" ? "offline" : r.busy ? "busy" : "idle", last: DATA.last[id] || {} }];
+  });
+  RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m.id, m])).values()];
+}
 const modelOf = id => DATA.models.find(m => m.id === id) || { name: id, quant: "" };
 const modelName = id => { const m = modelOf(id); return m.quant ? `${m.name} · ${m.quant}` : m.name; };
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
@@ -507,6 +519,8 @@ async function addMac() {
     if (fresh.status === "online") {
       set("online", "done", fresh.busy ? "Connected, running a job now" : "Connected and idle, ready for benchmarks");
       stopMacPoll();
+      await refreshPool();
+      draw();
     } else set("online", "now", "Registered, waiting for the service to come online");
   };
   macPoll = setInterval(tick, 3000);
@@ -549,6 +563,8 @@ async function removeOne(r) {
       li.className = "done";
       li.lastElementChild.textContent = `${r.name} removed`;
       stopMacPoll();
+      await refreshPool();
+      draw();
     }
   }, 3000);
 }
@@ -580,6 +596,7 @@ async function signIn() {
       try { localStorage.removeItem("pie-evals-token"); } catch {}
     }
   }
+  if (me) await refreshPool();
   renderWho();
 }
 function renderWho() {
@@ -847,6 +864,8 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         "running": in_flight(repo) if lookup_commits else [],
         "pool": _pool(live, matrix, last),
         "platforms": sorted(matrix.platforms),
+        "specs": {p.id: {"accelerator": p.accelerator, "os": p.os, "memory_gib": int(p.memory_gib)} for p in matrix.platforms.values()},
+        "last": last,
         "people": people(repo, {c["sha"]: c["author"] for c in [*known.values(), *commits]}) if lookup_commits else [],
     }
 
