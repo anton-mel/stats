@@ -215,6 +215,12 @@ async function refreshPool() {
   });
   RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m.id, m])).values()];
 }
+setInterval(async () => {
+  if (!me || document.hidden || !document.getElementById("modal").hidden) return;
+  const was = JSON.stringify(DATA.pool);
+  await refreshPool();
+  if (JSON.stringify(DATA.pool) !== was) draw();
+}, 15000);
 const modelOf = id => DATA.models.find(m => m.id === id) || { name: id, quant: "" };
 const modelName = id => { const m = modelOf(id); return m.quant ? `${m.name} · ${m.quant}` : m.name; };
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
@@ -466,7 +472,7 @@ function people() {
 }
 
 async function gh(path, opts = {}) {
-  const r = await fetch(`https://api.github.com/${path}`, { ...opts, headers: { Authorization: `Bearer ${token()}`, Accept: "application/vnd.github+json", ...(opts.headers || {}) } });
+  const r = await fetch(`https://api.github.com/${path}`, { cache: "no-store", ...opts, headers: { Authorization: `Bearer ${token()}`, Accept: "application/vnd.github+json", ...(opts.headers || {}) } });
   if (!r.ok && r.status !== 404) throw new Error(`${r.status} ${await r.text()}`);
   if (r.status === 404 || r.status === 204) return null;
   return r.json();
