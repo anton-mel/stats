@@ -165,6 +165,18 @@ PAGE = """<!doctype html>
   table.grid .c { text-align: center; }
   .ok { color: #1a7f37; font-weight: 700; }
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
+  .cmd { display: flex; gap: 8px; align-items: stretch; margin: 8px 0 4px; }
+  .cmd code { flex: 1; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 12px; font-size: 12px; word-break: break-all; }
+  .steps { list-style: none; padding: 0; margin: 14px 0 4px; display: flex; flex-direction: column; gap: 10px; }
+  .steps li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #7a838d; }
+  .steps li .st { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #d0d7de; flex: none; box-sizing: border-box; }
+  .steps li.now { color: #1f2328; }
+  .steps li.now .st { border-color: #0969da; border-top-color: transparent; animation: spin 0.9s linear infinite; }
+  .steps li.done { color: #1f2328; }
+  .steps li.done .st { border-color: #1a7f37; background: #1a7f37; }
+  .steps li.bad { color: #cf222e; }
+  .steps li.bad .st { border-color: #cf222e; background: #cf222e; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -446,11 +458,59 @@ async function gh(path, opts = {}) {
   return r.json();
 }
 function sheet(html) { document.getElementById("sheet").innerHTML = `<div class="card">${html}</div>`; document.getElementById("modal").hidden = false; }
-function closeSheet() { document.getElementById("modal").hidden = true; }
+function closeSheet() { document.getElementById("modal").hidden = true; stopMacPoll(); }
 document.getElementById("close").onclick = closeSheet;
 document.getElementById("modal").onclick = e => { if (e.target.id === "modal") closeSheet(); };
 document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); closeMenu(); } });
 
+let macPoll = null;
+function stopMacPoll() { if (macPoll) { clearInterval(macPoll); macPoll = null; } }
+async function addMac() {
+  stopMacPoll();
+  sheet(`<div class="sheet-head"><h2>Add this Mac</h2></div><p class="muted">Getting a registration token for ${esc(DATA.repo)}…</p>`);
+  let reg = null, err = "";
+  try { reg = await gh(`repos/${DATA.repo}/actions/runners/registration-token`, { method: "POST" }); } catch (e) { err = String(e.message || e); }
+  if (!reg?.token) {
+    sheet(`<div class="sheet-head"><h2>Add this Mac</h2></div><p>GitHub refused a runner registration token. Adding runners needs admin rights on ${esc(DATA.repo)} and a token with the <code>repo</code> scope (or Administration: write).</p><p class="muted">${esc(err.slice(0, 200))}</p>`);
+    return;
+  }
+  const before = new Set(((await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners || []).map(r => r.id));
+  const url = `https://raw.githubusercontent.com/${DATA.repo}/main/infra/mac/setup-runner.sh`;
+  const cmd = `curl -fsSL ${url} | bash -s ${reg.token}`;
+  const expires = reg.expires_at ? `${fmtTime(reg.expires_at)}` : "in an hour";
+  sheet(`<div class="sheet-head"><h2>Add this Mac</h2></div>` +
+    `<p>Open Terminal on the Mac you want to add and run:</p>` +
+    `<div class="cmd"><code id="cmd">${esc(cmd)}</code><button class="act" id="copy">Copy</button></div>` +
+    `<p class="muted">The token works once and expires at ${esc(expires)}. The script finds the chip and memory, installs the GitHub runner as a service and registers it here.</p>` +
+    `<ul class="steps" id="steps">` +
+    `<li class="now" data-s="wait"><span class="st"></span><span>Waiting for the Mac to register</span></li>` +
+    `<li data-s="reg"><span class="st"></span><span>Registered</span></li>` +
+    `<li data-s="online"><span class="st"></span><span>Connected and ready for benchmarks</span></li></ul>`);
+  document.getElementById("copy").onclick = async e => {
+    try { await navigator.clipboard.writeText(cmd); e.target.textContent = "Copied"; } catch { e.target.textContent = "Select and copy"; }
+  };
+  const set = (key, state, text) => {
+    const li = document.querySelector(`#steps li[data-s="${key}"]`);
+    if (!li) return;
+    li.className = state;
+    if (text) li.lastElementChild.innerHTML = text;
+  };
+  const tick = async () => {
+    if (document.getElementById("modal").hidden) return stopMacPoll();
+    const runners = (await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners || [];
+    const fresh = runners.find(r => !before.has(r.id));
+    if (!fresh) return;
+    const labels = fresh.labels.map(l => l.name);
+    const plat = labels.find(l => DATA.platforms.includes(l));
+    set("wait", "done", "Mac found");
+    set("reg", "done", `Registered as <code>${esc(fresh.name)}</code>` + (plat ? ` on platform <code>${esc(plat)}</code>` : ` <span class="muted">(its platform is not in matrix/platforms.yaml yet)</span>`));
+    if (fresh.status === "online") {
+      set("online", "done", fresh.busy ? "Connected, running a job now" : "Connected and idle, ready for benchmarks");
+      stopMacPoll();
+    } else set("online", "now", "Registered, waiting for the service to come online");
+  };
+  macPoll = setInterval(tick, 3000);
+}
 function openSignIn() { if (tab !== "Sign in") back = tab; tab = "Sign in"; closeSheet(); draw(); }
 function signInPage() {
   document.getElementById("main").innerHTML = `<div class="signin-wrap"><div class="card signin-page"><svg width="40" height="40" class="gh-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><h2>Sign in with GitHub</h2><p class="muted">Paste a GitHub token with access to ${REPO_NAME}.</p>` +
@@ -490,7 +550,8 @@ function renderWho() {
   if (i) i.onclick = openSignIn;
   if (m) m.onclick = () => {
     if (document.querySelector(".menu")) return closeMenu();
-    who.insertAdjacentHTML("beforeend", `<div class="menu"><button id="out"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"/></svg>Sign out</button></div>`);
+    who.insertAdjacentHTML("beforeend", `<div class="menu"><button id="addmac"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"/></svg>Add Mac</button><button id="out"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"/></svg>Sign out</button></div>`);
+    document.getElementById("addmac").onclick = () => { closeMenu(); addMac(); };
     document.getElementById("out").onclick = () => { closeMenu(); try { localStorage.removeItem("pie-evals-token"); } catch {} me = null; renderWho(); draw(); };
   };
 }
@@ -743,6 +804,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         "failed": [{"sha": sha, "mac": mac, "model": model} for sha, mac, model in failed],
         "running": in_flight(repo) if lookup_commits else [],
         "pool": _pool(live, matrix, last),
+        "platforms": sorted(matrix.platforms),
         "people": people(repo, {c["sha"]: c["author"] for c in [*known.values(), *commits]}) if lookup_commits else [],
     }
 
