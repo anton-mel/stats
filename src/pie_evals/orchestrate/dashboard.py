@@ -192,7 +192,7 @@ const RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m
 const modelOf = id => DATA.models.find(m => m.id === id) || { name: id, quant: "" };
 const modelName = id => { const m = modelOf(id); return m.quant ? `${m.name} · ${m.quant}` : m.name; };
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
-const PER_PAGE = 25;
+const PER_PAGE = 20;
 let tab = "History", back = "History", me = null, page = 0, denied = "";
 const pick = { decode: "best", prefill: "best" };
 const filt = { mac: "", model: "" };
