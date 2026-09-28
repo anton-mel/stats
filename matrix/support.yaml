@@ -1,3 +1,5 @@
-unsupported: []
+unsupported:
+  - when: {engine: pie, family: llama}
+    reason: "pie ships no Llama reader"
 
 fit_factor: 1.25

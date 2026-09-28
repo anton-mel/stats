@@ -62,7 +62,8 @@ def test_coverage_report_lists_not_run(tmp_path, matrix):
     st = Store(tmp_path / "store")
     views = rp.coverage(matrix, st, Tier.TARGETED)
     statuses = {v.status for v in views}
-    assert statuses == {"not_run"} and len(views) == len(matrix.runnable(Tier.TARGETED))
+    assert statuses == {"not_run", "declared_unsupported"}
+    assert sum(v.status == "not_run" for v in views) == len(matrix.runnable(Tier.TARGETED))
     md = rp.coverage_markdown(views, Tier.TARGETED)
     assert "## Gaps" in md and "not_run" in md
 
