@@ -113,6 +113,7 @@ class OllamaEngine(Engine):
 
     def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(*args, **kwargs)
+        self.slots = 1
         existing = self.env.get("PYTHONPATH") or os.environ.get("PYTHONPATH")
         self.env["PYTHONPATH"] = ":".join([str(self.pie_root / "scripts" / "bench")] + ([existing] if existing else []))
 
@@ -154,6 +155,8 @@ class OllamaEngine(Engine):
             args += ["--options", json.dumps(r["options"], sort_keys=True)]
         if r.get("flush_cache") is False:
             args.append("--no-flush-cache")
+        else:
+            args += ["--flush-slots", str(self.slots)]
         if r.get("request_timeout"):
             args += ["--request-timeout", str(r["request_timeout"])]
         return args
@@ -166,6 +169,7 @@ class OllamaEngine(Engine):
             self.recipe["num_parallel"] = workload_concurrency(workload)
         if self.recipe.get("context_length") == "$serve_context":
             self.recipe["context_length"] = max_model_len_for(workload)
+        self.slots = int(self.recipe.get("num_parallel") or 1)
         log_path = Path(log_path)
         log_path.parent.mkdir(parents=True, exist_ok=True)
         proc, url = start_server(self.server_env(workload), log_path, 60)
