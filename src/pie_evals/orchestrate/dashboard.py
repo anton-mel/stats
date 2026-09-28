@@ -511,6 +511,47 @@ async function addMac() {
   };
   macPoll = setInterval(tick, 3000);
 }
+async function removeMac() {
+  stopMacPoll();
+  const runners = (await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners || [];
+  if (!runners.length) { sheet(`<div class="sheet-head"><h2>Remove a Mac</h2></div><p class="muted">No Macs are registered to ${esc(DATA.repo)}.</p>`); return; }
+  const state = r => r.status !== "online" ? "offline" : r.busy ? "running a job" : "idle";
+  sheet(`<div class="sheet-head"><h2>Remove a Mac</h2></div><table class="compact">` +
+    runners.map(r => `<tr><td><code>${esc(r.name)}</code></td><td class="muted">${state(r)}</td><td class="num"><button class="act" data-rm="${r.id}">Remove</button></td></tr>`).join("") +
+    `</table>`);
+  document.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => removeOne(runners.find(r => String(r.id) === b.dataset.rm)));
+}
+async function removeOne(r) {
+  let tok = null, err = "";
+  try { tok = await gh(`repos/${DATA.repo}/actions/runners/remove-token`, { method: "POST" }); } catch (e) { err = String(e.message || e); }
+  if (!tok?.token) {
+    sheet(`<div class="sheet-head"><h2>Remove ${esc(r.name)}</h2></div><p>GitHub refused a removal token. Removing runners needs admin rights on ${esc(DATA.repo)}.</p><p class="muted">${esc(err.slice(0, 200))}</p>`);
+    return;
+  }
+  const cmd = `curl -fsSL https://raw.githubusercontent.com/${DATA.repo}/main/infra/mac/remove-runner.sh | bash -s ${tok.token}`;
+  sheet(`<div class="sheet-head"><h2>Remove ${esc(r.name)}</h2></div>` +
+    `<p>On that Mac, run this in Terminal to stop the service and unregister it:</p>` +
+    `<div class="cmd"><code>${esc(cmd)}</code><button class="act" id="copy">Copy</button></div>` +
+    `<p class="muted">Mac gone or unreachable? <a href="#" id="force">Remove it from GitHub only</a>; its runner files stay on that machine.</p>` +
+    `<ul class="steps" id="steps"><li class="now" data-s="gone"><span class="st"></span><span>Waiting for ${esc(r.name)} to unregister</span></li></ul>`);
+  document.getElementById("copy").onclick = async e => {
+    try { await navigator.clipboard.writeText(cmd); e.target.textContent = "Copied"; } catch { e.target.textContent = "Select and copy"; }
+  };
+  document.getElementById("force").onclick = async e => {
+    e.preventDefault();
+    try { await gh(`repos/${DATA.repo}/actions/runners/${r.id}`, { method: "DELETE" }); } catch (x) { e.target.textContent = `failed: ${String(x.message || x).slice(0, 80)}`; }
+  };
+  macPoll = setInterval(async () => {
+    if (document.getElementById("modal").hidden) return stopMacPoll();
+    const left = (await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners;
+    if (left && !left.some(x => x.id === r.id)) {
+      const li = document.querySelector('#steps li[data-s="gone"]');
+      li.className = "done";
+      li.lastElementChild.textContent = `${r.name} removed`;
+      stopMacPoll();
+    }
+  }, 3000);
+}
 function openSignIn() { if (tab !== "Sign in") back = tab; tab = "Sign in"; closeSheet(); draw(); }
 function signInPage() {
   document.getElementById("main").innerHTML = `<div class="signin-wrap"><div class="card signin-page"><svg width="40" height="40" class="gh-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><h2>Sign in with GitHub</h2><p class="muted">Paste a GitHub token with access to ${REPO_NAME}.</p>` +
@@ -550,8 +591,9 @@ function renderWho() {
   if (i) i.onclick = openSignIn;
   if (m) m.onclick = () => {
     if (document.querySelector(".menu")) return closeMenu();
-    who.insertAdjacentHTML("beforeend", `<div class="menu"><button id="addmac"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"/></svg>Add Mac</button><button id="out"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"/></svg>Sign out</button></div>`);
+    who.insertAdjacentHTML("beforeend", `<div class="menu"><button id="addmac"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"/></svg>Add Mac</button><button id="rmmac"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.75 7.25h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5Z"/></svg>Remove Mac</button><button id="out"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"/></svg>Sign out</button></div>`);
     document.getElementById("addmac").onclick = () => { closeMenu(); addMac(); };
+    document.getElementById("rmmac").onclick = () => { closeMenu(); removeMac(); };
     document.getElementById("out").onclick = () => { closeMenu(); try { localStorage.removeItem("pie-evals-token"); } catch {} me = null; renderWho(); draw(); };
   };
 }
