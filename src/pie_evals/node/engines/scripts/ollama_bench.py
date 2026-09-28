@@ -8,6 +8,7 @@ import statistics
 import sys
 import time
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
 from common import (
@@ -77,10 +78,14 @@ def run_one(args: argparse.Namespace, endpoint: str, prompt: str, prompt_count: 
 
 
 def flush(args: argparse.Namespace, endpoint: str) -> None:
-    try:
-        post_stream(endpoint, generate_payload(args, FLUSH_PROMPT, 1), args.request_timeout, lambda _o: None)
-    except Exception as e:  # noqa: BLE001
-        print(f"flush failed: {e}", file=sys.stderr)
+    def one(i: int) -> None:
+        try:
+            post_stream(endpoint, generate_payload(args, f"{FLUSH_PROMPT} {i}", 1), args.request_timeout, lambda _o: None)
+        except Exception as e:  # noqa: BLE001
+            print(f"flush failed: {e}", file=sys.stderr)
+
+    with ThreadPoolExecutor(max_workers=max(1, args.flush_slots)) as pool:
+        list(pool.map(one, range(max(1, args.flush_slots))))
 
 
 def _median(xs: list[float]) -> float | None:
@@ -163,7 +168,8 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--keep-alive", default="30m")
         sp.add_argument("--seed", type=int, default=0)
         sp.add_argument("--options", default="", help="extra Ollama options as JSON")
-        sp.add_argument("--flush-cache", action=argparse.BooleanOptionalAction, default=True, help="one-token unrelated prompt before each request")
+        sp.add_argument("--flush-cache", action=argparse.BooleanOptionalAction, default=True, help="one-token unrelated prompt per slot before each request")
+        sp.add_argument("--flush-slots", type=int, default=1, help="server slots to flush, OLLAMA_NUM_PARALLEL")
     return parser
 
 
