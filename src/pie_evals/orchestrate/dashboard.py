@@ -165,6 +165,8 @@ PAGE = """<!doctype html>
   table.grid .c { text-align: center; }
   .ok { color: #1a7f37; font-weight: 700; }
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
+  table.rmlist { width: 100%; }
+  table.rmlist td { vertical-align: middle; padding: 8px 6px; }
   .cmd { display: flex; gap: 8px; align-items: stretch; margin: 8px 0 4px; }
   .cmd code { flex: 1; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 12px; font-size: 12px; word-break: break-all; }
   .steps { list-style: none; padding: 0; margin: 14px 0 4px; display: flex; flex-direction: column; gap: 10px; }
@@ -530,7 +532,7 @@ async function removeMac() {
   const runners = (await gh(`repos/${DATA.repo}/actions/runners?per_page=100`).catch(() => null))?.runners || [];
   if (!runners.length) { sheet(`<div class="sheet-head"><h2>Remove a Mac</h2></div><p class="muted">No Macs are registered to ${esc(DATA.repo)}.</p>`); return; }
   const state = r => r.status !== "online" ? "offline" : r.busy ? "running a job" : "idle";
-  sheet(`<div class="sheet-head"><h2>Remove a Mac</h2></div><table class="compact">` +
+  sheet(`<div class="sheet-head"><h2>Remove a Mac</h2></div><table class="compact rmlist">` +
     runners.map(r => `<tr><td><code>${esc(r.name)}</code></td><td class="muted">${state(r)}</td><td class="num"><button class="act" data-rm="${r.id}">Remove</button></td></tr>`).join("") +
     `</table>`);
   document.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => removeOne(runners.find(r => String(r.id) === b.dataset.rm)));
