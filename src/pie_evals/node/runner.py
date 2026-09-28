@@ -85,6 +85,8 @@ def recipe_for_cell(recipe: dict, recipe_name: str, cell: Cell) -> dict:
     keys the boot added (snapshot_dir, pin, program_path) are kept."""
     fresh = load_recipe(str(cell.engine), recipe_name, cell.platform, cell.workload, family=cell.artifact.family)
     for k, v in recipe.items():
+        if isinstance(fresh.get(k), str) and fresh[k].startswith("$serve_"):
+            fresh[k] = v
         fresh.setdefault(k, v)
     return fresh
 
@@ -364,7 +366,7 @@ class NodeRunner:
                     continue
                 if hasattr(engine, "program_path"):
                     engine.program_path = cell.program.path  # the cell's own inferlet, not the process's first
-                recipe = recipe_for_cell(recipe, recipe_name, cell)
+                recipe = recipe_for_cell(engine.recipe, recipe_name, cell)
                 engine.recipe = recipe
                 rec = self._run_cell(cell, engine, snapshot, engine_version, recipe, recipe_name, fingerprint, machine_before)
                 if cell.workload.kind.value == "control_aa" and rec.status == CellStatus.NOISY:
