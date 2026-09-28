@@ -616,9 +616,9 @@ def mac_models(matrix: Matrix) -> list[dict]:
     for c in matrix.expand():
         a = c.artifact
         if (c.platform.os == "macos" and c.engine.value == "pie" and c.program.id == "text-completion-bench"
-                and c.mode.tp == 1 and c.declared_unsupported_reason is None and a.kind.value == "full"):
+                and c.mode.tp == 1 and a.kind.value == "full"):
             org, _, repo = a.base_model.partition("/")
-            seen[a.id] = {"id": a.id, "name": repo or org, "publisher": org if repo else "", "family": a.family,
+            seen[a.id] = {"id": a.id, "name": a.display_name or repo or org, "publisher": org if repo else "", "family": a.family,
                           "scheme": str(a.scheme), "format": str(a.source_format), "gib": a.expected_gib, "context": a.max_context,
                           "quant": quant_label(str(a.scheme))}
     names = [m["name"] for m in seen.values()]

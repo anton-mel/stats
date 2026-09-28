@@ -39,6 +39,7 @@ class QuantScheme(StrEnumBase):
     AFFINE_U4_G64 = "affine_u4_g64"  # mlx-community 4-bit, group 64
     GGUF_Q4_K_M = "gguf_q4_k_m"
     GGUF_Q8_0 = "gguf_q8_0"
+    NVFP4 = "nvfp4"
 
 
 class SourceFormat(StrEnumBase):
@@ -112,6 +113,7 @@ class ArtifactSpec(BaseModel):
     max_context: int | None = Field(default=None, description="tokens one sequence may hold on this artifact as pie ships it (the SKU's max_context), when smaller than the HF config's")
     gguf_file: str | None = Field(default=None, description="file name inside a GGUF repo (the arm must be named, never the quant tag)")
     gguf_config_from: str | None = Field(default=None, description="HF repo whose config.json is copied next to the GGUF (pie reads the encoding from config.json; GGUF repos ship none)")
+    display_name: str | None = Field(default=None, description="name the site shows for this model (its Ollama tag)")
     ollama_tag: str | None = Field(default=None, description="Ollama model tag this artifact is served as (``gemma4:26b``); source_format ollama")
     baseline_of: str | None = Field(default=None, description="the pie artifact this baseline copy is compared with (same model, the baseline's own weights)")
     baseline_label: str | None = Field(default=None, description="column name for this baseline arm on the site (``Ollama``, ``Ollama MLX``)")
