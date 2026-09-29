@@ -34,3 +34,11 @@ def test_scores_grade_the_answer_not_the_thinking():
     assert answer_part("<think>41</think>\n#### 42") == "#### 42"
     assert answer_part("<|channel>thought\nnever closed") == ""
     assert score_gsm8k(Item("q", "p", "42"), "<|channel>thought\n#### 41<channel|>#### 42") == 1.0
+
+
+def test_glimmer_answers_are_the_user_message():
+    from pie_evals.quality.tasks import answer_part
+
+    out = " to=self<|message|>We need to capitalize.<|eom|><|start|>assistant to=user<|message|>HELLO THERE<|eot|>"
+    assert answer_part(out) == "HELLO THERE"
+    assert answer_part(" to=self<|message|>still thinking when the budget ran out") == ""

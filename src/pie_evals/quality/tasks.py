@@ -47,6 +47,14 @@ def _number(text: str) -> str | None:
 
 
 def answer_part(text: str) -> str:
+    marks = list(re.finditer(r"(?:to=(\w+))?\s*<\|message\|>", text))
+    if marks:
+        final = [m for m in marks if m.group(1) != "self"]
+        if not final:
+            return ""
+        last = final[-1]
+        nxt = next((m.start() for m in marks if m.start() > last.end()), len(text))
+        return re.sub(r"<\|(eot|eom|end|start)\|>.*$", "", text[last.end():nxt], flags=re.S).strip()
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.S)
     if "<channel|>" in text:
         text = text.split("<channel|>")[-1]
