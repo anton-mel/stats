@@ -2,11 +2,11 @@
 
 | status | cells |
 |---|---|
-| pass | 38 |
+| pass | 39 |
 | fail | 0 |
 | declared_unsupported | 40 |
 | not_run | 176 |
-| noisy | 6 |
+| noisy | 5 |
 
 ## Gaps (expected supported, but not passing)
 
@@ -14,7 +14,6 @@
 |---|---|---|---|---|---|---|---|---|
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-story-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-512-200 | text-completion-bench | tp1 | noisy |  |  |
-| ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ctx-4k-256 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ctx-8k-256 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama-mlx | ob-short-100 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | muse-glimmer-30b-ollama | ob-512-200 | text-completion-bench | tp1 | noisy |  |  |
