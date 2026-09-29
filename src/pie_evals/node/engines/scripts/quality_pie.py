@@ -23,6 +23,8 @@ async def generate(bench_args: list[str], items: list[dict], system: str, max_to
             async with gate:
                 inp = {"system": system, "prompt": item["prompt"], "max_tokens": max_tokens, "temperature": 0.0, "top_p": 1.0,
                        "ignore_eos": False, "return_text": True, "report_timing": False}
+                if item.get("prompt_tokens"):
+                    inp["prompt_tokens"] = item["prompt_tokens"]
                 proc = await client.launch_process(pkg, input=inp)
                 while True:
                     ev, msg = await asyncio.wait_for(proc.recv(), timeout=timeout)
