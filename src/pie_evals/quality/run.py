@@ -75,6 +75,22 @@ def _pie_generate(art, snapshot: Path, pie_root: Path, prompts: list[str], max_t
         return json.loads(out.read_text()), commit[:12]
 
 
+class TasksSkipped(Exception):
+    def __init__(self, artifact: str, tasks: list[str], written: list[Path]):
+        super().__init__(f"{artifact}: skipped {', '.join(tasks)}")
+        self.artifact, self.tasks, self.written = artifact, tasks, written
+
+
+def load_items(task: str, n: int, log=print):
+    try:
+        return TASKS[task][0](n)
+    except Exception as e:  # noqa: BLE001
+        gated = type(e).__name__ == "GatedRepoError" or "401" in str(e)
+        hint = " (gated dataset: accept its terms on huggingface.co and give the runner's HF_TOKEN access)" if gated else ""
+        log(f"quality {task}: skipped, could not load the questions: {type(e).__name__}: {str(e).splitlines()[0][:160] if str(e) else ''}{hint}")
+        return None
+
+
 def run_quality(artifact_id: str, tasks: list[str], n: int, *, matrix_dir: str = "matrix", store_dir: str = "store", pie_root: Path, log=print) -> list[Path]:
     from pie_evals.node.snapshots import ensure_snapshot, hf_cache_dir
     from pie_evals.orchestrate.matrix import Matrix
@@ -83,10 +99,14 @@ def run_quality(artifact_id: str, tasks: list[str], n: int, *, matrix_dir: str =
     art = m.artifacts[artifact_id]
     engine = "ollama" if art.source_format == SourceFormat.OLLAMA else "pie"
     snapshot = ensure_snapshot(art, hf_cache_dir(), download=True, log=log)
-    written = []
+    written: list[Path] = []
+    skipped: list[str] = []
     for task in tasks:
         load, score, max_tokens = TASKS[task]
-        items = load(n)
+        items = load_items(task, n, log)
+        if items is None:
+            skipped.append(task)
+            continue
         t0 = time.monotonic()
         if engine == "ollama":
             texts, version = _ollama_generate(art.ollama_tag, snapshot, [i.prompt for i in items], max_tokens, log)
@@ -107,6 +127,8 @@ def run_quality(artifact_id: str, tasks: list[str], n: int, *, matrix_dir: str =
         path.write_text(json.dumps(summary, indent=1))
         log(f"quality {art.id} {task}: {correct:.0f}/{len(scores)} = {summary['score']:.1%} (95% {lo:.1%}..{hi:.1%}) in {summary['minutes']} min")
         written.append(path)
+    if skipped:
+        raise TasksSkipped(art.id, skipped, written)
     return written
 
 
