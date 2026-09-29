@@ -317,7 +317,14 @@ function overview() {
         `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : (noisy ? "~" : "") + pct(gap)}</td>` +
         `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td></tr>`;
     }
-    if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>`;
+    if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
+      DATA.benchmarks.map(b => {
+        const key = b.metric === "prefill" ? "prefill" : "decode";
+        const ol = ollamaAt(mac, m.pie, b.id, m.label, null);
+        const tip = `${m.label} ${tok(ol?.[key])}${ol?.version ? " (" + ol.version + ")" : ""}${ol?.noisy ? " · not steady, " + ol.noisy : ""}`;
+        return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(null)}</td>` +
+          `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td></tr>`;
+      }).join("");
     rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2><span class="muted">pie vs ${esc(m.label)}</span></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
