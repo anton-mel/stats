@@ -170,6 +170,10 @@ PAGE = """<!doctype html>
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
   img.ol { height: 14px; vertical-align: -2px; margin-right: 6px; }
   .model-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .grip { cursor: grab; color: #afb8c1; font-size: 14px; letter-spacing: -2px; user-select: none; }
+  .model-card.dragging { opacity: .45; }
+  .model-card.drop-before { box-shadow: 0 -3px 0 #0969da; }
+  .model-card.drop-after { box-shadow: 0 3px 0 #0969da; }
   .model-head h2 { margin: 0; font-size: 16px; }
   .model-head h2 img.ol { height: 16px; }
   table.ov td { vertical-align: middle; }
@@ -285,6 +289,12 @@ const home = sel;
 const openQuality = new Set();
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
+function orderedModels() {
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem("stats-model-order") || "[]"); } catch {}
+  const rank = id => { const i = saved.indexOf(id); return i < 0 ? saved.length + DATA.models.findIndex(m => m.id === id) : i; };
+  return [...DATA.models].sort((a, b) => rank(a.id) - rank(b.id));
+}
 function ollamaAt(mac, pie, wl, label, at) {
   const runs = DATA.baselines?.[mac]?.[pie]?.[wl]?.[label] || [];
   const upto = at ? runs.filter(r => r.at <= at) : runs;
@@ -310,7 +320,7 @@ function overview() {
     (sel && sel !== home ? `<a href="#" id="latest">back to latest</a>` : "") +
     (inFlight.has(sel) && done && done !== sel ? `<a href="#" id="done">last complete: ${done.slice(0, 7)}</a>` : "") + `</div></div>`;
   const rows = [];
-  for (const m of DATA.models) {
+  for (const m of orderedModels()) {
     const byTest = DATA.results[mac]?.models[m.pie] || {};
     let body = "";
     for (const b of DATA.benchmarks) {
@@ -348,11 +358,34 @@ function overview() {
       `<summary>quality</summary>` +
       `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
-    rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2></div>` +
+    rows.push(`<div class="card model-card" draggable="true" data-model="${esc(m.id)}"><div class="model-head"><span class="grip" title="drag to reorder">⋮⋮</span><h2>${modelTag(m)}</h2></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
+  let dragged = null;
+  main.querySelectorAll(".model-card").forEach(card => {
+    card.addEventListener("dragstart", e => { dragged = card.dataset.model; card.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; });
+    card.addEventListener("dragend", () => { card.classList.remove("dragging"); main.querySelectorAll(".drop-before,.drop-after").forEach(c => c.classList.remove("drop-before", "drop-after")); });
+    card.addEventListener("dragover", e => {
+      if (!dragged || dragged === card.dataset.model) return;
+      e.preventDefault();
+      const r = card.getBoundingClientRect(), after = e.clientY > r.top + r.height / 2;
+      card.classList.toggle("drop-after", after);
+      card.classList.toggle("drop-before", !after);
+    });
+    card.addEventListener("dragleave", () => card.classList.remove("drop-before", "drop-after"));
+    card.addEventListener("drop", e => {
+      e.preventDefault();
+      if (!dragged || dragged === card.dataset.model) return;
+      const ids = orderedModels().map(m => m.id).filter(id => id !== dragged);
+      const at = ids.indexOf(card.dataset.model) + (card.classList.contains("drop-after") ? 1 : 0);
+      ids.splice(at, 0, dragged);
+      try { localStorage.setItem("stats-model-order", JSON.stringify(ids)); } catch {}
+      dragged = null;
+      draw();
+    });
+  });
   main.querySelectorAll("details.quality").forEach(d => d.addEventListener("toggle", () => {
     if (d.open) openQuality.add(d.dataset.model); else openQuality.delete(d.dataset.model);
   }));
