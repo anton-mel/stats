@@ -186,7 +186,9 @@ PAGE = """<!doctype html>
   .gapbar.noisy .fill { opacity: .4; }
   details.quality { margin-top: 12px; }
   table.ov td { vertical-align: middle; }
-  table.ov td + td { padding-right: 18px; }
+  .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .vs > :first-child { text-align: right; } .vs > :last-child { text-align: left; }
+  table.ov th.vs-h, td.vs-c { text-align: center; }
   .barlab { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #424a53; margin-bottom: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .barlab .unit { color: #8c959f; }
   table.ov td.num, table.ov th.num { white-space: nowrap; }
@@ -300,9 +302,10 @@ const openQuality = new Set();
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
 function ms(v) { return v == null ? "–" : v >= 1000 ? (v / 1000).toFixed(1) + "s" : Math.round(v) + "ms"; }
+const vs = (a, b) => `<div class="vs"><span>${a}</span><span>/</span><span>${b}</span></div>`;
 function pair(p, o, higher, fmt, tip) {
   const win = p == null || o == null ? "" : (higher ? p >= o : p <= o) ? "up" : "down";
-  return `<td class="num ${win || "muted"}" title="${esc(tip)}">${fmt(p)} / ${fmt(o)}</td>`;
+  return `<td class="vs-c ${win || "muted"}" title="${esc(tip)}">${vs(fmt(p), fmt(o))}</td>`;
 }
 function orderedModels() {
   let saved = [];
@@ -327,8 +330,8 @@ function metricBar(pv, ov, noisy, unit, m, running, now, note) {
   const cls = gap == null || noisy ? "muted" : gap >= 0 ? "up" : "down";
   const tip = note || (`pie ${tok(pv)} · ${m.label} ${tok(ov)} ${unit}` + (gap != null ? ` · ${pct(gap)}` : "") + (noisy ? ` · not steady, ${noisy}` : ""));
   const text = note ? "–" : pv == null && ov == null ? (running && !m.unsupported ? "running" : "–") :
-    pv == null && running && !m.unsupported ? "running" : `${noisy ? "~" : ""}${tok(pv)} / ${tok(ov)}`;
-  return `<td>${gapBar(gap, noisy)}</td><td class="num ${cls}" title="${esc(tip)}">${text}</td>`;
+    pv == null && running && !m.unsupported ? "running" : vs(`${noisy ? "~" : ""}${tok(pv)}`, tok(ov));
+  return `<td>${gapBar(gap, noisy)}</td><td class="vs-c ${cls}" title="${esc(tip)}">${text}</td>`;
 }
 function overview() {
   const main = document.getElementById("main");
@@ -382,7 +385,7 @@ function overview() {
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
     rows.push(`<div class="card model-card" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:17%"><col><col style="width:110px"><col><col style="width:120px"><col style="width:112px"></colgroup>` +
-      `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent)">decode</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th><th title="prefill tok/s">prefill</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th><th class="num" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
+      `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent)">decode</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s</th><th title="prefill tok/s">prefill</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s</th><th class="vs-h" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
   let dragged = null;
