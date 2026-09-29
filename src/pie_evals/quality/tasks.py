@@ -61,7 +61,7 @@ def load_arc(n: int, seed: int = 20260929) -> list[Item]:
     rows = pq.read_table(_download("allenai/ai2_arc", "ARC-Challenge/test-00000-of-00001.parquet")).to_pylist()
     rows = random.Random(seed).sample(rows, min(n, len(rows)))
     out = []
-    for i, r in enumerate(rows):
+    for r in rows:
         labels = list(r["choices"]["label"])
         out.append(Item(f"arc-{r['id']}", _choices(r["question"], list(r["choices"]["text"])), LETTERS[labels.index(r["answerKey"])]))
     return out
