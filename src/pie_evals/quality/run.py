@@ -17,15 +17,19 @@ from .tasks import TASKS, wilson
 SYSTEM = "You are a helpful assistant."
 
 
-def _render(snapshot: Path, prompts: list[str]) -> list[str]:
+def _tokenizer(snapshot: Path):
     from transformers import AutoTokenizer
 
-    tok = AutoTokenizer.from_pretrained(str(snapshot), trust_remote_code=True)
+    return AutoTokenizer.from_pretrained(str(snapshot), trust_remote_code=True)
+
+
+def _render(snapshot: Path, prompts: list[str]) -> list[str]:
+    tok = _tokenizer(snapshot)
     out = []
     for p in prompts:
         msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": p}]
         try:
-            out.append(tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False))
+            out.append(tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False, reasoning_strength="low"))
         except Exception:  # noqa: BLE001
             out.append(tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True))
     return out
@@ -59,9 +63,11 @@ def _pie_generate(art, snapshot: Path, pie_root: Path, prompts: list[str], max_t
     model = ensure_artifact(art, snapshot, pie_root / "target/release/pie", commit, log=log) if needs_import(art) else snapshot
     script = Path(__file__).resolve().parents[1] / "node" / "engines" / "scripts" / "quality_pie.py"
     env = {**os.environ, "PYTHONPATH": ":".join([str(pie_root / "scripts/bench"), str(pie_root / "python/client/src"), str(pie_root / "python/server/python")])}
+    tok = _tokenizer(snapshot)
+    token_ids = [tok.encode(r, add_special_tokens=False) for r in _render(snapshot, prompts)]
     with tempfile.TemporaryDirectory() as tmp:
         items, out = Path(tmp) / "items.json", Path(tmp) / "out.json"
-        items.write_text(json.dumps([{"prompt": p} for p in prompts]))
+        items.write_text(json.dumps([{"prompt": p, "prompt_tokens": ids} for p, ids in zip(prompts, token_ids, strict=True)]))
         argv = [str(bench_python()), str(script), "--items", str(items), "--out", str(out), "--system", SYSTEM, "--max-tokens", str(max_tokens), "--",
                 "latency", "--model", str(model), "--engine", "metal", "--inferlet-dir", str(pie_root / "examples/text-completion-bench"),
                 "--max-model-len", "4096", "--requests", "1"]

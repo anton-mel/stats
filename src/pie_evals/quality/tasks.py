@@ -46,8 +46,17 @@ def _number(text: str) -> str | None:
     return nums[-1 if "####" not in text else 0].replace(",", "").rstrip(".")
 
 
+def answer_part(text: str) -> str:
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.S)
+    if "<channel|>" in text:
+        text = text.split("<channel|>")[-1]
+    elif text.lstrip().startswith("<|channel>"):
+        return ""
+    return text.strip()
+
+
 def score_gsm8k(item: Item, text: str) -> float:
-    got = _number(text)
+    got = _number(answer_part(text))
     try:
         return float(got is not None and abs(float(got) - float(item.gold)) < 1e-6)
     except ValueError:
@@ -57,7 +66,7 @@ def score_gsm8k(item: Item, text: str) -> float:
 def score_ifeval(item: Item, text: str) -> float:
     from lm_eval.tasks.ifeval import utils
 
-    return float(utils.process_results(item.gold, [text])["prompt_level_strict_acc"])
+    return float(utils.process_results(item.gold, [answer_part(text)])["prompt_level_strict_acc"])
 
 
 TASKS = {
