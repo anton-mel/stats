@@ -45,7 +45,10 @@ PAGE = """<!doctype html>
   .controls [hidden] { display: none; }
   .controls .grow { flex: 1; }
   tr.push.flat { cursor: default; }
-  input.rowpick { vertical-align: middle; }
+  input.rowpick { width: 18px; height: 18px; margin: 0; cursor: pointer; }
+  td.pickcell { padding: 0; }
+  td.pickcell label { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 36px; padding: 0 10px; cursor: pointer; }
+  td.pickcell:hover { background: #eef1f4; }
   .dot.wait { background: #d4a72c; }
   .dot.bad { background: #cf222e; }
   .dot.part { background: #bc4c00; }
@@ -401,7 +404,7 @@ async function configure() {
 }
 
 function pushes() {
-  let html = `<div class="card"><table class="compact fixed"><colgroup><col><col style="width:120px"><col style="width:96px"><col style="width:60px"><col style="width:34px"></colgroup>` +
+  let html = `<div class="card"><table class="compact fixed"><colgroup><col><col style="width:120px"><col style="width:96px"><col style="width:60px"><col style="width:48px"></colgroup>` +
              `<tr><th>commit</th><th>author</th><th>date</th><th>time</th><th></th></tr>`;
   const pages = Math.max(1, Math.ceil(ALL.length / PER_PAGE));
   page = Math.min(page, pages - 1);
@@ -418,11 +421,11 @@ function pushes() {
   for (const c of ALL.slice(page * PER_PAGE, (page + 1) * PER_PAGE)) {
     html += `<tr class="push${isMeasured.has(c.sha) ? "" : " flat"}" data-sha="${c.sha}"><td class="clip" title="${esc(c.message)}"><span class="dot ${state(c.sha)[0]}" title="${state(c.sha)[1]}"></span><code>${c.sha.slice(0, 7)}</code> ${esc(c.message)}</td>` +
             `<td class="clip">${esc(c.author)}</td><td>${fmtDate(c.date)}</td><td class="muted">${fmtTime(c.date)}</td>` +
-            `<td class="num"><input type="checkbox" class="rowpick" value="${c.sha}"${chosen.has(c.sha) ? " checked" : ""}></td></tr>`;
+            `<td class="pickcell"><label><input type="checkbox" class="rowpick" value="${c.sha}"${chosen.has(c.sha) ? " checked" : ""}></label></td></tr>`;
   }
   document.getElementById("main").innerHTML = html + `</table>${pager(pages)}</div>`;
   document.querySelectorAll("tr.push").forEach(tr => tr.onclick = e => {
-    if (e.target.classList.contains("rowpick")) return;
+    if (e.target.closest(".pickcell")) return;
     if (!isMeasured.has(tr.dataset.sha)) return;
     sel = tr.dataset.sha; tab = "Overview"; draw();
   });
