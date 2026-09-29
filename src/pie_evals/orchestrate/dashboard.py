@@ -88,7 +88,6 @@ PAGE = """<!doctype html>
   .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
   .dot.on { background: #1a7f37; margin: 0 0 1px 6px; }
   .dot.run { background: #1a7f37; }
-  th.flip { cursor: pointer; user-select: none; }
   .idle { background: #1a7f37; } .busy { background: #bf8700; } .offline { background: #cf222e; }
   .tag { display: inline-block; background: #eaeef2; border-radius: 10px; padding: 0 8px; margin: 0 4px 4px 0; font-size: 13px; }
   .avatar { width: 22px; height: 22px; border-radius: 50%; vertical-align: middle; margin-right: 6px; }
@@ -231,7 +230,6 @@ const modelTag = m => `<img class="ol" src="${DATA.ollama_icon}" alt="">${esc(m.
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
 const PER_PAGE = 20;
 let tab = "History", back = "History", me = null, page = 0, denied = "";
-const pick = { decode: "best", prefill: "best" };
 const filt = { mac: "", model: "" };
 const chosen = new Set();
 const testName = id => DATA.benchmarks.find(b => b.id === id)?.name || id;
@@ -394,8 +392,8 @@ async function configure() {
 }
 
 function pushes() {
-  let html = `<div class="card"><table class="compact fixed"><colgroup><col><col style="width:80px"><col style="width:80px"><col style="width:120px"><col style="width:96px"><col style="width:60px"><col style="width:34px"></colgroup>` +
-             `<tr><th>commit</th>${["decode", "prefill"].map(ph => `<th class="num flip" data-phase="${ph}" title="${ph} ${pick[ph]}, click to flip">${ph[0].toUpperCase()} ${pick[ph] === "best" ? "▲" : "▼"}</th>`).join("")}<th>author</th><th>date</th><th>time</th><th></th></tr>`;
+  let html = `<div class="card"><table class="compact fixed"><colgroup><col><col style="width:120px"><col style="width:96px"><col style="width:60px"><col style="width:34px"></colgroup>` +
+             `<tr><th>commit</th><th>author</th><th>date</th><th>time</th><th></th></tr>`;
   const pages = Math.max(1, Math.ceil(ALL.length / PER_PAGE));
   page = Math.min(page, pages - 1);
   const isMeasured = new Set(DATA.commits.map(c => c.sha));
@@ -410,7 +408,7 @@ function pushes() {
     : measuredAt(sha) ? ["run", "benchmarked"] : ["", "not benchmarked"];
   for (const c of ALL.slice(page * PER_PAGE, (page + 1) * PER_PAGE)) {
     html += `<tr class="push${isMeasured.has(c.sha) ? "" : " flat"}" data-sha="${c.sha}"><td class="clip" title="${esc(c.message)}"><span class="dot ${state(c.sha)[0]}" title="${state(c.sha)[1]}"></span><code>${c.sha.slice(0, 7)}</code> ${esc(c.message)}</td>` +
-            `${change(c.sha, "decode", pick.decode)}${change(c.sha, "prefill", pick.prefill)}<td class="clip">${esc(c.author)}</td><td>${fmtDate(c.date)}</td><td class="muted">${fmtTime(c.date)}</td>` +
+            `<td class="clip">${esc(c.author)}</td><td>${fmtDate(c.date)}</td><td class="muted">${fmtTime(c.date)}</td>` +
             `<td class="num"><input type="checkbox" class="rowpick" value="${c.sha}"${chosen.has(c.sha) ? " checked" : ""}></td></tr>`;
   }
   document.getElementById("main").innerHTML = html + `</table>${pager(pages)}</div>`;
@@ -425,15 +423,6 @@ function pushes() {
   });
   document.getElementById("bench").disabled = !chosen.size;
   document.querySelectorAll(".pager button[data-page]").forEach(b => b.onclick = () => { page = +b.dataset.page; draw(); window.scrollTo(0, 0); });
-  document.querySelectorAll("th.flip").forEach(th => th.onclick = () => { const ph = th.dataset.phase; pick[ph] = pick[ph] === "best" ? "worst" : "best"; draw(); });
-}
-function change(sha, phase, which) {
-  const cs = ((DATA.verdicts || {})[sha] || []).filter(c => c.phase === phase && (!filt.mac || c.mac === filt.mac) && (!filt.model || c.model === pieOf(filt.model)));
-  if (!cs.length) return `<td></td>`;
-  const c = cs.reduce((a, b) => (which === "best" ? b.pct > a.pct : b.pct < a.pct) ? b : a);
-  const cls = c.pct > 0 ? "up" : c.pct < 0 ? "down" : "muted";
-  const label = `${DATA.results[c.mac].name} · ${modelName(c.model)} · ${testName(c.test)}`;
-  return `<td class="num ${cls}" title="${esc(label)}">${c.pct > 0 ? "+" : ""}${c.pct}%</td>`;
 }
 function pager(pages) {
   if (pages < 2) return "";
