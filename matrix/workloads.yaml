@@ -7,7 +7,8 @@ workloads:
   - id: ob-story-200
     kind: single_stream
     params:
-      label: "default: story prompt, 200 tokens out"
+      label: Story
+      description: "ollama-bench default: story prompt, 200 tokens out, 6 runs"
       prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
       decode: 200
       requests: 6
@@ -15,16 +16,29 @@ workloads:
     est_minutes: 1
   - id: ob-512-200
     kind: single_stream
-    params: {label: "-prompt-tokens 512, 200 tokens out", prefill: 512, decode: 200, requests: 6, warmup: 1}
+    params:
+      label: Prompt 512
+      description: "ollama-bench -prompt-tokens 512: 512 token prompt, 200 tokens out"
+      prefill: 512
+      decode: 200
+      requests: 6
+      warmup: 1
     est_minutes: 1
   - id: ob-short-100
     kind: single_stream
-    params: {label: "-p \"Write me a short story\" -max-tokens 100", prompt: "Write me a short story", decode: 100, requests: 6, warmup: 1}
+    params:
+      label: Short story
+      description: "ollama-bench -p \"Write me a short story\" -max-tokens 100"
+      prompt: Write me a short story
+      decode: 100
+      requests: 6
+      warmup: 1
     est_minutes: 0.5
   - id: ob-advanced-500
     kind: single_stream
     params:
-      label: "-epochs 10 -temperature 0.7 -max-tokens 500 -seed 42 -warmup 2"
+      label: Sampled 500
+      description: "ollama-bench advanced: temperature 0.7, seed 42, 500 tokens out, 10 runs"
       prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
       decode: 500
       requests: 10
@@ -32,11 +46,48 @@ workloads:
       temperature: 0.7
       seed: 42
     est_minutes: 2
-  - id: lb-pp512
-    kind: single_stream
-    params: {label: "llama-bench pp512: prefill 512 tokens", prefill: 512, decode: 1, requests: 5, warmup: 1, primary: prefill_tok_s}
-    est_minutes: 0.5
-  - id: lb-tg128
-    kind: single_stream
-    params: {label: "llama-bench tg128: decode 128 tokens", prompt: "Hi", decode: 128, requests: 5, warmup: 1}
-    est_minutes: 0.5
+  - id: ctx-4k-256
+    kind: long_context
+    params:
+      label: Long prompt 4k
+      description: "4k token prompt, 256 tokens out: prefill speed and decode on a long context"
+      prefill: 4096
+      decode: 256
+      concurrency: 1
+      requests: 4
+      warmup: 1
+    est_minutes: 1.5
+  - id: ctx-8k-256
+    kind: long_context
+    params:
+      label: Long context 8k
+      description: "8k token prompt, 256 tokens out: how speed holds as context grows"
+      prefill: 8192
+      decode: 256
+      concurrency: 1
+      requests: 3
+      warmup: 1
+    est_minutes: 2.5
+  - id: cache-2k
+    kind: prefix_shared
+    params:
+      label: Cached prompt
+      description: "8 requests sharing a 2k token prefix; Ollama reuses its prompt cache"
+      shared_prefix: 2048
+      unique_suffix: 64
+      variants: 8
+      decode: 64
+      concurrency: 1
+      warmup: 1
+      primary: prefill_tok_s
+    est_minutes: 1
+  - id: c4
+    kind: concurrency
+    params:
+      label: 4 at once
+      description: "4 concurrent requests, 128 tokens in, 256 out: serving throughput"
+      concurrency: 4
+      num_requests: 16
+      prefill: 128
+      decode: 256
+    est_minutes: 1.5

@@ -215,7 +215,8 @@ def test_heavy_model_on_a_small_mac_boots_short_and_long_shapes_apart():
             assert sum(len(cs) for cs in out.values()) == len(cells)
         else:
             assert out == groups
-        assert split_heavy_processes({process_key(cells[0]): cells[:-1]}) == {process_key(cells[0]): cells[:-1]}
+        shipped = {process_key(cells[0]): cells[:-1]}
+        assert (split_heavy_processes(shipped) == shipped) is not split
 
 
 def test_recipe_follows_the_cell_and_keeps_what_the_boot_added(job, monkeypatch):
