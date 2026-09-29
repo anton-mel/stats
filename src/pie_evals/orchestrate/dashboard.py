@@ -189,6 +189,8 @@ PAGE = """<!doctype html>
   .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .vs > :first-child { text-align: right; } .vs > :last-child { text-align: left; }
   table.ov th.vs-h, td.vs-c { text-align: center; }
+  table.ov th { vertical-align: bottom; }
+  .vs.who { font-size: 11px; font-weight: 400; color: #7a838d; }
   .barlab { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #424a53; margin-bottom: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .barlab .unit { color: #8c959f; }
   table.ov td.num, table.ov th.num { white-space: nowrap; }
@@ -383,9 +385,10 @@ function overview() {
       `<summary>Quality scores</summary>` +
       `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
+    const who = `<div class="vs who"><span>pie</span><span>/</span><span>${esc(m.label)}</span></div>`;
     rows.push(`<div class="card model-card" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:17%"><col><col style="width:110px"><col><col style="width:120px"><col style="width:112px"></colgroup>` +
-      `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent)">decode</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s</th><th title="prefill tok/s">prefill</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s</th><th class="vs-h" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
+      `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent)">decode</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s${who}</th><th title="prefill tok/s">prefill</th><th class="vs-h" title="pie / ${esc(m.label)}">tok/s${who}</th><th class="vs-h" title="median time to first token, pie / ${esc(m.label)}">TTFT${who}</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
   let dragged = null;
