@@ -122,10 +122,17 @@ def prepare_cmd(tier, matrix_dir, platforms, engines_f, programs_f, pie_root, pi
 @click.option("--store", "store_dir", default="store")
 @click.option("--pie-root", type=click.Path(), default=os.environ.get("PIE_ROOT", str(DEFAULT_PIE_ROOT)))
 def quality_cmd(artifacts, tasks, n, matrix_dir, store_dir, pie_root):
-    from pie_evals.quality.run import run_quality
+    from pie_evals.quality.run import TasksSkipped, run_quality
 
+    skipped = []
     for a in artifacts:
-        run_quality(a, list(tasks), n, matrix_dir=matrix_dir, store_dir=store_dir, pie_root=Path(pie_root), log=lambda m_: click.echo(m_, err=True))
+        try:
+            run_quality(a, list(tasks), n, matrix_dir=matrix_dir, store_dir=store_dir, pie_root=Path(pie_root), log=lambda m_: click.echo(m_, err=True))
+        except TasksSkipped as e:
+            skipped.append(str(e))
+    if skipped:
+        click.echo("skipped tasks: " + "; ".join(skipped), err=True)
+        sys.exit(1)
 
 
 @main.command("rescore", help="Grade saved quality answers again with the current scorers.")

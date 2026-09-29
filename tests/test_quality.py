@@ -98,3 +98,20 @@ def test_every_task_has_a_loader_scorer_and_budget():
     assert set(TASKS) == {"gsm8k", "ifeval", "mmlu", "arc", "math500", "gpqa"}
     for load, score, budget in TASKS.values():
         assert callable(load) and callable(score) and budget > 0
+
+
+def test_a_task_that_cannot_load_is_skipped_not_fatal(monkeypatch):
+    from pie_evals.quality import run, tasks
+
+    class GatedRepoError(Exception):
+        pass
+
+    def gated(n):
+        raise GatedRepoError("401 Client Error. Cannot access gated repo")
+
+    monkeypatch.setitem(tasks.TASKS, "gpqa", (gated, tasks.score_choice, 1024))
+    lines = []
+    assert run.load_items("gpqa", 100, lines.append) is None
+    assert "skipped" in lines[0] and "HF_TOKEN" in lines[0]
+    monkeypatch.setitem(tasks.TASKS, "gpqa", (lambda n: ["item"], tasks.score_choice, 1024))
+    assert run.load_items("gpqa", 100, lines.append) == ["item"]
