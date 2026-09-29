@@ -180,6 +180,7 @@ PAGE = """<!doctype html>
   .gapbar .fill.ahead { left: 50%; background: #2da44e; border-radius: 0 5px 5px 0; }
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
+  .running { color: #9a6700; background: #fff8c5; border-radius: 999px; padding: 0 8px; font-size: 12px; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
   table.rmlist { width: 100%; }
   table.rmlist td { vertical-align: middle; padding: 8px 6px; }
@@ -275,7 +276,9 @@ const ALL = [...DATA.commits, ...DATA.history].sort((a, b) => (b.date || "").loc
 const commitOf = sha => ALL.find(c => c.sha === sha) || { sha, message: "", author: "", date: "" };
 const parentOf = sha => { const i = ALL.findIndex(c => c.sha === sha); return i >= 0 ? ALL[i + 1] : null; };
 const measured = [...DATA.commits].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-let sel = measured[0]?.sha || "";
+const inFlight = new Set(DATA.running || []);
+let sel = [...measured, ...ALL.filter(c => inFlight.has(c.sha))].sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0]?.sha || "";
+const home = sel;
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
 function ollamaAt(mac, pie, wl, label, at) {
@@ -292,14 +295,16 @@ function gapBar(gap, noisy) {
 }
 function overview() {
   const main = document.getElementById("main");
-  const mac = filt.mac, latest = measured[0]?.sha || "";
+  const mac = filt.mac, done = measured.find(c => !inFlight.has(c.sha))?.sha || "";
   const c = sel ? commitOf(sel) : null;
   let html = `<div class="commit-head"><div class="title">${c ? esc(c.message) || sel.slice(0, 7) : "No pie commit measured yet"}</div><div class="meta">` +
     (c ? `<a class="sha" href="https://github.com/${DATA.pie_repo}/commit/${sel}" target="_blank"><code>${sel.slice(0, 7)}</code></a>` : "") +
     (c?.author ? `<span><img class="avatar" src="https://github.com/${esc(c.author)}.png?size=40">${esc(c.author)}</span>` : "") +
     (c?.date ? `<span title="${fmtDate(c.date)} ${fmtTime(c.date)}">${relTime(c.date)}</span>` : "") +
     `<span class="muted">${esc(macName(mac))}</span>` +
-    (sel && sel !== latest ? `<a href="#" id="latest">back to latest</a>` : "") + `</div></div>`;
+    (inFlight.has(sel) ? `<span class="running">measuring now</span>` : "") +
+    (sel && sel !== home ? `<a href="#" id="latest">back to latest</a>` : "") +
+    (inFlight.has(sel) && done && done !== sel ? `<a href="#" id="done">last complete: ${done.slice(0, 7)}</a>` : "") + `</div></div>`;
   const rows = [];
   for (const m of DATA.models) {
     const byTest = DATA.results[mac]?.models[m.pie] || {};
@@ -314,7 +319,7 @@ function overview() {
       const noisy = [now?.noisy && `pie: ${now.noisy}`, ol?.noisy && `${m.label}: ${ol.noisy}`].filter(Boolean).join("; ");
       const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
       body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap, noisy)}</td>` +
-        `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : (noisy ? "~" : "") + pct(gap)}</td>` +
+        `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? (inFlight.has(sel) ? "running" : "not run") : (inFlight.has(sel) ? "running" : "no " + esc(m.label))) : (noisy ? "~" : "") + pct(gap)}</td>` +
         `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td></tr>`;
     }
     if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
@@ -330,7 +335,8 @@ function overview() {
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
   }
   main.innerHTML = html + rows.join("");
-  document.getElementById("latest")?.addEventListener("click", e => { e.preventDefault(); sel = latest; draw(); });
+  document.getElementById("latest")?.addEventListener("click", e => { e.preventDefault(); sel = home; draw(); });
+  document.getElementById("done")?.addEventListener("click", e => { e.preventDefault(); sel = done; draw(); });
 }
 function openRuns(shas) {
   if (!me) return openSignIn();
