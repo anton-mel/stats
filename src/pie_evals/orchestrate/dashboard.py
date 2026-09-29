@@ -179,6 +179,7 @@ PAGE = """<!doctype html>
   .gapbar .fill { position: absolute; top: 0; bottom: 0; }
   .gapbar .fill.ahead { left: 50%; background: #2da44e; border-radius: 0 5px 5px 0; }
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
+  .gapbar.noisy .fill { opacity: .4; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
   .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
   .stats .stat { margin: 0; }
@@ -297,10 +298,10 @@ function ollamaAt(mac, pie, wl, label, at) {
 }
 const pct = x => `${x > 0 ? "+" : ""}${(x * 100).toFixed(x > -0.1 && x < 0.1 ? 1 : 0)}%`;
 const tok = x => x == null ? "–" : Math.round(x).toLocaleString();
-function gapBar(gap) {
+function gapBar(gap, noisy) {
   if (gap == null) return `<div class="gapbar empty"><span class="mid"></span></div>`;
   const w = Math.min(Math.abs(gap), 1) * 50;
-  return `<div class="gapbar"><span class="mid"></span><span class="fill ${gap >= 0 ? "ahead" : "behind"}" style="width:${w}%"></span></div>`;
+  return `<div class="gapbar${noisy ? " noisy" : ""}"><span class="mid"></span><span class="fill ${gap >= 0 ? "ahead" : "behind"}" style="width:${w}%"></span></div>`;
 }
 function overview() {
   const main = document.getElementById("main");
@@ -325,12 +326,13 @@ function overview() {
       const pv = now?.[key], ov = ol?.[key];
       const gap = pv != null && ov ? pv / ov - 1 : null;
       const move = pv != null && was?.[key] ? pv / was[key] - 1 : null;
-      if (gap != null) gaps.push(gap);
+      if (gap != null && !(now?.noisy || ol?.noisy)) gaps.push(gap);
       if (move != null) moves.push(move);
       const unit = b.concurrency > 1 ? "tok/s total" : `${key} tok/s`;
-      const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}`;
-      body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap)}</td>` +
-        `<td class="num ${gap == null ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : pct(gap)}</td>` +
+      const noisy = [now?.noisy && `pie: ${now.noisy}`, ol?.noisy && `${m.label}: ${ol.noisy}`].filter(Boolean).join("; ");
+      const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
+      body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap, noisy)}</td>` +
+        `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : (noisy ? "~" : "") + pct(gap)}</td>` +
         `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td>` +
         `<td class="num">${move == null ? "" : `<span class="${move > 0.005 ? "up" : move < -0.005 ? "down" : "muted"}" title="vs ${was.sha.slice(0, 7)}">${pct(move)}</span>`}</td></tr>`;
     }
@@ -810,7 +812,12 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
     concurrency = {b["id"]: b["concurrency"] for b in tests}
     t = store.table(Tier.TARGETED)
     every = [r for r in t.to_pylist() if r["pie_commit"]] if t.num_rows else []
-    rows = [r for r in every if r["status"] == str(CellStatus.PASS)]
+    latest = {}
+    for r in every:
+        latest[(r["run_id"], r["cell_id"])] = r
+    every = list(latest.values())
+    measured_ok = (str(CellStatus.PASS), str(CellStatus.NOISY))
+    rows = [r for r in every if r["status"] in measured_ok and (r["decode_tok_s"] is not None or r["output_tok_s"] is not None or r["prefill_tok_s"] is not None)]
     rows.sort(key=lambda r: r["started_at"])
     baseline_of = {a.id: a.baseline_of for a in matrix.artifacts.values() if a.baseline_of}
     label_of = {a.id: a.baseline_label or a.id for a in matrix.artifacts.values() if a.baseline_of}
@@ -823,7 +830,8 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
                 "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "prefill": r["prefill_tok_s"] if single else None,
                 "decode": r["decode_tok_s"] if single else r["output_tok_s"],
-                "version": r["engine_version"] or ""})
+                "version": r["engine_version"] or "",
+                "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None})
     rows = [r for r in rows if r["engine"] == "pie"]
     failed = sorted({(r["pie_commit"], r["platform"], r["artifact"]) for r in every
                      if r["status"] == str(CellStatus.FAIL)
@@ -846,7 +854,8 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         mac["models"][r["artifact"]][r["workload"]][r["pie_commit"]] = {
             "prefill": r["prefill_tok_s"] if single else None, "prefill_tflops": tf["prefill_tflops"],
             "decode": r["decode_tok_s"] if single else r["output_tok_s"], "decode_tflops": tf["decode_tflops"], "output": r["output_tok_s"],
-            "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ")}
+            "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None}
         have.add(r["artifact"])
 
     known = {c["sha"]: c for c in (history(pie_repo) if lookup_commits else [])}
