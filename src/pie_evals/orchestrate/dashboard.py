@@ -333,13 +333,12 @@ function overview() {
       const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
       body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap, noisy)}</td>` +
         `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : (noisy ? "~" : "") + pct(gap)}</td>` +
-        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td>` +
-        `<td class="num">${move == null ? "" : `<span class="${move > 0.005 ? "up" : move < -0.005 ? "down" : "muted"}" title="vs ${was.sha.slice(0, 7)}">${pct(move)}</span>`}</td></tr>`;
+        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td></tr>`;
     }
-    if (m.unsupported) body = `<tr><td colspan="5" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>`;
+    if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>`;
     rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2><span class="muted">pie vs ${esc(m.label)}</span></div>` +
-      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"><col style="width:78px"></colgroup>` +
-      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th><th class="num" title="change from the commit before">commit</th></tr>${body}</table></div>`);
+      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
+      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
   }
   const avg = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
   const g = avg(gaps), mv = avg(moves);
