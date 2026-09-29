@@ -186,9 +186,7 @@ PAGE = """<!doctype html>
   .gapbar.noisy .fill { opacity: .4; }
   details.quality { margin-top: 12px; }
   table.ov td { vertical-align: middle; }
-  .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .vs > :first-child { text-align: right; } .vs > :last-child { text-align: left; }
-  table.ov th.vs-h, td.vs-c { text-align: center; }
+  table.ov th.vs-h, td.vs-c { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
   table.ov th { vertical-align: bottom; }
   .model-head .who { font-size: 13px; color: #7a838d; }
   .barlab { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #424a53; margin-bottom: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -304,7 +302,7 @@ const openQuality = new Set();
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
 function ms(v) { return v == null ? "–" : v >= 1000 ? (v / 1000).toFixed(1) + "s" : Math.round(v) + "ms"; }
-const vs = (a, b) => `<div class="vs"><span>${a}</span><span>/</span><span>${b}</span></div>`;
+const vs = (a, b) => `${a} / ${b}`;
 function pair(p, o, higher, fmt, tip) {
   const win = p == null || o == null ? "" : (higher ? p >= o : p <= o) ? "up" : "down";
   return `<td class="vs-c ${win || "muted"}" title="${esc(tip)}">${vs(fmt(p), fmt(o))}</td>`;
@@ -329,11 +327,11 @@ function gapBar(gap, noisy) {
 }
 function metricBar(pv, ov, noisy, unit, m, running, now, note) {
   const gap = pv != null && ov ? pv / ov - 1 : null;
-  const cls = gap == null || noisy ? "muted" : gap >= 0 ? "up" : "down";
+  const cls = gap == null ? "muted" : gap >= 0 ? "up" : "down";
   const tip = note || (`pie ${tok(pv)} · ${m.label} ${tok(ov)} ${unit}` + (gap != null ? ` · ${pct(gap)}` : "") + (noisy ? ` · not steady, ${noisy}` : ""));
   const text = note ? "–" : pv == null && ov == null ? (running && !m.unsupported ? "running" : "–") :
-    pv == null && running && !m.unsupported ? "running" : vs(`${noisy ? "~" : ""}${tok(pv)}`, tok(ov));
-  return `<td>${gapBar(gap, noisy)}</td><td class="vs-c ${cls}" title="${esc(tip)}">${text}</td>`;
+    pv == null && running && !m.unsupported ? "running" : vs(tok(pv), tok(ov));
+  return `<td>${gapBar(gap)}</td><td class="vs-c ${cls}" title="${esc(tip)}">${text}</td>`;
 }
 function overview() {
   const main = document.getElementById("main");
@@ -359,7 +357,7 @@ function overview() {
       const multi = b.concurrency > 1;
       body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td>` +
         `${metricBar(now?.decode, ol?.decode, noisy, multi ? "tok/s total" : "tok/s", m, running, now)}` +
-        `${multi ? metricBar(null, null, "", "", m, false, now, "per request, see TTFT") : metricBar(now?.prefill, ol?.prefill, noisy, "tok/s", m, running, now)}` +
+        `${metricBar(now?.prefill, ol?.prefill, noisy, multi ? "tok/s per request" : "tok/s", m, running, now)}` +
         pair(now?.ttft, ol?.ttft, false, ms, `time to first token (median), pie / ${m.label}`) + `</tr>`;
     }
     if (m.unsupported) body = `<tr><td colspan="6" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
@@ -368,7 +366,7 @@ function overview() {
         const multi = b.concurrency > 1;
         return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td>` +
           `${metricBar(null, ol?.decode, ol?.noisy, multi ? "tok/s total" : "tok/s", m, false, null)}` +
-          `${multi ? metricBar(null, null, "", "", m, false, null, "per request, see TTFT") : metricBar(null, ol?.prefill, ol?.noisy, "tok/s", m, false, null)}` +
+          `${metricBar(null, ol?.prefill, ol?.noisy, multi ? "tok/s per request" : "tok/s", m, false, null)}` +
           pair(null, ol?.ttft, false, ms, `time to first token, ${m.label}`) + `</tr>`;
       }).join("");
     const qtasks = [
@@ -910,7 +908,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
             single = concurrency[r["workload"]] == 1
             baselines.setdefault(r["platform"], {}).setdefault(baseline_of.get(r["artifact"], r["artifact"]), {}).setdefault(r["workload"], {}).setdefault(label_of.get(r["artifact"], r["engine"]), []).append({
                 "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "prefill": r["prefill_tok_s"] if single else None,
+                "prefill": r["prefill_tok_s"],
                 "decode": r["decode_tok_s"] if single else r["output_tok_s"],
                 "version": r["engine_version"] or "", "ttft": r["ttft_ms_p50"],
                 "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None})
@@ -934,7 +932,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         tf = flops.tflops(r, cell["workload"]["params"], flops.model_config(cell["artifact"]["base_model"]))
         single = concurrency[r["workload"]] == 1
         mac["models"][r["artifact"]][r["workload"]][r["pie_commit"]] = {
-            "prefill": r["prefill_tok_s"] if single else None, "prefill_tflops": tf["prefill_tflops"],
+            "prefill": r["prefill_tok_s"], "prefill_tflops": tf["prefill_tflops"],
             "decode": r["decode_tok_s"] if single else r["output_tok_s"], "decode_tflops": tf["decode_tflops"], "output": r["output_tok_s"],
             "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"), "ttft": r["ttft_ms_p50"],
             "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None}
