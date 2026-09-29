@@ -2,8 +2,8 @@
 
 | status | cells |
 |---|---|
-| pass | 41 |
-| fail | 2 |
+| pass | 43 |
+| fail | 0 |
 | declared_unsupported | 45 |
 | not_run | 200 |
 | noisy | 7 |
@@ -12,8 +12,6 @@
 
 | engine | platform | artifact | workload | program | mode | status | error | message |
 |---|---|---|---|---|---|---|---|---|
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | hang | timed out (hang is only ever observed via timeout) |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | hang | timed out (hang is only ever observed via timeout) |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-story-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-512-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ctx-4k-256 | text-completion-bench | tp1 | noisy |  |  |
@@ -232,5 +230,5 @@
 
 | family | m1-max-32g | m2-max | m4-pro-48g | m5-max-128g | m5-max-48g |
 |---|---|---|---|---|---|
-| gemma4_moe | 0/9 | 0/9 | 0/9 | 0/9 | 8/9 |
-| muse_glimmer | 0/9 | 0/9 | 0/9 | 0/9 | 8/9 |
+| gemma4_moe | 0/9 | 0/9 | 0/9 | 0/9 | 9/9 |
+| muse_glimmer | 0/9 | 0/9 | 0/9 | 0/9 | 9/9 |
