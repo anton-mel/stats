@@ -132,7 +132,7 @@ def make_jobs(
     return jobs
 
 
-def available_platforms(matrix: Matrix, repo: str, token: str | None = None) -> tuple[list[str], dict[str, str]]:
+def available_platforms(matrix: Matrix, repo: str, token: str | None = None) -> tuple[list[str] | None, dict[str, str]]:
     """Macs a job can actually land on right now: those with an *online*
     registered runner carrying the platform's label. Everything else is
     skipped with a reason — a job queued for a runner that never comes sits
@@ -141,10 +141,9 @@ def available_platforms(matrix: Matrix, repo: str, token: str | None = None) -> 
     try:
         out = subprocess.run(["gh", "api", f"repos/{repo}/actions/runners?per_page=100"], capture_output=True, text=True, env=env, check=True).stdout
         runners = json.loads(out).get("runners", [])
-    except Exception as e:  # no gh / no token: nothing is known-schedulable
-        runners, note = [], f"runner list unavailable ({e}); skipped"
-    else:
-        note = ""
+    except Exception as e:  # noqa: BLE001
+        return None, {"*": f"runner list unavailable ({str(e).strip()[:120]})"}
+    note = ""
     online = {lab["name"] for r in runners if r.get("status") == "online" for lab in r.get("labels", [])}
     ok, skipped = [], {}
     for p in matrix.platforms.values():

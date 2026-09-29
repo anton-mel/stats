@@ -64,3 +64,30 @@ def test_available_platforms_keeps_only_online_macs(matrix, monkeypatch):
     ok, skipped = J.available_platforms(matrix, "o/r")
     assert ok == ["m1-max-32g"]
     assert "m4-pro-48g" in skipped and "m2-max" in skipped
+
+
+def _jobs_cli(tmp_path, monkeypatch, *platforms):
+    import json
+
+    from click.testing import CliRunner
+
+    from pie_evals.orchestrate import cli
+    from pie_evals.orchestrate import jobs as J
+
+    def denied(*a, **k):
+        raise RuntimeError("HTTP 403")
+
+    monkeypatch.setattr(J.subprocess, "run", denied)
+    args = ["--matrix", str(ROOT / "matrix"), "--store", str(tmp_path / "store"), "jobs", "--tier", "targeted", "--pie-commit", "c" * 40,
+            "--out", str(tmp_path / "jobs"), "--skip-unavailable"] + [x for p in platforms for x in ("--platform", p)]
+    res = CliRunner().invoke(cli.main, args)
+    assert res.exit_code == 0, res.output
+    return {j["platform"] for j in json.loads((tmp_path / "jobs" / "gh-matrix.json").read_text())["include"]}
+
+
+def test_unknown_runners_schedule_only_the_macs_asked_for(tmp_path, monkeypatch):
+    assert _jobs_cli(tmp_path, monkeypatch, "m5-max-48g") == {"m5-max-48g"}
+
+
+def test_unknown_runners_and_no_mac_asked_schedule_nothing(tmp_path, monkeypatch):
+    assert _jobs_cli(tmp_path, monkeypatch) == set()
