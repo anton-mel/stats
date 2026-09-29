@@ -2,13 +2,13 @@ name: pie eval
 run-name: pie eval ${{ github.event.client_payload.pie_commit || inputs.pie_commit || 'pie main' }}
 permissions: { contents: write, actions: read }
 concurrency:
-  group: pie-eval-${{ github.event.client_payload.pie_commit || github.event.inputs.pie_commit || 'main' }}
-  cancel-in-progress: true
+  group: ${{ github.event_name == 'workflow_dispatch' && format('pie-eval-{0}', github.event.inputs.pie_commit) || 'pie-eval-auto' }}
+  cancel-in-progress: false
 on:
   repository_dispatch:
     types: [pie-eval]
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
     inputs:
       pie_commit: { description: "pie commit (empty: pie main)", required: false, default: "" }
