@@ -162,15 +162,13 @@ def recorded_cell_keys(store: Store, tier: Tier, pie_commit: str, baseline_pins:
     t = store.table(tier)
     if t.num_rows == 0:
         return set()
-    keys = t.column("cell_key").to_pylist()
-    commits = t.column("pie_commit").to_pylist()
-    statuses = t.column("status").to_pylist()
-    engines = t.column("engine").to_pylist()
-    versions = t.column("engine_version").to_pylist()
-    classes = t.column("error_class").to_pylist()
+    latest = {}
+    for r in t.select(["run_id", "cell_id", "cell_key", "pie_commit", "status", "engine", "engine_version", "error_class"]).to_pylist():
+        latest[(r["run_id"], r["cell_id"] or r["cell_key"])] = r
     pins = baseline_pins or {}
     done = set()
-    for k, c, s, e, v, cls in zip(keys, commits, statuses, engines, versions, classes, strict=True):
+    for r in latest.values():
+        k, c, s, e, v, cls = r["cell_key"], r["pie_commit"], r["status"], r["engine"], r["engine_version"], r["error_class"]
         if s in ("not_run", "noisy"):  # never reached, or measured on a card that could not agree with itself: a re-dispatch measures again
             continue
         if str(cls or "") == "harness_invalid":
