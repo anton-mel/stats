@@ -69,8 +69,8 @@ def test_fit_rule_marks_big_models_on_small_macs(matrix, cells):
 
 
 def test_context_rule_marks_shapes_past_max_context(matrix, cells):
-    c = next(c for c in cells if c.workload.id == "lc-2k-128")
-    short = c.model_copy(update={"artifact": c.artifact.model_copy(update={"max_context": 1024})})
+    c = next(c for c in cells if c.workload.id == "ob-512-200")
+    short = c.model_copy(update={"artifact": c.artifact.model_copy(update={"max_context": 512})})
     assert "max_context" in matrix._physical_reason(short)
 
 

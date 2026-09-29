@@ -11,9 +11,7 @@
   "benchmarks": [
     "ob-story-200",
     "ob-512-200",
-    "ob-2048-200",
-    "ss-128-64",
-    "lc-2k-128",
-    "c8"
+    "ob-short-100",
+    "ob-advanced-500"
   ]
 }

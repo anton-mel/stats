@@ -319,6 +319,14 @@ def test_ollama_flushes_every_slot_it_booted(tmp_path):
     assert flag_value(argv_for(eng, WORKLOADS["ss-128-64"], tmp_path), "--flush-slots") == "8"
 
 
+def test_advanced_shape_carries_temperature_and_ollama_seed(tmp_path):
+    adv = WorkloadSpec(id="ob-advanced-500", kind="single_stream", params={"prompt": "p", "decode": 500, "temperature": 0.7, "seed": 42})
+    assert flag_value(common_args_for(adv), "--temperature") == "0.7"
+    argv = argv_for(make(OllamaEngine), adv, tmp_path)
+    assert flag_value(argv, "--seed") == "42"
+    assert "--seed" not in argv_for(make(PieEngine), adv, tmp_path)
+
+
 def test_ollama_server_env_maps_recipe_knobs():
     eng = make(OllamaEngine)
     eng.recipe = {**eng.recipe, "num_parallel": 8, "context_length": 4096, "flash_attention": True, "kv_cache_type": "q8_0"}
