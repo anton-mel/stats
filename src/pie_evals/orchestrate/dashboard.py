@@ -180,14 +180,9 @@ PAGE = """<!doctype html>
   .gapbar .fill.ahead { left: 50%; background: #2da44e; border-radius: 0 5px 5px 0; }
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
-  details.quality { margin-top: 14px; border-top: 1px solid #eaeef2; }
-  details.quality > summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0 8px; cursor: pointer; list-style: none; font-weight: 600; font-size: 13px; user-select: none; }
-  details.quality > summary::-webkit-details-marker { display: none; }
-  details.quality > summary::before { content: "▸"; display: inline-block; width: 14px; color: #656d76; transition: transform .12s; }
-  details.quality[open] > summary::before { transform: rotate(90deg); }
-  details.quality > summary .qtitle { flex: 1; }
-  details.quality > summary .qsum { font-weight: 400; color: #656d76; }
-  table.quality { margin-top: 2px; }
+  details.quality { margin-top: 12px; }
+  details.quality > summary { cursor: pointer; font-weight: 600; font-size: 13px; padding: 6px 0; user-select: none; }
+  table.quality { margin-top: 4px; }
   .running { color: #9a6700; background: #fff8c5; border-radius: 999px; padding: 0 8px; font-size: 12px; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
   table.rmlist { width: 100%; }
@@ -350,13 +345,10 @@ function overview() {
     const qcell = q => q?.score == null ? `<td class="num muted">not run</td>` :
       `<td class="num" title="95% interval ${(q.ci95[0] * 100).toFixed(0)}–${(q.ci95[1] * 100).toFixed(0)}%, n=${q.n}${q.version ? ", " + esc(q.version) : ""}">${(q.score * 100).toFixed(0)}%</td>`;
     const qrows = qtasks;
-    const scored = qrows.map(([t]) => DATA.quality?.[m.id]?.[t]).filter(q => q?.score != null);
-    const qsum = scored.length ? `${scored.length} of ${qrows.length} tasks · avg ${(scored.reduce((a, q) => a + q.score, 0) / scored.length * 100).toFixed(0)}%` : "not run";
     const qhtml = `<details class="quality" data-model="${esc(m.id)}"${openQuality.has(m.id) ? " open" : ""}>` +
-      `<summary><span class="qtitle">quality</span><span class="qsum" title="scored on ${esc(m.label)}; the model's own quality, not the engine's">${qsum}</span></summary>` +
-      `<table class="compact fixed quality"><colgroup><col style="width:26%"><col><col style="width:120px"></colgroup>` +
-      `<tr><th>task</th><th></th><th class="num">score</th></tr>` +
-      qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td><td class="muted">${esc(desc)}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
+      `<summary>quality</summary>` +
+      `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
+      qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
     rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table>${qhtml}</div>`);
