@@ -390,3 +390,39 @@ def test_argparse_flag_extraction_sees_loop_registered_and_boolean_optional_flag
     got = argparse_flags(OLLAMA_SCRIPT)
     assert {"--model", "--max-tokens", "--concurrency", "--num-requests", "--requests", "--dump-all-token-ids"} <= got
     assert {"--ollama-model", "--flush-cache", "--no-flush-cache"} <= got
+
+
+def test_a_shape_can_score_on_prefill(tmp_path):
+    import sys
+
+    from pie_evals.node.engines.base import Engine
+
+    fake = tmp_path / "fake_bench.py"
+    fake.write_text(
+        "import json, sys\n"
+        "out = sys.argv[sys.argv.index('--json-out') + 1]\n"
+        "req = {'ok': True, 'latency_s': 0.2, 'ttft_s': 0.1, 'output_tokens': 1, 'prompt_tokens': 512}\n"
+        "json.dump({'summary': {'wall_s': 0.2, 'output_tokens': 1, 'prompt_tokens': 512}, 'requests': [req]}, open(out, 'w'))\n"
+    )
+    root = tmp_path / "pie"
+    (root / "scripts" / "bench").mkdir(parents=True)
+
+    class Stub(Engine):
+        name = "pie"
+
+        def script_path(self):
+            return fake
+
+        def default_python(self):
+            return sys.executable
+
+        def model_arg(self):
+            return "m"
+
+        def engine_args(self, workload):
+            return []
+
+    eng = Stub(pie_root=root, artifact=artifact(), platform=platform(), mode=Mode(), recipe={})
+    pp = WorkloadSpec(id="lb-pp512", kind="single_stream", params={"prefill": 512, "decode": 1, "primary": "prefill_tok_s"})
+    res = eng.run(pp, [], tmp_path / "out", 60)
+    assert res.perf.primary == "prefill_tok_s" and res.perf.prefill_tok_s == 512 / 0.1

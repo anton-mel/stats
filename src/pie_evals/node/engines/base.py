@@ -283,6 +283,8 @@ class Engine(ABC):
             cls = ErrorClass.HARNESS_INVALID if re.search(r"temperature must be|Failed to parse JSON input", err) else ErrorClass.INCOMPATIBLE if re.search(r"forward-hybrid|not valid on|interface", err) else ErrorClass.CRASH
             raise EngineLaunchError(cls, f"all {len(requests)} requests failed: {err[:300]}")
         perf = perf_from_common_json(summary, requests, self.num_layers, concurrency=int(workload.params.get("concurrency", 1)))
+        if workload.params.get("primary"):
+            perf.primary = str(workload.params["primary"])
         perf.counters.update(self.counters_from_summary(summary))
         perf.resident_gib = self.resident_gib()
         ids = [r.get("output_token_ids") or [] for r in requests]
