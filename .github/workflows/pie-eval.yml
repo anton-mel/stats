@@ -16,6 +16,7 @@ on:
       macs: { description: "comma-separated Mac ids (empty: config.json)", required: false, default: "" }
       benchmarks: { description: "comma-separated workload ids (empty: config.json)", required: false, default: "" }
       engines: { description: "pie,ollama (default both)", required: false, default: "pie,ollama" }
+      rerun: { description: "measure again even if already recorded", type: boolean, required: false, default: false }
 
 env:
   PIE_REPO: ${{ vars.PIE_REPO || 'pie-project/pie' }}
@@ -67,4 +68,5 @@ jobs:
       platforms: ${{ needs.start.outputs.macs }}
       workloads: ${{ needs.start.outputs.workloads }}
       engines: ${{ needs.start.outputs.engines }}
+      skip_recorded: ${{ !inputs.rerun }}
     secrets: inherit
