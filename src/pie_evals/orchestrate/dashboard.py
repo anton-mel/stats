@@ -214,6 +214,7 @@ async function refreshPool() {
       status: r.status !== "online" ? "offline" : r.busy ? "busy" : "idle", last: DATA.last[id] || {} }];
   });
   RUNNABLE = [...new Map(DATA.pool.filter(m => m.os === "macos").map(m => [m.id, m])).values()];
+  fillFilters();
 }
 setInterval(async () => {
   if (!me || document.hidden || !document.getElementById("modal").hidden) return;
