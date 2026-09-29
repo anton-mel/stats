@@ -100,7 +100,7 @@ def run_quality(artifact_id: str, tasks: list[str], n: int, *, matrix_dir: str =
             "task": task, "n": len(scores), "correct": correct, "score": correct / len(scores) if scores else None, "ci95": [lo, hi],
             "version": version, "empty": sum(1 for t in texts if not t), "minutes": round((time.monotonic() - t0) / 60, 1),
             "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "samples": [{"id": i.id, "score": s, "text": t[:2000]} for i, s, t in zip(items, scores, texts, strict=True)],
+            "samples": [{"id": i.id, "score": s, "text": t} for i, s, t in zip(items, scores, texts, strict=True)],
         }
         path = Path(store_dir) / "quality" / f"{art.id}-{task}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
