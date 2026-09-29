@@ -325,7 +325,7 @@ function overview() {
         return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(null)}</td>` +
           `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td></tr>`;
       }).join("");
-    rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2><span class="muted">pie vs ${esc(m.label)}</span></div>` +
+    rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
   }
