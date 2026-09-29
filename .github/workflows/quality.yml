@@ -1,0 +1,37 @@
+name: quality
+run-name: quality ${{ inputs.artifacts }}
+permissions: { contents: write }
+concurrency: { group: quality, cancel-in-progress: false }
+on:
+  workflow_dispatch:
+    inputs:
+      artifacts: { description: "comma-separated artifact ids", required: true, default: "gemma-4-26b-a4b-mlx4,gemma-4-26b-a4b-ollama,gemma-4-26b-a4b-ollama-mlx,muse-glimmer-30b-mlx4,muse-glimmer-30b-ollama,llama-3.2-3b-ollama" }
+      tasks: { description: "comma-separated tasks", required: false, default: "gsm8k,ifeval" }
+      n: { description: "questions per task", required: false, default: "100" }
+      mac: { description: "Mac id", required: false, default: "m5-max-48g" }
+
+jobs:
+  quality:
+    runs-on: [self-hosted, macos, "${{ inputs.mac }}"]
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - name: install harness
+        run: uv venv --quiet .venv && uv pip install --quiet --python .venv/bin/python -e ".[quality]"
+      - name: run
+        env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}" }
+        run: |
+          echo "PIE_ROOT=${PIE_ROOT:-$HOME/pie-stats}"
+          args=""
+          for a in $(echo "${{ inputs.artifacts }}" | tr ',' ' '); do args="$args --artifact $a"; done
+          for t in $(echo "${{ inputs.tasks }}" | tr ',' ' '); do args="$args --task $t"; done
+          .venv/bin/pie-evals-node quality $args --n "${{ inputs.n }}" --pie-root "${PIE_ROOT:-$HOME/pie-stats}"
+      - name: commit scores
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add store/quality 2>/dev/null || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -q -m "store: quality ${{ inputs.tasks }} n=${{ inputs.n }}"
+          for i in 1 2 3; do git push -q origin HEAD:main && exit 0; git pull -q --rebase origin main; done
