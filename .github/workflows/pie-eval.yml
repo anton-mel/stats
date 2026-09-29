@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       pie_commit: { description: "pie commit (empty: pie main)", required: false, default: "" }
-      models: { description: "comma-separated pie model ids (empty: config.json); their Ollama arms follow", required: false, default: "" }
+      models: { description: "comma-separated model ids (empty: config.json); an Ollama arm brings its pie counterpart", required: false, default: "" }
       macs: { description: "comma-separated Mac ids (empty: config.json)", required: false, default: "" }
       benchmarks: { description: "comma-separated workload ids (empty: config.json)", required: false, default: "" }
       engines: { description: "pie,ollama (default both)", required: false, default: "pie,ollama" }
@@ -51,7 +51,7 @@ jobs:
             [ -n "$IN_MODELS" ] && models=$IN_MODELS; [ -n "$IN_MACS" ] && macs=$IN_MACS; [ -n "$IN_WORKLOADS" ] && workloads=$IN_WORKLOADS; engines=${IN_ENGINES:-pie,ollama}
           fi
           [[ "$models$macs$workloads$engines" =~ ^[a-z0-9.,-]*$ ]] || { echo "::error::bad input"; exit 1; }
-          artifacts=$(.venv/bin/python -c "import sys,yaml; want=set(filter(None,sys.argv[1].split(','))); arts=yaml.safe_load(open('matrix/models.yaml'))['artifacts']; print(','.join(a['id'] for a in arts if a['id'] in want or a.get('baseline_of') in want))" "$models")
+          artifacts=$(.venv/bin/python -c "import sys,yaml; want=set(filter(None,sys.argv[1].split(','))); arts=yaml.safe_load(open('matrix/models.yaml'))['artifacts']; pie={a.get('baseline_of') for a in arts if a['id'] in want}; print(','.join(a['id'] for a in arts if a['id'] in want or a['id'] in pie or (a['id'] not in pie and a.get('baseline_of') in want)))" "$models")
           skip=false; [ -n "$artifacts" ] && [ -n "$workloads" ] || skip=true
           echo "commit=$COMMIT models=$models artifacts=$artifacts macs=${macs:-every connected Mac} benchmarks=$workloads engines=$engines skip=$skip" | tee -a "$GITHUB_STEP_SUMMARY"
           { echo "commit=$COMMIT"; echo "artifacts=$artifacts"; echo "macs=$macs"; echo "workloads=$workloads"; echo "engines=$engines"; echo "skip=$skip"; } >> "$GITHUB_OUTPUT"

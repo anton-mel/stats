@@ -47,7 +47,7 @@ class FakeEngine(Engine):
 @pytest.fixture
 def job(tmp_path):
     m = Matrix.load(ROOT / "matrix")
-    cells = [c for c in m.runnable(Tier.TARGETED) if c.platform.id == "m4-pro-48g" and c.artifact.id == "gemma-4-e4b-bf16" and str(c.engine) == "pie"]
+    cells = [c for c in m.runnable(Tier.TARGETED) if c.platform.id == "m4-pro-48g" and c.artifact.id == "gemma-4-26b-a4b-mlx4" and str(c.engine) == "pie"]
     j = make_jobs(m, Tier.TARGETED, pie_commit="deadbeef", store=Store(tmp_path / "store"), platforms=["m4-pro-48g"], cells=cells)[0]
     assert {c.workload.id for c in j.cells} >= {"control-aa", "ss-128-64", "c8"}
     return j
@@ -60,7 +60,7 @@ def patched(monkeypatch, tmp_path):
     FakeEngine.behaviour = {}
     monkeypatch.setattr(runner_mod, "get_engine", lambda name: FakeEngine)
     monkeypatch.setattr(runner_mod, "load_recipe", lambda *a, **k: {})
-    snap = tmp_path / "hf" / "models--google--gemma-4-E4B-it" / "snapshots" / "abc"
+    snap = tmp_path / "hf" / "models--mlx-community--gemma-4-26b-a4b-it-4bit" / "snapshots" / "abc"
     snap.mkdir(parents=True)
     (snap / "config.json").write_text('{"num_hidden_layers": 28}')
     (snap / "model.safetensors").write_bytes(b"x")
@@ -79,6 +79,7 @@ def patched(monkeypatch, tmp_path):
     monkeypatch.setattr(runner_mod.prov, "hardware_fingerprint", lambda: {"gpu": "fake"})
     monkeypatch.setattr(runner_mod.prov, "build_provenance", lambda *a, **k: runner_mod.prov.Provenance(harness_commit="h", engine_version="deadbeef", checkpoint_revision="abc", hardware_fingerprint={"gpu": "fake"}))
     monkeypatch.setattr("pie_evals.node.reclaim.reclaim", lambda *a, **k: 0.0)
+    monkeypatch.setattr("pie_evals.node.importer.ensure_artifact", lambda art, snap, *a, **k: snap)
     return tmp_path / "hf"
 
 
@@ -198,8 +199,8 @@ def test_heavy_model_on_a_small_mac_boots_short_and_long_shapes_apart():
 
     m = Matrix.load(ROOT / "matrix")
     lc16k = WorkloadSpec(id="lc-16k-128", kind="long_context", params={"prefill": 16384, "decode": 128, "concurrency": 1})
-    for aid, split in (("gemma-4-26b-a4b-mlx4", True), ("gemma-4-e4b-bf16", False)):
-        cells = [c for c in m.runnable(Tier.TARGETED) if c.artifact.id == aid and c.platform.id == "m1-max-32g" and str(c.engine) == "pie"]
+    for plat, split in (("m1-max-32g", True), ("m5-max-128g", False)):
+        cells = [c for c in m.runnable(Tier.TARGETED) if c.artifact.id == "gemma-4-26b-a4b-mlx4" and c.platform.id == plat and str(c.engine) == "pie"]
         cells.append(cells[0].model_copy(update={"workload": lc16k}))
         groups = {process_key(cells[0]): cells}
         out = split_heavy_processes(groups)

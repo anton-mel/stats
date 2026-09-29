@@ -11,7 +11,7 @@ from . import flops
 from .matrix import Matrix
 from .store import Store
 
-DEFAULT_MODEL = "gemma-4-26b-a4b-mlx4"
+DEFAULT_MODEL = "gemma-4-26b-a4b-ollama"
 
 PAGE = """<!doctype html>
 <html lang="en">
@@ -222,8 +222,9 @@ setInterval(async () => {
   await refreshPool();
   if (JSON.stringify(DATA.pool) !== was) draw();
 }, 15000);
-const modelOf = id => DATA.models.find(m => m.id === id) || { name: id, quant: "" };
-const modelName = id => { const m = modelOf(id); return m.quant ? `${m.name} · ${m.quant}` : m.name; };
+const modelOf = id => DATA.models.find(m => m.id === id) || DATA.models.find(m => m.pie === id) || { name: id, quant: "" };
+const modelName = id => modelOf(id).name;
+const pieOf = id => modelOf(id).pie || id;
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
 const PER_PAGE = 20;
 let tab = "History", back = "History", me = null, page = 0, denied = "";
@@ -233,7 +234,7 @@ const chosen = new Set();
 const testName = id => DATA.benchmarks.find(b => b.id === id)?.name || id;
 function fillFilters() {
   const macs = [...new Set([...Object.keys(DATA.results), ...RUNNABLE.map(m => m.id)])];
-  const models = [...new Set([...macs.flatMap(m => Object.keys(DATA.results[m]?.models || {})), ...DATA.models.map(m => m.id)])]
+  const models = DATA.models.map(m => m.id)
     .sort((a, b) => (a === DATA.default_model ? -1 : b === DATA.default_model ? 1 : 0));
   const opts = (all, ids, name, on) => ids.map(id => `<option value="${esc(id)}"${id === on ? " selected" : ""}>${esc(name(id))}</option>`).join("");
   if (!macs.includes(filt.mac)) filt.mac = macs[0] || "";
@@ -309,12 +310,12 @@ function overview() {
   for (const [mac, r] of Object.entries(DATA.results)) {
     if (mac !== onMac) continue;
     for (const [model, byTest] of Object.entries(r.models)) {
-      if (model !== shown) continue;
+      if (model !== pieOf(shown)) continue;
       const tests = DATA.benchmarks.filter(b => byTest[b.id]?.[sel]);
       if (!tests.length) continue;
       any = true;
       const base = DATA.baselines?.[mac]?.[model] || {};
-      const engines = Object.keys(BASELINES).filter(e => Object.values(base).some(b => b[e]));
+      const engines = Object.keys(BASELINES).filter(e => e === modelOf(shown).label && Object.values(base).some(b => b[e]));
       html += `<div class="card"><h2>${esc(r.name)}</h2><table class="compact fixed">` +
         `<colgroup><col style="width:30%"><col><col><col><col>${engines.map(() => `<col style="width:72px"><col style="width:72px">`).join("")}</colgroup>` +
         `<tr><th>benchmark</th><th class="num">prefill</th><th class="num">change</th><th class="num">decode</th><th class="num">change</th>` +
@@ -396,11 +397,11 @@ function pushes() {
   page = Math.min(page, pages - 1);
   const isMeasured = new Set(DATA.commits.map(c => c.sha));
   const running = new Set(DATA.running || []);
-  const fits = x => (!filt.mac || x.mac === filt.mac) && (!filt.model || x.model === filt.model);
+  const fits = x => (!filt.mac || x.mac === filt.mac) && (!filt.model || x.model === pieOf(filt.model));
   const failedAt = sha => (DATA.failed || []).some(f => f.sha === sha && fits(f));
   const measuredAt = sha => Object.entries(DATA.results).some(([mac, r]) =>
     (!filt.mac || mac === filt.mac) && Object.entries(r.models).some(([model, byTest]) =>
-      (!filt.model || model === filt.model) && Object.values(byTest).some(byCommit => byCommit[sha])));
+      (!filt.model || model === pieOf(filt.model)) && Object.values(byTest).some(byCommit => byCommit[sha])));
   const state = sha => running.has(sha) ? ["wait", "waiting to run"]
     : failedAt(sha) ? [measuredAt(sha) ? "part" : "bad", measuredAt(sha) ? "some benchmarks failed" : "failed"]
     : measuredAt(sha) ? ["run", "benchmarked"] : ["", "not benchmarked"];
@@ -424,7 +425,7 @@ function pushes() {
   document.querySelectorAll("th.flip").forEach(th => th.onclick = () => { const ph = th.dataset.phase; pick[ph] = pick[ph] === "best" ? "worst" : "best"; draw(); });
 }
 function change(sha, phase, which) {
-  const cs = ((DATA.verdicts || {})[sha] || []).filter(c => c.phase === phase && (!filt.mac || c.mac === filt.mac) && (!filt.model || c.model === filt.model));
+  const cs = ((DATA.verdicts || {})[sha] || []).filter(c => c.phase === phase && (!filt.mac || c.mac === filt.mac) && (!filt.model || c.model === pieOf(filt.model)));
   if (!cs.length) return `<td></td>`;
   const c = cs.reduce((a, b) => (which === "best" ? b.pct > a.pct : b.pct < a.pct) ? b : a);
   const cls = c.pct > 0 ? "up" : c.pct < 0 ? "down" : "muted";
@@ -733,24 +734,22 @@ def quant_label(scheme: str) -> str:
         return "mxfp4"
     if "bf16" in low:
         return "bf16"
+    if "nvfp4" in low:
+        return "nvfp4"
     return scheme
 
 
 def mac_models(matrix: Matrix) -> list[dict]:
-    seen: dict[str, dict] = {}
-    for c in matrix.expand():
-        a = c.artifact
-        if (c.platform.os == "macos" and c.engine.value == "pie" and c.program.id == "text-completion-bench"
-                and c.mode.tp == 1 and a.kind.value == "full"):
-            org, _, repo = a.base_model.partition("/")
-            seen[a.id] = {"id": a.id, "name": a.display_name or repo or org, "publisher": org if repo else "", "family": a.family,
-                          "scheme": str(a.scheme), "format": str(a.source_format), "gib": a.expected_gib, "context": a.max_context,
-                          "quant": quant_label(str(a.scheme))}
-    names = [m["name"] for m in seen.values()]
-    for m in seen.values():
-        if names.count(m["name"]) > 1:
-            m["name"] = f"{m['name']} ({m['publisher']})"
-    return sorted(seen.values(), key=lambda m: m["name"].lower())
+    macs = [p for p in matrix.platforms.values() if p.os == "macos"]
+    out = []
+    for a in matrix.artifacts.values():
+        pie = matrix.artifacts.get(a.baseline_of or "")
+        if a.source_format.value != "ollama" or pie is None or not macs:
+            continue
+        out.append({"id": a.id, "name": a.ollama_tag, "pie": pie.id, "label": a.baseline_label or "Ollama", "family": a.family,
+                    "scheme": str(a.scheme), "format": str(a.source_format), "gib": a.expected_gib, "context": pie.max_context,
+                    "quant": quant_label(str(a.scheme))})
+    return sorted(out, key=lambda m: m["name"])
 
 
 def _paginate(path: str) -> list:
@@ -805,7 +804,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
     rows.sort(key=lambda r: r["started_at"])
     baseline_of = {a.id: a.baseline_of for a in matrix.artifacts.values() if a.baseline_of}
     label_of = {a.id: a.baseline_label or a.id for a in matrix.artifacts.values() if a.baseline_of}
-    shown = {m["id"] for m in mac_models(matrix)}
+    shown = {m["pie"] for m in mac_models(matrix)}
     baselines: dict[str, dict] = {}
     for r in rows:
         if r["engine"] != "pie" and r["workload"] in concurrency:
@@ -858,7 +857,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
 
     models = mac_models(matrix)
     for m in models:
-        m["has_results"] = m["id"] in have
+        m["has_results"] = m["pie"] in have
     return {
         "repo": repo, "pie_repo": pie_repo, "default_model": DEFAULT_MODEL,
         "benchmarks": tests,

@@ -26,7 +26,7 @@ def _rec(cell, value, when, status=CellStatus.PASS, engine_version="abc123", run
 
 def test_store_roundtrip_and_history(tmp_path, matrix):
     cells = matrix.runnable(Tier.TARGETED)
-    cell = next(c for c in cells if c.workload.id == "ss-128-64" and c.artifact.id == "gemma-4-e4b-bf16" and c.platform.id == "m4-pro-48g" and str(c.engine) == "pie")
+    cell = next(c for c in cells if c.workload.id == "ss-128-64" and c.artifact.id == "gemma-4-26b-a4b-mlx4" and c.platform.id == "m4-pro-48g" and str(c.engine) == "pie")
     st = Store(tmp_path / "store")
     t0 = datetime(2026, 9, 1, tzinfo=timezone.utc)
     for i, v in enumerate([430, 432, 431, 433]):
@@ -46,7 +46,7 @@ def test_store_refuses_missing_provenance(tmp_path, matrix):
 
 def test_regression_is_noise_aware(tmp_path, matrix):
     cells = matrix.runnable(Tier.TARGETED)
-    cell = next(c for c in cells if c.workload.id == "ss-128-64" and c.artifact.id == "gemma-4-e4b-bf16" and c.platform.id == "m4-pro-48g" and str(c.engine) == "pie")
+    cell = next(c for c in cells if c.workload.id == "ss-128-64" and c.artifact.id == "gemma-4-26b-a4b-mlx4" and c.platform.id == "m4-pro-48g" and str(c.engine) == "pie")
     st = Store(tmp_path / "store")
     t0 = datetime(2026, 9, 1, tzinfo=timezone.utc)
     vals = [430, 432, 431, 433, 430, 400]
@@ -74,7 +74,7 @@ def _pair(matrix, workload="c32"):
     def pick(aid):
         return next(c for c in cells if c.workload.id == workload and c.artifact.id == aid and c.platform.id == "m4-pro-48g")
 
-    return pick("gemma-4-e4b-bf16"), pick("gemma-4-e4b-ollama-bf16")
+    return pick("gemma-4-26b-a4b-mlx4"), pick("gemma-4-26b-a4b-ollama")
 
 
 def test_baseline_ratio_pairs_the_ollama_arm_through_baseline_of(tmp_path, matrix):
