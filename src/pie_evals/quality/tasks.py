@@ -73,21 +73,6 @@ def load_math500(n: int, seed: int = 20260929) -> list[Item]:
     return [Item(f"math500-{r['unique_id']}", r["problem"] + MATH_SUFFIX, r["answer"]) for r in rows]
 
 
-def load_gpqa(n: int, seed: int = 20260929) -> list[Item]:
-    import csv
-
-    with open(_download("Idavidrein/gpqa", "gpqa_diamond.csv"), newline="") as f:
-        rows = list(csv.DictReader(f))
-    rows = random.Random(seed).sample(rows, min(n, len(rows)))
-    out = []
-    for i, r in enumerate(rows):
-        options = [r["Correct Answer"], r["Incorrect Answer 1"], r["Incorrect Answer 2"], r["Incorrect Answer 3"]]
-        order = list(range(4))
-        random.Random(f"{seed}:{i}").shuffle(order)
-        out.append(Item(f"gpqa-{i}", _choices(r["Question"], [options[j] for j in order]), LETTERS[order.index(0)]))
-    return out
-
-
 def _number(text: str) -> str | None:
     tail = text.split("####")[-1] if "####" in text else text
     nums = re.findall(r"-?\d[\d,]*\.?\d*", tail)
@@ -177,7 +162,6 @@ TASKS = {
     "mmlu": (load_mmlu, score_choice, 512),
     "arc": (load_arc, score_choice, 512),
     "math500": (load_math500, score_math, 1024),
-    "gpqa": (load_gpqa, score_choice, 1024),
 }
 
 
