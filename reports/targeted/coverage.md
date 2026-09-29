@@ -2,20 +2,23 @@
 
 | status | cells |
 |---|---|
-| pass | 40 |
+| pass | 37 |
 | fail | 0 |
 | declared_unsupported | 40 |
 | not_run | 176 |
-| noisy | 4 |
+| noisy | 7 |
 
 ## Gaps (expected supported, but not passing)
 
 | engine | platform | artifact | workload | program | mode | status | error | message |
 |---|---|---|---|---|---|---|---|---|
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | control-aa | text-completion-bench | tp1 | noisy |  |  |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | c4 | text-completion-bench | tp1 | noisy | harness_invalid | control A/A failed on this process; numbers not read |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-story-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-512-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ctx-4k-256 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | llama-3.2-3b-ollama | c4 | text-completion-bench | tp1 | noisy |  |  |
+| ollama | m5-max-48g | muse-glimmer-30b-ollama | c4 | text-completion-bench | tp1 | noisy |  |  |
 | pie | m1-max-32g | gemma-4-26b-a4b-mlx4 | control-aa | text-completion-bench | tp1 | not_run |  |  |
 | pie | m1-max-32g | gemma-4-26b-a4b-mlx4 | ob-story-200 | text-completion-bench | tp1 | not_run |  |  |
 | pie | m1-max-32g | gemma-4-26b-a4b-mlx4 | ob-512-200 | text-completion-bench | tp1 | not_run |  |  |
@@ -203,5 +206,5 @@
 
 | family | m1-max-32g | m2-max | m4-pro-48g | m5-max-128g | m5-max-48g |
 |---|---|---|---|---|---|
-| gemma4_moe | 0/8 | 0/8 | 0/8 | 0/8 | 8/8 |
+| gemma4_moe | 0/8 | 0/8 | 0/8 | 0/8 | 6/8 |
 | muse_glimmer | 0/8 | 0/8 | 0/8 | 0/8 | 8/8 |

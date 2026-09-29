@@ -1,1 +1,20 @@
-[]
+[
+ {
+  "cell_id": "093137bf528baeba",
+  "cell_key": "pie|m5-max-48g|meta-models/Muse-Glimmer-30B@affine_u4_g64/hf_safetensors|control-aa|text-completion-bench|tp1",
+  "engine": "pie",
+  "platform": "m5-max-48g",
+  "artifact": "muse-glimmer-30b-mlx4",
+  "workload": "control-aa",
+  "program": "text-completion-bench",
+  "mode": "tp1",
+  "metric": "decode_tok_s",
+  "value": 34.04656458761728,
+  "delta_rel": -0.02200197775018768,
+  "threshold_rel": 0.02,
+  "kind": "regression",
+  "pie_commit": "b95c82de68a087f704dcd6b35af448cd90e825eb",
+  "engine_version": "b95c82de6",
+  "family": "muse_glimmer"
+ }
+]
