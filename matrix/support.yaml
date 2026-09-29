@@ -2,4 +2,7 @@ unsupported:
   - when: {engine: pie, family: llama}
     reason: "pie ships no Llama reader"
 
+first_token_broken:
+  muse-glimmer-30b-mlx4: "pie reports the first token before prefill ends on this model, so its prefill and TTFT are not shown"
+
 fit_factor: 1.25

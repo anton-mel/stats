@@ -5,6 +5,8 @@ import subprocess
 from collections import defaultdict
 from pathlib import Path
 
+import yaml
+
 from pie_evals.schema import CellStatus, Tier
 
 from . import flops
@@ -349,8 +351,11 @@ function overview() {
     const byTest = DATA.results[mac]?.models[m.pie] || {};
     let body = "";
     const running = inFlight.has(sel);
+    const ftb = m.first_token_broken;
+    if (ftb) body += `<tr><td colspan="6" class="muted">${esc(ftb)}.</td></tr>`;
     for (const b of DATA.benchmarks) {
-      const now = sel ? byTest[b.id]?.[sel] : null;
+      const raw = sel ? byTest[b.id]?.[sel] : null;
+      const now = raw && ftb ? {...raw, prefill: null, ttft: null} : raw;
       const ol = ollamaAt(mac, m.pie, b.id, m.label, now?.at);
       const noisy = [now?.noisy && `pie: ${now.noisy}`, ol?.noisy && `${m.label}: ${ol.noisy}`].filter(Boolean).join("; ");
       const multi = b.concurrency > 1;
@@ -820,6 +825,7 @@ def quant_label(scheme: str) -> str:
 def mac_models(matrix: Matrix) -> list[dict]:
     macs = [p for p in matrix.platforms.values() if p.os == "macos"]
     why = {}
+    broken = (yaml.safe_load((matrix.root / "support.yaml").read_text()) or {}).get("first_token_broken") or {}
     for c in matrix.expand():
         if str(c.engine) == "pie":
             why.setdefault(c.artifact.id, set()).add(c.declared_unsupported_reason)
@@ -830,7 +836,7 @@ def mac_models(matrix: Matrix) -> list[dict]:
             continue
         out.append({"id": a.id, "name": a.ollama_tag, "pie": pie.id, "label": a.baseline_label or "Ollama", "family": a.family,
                     "scheme": str(a.scheme), "format": str(a.source_format), "gib": a.expected_gib, "context": pie.max_context,
-                    "quant": quant_label(str(a.scheme)),
+                    "quant": quant_label(str(a.scheme)), "first_token_broken": broken.get(pie.id),
                     "unsupported": next(iter(why[pie.id])) if pie.id in why and None not in why[pie.id] else None})
     return sorted(out, key=lambda m: m["name"])
 
