@@ -613,9 +613,9 @@ function renderWho() {
 }
 
 function draw() {
-  if (!me) tab = "Sign in";
+  if (!me && tab !== "Overview" && tab !== "Sign in") tab = "Overview";
   else if (tab === "Sign in") tab = back;
-  document.getElementById("tabs").innerHTML = me ? TABS.map(t => `<button class="${t === tab ? "on" : ""}">${t}</button>`).join("") : "";
+  document.getElementById("tabs").innerHTML = (me ? TABS : ["Overview"]).map(t => `<button class="${t === tab ? "on" : ""}">${t}</button>`).join("");
   document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => { tab = b.textContent; draw(); });
   document.getElementById("controls").hidden = tab !== "Overview" && tab !== "History";
   document.getElementById("fmac").hidden = tab !== "History" && tab !== "Overview";
