@@ -98,7 +98,9 @@ def test_site_has_pushes_pool_and_people(tmp_path, matrix, monkeypatch):
     assert set(by_test) == {"ob-story-200", "ob-512-200"}
     assert by_test["ob-story-200"]["c1"]["decode"] == 401 and by_test["ob-story-200"]["c1"]["prefill"] == 401 * 30
     assert "gemma-4-26b-a4b-ollama" not in data["results"]["m5-max-48g"]["models"]
-    arm = data["baselines"]["m5-max-48g"]["gemma-4-26b-a4b-mlx4"]["ob-story-200"][ollama.artifact.baseline_label]
+    runs = data["baselines"]["m5-max-48g"]["gemma-4-26b-a4b-mlx4"]["ob-story-200"][ollama.artifact.baseline_label]
+    arm = runs[-1]
+    assert arm["at"] and all("at" in v for v in by_test["ob-story-200"].values())
     assert arm["decode"] == 300 and arm["version"] == "0.34.4"
     assert sorted(b["id"] for b in data["benchmarks"]) == ["c4", "cache-2k", "ctx-4k-256", "ctx-8k-256", "ob-512-200", "ob-advanced-500", "ob-short-100", "ob-story-200"]
     assert data["people"] == []
