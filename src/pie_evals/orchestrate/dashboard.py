@@ -170,7 +170,7 @@ PAGE = """<!doctype html>
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
   img.ol { height: 14px; vertical-align: -2px; margin-right: 6px; }
   .model-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
-  .grip { cursor: grab; color: #afb8c1; font-size: 14px; letter-spacing: -2px; user-select: none; }
+  .grip { margin-left: auto; cursor: grab; color: #8c959f; font-size: 14px; letter-spacing: -2px; user-select: none; }
   .model-card.dragging { opacity: .45; }
   .model-card.drop-before { box-shadow: 0 -3px 0 #0969da; }
   .model-card.drop-after { box-shadow: 0 3px 0 #0969da; }
@@ -185,7 +185,13 @@ PAGE = """<!doctype html>
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
   details.quality { margin-top: 12px; }
-  details.quality > summary { cursor: pointer; font-weight: 600; font-size: 13px; padding: 6px 0; user-select: none; }
+  table.ov td.num, table.ov th.num { white-space: nowrap; }
+  details.quality > summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border: 1px solid #d0d7de; border-radius: 999px; background: #fff; color: #424a53; font-size: 13px; cursor: pointer; user-select: none; }
+  details.quality > summary::-webkit-details-marker { display: none; }
+  details.quality > summary:hover { background: #f6f8fa; }
+  details.quality > summary::after { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+  details.quality[open] > summary { background: #1f2328; border-color: #1f2328; color: #fff; }
+  details.quality[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
   table.quality { margin-top: 4px; }
   .running { color: #9a6700; background: #fff8c5; border-radius: 999px; padding: 0 8px; font-size: 12px; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
@@ -289,6 +295,11 @@ const home = sel;
 const openQuality = new Set();
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
+function ms(v) { return v == null ? "–" : v >= 1000 ? (v / 1000).toFixed(1) + "s" : Math.round(v) + "ms"; }
+function pair(p, o, higher, fmt, tip) {
+  const win = p == null || o == null ? "" : (higher ? p >= o : p <= o) ? "up" : "down";
+  return `<td class="num ${win || "muted"}" title="${esc(tip)}">${fmt(p)} / ${fmt(o)}</td>`;
+}
 function orderedModels() {
   let saved = [];
   try { saved = JSON.parse(localStorage.getItem("stats-model-order") || "[]"); } catch {}
@@ -334,15 +345,18 @@ function overview() {
       const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
       body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap, noisy)}</td>` +
         `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? (inFlight.has(sel) ? "running" : "not run") : (inFlight.has(sel) ? "running" : "no " + esc(m.label))) : (noisy ? "~" : "") + pct(gap)}</td>` +
-        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td></tr>`;
+        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td>` +
+        pair(b.concurrency > 1 ? null : now?.prefill, b.concurrency > 1 ? null : ol?.prefill, true, tok, `prefill tok/s, pie / ${m.label}`) +
+        pair(now?.ttft, ol?.ttft, false, ms, `time to first token (median), pie / ${m.label}`) + `</tr>`;
     }
-    if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
+    if (m.unsupported) body = `<tr><td colspan="6" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
       DATA.benchmarks.map(b => {
         const key = b.metric === "prefill" ? "prefill" : "decode";
         const ol = ollamaAt(mac, m.pie, b.id, m.label, null);
         const tip = `${m.label} ${tok(ol?.[key])}${ol?.version ? " (" + ol.version + ")" : ""}${ol?.noisy ? " · not steady, " + ol.noisy : ""}`;
         return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(null)}</td>` +
-          `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td></tr>`;
+          `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td>` +
+          pair(null, b.concurrency > 1 ? null : ol?.prefill, true, tok, `prefill tok/s, ${m.label}`) + pair(null, ol?.ttft, false, ms, `time to first token, ${m.label}`) + `</tr>`;
       }).join("");
     const qtasks = [
       ["gsm8k", "GSM8K", "grade school math, exact final answer"],
@@ -355,12 +369,12 @@ function overview() {
       `<td class="num" title="95% interval ${(q.ci95[0] * 100).toFixed(0)}–${(q.ci95[1] * 100).toFixed(0)}%, n=${q.n}${q.version ? ", " + esc(q.version) : ""}">${(q.score * 100).toFixed(0)}%</td>`;
     const qrows = qtasks;
     const qhtml = `<details class="quality" data-model="${esc(m.id)}"${openQuality.has(m.id) ? " open" : ""}>` +
-      `<summary>quality</summary>` +
+      `<summary>Quality scores</summary>` +
       `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
-    rows.push(`<div class="card model-card" draggable="true" data-model="${esc(m.id)}"><div class="model-head"><span class="grip" title="drag to reorder">⋮⋮</span><h2>${modelTag(m)}</h2></div>` +
-      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
-      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table>${qhtml}</div>`);
+    rows.push(`<div class="card model-card" draggable="true" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
+      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:70px"><col style="width:105px"><col style="width:105px"><col style="width:110px"></colgroup>` +
+      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="decode tok/s (total for concurrent), pie / ${esc(m.label)}">tok/s</th><th class="num" title="prefill tok/s, pie / ${esc(m.label)}">prefill</th><th class="num" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
   let dragged = null;
@@ -882,7 +896,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
                 "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "prefill": r["prefill_tok_s"] if single else None,
                 "decode": r["decode_tok_s"] if single else r["output_tok_s"],
-                "version": r["engine_version"] or "",
+                "version": r["engine_version"] or "", "ttft": r["ttft_ms_p50"],
                 "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None})
     rows = [r for r in rows if r["engine"] == "pie"]
     failed = sorted({(r["pie_commit"], r["platform"], r["artifact"]) for r in every
@@ -906,7 +920,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         mac["models"][r["artifact"]][r["workload"]][r["pie_commit"]] = {
             "prefill": r["prefill_tok_s"] if single else None, "prefill_tflops": tf["prefill_tflops"],
             "decode": r["decode_tok_s"] if single else r["output_tok_s"], "decode_tflops": tf["decode_tflops"], "output": r["output_tok_s"],
-            "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"), "ttft": r["ttft_ms_p50"],
             "noisy": r["invalid_reason"] if r["status"] == str(CellStatus.NOISY) else None}
         have.add(r["artifact"])
 
