@@ -1,7 +1,9 @@
 {
   "models": [
-    "gemma-4-26b-a4b-mlx4",
-    "muse-glimmer-30b-mlx4"
+    "gemma-4-26b-a4b-ollama",
+    "gemma-4-26b-a4b-ollama-mlx",
+    "muse-glimmer-30b-ollama",
+    "llama-3.2-3b-ollama"
   ],
   "machines": [
     "m5-max-48g"

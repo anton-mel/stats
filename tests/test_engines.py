@@ -128,7 +128,7 @@ def platform(arch: str = "apple9", memory_gib: float = 48.0) -> PlatformSpec:
 
 
 def artifact(**over) -> ArtifactSpec:
-    base = {"id": "qwen3.6-27b-mlx4", "base_model": "mlx-community/Qwen3.6-27B-4bit", "family": "qwen3_6",
+    base = {"id": "muse-glimmer-30b-mlx4", "base_model": "mlx-community/Qwen3.6-27B-4bit", "family": "qwen3_6",
             "scheme": "affine_u4_g64", "source_format": "mlx"}
     base.update(over)
     return ArtifactSpec(**base)
@@ -136,7 +136,7 @@ def artifact(**over) -> ArtifactSpec:
 
 def ollama_artifact(**over) -> ArtifactSpec:
     base = {"id": "qwen3.6-27b-ollama", "source_format": "ollama", "scheme": "gguf_q4_k_m",
-            "ollama_tag": "qwen3.6:27b", "baseline_of": "qwen3.6-27b-mlx4"}
+            "ollama_tag": "qwen3.6:27b", "baseline_of": "muse-glimmer-30b-mlx4"}
     base.update(over)
     return artifact(**base)
 
