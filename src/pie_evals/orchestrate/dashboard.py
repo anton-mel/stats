@@ -185,6 +185,10 @@ PAGE = """<!doctype html>
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
   details.quality { margin-top: 12px; }
+  table.ov td { vertical-align: middle; }
+  table.ov td + td { padding-right: 18px; }
+  .barlab { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #424a53; margin-bottom: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .barlab .unit { color: #8c959f; }
   table.ov td.num, table.ov th.num { white-space: nowrap; }
   details.quality > summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border: 1px solid #d0d7de; border-radius: 999px; background: #fff; color: #424a53; font-size: 13px; cursor: pointer; user-select: none; }
   details.quality > summary::-webkit-details-marker { display: none; }
@@ -318,6 +322,13 @@ function gapBar(gap, noisy) {
   const w = Math.min(Math.abs(gap), 1) * 50;
   return `<div class="gapbar${noisy ? " noisy" : ""}"><span class="mid"></span><span class="fill ${gap >= 0 ? "ahead" : "behind"}" style="width:${w}%"></span></div>`;
 }
+function metricBar(pv, ov, noisy, unit, m, running, now, note) {
+  const gap = pv != null && ov ? pv / ov - 1 : null;
+  const cls = gap == null || noisy ? "muted" : gap >= 0 ? "up" : "down";
+  const status = note ? note : gap != null ? (noisy ? "~" : "") + pct(gap) : m.unsupported ? "" : running ? "running" : pv == null && ov == null ? "not run" : pv == null ? "no pie" : "no " + m.label;
+  const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
+  return `<div class="barlab" title="${esc(tip)}"><span>${note ? "" : `${tok(pv)} / ${tok(ov)} <span class="unit">${unit}</span>`}</span><span class="${cls}">${esc(status)}</span></div>${gapBar(gap, noisy)}`;
+}
 function overview() {
   const main = document.getElementById("main");
   const mac = filt.mac, done = measured.find(c => !inFlight.has(c.sha))?.sha || "";
@@ -334,29 +345,25 @@ function overview() {
   for (const m of orderedModels()) {
     const byTest = DATA.results[mac]?.models[m.pie] || {};
     let body = "";
+    const running = inFlight.has(sel);
     for (const b of DATA.benchmarks) {
-      const key = b.metric === "prefill" ? "prefill" : "decode";
       const now = sel ? byTest[b.id]?.[sel] : null;
       const ol = ollamaAt(mac, m.pie, b.id, m.label, now?.at);
-      const pv = now?.[key], ov = ol?.[key];
-      const gap = pv != null && ov ? pv / ov - 1 : null;
-      const unit = b.concurrency > 1 ? "tok/s total" : `${key} tok/s`;
       const noisy = [now?.noisy && `pie: ${now.noisy}`, ol?.noisy && `${m.label}: ${ol.noisy}`].filter(Boolean).join("; ");
-      const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
-      body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap, noisy)}</td>` +
-        `<td class="num ${gap == null ? "muted" : noisy ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? (inFlight.has(sel) ? "running" : "not run") : (inFlight.has(sel) ? "running" : "no " + esc(m.label))) : (noisy ? "~" : "") + pct(gap)}</td>` +
-        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td>` +
-        pair(b.concurrency > 1 ? null : now?.prefill, b.concurrency > 1 ? null : ol?.prefill, true, tok, `prefill tok/s, pie / ${m.label}`) +
+      const multi = b.concurrency > 1;
+      body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td>` +
+        `<td>${metricBar(now?.decode, ol?.decode, noisy, multi ? "tok/s total" : "tok/s", m, running, now)}</td>` +
+        `<td>${multi ? metricBar(null, null, "", "", m, false, now, "per request, see TTFT") : metricBar(now?.prefill, ol?.prefill, noisy, "tok/s", m, running, now)}</td>` +
         pair(now?.ttft, ol?.ttft, false, ms, `time to first token (median), pie / ${m.label}`) + `</tr>`;
     }
-    if (m.unsupported) body = `<tr><td colspan="6" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
+    if (m.unsupported) body = `<tr><td colspan="4" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>` +
       DATA.benchmarks.map(b => {
-        const key = b.metric === "prefill" ? "prefill" : "decode";
         const ol = ollamaAt(mac, m.pie, b.id, m.label, null);
-        const tip = `${m.label} ${tok(ol?.[key])}${ol?.version ? " (" + ol.version + ")" : ""}${ol?.noisy ? " · not steady, " + ol.noisy : ""}`;
-        return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(null)}</td>` +
-          `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td>` +
-          pair(null, b.concurrency > 1 ? null : ol?.prefill, true, tok, `prefill tok/s, ${m.label}`) + pair(null, ol?.ttft, false, ms, `time to first token, ${m.label}`) + `</tr>`;
+        const multi = b.concurrency > 1;
+        return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td>` +
+          `<td>${metricBar(null, ol?.decode, ol?.noisy, multi ? "tok/s total" : "tok/s", m, false, null)}</td>` +
+          `<td>${multi ? metricBar(null, null, "", "", m, false, null, "per request, see TTFT") : metricBar(null, ol?.prefill, ol?.noisy, "tok/s", m, false, null)}</td>` +
+          pair(null, ol?.ttft, false, ms, `time to first token, ${m.label}`) + `</tr>`;
       }).join("");
     const qtasks = [
       ["gsm8k", "GSM8K", "grade school math, exact final answer"],
@@ -373,8 +380,8 @@ function overview() {
       `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
     rows.push(`<div class="card model-card" draggable="true" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
-      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:70px"><col style="width:105px"><col style="width:105px"><col style="width:110px"></colgroup>` +
-      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="decode tok/s (total for concurrent), pie / ${esc(m.label)}">tok/s</th><th class="num" title="prefill tok/s, pie / ${esc(m.label)}">prefill</th><th class="num" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
+      `<table class="compact fixed ov"><colgroup><col style="width:20%"><col><col><col style="width:120px"></colgroup>` +
+      `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent), pie / ${esc(m.label)}">decode</th><th title="prefill tok/s, pie / ${esc(m.label)}">prefill</th><th class="num" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
   let dragged = null;
