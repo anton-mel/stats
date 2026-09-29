@@ -200,6 +200,9 @@ class OllamaEngine(Engine):
         self._server_proc = None
         self.server_url = None
 
+    def watch_pids(self) -> list[int]:
+        return [self._server_proc.pid] if self._server_proc is not None else []
+
     def resident_gib(self) -> float | None:
         size = (getattr(self, "loaded", None) or {}).get("size_vram")
         return round(size / 2**30, 2) if size else None
