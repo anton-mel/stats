@@ -8,7 +8,7 @@ from pie_evals.node.engines.base import BenchResult, Engine, EngineLaunchError
 from pie_evals.orchestrate.jobs import make_jobs
 from pie_evals.orchestrate.matrix import Matrix
 from pie_evals.orchestrate.store import Store
-from pie_evals.schema import CellStatus, ErrorClass, PerfMetrics, Record, Tier
+from pie_evals.schema import CellStatus, ErrorClass, PerfMetrics, Record, Tier, WorkloadSpec
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -48,8 +48,10 @@ class FakeEngine(Engine):
 def job(tmp_path):
     m = Matrix.load(ROOT / "matrix")
     cells = [c for c in m.runnable(Tier.TARGETED) if c.platform.id == "m4-pro-48g" and c.artifact.id == "gemma-4-26b-a4b-mlx4" and str(c.engine) == "pie"]
+    c8 = WorkloadSpec(id="c8", kind="concurrency", params={"concurrency": 8, "num_requests": 32, "prefill": 128, "decode": 128}, est_minutes=1)
+    cells.append(cells[0].model_copy(update={"workload": c8}))
     j = make_jobs(m, Tier.TARGETED, pie_commit="deadbeef", store=Store(tmp_path / "store"), platforms=["m4-pro-48g"], cells=cells)[0]
-    assert {c.workload.id for c in j.cells} >= {"control-aa", "ss-128-64", "c8"}
+    assert {c.workload.id for c in j.cells} >= {"control-aa", "ob-story-200", "c8"}
     return j
 
 
@@ -96,22 +98,22 @@ def test_happy_path_one_process_all_cells(job, patched, tmp_path):
     assert {r.status for r in recs} == {CellStatus.PASS}
     assert FakeEngine.calls[0] == "control-aa"
     assert all(r.provenance.pie_commit == "deadbeef" for r in recs)
-    ss = next(r for r in recs if r.cell.workload.id == "ss-128-64")
+    ss = next(r for r in recs if r.cell.workload.id == "ob-story-200")
     assert len(ss.perf.rounds) == 1 + job.repetition.confirm_rounds
 
 
 def test_history_within_band_skips_confirmation(job, patched, tmp_path):
-    cid = next(c.cell_id for c in job.cells if c.workload.id == "ss-128-64")
+    cid = next(c.cell_id for c in job.cells if c.workload.id == "ob-story-200")
     job = job.model_copy(update={"history": {cid: [100.0, 100.5, 99.5, 100.2]}})
     recs, _ = _run(job, patched, tmp_path)
-    ss = next(r for r in recs if r.cell.workload.id == "ss-128-64")
+    ss = next(r for r in recs if r.cell.workload.id == "ob-story-200")
     assert len(ss.perf.rounds) == 1
 
 
 def test_noisy_rounds_mark_cell_noisy(job, patched, tmp_path):
-    FakeEngine.behaviour["ss-128-64"] = [100.0, 90.0, 110.0]
+    FakeEngine.behaviour["ob-story-200"] = [100.0, 90.0, 110.0]
     recs, _ = _run(job, patched, tmp_path)
-    ss = next(r for r in recs if r.cell.workload.id == "ss-128-64")
+    ss = next(r for r in recs if r.cell.workload.id == "ob-story-200")
     assert ss.status == CellStatus.NOISY and "cov" in ss.invalid_reason
 
 
@@ -220,7 +222,7 @@ def test_recipe_follows_the_cell_and_keeps_what_the_boot_added(job, monkeypatch)
     from pie_evals.node.engines.shape import workload_concurrency
 
     monkeypatch.setattr(runner_mod, "load_recipe", lambda engine, name, plat, wl, family=None: {"slots": workload_concurrency(wl), "_recipe": name})
-    ss = next(c for c in job.cells if c.workload.id == "ss-128-64")
+    ss = next(c for c in job.cells if c.workload.id == "ob-story-200")
     c8 = next(c for c in job.cells if c.workload.id == "c8")
     base = runner_mod.load_recipe("pie", "default", ss.platform, ss.workload)
     base["snapshot_dir"], base["program_path"] = "/snap", "examples/x"
@@ -243,15 +245,15 @@ def test_warmup_follows_the_workload(job, patched, tmp_path):
         args = FakeEngine.common[wl]
         return args[args.index("--warmup") + 1]
 
-    assert warm("ob-512-200") == "1" and warm("ss-128-64") == "2"
+    assert warm("ob-512-200") == "1" and warm("ob-advanced-500") == "2"
 
 
 def test_a_slow_first_round_is_confirmed_away_not_withheld(job, patched, tmp_path):
     job = job.model_copy(update={"repetition": job.repetition.model_copy(update={"min_rounds": 3, "confirm_rounds": 2, "max_rounds": 5})})
-    FakeEngine.behaviour["ss-128-64"] = [90.0, 100.0, 101.0, 100.0, 100.0]
+    FakeEngine.behaviour["ob-story-200"] = [90.0, 100.0, 101.0, 100.0, 100.0]
     FakeEngine.behaviour["c8"] = [100.0, 80.0, 120.0, 85.0, 118.0]
     recs, _ = _run(job, patched, tmp_path)
-    ss = next(r for r in recs if r.cell.workload.id == "ss-128-64")
+    ss = next(r for r in recs if r.cell.workload.id == "ob-story-200")
     assert ss.status == CellStatus.PASS and len(ss.perf.rounds) == 5 and ss.perf.decode_tok_s == 100.0
     c8 = next(r for r in recs if r.cell.workload.id == "c8")
     assert c8.status == CellStatus.NOISY and len(c8.perf.rounds) == 4
