@@ -33,3 +33,15 @@ def test_recorded_cell_keys_are_per_commit_and_pin(tmp_path: Path):
     assert done == {rows[0]["cell_key"], rows[1]["cell_key"], rows[3]["cell_key"]}
     assert recorded_cell_keys(st, Tier.TARGETED, "aaaa") == {rows[0]["cell_key"], rows[1]["cell_key"]}
     assert recorded_cell_keys(Store(tmp_path / "empty"), Tier.TARGETED, "aaaa") == set()
+
+
+def test_a_cell_invalidated_later_in_its_run_is_measured_again(tmp_path: Path):
+    st = Store(tmp_path)
+    out = st.records_dir / "targeted" / "2026-09" / "run1.parquet"
+    out.parent.mkdir(parents=True)
+    key = "ollama|m5-max-48g|g#muse-glimmer:30b|c4|text-completion-bench|tp1"
+    rows = [{"run_id": "r1", "cell_id": "x", "cell_key": key, "status": status, "engine": "ollama", "engine_version": "0.34.4",
+             "started_at": datetime(2026, 9, 29, 1, 0, tzinfo=timezone.utc)} for status in ("pass", "noisy")]
+    cols = {name: [row.get(name) for row in rows] for name in ARROW_SCHEMA.names}
+    pq.write_table(pa.table(cols, schema=ARROW_SCHEMA), out)
+    assert recorded_cell_keys(st, Tier.TARGETED, "aaaa", {"ollama": "0.34.4"}) == set()

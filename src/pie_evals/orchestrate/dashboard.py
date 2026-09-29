@@ -798,7 +798,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
     every = [r for r in t.to_pylist() if r["pie_commit"]] if t.num_rows else []
     latest = {}
     for r in every:
-        latest[(r["run_id"], r["cell_id"])] = r
+        latest[(r["run_id"], r["cell_id"] or r["cell_key"])] = r
     every = list(latest.values())
     measured_ok = (str(CellStatus.PASS), str(CellStatus.NOISY))
     rows = [r for r in every if r["status"] in measured_ok and (r["decode_tok_s"] is not None or r["output_tok_s"] is not None or r["prefill_tok_s"] is not None)]
