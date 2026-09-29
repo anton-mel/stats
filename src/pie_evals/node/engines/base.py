@@ -231,6 +231,12 @@ class Engine(ABC):
         """Process names that may outlive the parent and hold the GPU."""
         return []
 
+    def stall_s(self) -> int:
+        return int(self.recipe.get("stall_s") or os.environ.get("PIE_EVALS_STALL_S") or 180)
+
+    def watch_pids(self) -> list[int]:
+        return []
+
     # ---- the run -------------------------------------------------------------
     def script_path(self) -> Path:
         """The bench script this adapter runs (a path under the pie checkout by default)."""
@@ -255,18 +261,14 @@ class Engine(ABC):
             env["PIE_BENCH_SERVER_URL"] = self.server_url
         (out_dir / "argv.txt").write_text(shlex.join(argv) + "\n")
         t0 = time.monotonic()
-        timed_out = False
-        try:
-            proc = subprocess.run(
-                argv, cwd=str(self.pie_root / "scripts/bench"), env=env, capture_output=True, text=True, timeout=timeout_s
-            )
-            rc, stdout, stderr = proc.returncode, proc.stdout, proc.stderr
-        except subprocess.TimeoutExpired as e:
-            timed_out = True
-            rc, stdout, stderr = -1, (e.stdout or b"").decode(errors="replace") if isinstance(e.stdout, bytes) else (e.stdout or ""), (e.stderr or b"").decode(errors="replace") if isinstance(e.stderr, bytes) else (e.stderr or "")
+        with open(out_dir / "stdout.txt", "w") as so, open(out_dir / "stderr.txt", "w") as se:
+            proc = subprocess.Popen(argv, cwd=str(self.pie_root / "scripts/bench"), env=env, stdout=so, stderr=se, text=True)
+            rc, timed_out, stalled = wait_with_stall_check(proc, timeout_s, self.stall_s(), self.watch_pids)
         dur = time.monotonic() - t0
-        (out_dir / "stdout.txt").write_text(stdout)
-        (out_dir / "stderr.txt").write_text(stderr)
+        stdout = (out_dir / "stdout.txt").read_text(errors="replace")
+        stderr = (out_dir / "stderr.txt").read_text(errors="replace")
+        if stalled:
+            raise EngineLaunchError(ErrorClass.HANG, f"no CPU work from the bench or its engine for {self.stall_s()}s; stopped")
         if rc != 0 or not json_out.exists():
             cls, msg = classify_failure(rc, stderr, stdout, timed_out)
             if rc == 0 and not timed_out:
@@ -292,6 +294,64 @@ class Engine(ABC):
             perf=perf, summary=summary, requests=requests, argv=argv,
             stdout_tail=stdout[-4000:], stderr_tail=stderr[-4000:], duration_s=dur, output_token_ids=ids,
         )
+
+
+def _cpu_seconds(text: str) -> float:
+    days, _, rest = text.strip().rpartition("-")
+    parts = [float(x) for x in rest.split(":")]
+    secs = 0.0
+    for x in parts:
+        secs = secs * 60 + x
+    return secs + (float(days) * 86400 if days else 0.0)
+
+
+def process_table() -> dict[int, tuple[int, float]]:
+    out = subprocess.run(["ps", "-axo", "pid=,ppid=,time="], capture_output=True, text=True, check=False).stdout
+    table = {}
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) == 3 and parts[0].isdigit() and parts[1].isdigit():
+            try:
+                table[int(parts[0])] = (int(parts[1]), _cpu_seconds(parts[2]))
+            except ValueError:
+                continue
+    return table
+
+
+def tree_pids(roots: list[int], table: dict[int, tuple[int, float]]) -> set[int]:
+    pids = {r for r in roots if r in table}
+    grew = True
+    while grew:
+        more = {p for p, (pp, _) in table.items() if pp in pids and p not in pids}
+        pids |= more
+        grew = bool(more)
+    return pids
+
+
+def wait_with_stall_check(proc: subprocess.Popen, timeout_s: float, stall_s: float, extra_pids=lambda: [], poll_s: float = 5.0) -> tuple[int, bool, bool]:
+    start = last_work = time.monotonic()
+    last_cpu = None
+    while True:
+        try:
+            return proc.wait(timeout=poll_s), False, False
+        except subprocess.TimeoutExpired:
+            pass
+        now = time.monotonic()
+        table = process_table()
+        cpu = sum(table[p][1] for p in tree_pids([proc.pid, *extra_pids()], table))
+        if last_cpu is None or cpu > last_cpu + 0.05:
+            last_work = now
+        last_cpu = cpu if last_cpu is None else max(cpu, last_cpu)
+        timed_out, stalled = now - start > timeout_s, now - last_work > stall_s
+        if timed_out or stalled:
+            for p in tree_pids([proc.pid], table) - {proc.pid}:
+                try:
+                    os.kill(p, 9)
+                except OSError:
+                    pass
+            proc.kill()
+            proc.wait()
+            return -1, timed_out, stalled and not timed_out
 
 
 def workload_mode_args(workload: WorkloadSpec) -> tuple[str, list[str]]:

@@ -445,3 +445,25 @@ def test_lifeline_stops_its_child_when_the_parent_goes_away():
     sup.stdin.close()
     assert sup.wait(timeout=30) != 0 or sup.returncode == 0
     assert sup.poll() is not None
+
+
+def test_an_idle_bench_is_stopped_as_a_hang():
+    import subprocess
+    import sys
+
+    from pie_evals.node.engines.base import wait_with_stall_check
+
+    idle = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+    rc, timed_out, stalled = wait_with_stall_check(idle, timeout_s=60, stall_s=2, poll_s=0.5)
+    assert stalled and not timed_out and idle.poll() is not None
+
+
+def test_a_busy_bench_is_left_to_finish():
+    import subprocess
+    import sys
+
+    from pie_evals.node.engines.base import wait_with_stall_check
+
+    busy = subprocess.Popen([sys.executable, "-c", "import time\nt = time.time()\nwhile time.time() - t < 4: pass"])
+    rc, timed_out, stalled = wait_with_stall_check(busy, timeout_s=60, stall_s=2, poll_s=0.5)
+    assert (rc, timed_out, stalled) == (0, False, False)
