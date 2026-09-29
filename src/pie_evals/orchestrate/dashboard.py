@@ -339,7 +339,6 @@ function overview() {
       ["math500", "MATH-500", "competition math, exact boxed answer"],
       ["mmlu", "MMLU", "general knowledge across 57 subjects, multiple choice"],
       ["arc", "ARC-Challenge", "grade school science reasoning, multiple choice"],
-      ["gpqa", "GPQA Diamond", "graduate level science, multiple choice"],
       ["ifeval", "IFEval", "follows verifiable format instructions"],
     ];
     const qcell = q => q?.score == null ? `<td class="num muted">not run</td>` :

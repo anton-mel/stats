@@ -72,30 +72,10 @@ def test_math_tasks_compare_the_boxed_answer():
     assert score_math(Item("q", "p", "{1}"), "\\boxed{{1}}") == 1.0
 
 
-def test_choice_loaders_shuffle_deterministically_and_mark_the_gold_letter(monkeypatch, tmp_path):
-    import csv
-
-    from pie_evals.quality import tasks
-
-    path = tmp_path / "gpqa.csv"
-    with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["Question", "Correct Answer", "Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"])
-        w.writeheader()
-        for i in range(5):
-            w.writerow({"Question": f"q{i}", "Correct Answer": f"right{i}", "Incorrect Answer 1": "a", "Incorrect Answer 2": "b", "Incorrect Answer 3": "c"})
-    monkeypatch.setattr(tasks, "_download", lambda repo, filename: path)
-    first, second = tasks.load_gpqa(5), tasks.load_gpqa(5)
-    assert [i.prompt for i in first] == [i.prompt for i in second]
-    for item in first:
-        lines = {row[0]: row[3:] for row in item.prompt.splitlines() if len(row) > 3 and row[1:3] == ". "}
-        assert lines[item.gold].startswith("right")
-        assert tasks.score_choice(item, f"Answer: {item.gold}") == 1.0
-
-
 def test_every_task_has_a_loader_scorer_and_budget():
     from pie_evals.quality.tasks import TASKS
 
-    assert set(TASKS) == {"gsm8k", "ifeval", "mmlu", "arc", "math500", "gpqa"}
+    assert set(TASKS) == {"gsm8k", "ifeval", "mmlu", "arc", "math500"}
     for load, score, budget in TASKS.values():
         assert callable(load) and callable(score) and budget > 0
 
@@ -109,9 +89,9 @@ def test_a_task_that_cannot_load_is_skipped_not_fatal(monkeypatch):
     def gated(n):
         raise GatedRepoError("401 Client Error. Cannot access gated repo")
 
-    monkeypatch.setitem(tasks.TASKS, "gpqa", (gated, tasks.score_choice, 1024))
+    monkeypatch.setitem(tasks.TASKS, "mmlu", (gated, tasks.score_choice, 1024))
     lines = []
-    assert run.load_items("gpqa", 100, lines.append) is None
+    assert run.load_items("mmlu", 100, lines.append) is None
     assert "skipped" in lines[0] and "HF_TOKEN" in lines[0]
-    monkeypatch.setitem(tasks.TASKS, "gpqa", (lambda n: ["item"], tasks.score_choice, 1024))
-    assert run.load_items("gpqa", 100, lines.append) == ["item"]
+    monkeypatch.setitem(tasks.TASKS, "mmlu", (lambda n: ["item"], tasks.score_choice, 1024))
+    assert run.load_items("mmlu", 100, lines.append) == ["item"]

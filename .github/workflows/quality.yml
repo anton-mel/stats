@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       artifacts: { description: "comma-separated artifact ids", required: true, default: "gemma-4-26b-a4b-ollama,gemma-4-26b-a4b-ollama-mlx,muse-glimmer-30b-ollama,llama-3.2-3b-ollama" }
-      tasks: { description: "comma-separated tasks (gsm8k, ifeval, mmlu, arc, math500, gpqa)", required: false, default: "gsm8k,ifeval,mmlu,arc,math500,gpqa" }
+      tasks: { description: "comma-separated tasks (gsm8k, ifeval, mmlu, arc, math500)", required: false, default: "gsm8k,ifeval,mmlu,arc,math500" }
       n: { description: "questions per task", required: false, default: "100" }
       mac: { description: "Mac id", required: false, default: "m5-max-48g" }
 
