@@ -3,9 +3,9 @@
 | status | cells |
 |---|---|
 | pass | 17 |
-| fail | 10 |
+| fail | 1 |
 | declared_unsupported | 45 |
-| not_run | 200 |
+| not_run | 209 |
 | noisy | 23 |
 
 ## Gaps (expected supported, but not passing)
@@ -13,15 +13,6 @@
 | engine | platform | artifact | workload | program | mode | status | error | message |
 |---|---|---|---|---|---|---|---|---|
 | pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | harness_invalid | timed out (hang is only ever observed via timeout) |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | control-aa | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-story-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-512-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-short-100 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | cache-2k | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | c4 | text-completion-bench | tp1 | fail | load_fail | artifact import: This import converts for the row named and for no other; drop `--sku` to convert ~/.cache/huggingface/h |
 | pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | control-aa | text-completion-bench | tp1 | noisy |  |  |
 | pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-story-200 | text-completion-bench | tp1 | noisy |  |  |
 | pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-512-200 | text-completion-bench | tp1 | noisy |  |  |
@@ -245,6 +236,15 @@
 | ollama | m5-max-128g | muse-glimmer-30b-ollama | ctx-8k-256 | text-completion-bench | tp1 | not_run |  |  |
 | ollama | m5-max-128g | muse-glimmer-30b-ollama | cache-2k | text-completion-bench | tp1 | not_run |  |  |
 | ollama | m5-max-128g | muse-glimmer-30b-ollama | c4 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | control-aa | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-story-200 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-512-200 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-short-100 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | cache-2k | text-completion-bench | tp1 | not_run |  |  |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | c4 | text-completion-bench | tp1 | not_run |  |  |
 
 ## Declared unsupported
 
