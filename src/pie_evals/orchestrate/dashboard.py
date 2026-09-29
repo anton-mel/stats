@@ -315,8 +315,7 @@ function orderedModels() {
 }
 function ollamaAt(mac, pie, wl, label, at) {
   const runs = DATA.baselines?.[mac]?.[pie]?.[wl]?.[label] || [];
-  const upto = at ? runs.filter(r => r.at <= at) : runs;
-  return (upto.length ? upto : runs).reduce((a, b) => (!a || b.at > a.at ? b : a), null);
+  return runs.reduce((a, b) => (!a || b.at > a.at ? b : a), null);
 }
 const pct = x => `${x > 0 ? "+" : ""}${(x * 100).toFixed(x > -0.1 && x < 0.1 ? 1 : 0)}%`;
 const tok = x => x == null ? "–" : Math.round(x).toLocaleString();

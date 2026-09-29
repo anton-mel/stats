@@ -103,7 +103,7 @@ async def run(args: argparse.Namespace):
     if args.ollama_model is None:
         sys.exit("--ollama-model is required")
     n = args.requests if args.mode == "latency" else args.num_requests
-    batch = 1 if args.mode == "latency" else (args.concurrency or max(1, args.num_requests))
+    batch = 1 if args.mode == "latency" else max(1, args.num_requests)
     raw = make_prompts(args, n + args.warmup)
     if args.flush_cache:
         salt = random.SystemRandom().getrandbits(32)
