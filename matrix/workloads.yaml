@@ -73,9 +73,9 @@ workloads:
     kind: concurrency
     params:
       label: 4 at once
-      description: "4 concurrent requests, 128 tokens in, 256 out: serving throughput"
+      description: "4 requests sent together, 128 tokens in, 256 out: serving throughput and first token under load"
       concurrency: 4
-      num_requests: 16
+      num_requests: 4
       prefill: 128
       decode: 256
     est_minutes: 1.5
