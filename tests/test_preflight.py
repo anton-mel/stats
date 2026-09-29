@@ -70,3 +70,14 @@ def test_no_pkill_invocation():
         for line in f:
             code = line.split("#", 1)[0]
             assert '"pkill"' not in code and "'pkill'" not in code, f"pkill invoked: {line!r}"
+
+
+def test_only_orphaned_harness_ollama_servers_are_reaped():
+    ps = "\n".join([
+        "59455 1 /usr/local/bin/ollama serve OLLAMA_HOST=127.0.0.1:65096 OLLAMA_NOHISTORY=1 HOME=/u",
+        "62774 60357 /usr/local/bin/ollama serve OLLAMA_HOST=127.0.0.1:62000 OLLAMA_NOHISTORY=1",
+        "40172 1 /Applications/Ollama.app/Contents/Resources/ollama serve HOME=/u",
+        "40173 1 /usr/local/bin/ollama serve OLLAMA_HOST=127.0.0.1:11434 OLLAMA_NOHISTORY=1",
+        "50000 1 /usr/bin/python serve OLLAMA_NOHISTORY=1 OLLAMA_HOST=127.0.0.1:1",
+    ])
+    assert pf.orphaned_ollama_servers(ps) == [59455]
