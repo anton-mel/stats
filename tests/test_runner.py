@@ -276,3 +276,20 @@ def test_checkpoints_download_in_the_background(job, patched, tmp_path, monkeypa
     r = runner_mod.NodeRunner(job, pie_root=tmp_path / "pie", out_dir=tmp_path / "out", hf_cache=patched, build=False, download=True)
     recs = r.run()
     assert recs and any(t.startswith("prefetch") for t in threads)
+
+
+def test_an_imported_artifact_needs_no_source_weights(job, patched, tmp_path, monkeypatch):
+    from pie_evals.node import importer, snapshots
+
+    monkeypatch.setenv("PIE_EVALS_CACHE", str(tmp_path / "cache"))
+    art = job.cells[0].artifact
+    zt_dir = importer.artifact_dir(art, job.pie_commit)
+    zt_dir.mkdir(parents=True)
+    (zt_dir / "m.zt").write_bytes(b"x")
+    org, _, name = art.base_model.partition("/")
+    snap = patched / f"models--{org}--{name}" / "snapshots" / "abc"
+    for f in snap.glob("*.safetensors"):
+        f.unlink()
+    monkeypatch.setattr(snapshots, "ensure_snapshot", lambda *a, **k: (_ for _ in ()).throw(AssertionError("fetched the source")))
+    r = runner_mod.NodeRunner(job, pie_root=tmp_path / "pie", out_dir=tmp_path / "out", hf_cache=patched, build=False, download=True)
+    assert r.snapshot_dir(job.cells[0]) == snap
