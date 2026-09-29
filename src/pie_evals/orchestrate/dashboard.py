@@ -379,7 +379,7 @@ function overview() {
       `<summary>Quality scores</summary>` +
       `<table class="compact fixed quality"><colgroup><col><col style="width:120px"></colgroup>` +
       qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table></details>`;
-    rows.push(`<div class="card model-card" draggable="true" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
+    rows.push(`<div class="card model-card" data-model="${esc(m.id)}"><div class="model-head"><h2>${modelTag(m)}</h2><span class="grip" title="drag to reorder">⋮⋮</span></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:20%"><col><col><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th title="decode tok/s (total across requests when concurrent), pie / ${esc(m.label)}">decode</th><th title="prefill tok/s, pie / ${esc(m.label)}">prefill</th><th class="num" title="median time to first token, pie / ${esc(m.label)}">TTFT</th></tr>${body}</table>${qhtml}</div>`);
   }
@@ -387,7 +387,10 @@ function overview() {
   let dragged = null;
   main.querySelectorAll(".model-card").forEach(card => {
     card.addEventListener("dragstart", e => { dragged = card.dataset.model; card.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; });
-    card.addEventListener("dragend", () => { card.classList.remove("dragging"); main.querySelectorAll(".drop-before,.drop-after").forEach(c => c.classList.remove("drop-before", "drop-after")); });
+    const grip = card.querySelector(".grip");
+    grip.addEventListener("pointerdown", () => { card.draggable = true; });
+    grip.addEventListener("pointerup", () => { card.draggable = false; });
+    card.addEventListener("dragend", () => { card.draggable = false; card.classList.remove("dragging"); main.querySelectorAll(".drop-before,.drop-after").forEach(c => c.classList.remove("drop-before", "drop-after")); });
     card.addEventListener("dragover", e => {
       if (!dragged || dragged === card.dataset.model) return;
       e.preventDefault();
