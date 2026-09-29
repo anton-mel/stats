@@ -62,7 +62,14 @@ jobs:
           if [ -x "$bin" ]; then echo "OLLAMA_BIN=$bin" >> "$GITHUB_ENV"; "$bin" --version || true
           else echo "::warning::ollama is not installed on this Mac; its cells will fail to load"; fi
       - name: run
-        run: env ${{ inputs.pie_env }} .venv/bin/pie-evals-node run --job "jobs/${{ matrix.job_id }}.json" --pie-root "$PIE_ROOT" --out "out/${{ matrix.job_id }}" --download
+        run: |
+          out="out/${{ matrix.job_id }}"
+          pub=""
+          if [ "${{ inputs.persist }}" = "true" ]; then ( while sleep 600; do nice -n 19 infra/ci/publish-partial.sh "$out" || true; done ) >/dev/null 2>&1 & pub=$!; fi
+          rc=0
+          env ${{ inputs.pie_env }} .venv/bin/pie-evals-node run --job "jobs/${{ matrix.job_id }}.json" --pie-root "$PIE_ROOT" --out "$out" --download || rc=$?
+          [ -n "$pub" ] && kill "$pub" 2>/dev/null
+          exit $rc
         env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}" }
       - uses: actions/upload-artifact@v4
         if: always()
