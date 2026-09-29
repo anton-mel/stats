@@ -69,19 +69,6 @@ workloads:
       requests: 3
       warmup: 1
     est_minutes: 2.5
-  - id: cache-2k
-    kind: prefix_shared
-    params:
-      label: Cached prompt
-      description: "8 requests sharing a 2k token prefix; Ollama reuses its prompt cache"
-      shared_prefix: 2048
-      unique_suffix: 64
-      variants: 8
-      decode: 64
-      concurrency: 1
-      warmup: 1
-      primary: prefill_tok_s
-    est_minutes: 1
   - id: c4
     kind: concurrency
     params:
