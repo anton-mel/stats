@@ -9,6 +9,7 @@ from pathlib import Path
 
 import click
 
+from pie_evals.quality.tasks import TASKS
 from pie_evals.schema import JobSpec
 
 from .build import DEFAULT_PIE_ROOT
@@ -113,9 +114,9 @@ def prepare_cmd(tier, matrix_dir, platforms, engines_f, programs_f, pie_root, pi
     sys.exit(1 if failed else 0)
 
 
-@main.command("quality", help="Score output quality (GSM8K, IFEval) on the same sampled questions for each artifact.")
+@main.command("quality", help="Score model quality (GSM8K, IFEval, MMLU, ARC, MATH-500, GPQA) on sampled questions, on the Ollama arm of each model.")
 @click.option("--artifact", "artifacts", multiple=True, required=True, help="artifact id from matrix/models.yaml (a pie checkpoint or an Ollama arm)")
-@click.option("--task", "tasks", multiple=True, type=click.Choice(["gsm8k", "ifeval"]), default=("gsm8k", "ifeval"), show_default=True)
+@click.option("--task", "tasks", multiple=True, type=click.Choice(sorted(TASKS)), default=("gsm8k", "ifeval", "mmlu", "arc", "math500", "gpqa"), show_default=True)
 @click.option("--n", type=int, default=100, show_default=True)
 @click.option("--matrix", "matrix_dir", default="matrix")
 @click.option("--store", "store_dir", default="store")
