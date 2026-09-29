@@ -87,7 +87,7 @@ def test_choice_loaders_shuffle_deterministically_and_mark_the_gold_letter(monke
     first, second = tasks.load_gpqa(5), tasks.load_gpqa(5)
     assert [i.prompt for i in first] == [i.prompt for i in second]
     for item in first:
-        lines = {l[0]: l[3:] for l in item.prompt.splitlines() if len(l) > 3 and l[1:3] == ". "}
+        lines = {row[0]: row[3:] for row in item.prompt.splitlines() if len(row) > 3 and row[1:3] == ". "}
         assert lines[item.gold].startswith("right")
         assert tasks.score_choice(item, f"Answer: {item.gold}") == 1.0
 
