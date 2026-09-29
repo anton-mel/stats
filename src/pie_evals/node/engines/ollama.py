@@ -7,6 +7,7 @@ import re
 import shutil
 import socket
 import subprocess
+import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -57,7 +58,8 @@ def start_server(env_extra: dict[str, str], log_path: Path | None, timeout_s: fl
     url = f"http://127.0.0.1:{port}"
     env = {**os.environ, **env_extra, "OLLAMA_HOST": f"127.0.0.1:{port}"}
     log = open(log_path, "w") if log_path else subprocess.DEVNULL
-    proc = subprocess.Popen([ollama_bin(), "serve"], env=env, stdout=log, stderr=subprocess.STDOUT)
+    proc = subprocess.Popen([sys.executable, "-m", "pie_evals.node.engines.lifeline", ollama_bin(), "serve"],
+                            env=env, stdin=subprocess.PIPE, stdout=log, stderr=subprocess.STDOUT)
     deadline = time.monotonic() + timeout_s
     while time.monotonic() < deadline:
         if proc.poll() is not None:

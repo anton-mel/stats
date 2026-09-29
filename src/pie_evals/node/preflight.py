@@ -14,7 +14,6 @@ import json
 import os
 import re
 import shutil
-import signal
 import subprocess
 import urllib.request
 from typing import Any
@@ -45,35 +44,6 @@ def engine_processes(exclude: set[int] | None = None) -> list[str]:
         if os.path.basename(parts[1]) in ENGINE_PROCESSES:
             found.append(f"{os.path.basename(parts[1])}:{parts[0]}")
     return sorted(found)
-
-
-def orphaned_ollama_servers(ps_output: str) -> list[int]:
-    pids = []
-    for line in ps_output.splitlines():
-        parts = line.split(None, 2)
-        if len(parts) < 3 or not parts[0].isdigit() or parts[1] != "1":
-            continue
-        cmd = parts[2]
-        if " serve" not in cmd or "ollama" not in cmd.split(" serve")[0] or "OLLAMA_NOHISTORY=1" not in cmd:
-            continue
-        host = next((t.split("=", 1)[1] for t in cmd.split() if t.startswith("OLLAMA_HOST=")), "")
-        if host and not host.endswith(":11434"):
-            pids.append(int(parts[0]))
-    return pids
-
-
-def reap_orphaned_ollama(log=print) -> list[int]:
-    out = _run(["ps", "-E", "-axo", "pid=,ppid=,command="]) or ""
-    pids = orphaned_ollama_servers(out)
-    for pid in pids:
-        children = (_run(["pgrep", "-P", str(pid)]) or "").split()
-        for p in [*children, str(pid)]:
-            try:
-                os.kill(int(p), signal.SIGTERM)
-            except (ProcessLookupError, PermissionError, ValueError):
-                pass
-        log(f"preflight: stopped orphaned ollama serve {pid} and {len(children)} children")
-    return pids
 
 
 def ollama_loaded(host: str | None = None) -> list[str]:
@@ -186,11 +156,7 @@ class Preflight:
     state (goes into ``Provenance.machine_state``) and invalidation reasons."""
 
     def before_job(self, platform_os: str | None = None) -> dict[str, Any]:
-        reaped = reap_orphaned_ollama()
-        state = machine_state(platform_os)
-        if reaped:
-            state["reaped_ollama"] = [str(p) for p in reaped]
-        return state
+        return machine_state(platform_os)
 
     def between_engines(self, platform_os: str | None, leftover_names: list[str]) -> dict[str, Any]:
         return machine_state(platform_os)
