@@ -217,6 +217,7 @@ class NodeRunner:
         self.log(f"pie interpreter for the bench: {os.environ.get('PIE_PY', 'python3')}")
 
     def snapshot_dir(self, cell: Cell) -> Path:
+        from .importer import artifact_dir, find_zt, needs_import
         from .snapshots import ensure_snapshot
 
         try:
@@ -224,6 +225,11 @@ class NodeRunner:
             from .reclaim import LOW_WATER_GIB, reclaim
 
             reclaim(self.job, self.hf_cache, low_water_gib=max(LOW_WATER_GIB, float(cell.artifact.expected_gib or 0) * 1.2 + 10), log=self.log)
+            if str(cell.engine) == "pie" and self.job.pie_commit and needs_import(cell.artifact) and find_zt(artifact_dir(cell.artifact, self.job.pie_commit)):
+                org, _, name = cell.artifact.base_model.partition("/")
+                snaps = sorted((self.hf_cache / f"models--{org}--{name}" / "snapshots").glob("*/config.json"))
+                if snaps:
+                    return snaps[-1].parent
             pending = getattr(self, "_prefetch", {}).get(cell.artifact.id)
             if pending is not None:
                 pending.result()
@@ -242,11 +248,14 @@ class NodeRunner:
             return
         from concurrent.futures import ThreadPoolExecutor
 
+        from .importer import artifact_dir, find_zt, needs_import
         from .snapshots import ensure_snapshot
 
         pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="prefetch")
         self._prefetch = {}
         for art in {a.id: a for a in artifacts}.values():
+            if self.job.pie_commit and needs_import(art) and find_zt(artifact_dir(art, self.job.pie_commit)):
+                continue
             def fetch(a=art):
                 ensure_snapshot(a, self.hf_cache, download=True, log=lambda m: self.log(f"prefetch: {m}"))
             self._prefetch[art.id] = pool.submit(fetch)
