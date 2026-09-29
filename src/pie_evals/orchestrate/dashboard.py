@@ -181,11 +181,6 @@ PAGE = """<!doctype html>
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-  .stats .stat { margin: 0; }
-  .stat .label { margin: 0 0 4px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #7a838d; }
-  .stat .big { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
-  @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
   table.rmlist { width: 100%; }
   table.rmlist td { vertical-align: middle; padding: 8px 6px; }
   .cmd { display: flex; gap: 8px; align-items: stretch; margin: 8px 0 4px; }
@@ -283,14 +278,6 @@ const measured = [...DATA.commits].sort((a, b) => (b.date || "").localeCompare(a
 let sel = measured[0]?.sha || "";
 
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
-function before(mac, model, wl, sha) {
-  const order = [...DATA.commits].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-  for (let i = order.findIndex(c => c.sha === sha) - 1; i >= 0; i--) {
-    const v = valueAt(mac, model, wl, order[i].sha);
-    if (v) return { sha: order[i].sha, ...v };
-  }
-  return null;
-}
 function ollamaAt(mac, pie, wl, label, at) {
   const runs = DATA.baselines?.[mac]?.[pie]?.[wl]?.[label] || [];
   const upto = at ? runs.filter(r => r.at <= at) : runs;
@@ -313,21 +300,16 @@ function overview() {
     (c?.date ? `<span title="${fmtDate(c.date)} ${fmtTime(c.date)}">${relTime(c.date)}</span>` : "") +
     `<span class="muted">${esc(macName(mac))}</span>` +
     (sel && sel !== latest ? `<a href="#" id="latest">back to latest</a>` : "") + `</div></div>`;
-  const rows = [], gaps = [], moves = [];
-  const total = DATA.models.filter(m => !m.unsupported).length * DATA.benchmarks.length;
+  const rows = [];
   for (const m of DATA.models) {
     const byTest = DATA.results[mac]?.models[m.pie] || {};
     let body = "";
     for (const b of DATA.benchmarks) {
       const key = b.metric === "prefill" ? "prefill" : "decode";
       const now = sel ? byTest[b.id]?.[sel] : null;
-      const was = now ? before(mac, m.pie, b.id, sel) : null;
       const ol = ollamaAt(mac, m.pie, b.id, m.label, now?.at);
       const pv = now?.[key], ov = ol?.[key];
       const gap = pv != null && ov ? pv / ov - 1 : null;
-      const move = pv != null && was?.[key] ? pv / was[key] - 1 : null;
-      if (gap != null && !(now?.noisy || ol?.noisy)) gaps.push(gap);
-      if (move != null) moves.push(move);
       const unit = b.concurrency > 1 ? "tok/s total" : `${key} tok/s`;
       const noisy = [now?.noisy && `pie: ${now.noisy}`, ol?.noisy && `${m.label}: ${ol.noisy}`].filter(Boolean).join("; ");
       const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}` + (noisy ? ` · not steady, ${noisy}` : "");
@@ -340,10 +322,6 @@ function overview() {
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
   }
-  const avg = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
-  const g = avg(gaps), mv = avg(moves);
-  html += `<div class="stats"><div class="card stat"><div class="label">pie vs Ollama, average</div><div class="big ${g == null ? "muted" : g >= 0 ? "up" : "down"}">${g == null ? "–" : pct(g)}</div><div class="muted">${gaps.length} of ${total} benchmarks measured</div></div>` +
-    `<div class="card stat"><div class="label">this commit vs the one before</div><div class="big ${mv == null ? "muted" : mv > 0.005 ? "up" : mv < -0.005 ? "down" : "muted"}">${mv == null ? "–" : pct(mv)}</div><div class="muted">${moves.length ? "average over " + moves.length + " benchmarks" : "no earlier commit to compare"}</div></div></div>`;
   main.innerHTML = html + rows.join("");
   document.getElementById("latest")?.addEventListener("click", e => { e.preventDefault(); sel = latest; draw(); });
 }
