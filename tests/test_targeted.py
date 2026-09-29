@@ -51,7 +51,7 @@ def test_targeted_is_small_and_baselines_run_on_their_copies(matrix):
     assert all(c.engine.value == "pie" or c.workload.id != "control-aa" for c in cells)
     assert all(c.artifact.baseline_of for c in cells if c.engine.value == "ollama")
     assert not any(c.artifact.baseline_of for c in cells if c.engine.value == "pie")
-    assert {c.workload.id for c in cells} == {"control-aa", "ob-story-200", "ob-512-200", "ob-short-100", "ob-advanced-500", "lb-pp512", "lb-tg128"}
+    assert {c.workload.id for c in cells} == {"control-aa", "ob-story-200", "ob-512-200", "ob-short-100", "ob-advanced-500", "ctx-4k-256", "ctx-8k-256", "cache-2k", "c4"}
     assert not matrix.check_budget(Tier.TARGETED)
 
 
@@ -100,7 +100,7 @@ def test_site_has_pushes_pool_and_people(tmp_path, matrix, monkeypatch):
     assert "gemma-4-26b-a4b-ollama" not in data["results"]["m5-max-48g"]["models"]
     arm = data["baselines"]["m5-max-48g"]["gemma-4-26b-a4b-mlx4"]["ob-story-200"][ollama.artifact.baseline_label]
     assert arm["decode"] == 300 and arm["version"] == "0.34.4"
-    assert sorted(b["id"] for b in data["benchmarks"]) == ["lb-pp512", "lb-tg128", "ob-512-200", "ob-advanced-500", "ob-short-100", "ob-story-200"]
+    assert sorted(b["id"] for b in data["benchmarks"]) == ["c4", "cache-2k", "ctx-4k-256", "ctx-8k-256", "ob-512-200", "ob-advanced-500", "ob-short-100", "ob-story-200"]
     assert data["people"] == []
     assert any(m["name"] == "gemma4:26b" and m["pie"] == "gemma-4-26b-a4b-mlx4" and m["has_results"] for m in data["models"])
     assert [m["name"] for m in data["models"]] == ["gemma4:26b", "gemma4:26b-mlx", "llama3.2:3b", "muse-glimmer:30b"]

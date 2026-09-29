@@ -31,3 +31,9 @@ competitive:
     context_length:
       value: "$serve_context"
       rationale: Longest shape of the process, rounded like pie max-model-len; the model default does not fit KV on 48 GB.
+  workload_kind:
+    prefix_shared:
+      knobs:
+        flush_cache:
+          value: false
+          rationale: The cached prompt shape measures prefix reuse, so Ollama keeps its cache.

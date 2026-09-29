@@ -12,6 +12,7 @@ from .matrix import Matrix
 from .store import Store
 
 DEFAULT_MODEL = "gemma-4-26b-a4b-ollama"
+OLLAMA_ICON = "data:image/png;base64,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"
 
 PAGE = """<!doctype html>
 <html lang="en">
@@ -165,6 +166,7 @@ PAGE = """<!doctype html>
   table.grid .c { text-align: center; }
   .ok { color: #1a7f37; font-weight: 700; }
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
+  img.ol { height: 14px; vertical-align: -2px; margin-right: 6px; }
   table.rmlist { width: 100%; }
   table.rmlist td { vertical-align: middle; padding: 8px 6px; }
   .cmd { display: flex; gap: 8px; align-items: stretch; margin: 8px 0 4px; }
@@ -225,6 +227,7 @@ setInterval(async () => {
 const modelOf = id => DATA.models.find(m => m.id === id) || DATA.models.find(m => m.pie === id) || { name: id, quant: "" };
 const modelName = id => modelOf(id).name;
 const pieOf = id => modelOf(id).pie || id;
+const modelTag = m => `<img class="ol" src="${DATA.ollama_icon}" alt="">${esc(m.name)}`;
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
 const PER_PAGE = 20;
 let tab = "History", back = "History", me = null, page = 0, denied = "";
@@ -322,7 +325,7 @@ function overview() {
         engines.map(e => `<th class="num" title="${BASELINES[e]} prefill tok/s">${BASELINES[e]} P</th><th class="num" title="${BASELINES[e]} decode tok/s">${BASELINES[e]} D</th>`).join("") + `</tr>`;
       for (const b of tests) {
         const now = byTest[b.id][sel], was = before(mac, model, b.id, sel);
-        html += `<tr><td class="clip">${esc(b.name)}</td>${cell(now, was, "prefill" + unit)}${cell(now, was, "decode" + unit)}` +
+        html += `<tr><td class="clip" title="${esc(b.description)}">${esc(b.name)}</td>${cell(now, was, "prefill" + unit)}${cell(now, was, "decode" + unit)}` +
           engines.map(e => baseCell(base[b.id]?.[e], "prefill") + baseCell(base[b.id]?.[e], "decode")).join("") + `</tr>`;
       }
       html += `</table></div>`;
@@ -337,7 +340,7 @@ function openRuns(shas) {
   if (!me) return openSignIn();
   const list = Array.isArray(shas) ? shas : [shas];
   const sha = list[0], c = commitOf(sha), parent = list.length > 1 ? null : parentOf(sha);
-  const row = (kind, x, on) => `<label class="toggle"><span>${esc(x.name)}</span><input type="checkbox" class="switch" data-kind="${kind}" value="${x.id}" ${on ? "checked" : ""}></label>`;
+  const row = (kind, x, on) => `<label class="toggle"><span>${kind === "models" ? modelTag(x) : esc(x.name)}</span><input type="checkbox" class="switch" data-kind="${kind}" value="${x.id}" ${on ? "checked" : ""}></label>`;
   sheet(`<div class="sheet-head"><h2>Bench</h2>` +
     `<div class="chips">${list.map(x => `<code>${x.slice(0, 7)}</code>`).join("")}</div></div>` +
     `<div class="group"><div class="label">Models</div>${DATA.models.map(m => row("models", m, false)).join("")}</div>` +
@@ -377,14 +380,14 @@ async function configure() {
   const tests = DATA.benchmarks.filter(b => on("benchmarks", b.id));
 
   let html = `<div class="card"><table class="compact"><tr><th>model</th><th>precision</th><th class="num">size</th></tr>`;
-  for (const m of models) html += `<tr><td>${esc(m.name)}</td><td class="muted">${esc(m.quant || "")}</td><td class="num">${gib(m.gib)}</td></tr>`;
+  for (const m of models) html += `<tr><td>${modelTag(m)}</td><td class="muted">${esc(m.quant || "")}</td><td class="num">${gib(m.gib)}</td></tr>`;
   if (!models.length) html += `<tr><td colspan="3" class="muted">No model runs.</td></tr>`;
   html += `</table></div><div class="card"><table class="compact"><tr><th>machine</th><th>id</th><th>memory</th><th>status</th></tr>`;
   for (const m of machines) html += `<tr><td>${esc(m.name)}</td><td class="muted">${m.id}</td><td>${m.memory_gib ? m.memory_gib + " GB" : "–"}</td>` +
     `<td><span class="dot ${m.status}"></span>${m.status}</td></tr>`;
   if (!machines.length) html += `<tr><td colspan="4" class="muted">No machine runs.</td></tr>`;
-  html += `</table></div><div class="card"><table class="compact"><tr><th>benchmark</th></tr>`;
-  for (const b of tests) html += `<tr><td>${esc(b.name)}</td></tr>`;
+  html += `</table></div><div class="card"><table class="compact"><tr><th>benchmark</th><th>description</th></tr>`;
+  for (const b of tests) html += `<tr><td>${esc(b.name)}</td><td class="muted">${esc(b.description)}</td></tr>`;
   if (!tests.length) html += `<tr><td class="muted">No benchmark runs.</td></tr>`;
   const by = last ? `Set <span title="${fmtDate(last.commit.committer.date)} ${fmtTime(last.commit.committer.date)}">${relTime(last.commit.committer.date)}</span> in config.json` : "Not set up yet: pushes run nothing";
   main.innerHTML = html + `</table></div><div class="muted">${by}</div>`;
@@ -696,14 +699,14 @@ def _tokens(n: int) -> str:
 
 def benchmarks(matrix: Matrix) -> list[dict]:
     workloads = {c.workload.id: c.workload for c in matrix.cells_for(Tier.TARGETED)
-                 if str(c.workload.kind) in ("single_stream", "long_context", "concurrency")}
+                 if str(c.workload.kind) in ("single_stream", "long_context", "concurrency", "prefix_shared")}
     order = sorted(workloads.values(), key=lambda w: (int(w.params.get("concurrency") or 1), int(w.params.get("prefill") or 0)))
     tests = []
     for w in order:
         n, prompt, out = int(w.params.get("concurrency") or 1), int(w.params.get("prefill") or 0), int(w.params.get("decode") or 0)
         head = "story prompt" if w.params.get("prompt") else f"{_tokens(prompt)}-token prompt"
         label = w.params.get("label") or f"{head}, {out} tokens out" + (f", {n} requests at once" if n > 1 else "")
-        tests.append({"id": w.id, "name": label, "concurrency": n})
+        tests.append({"id": w.id, "name": label, "description": w.params.get("description", ""), "concurrency": n})
     return tests
 
 
@@ -863,6 +866,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         "benchmarks": tests,
         "verdicts": verdicts(results, commits), "baselines": baselines,
         "baseline_labels": sorted(set(label_of.values())),
+        "ollama_icon": OLLAMA_ICON,
         "commits": commits, "history": all_commits, "results": results, "models": models,
         "failed": [{"sha": sha, "mac": mac, "model": model} for sha, mac, model in failed],
         "running": in_flight(repo) if lookup_commits else [],

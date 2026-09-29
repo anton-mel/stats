@@ -13,7 +13,9 @@
     "ob-512-200",
     "ob-short-100",
     "ob-advanced-500",
-    "lb-pp512",
-    "lb-tg128"
+    "ctx-4k-256",
+    "ctx-8k-256",
+    "cache-2k",
+    "c4"
   ]
 }

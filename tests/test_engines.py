@@ -327,6 +327,12 @@ def test_advanced_shape_carries_temperature_and_ollama_seed(tmp_path):
     assert "--seed" not in argv_for(make(PieEngine), adv, tmp_path)
 
 
+def test_ollama_keeps_its_cache_on_the_cached_prompt_shape():
+    cache = WorkloadSpec(id="cache-2k", kind="prefix_shared", params={"shared_prefix": 2048, "unique_suffix": 64, "variants": 8, "decode": 64, "concurrency": 1})
+    assert load_recipe("ollama", "competitive", platform(), cache)["flush_cache"] is False
+    assert load_recipe("ollama", "competitive", platform(), WORKLOADS["ss-128-64"])["flush_cache"] is True
+
+
 def test_ollama_server_env_maps_recipe_knobs():
     eng = make(OllamaEngine)
     eng.recipe = {**eng.recipe, "num_parallel": 8, "context_length": 4096, "flash_attention": True, "kv_cache_type": "q8_0"}
