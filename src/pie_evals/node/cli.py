@@ -113,6 +113,20 @@ def prepare_cmd(tier, matrix_dir, platforms, engines_f, programs_f, pie_root, pi
     sys.exit(1 if failed else 0)
 
 
+@main.command("quality", help="Score output quality (GSM8K, IFEval) on the same sampled questions for each artifact.")
+@click.option("--artifact", "artifacts", multiple=True, required=True, help="artifact id from matrix/models.yaml (a pie checkpoint or an Ollama arm)")
+@click.option("--task", "tasks", multiple=True, type=click.Choice(["gsm8k", "ifeval"]), default=("gsm8k", "ifeval"), show_default=True)
+@click.option("--n", type=int, default=100, show_default=True)
+@click.option("--matrix", "matrix_dir", default="matrix")
+@click.option("--store", "store_dir", default="store")
+@click.option("--pie-root", type=click.Path(), default=os.environ.get("PIE_ROOT", str(DEFAULT_PIE_ROOT)))
+def quality_cmd(artifacts, tasks, n, matrix_dir, store_dir, pie_root):
+    from pie_evals.quality.run import run_quality
+
+    for a in artifacts:
+        run_quality(a, list(tasks), n, matrix_dir=matrix_dir, store_dir=store_dir, pie_root=Path(pie_root), log=lambda m_: click.echo(m_, err=True))
+
+
 @main.command("preflight")
 def preflight_cmd():
     """Print the hardware fingerprint and machine state checks."""
