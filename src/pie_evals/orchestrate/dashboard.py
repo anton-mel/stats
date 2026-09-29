@@ -166,6 +166,22 @@ PAGE = """<!doctype html>
   .ok { color: #1a7f37; font-weight: 700; }
   .label { font-size: 13px; font-weight: 600; color: #424a53; margin: 8px 0 4px; }
   img.ol { height: 14px; vertical-align: -2px; margin-right: 6px; }
+  .model-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .model-head h2 { margin: 0; font-size: 16px; }
+  .model-head h2 img.ol { height: 16px; }
+  table.ov td { vertical-align: middle; }
+  .gapbar { position: relative; height: 10px; background: #f0f3f6; border-radius: 5px; }
+  .gapbar.empty { background: repeating-linear-gradient(90deg, #f0f3f6 0 6px, #fff 6px 10px); }
+  .gapbar .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: #8c959f; }
+  .gapbar .fill { position: absolute; top: 0; bottom: 0; }
+  .gapbar .fill.ahead { left: 50%; background: #2da44e; border-radius: 0 5px 5px 0; }
+  .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
+  .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .stats .stat { margin: 0; }
+  .stat .label { margin: 0 0 4px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #7a838d; }
+  .stat .big { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+  @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
   table.rmlist { width: 100%; }
   table.rmlist td { vertical-align: middle; padding: 8px 6px; }
   .cmd { display: flex; gap: 8px; align-items: stretch; margin: 8px 0 4px; }
@@ -191,7 +207,6 @@ PAGE = """<!doctype html>
 </div></header>
 <div class="controls" id="controls">
   <select id="fmac" aria-label="machine"></select><select id="fmodel" aria-label="model"></select>
-  <div class="seg" id="unit" role="group" aria-label="unit"><button data-u="" class="on">tok/s</button><button data-u="_tflops">TFLOP/s</button></div>
   <span class="grow"></span>
   <button class="act" id="bench" disabled>Bench</button>
 </div>
@@ -199,7 +214,7 @@ PAGE = """<!doctype html>
 <div id="modal" class="modal" hidden><div class="sheet"><button class="x" id="close" aria-label="close">×</button><div id="sheet"></div></div></div>
 <script>
 const DATA = __DATA__;
-const TABS = ["Pipeline", "History", "Machines", "People"];
+const TABS = ["Overview", "Pipeline", "History", "Machines", "People"];
 const NL = String.fromCharCode(10);
 const REPO_NAME = DATA.repo.split("/").pop();
 const esc = x => String(x ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
@@ -229,7 +244,7 @@ const pieOf = id => modelOf(id).pie || id;
 const modelTag = m => `<img class="ol" src="${DATA.ollama_icon}" alt="">${esc(m.name)}`;
 const macName = id => (DATA.pool.find(m => m.id === id) || DATA.results[id] || { name: id }).name;
 const PER_PAGE = 20;
-let tab = "History", back = "History", me = null, page = 0, denied = "";
+let tab = "Overview", back = "Overview", me = null, page = 0, denied = "";
 const filt = { mac: "", model: "" };
 const chosen = new Set();
 const testName = id => DATA.benchmarks.find(b => b.id === id)?.name || id;
@@ -263,13 +278,6 @@ const parentOf = sha => { const i = ALL.findIndex(c => c.sha === sha); return i 
 const measured = [...DATA.commits].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 let sel = measured[0]?.sha || "";
 
-const unitSel = { value: "" };
-document.querySelectorAll("#unit button").forEach(b => b.onclick = () => {
-  unitSel.value = b.dataset.u;
-  document.querySelectorAll("#unit button").forEach(x => x.classList.toggle("on", x === b));
-  draw();
-});
-
 function valueAt(mac, model, wl, sha) { return DATA.results[mac]?.models[model]?.[wl]?.[sha]; }
 function before(mac, model, wl, sha) {
   const order = [...DATA.commits].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
@@ -279,61 +287,62 @@ function before(mac, model, wl, sha) {
   }
   return null;
 }
-const BASELINES = Object.fromEntries((DATA.baseline_labels || []).map(l => [l, l]));
-function baseCell(b, key) {
-  const v = b?.[key];
-  if (v == null) return `<td class="num muted">–</td>`;
-  const tip = b.version ? ` title="${esc(b.version)}"` : "";
-  return `<td class="num"${tip}>${Math.round(v).toLocaleString()}</td>`;
+function ollamaAt(mac, pie, wl, label, at) {
+  const runs = DATA.baselines?.[mac]?.[pie]?.[wl]?.[label] || [];
+  const upto = at ? runs.filter(r => r.at <= at) : runs;
+  return (upto.length ? upto : runs).reduce((a, b) => (!a || b.at > a.at ? b : a), null);
 }
-function cell(now, was, key) {
-  const v = now?.[key];
-  if (v == null) return `<td class="num muted">–</td><td></td>`;
-  const fmt = x => key.endsWith("tflops") ? x.toFixed(2) : Math.round(x).toLocaleString();
-  const b = was?.[key];
-  const change = b ? (v / b - 1) * 100 : null;
-  const chip = change == null ? "" : `<span class="${change > 0.5 ? "up" : change < -0.5 ? "down" : "muted"}">${change > 0 ? "+" : ""}${change.toFixed(1)}%</span>`;
-  const tip = b ? ` title="before: ${fmt(b)} at ${was.sha.slice(0, 7)}"` : "";
-  return `<td class="num"${tip}>${fmt(v)}</td><td class="num">${chip}</td>`;
+const pct = x => `${x > 0 ? "+" : ""}${(x * 100).toFixed(x > -0.1 && x < 0.1 ? 1 : 0)}%`;
+const tok = x => x == null ? "–" : Math.round(x).toLocaleString();
+function gapBar(gap) {
+  if (gap == null) return `<div class="gapbar empty"><span class="mid"></span></div>`;
+  const w = Math.min(Math.abs(gap), 1) * 50;
+  return `<div class="gapbar"><span class="mid"></span><span class="fill ${gap >= 0 ? "ahead" : "behind"}" style="width:${w}%"></span></div>`;
 }
-
 function overview() {
   const main = document.getElementById("main");
-  if (!sel) { main.innerHTML = `<div class="card muted">Nothing has been benchmarked yet.</div>`; return; }
-  const c = commitOf(sel), unit = unitSel.value;
-  let html = `<div class="commit-head"><a href="#" class="backlink" id="back">‹ History</a><div class="title">${esc(c.message) || sel.slice(0, 7)}</div><div class="meta">` +
-    `<a class="sha" href="https://github.com/${DATA.pie_repo}/commit/${sel}" target="_blank"><code>${sel.slice(0, 7)}</code></a>` +
-    (c.author ? `<span><img class="avatar" src="https://github.com/${esc(c.author)}.png?size=40">${esc(c.author)}</span>` : "") +
-    (c.date ? `<span title="${fmtDate(c.date)} ${fmtTime(c.date)}">${relTime(c.date)}</span>` : "") +
-    `</div></div>`;
-  const shown = filt.model, onMac = filt.mac;
-  let any = false;
-  for (const [mac, r] of Object.entries(DATA.results)) {
-    if (mac !== onMac) continue;
-    for (const [model, byTest] of Object.entries(r.models)) {
-      if (model !== pieOf(shown)) continue;
-      const tests = DATA.benchmarks.filter(b => byTest[b.id]?.[sel]);
-      if (!tests.length) continue;
-      any = true;
-      const base = DATA.baselines?.[mac]?.[model] || {};
-      const engines = Object.keys(BASELINES).filter(e => e === modelOf(shown).label && Object.values(base).some(b => b[e]));
-      html += `<div class="card"><h2>${esc(r.name)}</h2><table class="compact fixed">` +
-        `<colgroup><col style="width:30%"><col><col><col><col>${engines.map(() => `<col style="width:72px"><col style="width:72px">`).join("")}</colgroup>` +
-        `<tr><th>benchmark</th><th class="num">prefill</th><th class="num">change</th><th class="num">decode</th><th class="num">change</th>` +
-        engines.map(e => `<th class="num" title="${BASELINES[e]} prefill tok/s">${BASELINES[e]} P</th><th class="num" title="${BASELINES[e]} decode tok/s">${BASELINES[e]} D</th>`).join("") + `</tr>`;
-      for (const b of tests) {
-        const now = byTest[b.id][sel], was = before(mac, model, b.id, sel);
-        html += `<tr><td class="clip" title="${esc(b.description)}">${esc(b.name)}</td>${cell(now, was, "prefill" + unit)}${cell(now, was, "decode" + unit)}` +
-          engines.map(e => baseCell(base[b.id]?.[e], "prefill") + baseCell(base[b.id]?.[e], "decode")).join("") + `</tr>`;
-      }
-      html += `</table></div>`;
+  const mac = filt.mac, latest = measured[0]?.sha || "";
+  const c = sel ? commitOf(sel) : null;
+  let html = `<div class="commit-head"><div class="title">${c ? esc(c.message) || sel.slice(0, 7) : "No pie commit measured yet"}</div><div class="meta">` +
+    (c ? `<a class="sha" href="https://github.com/${DATA.pie_repo}/commit/${sel}" target="_blank"><code>${sel.slice(0, 7)}</code></a>` : "") +
+    (c?.author ? `<span><img class="avatar" src="https://github.com/${esc(c.author)}.png?size=40">${esc(c.author)}</span>` : "") +
+    (c?.date ? `<span title="${fmtDate(c.date)} ${fmtTime(c.date)}">${relTime(c.date)}</span>` : "") +
+    `<span class="muted">${esc(macName(mac))}</span>` +
+    (sel && sel !== latest ? `<a href="#" id="latest">back to latest</a>` : "") + `</div></div>`;
+  const rows = [], gaps = [], moves = [];
+  const total = DATA.models.filter(m => !m.unsupported).length * DATA.benchmarks.length;
+  for (const m of DATA.models) {
+    const byTest = DATA.results[mac]?.models[m.pie] || {};
+    let body = "";
+    for (const b of DATA.benchmarks) {
+      const key = b.metric === "prefill" ? "prefill" : "decode";
+      const now = sel ? byTest[b.id]?.[sel] : null;
+      const was = now ? before(mac, m.pie, b.id, sel) : null;
+      const ol = ollamaAt(mac, m.pie, b.id, m.label, now?.at);
+      const pv = now?.[key], ov = ol?.[key];
+      const gap = pv != null && ov ? pv / ov - 1 : null;
+      const move = pv != null && was?.[key] ? pv / was[key] - 1 : null;
+      if (gap != null) gaps.push(gap);
+      if (move != null) moves.push(move);
+      const unit = b.concurrency > 1 ? "tok/s total" : `${key} tok/s`;
+      const tip = `pie ${tok(pv)} · ${m.label} ${tok(ov)}${ol?.version ? " (" + ol.version + ")" : ""} ${unit}`;
+      body += `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(gap)}</td>` +
+        `<td class="num ${gap == null ? "muted" : gap >= 0 ? "up" : "down"}" title="${esc(tip)}">${gap == null ? (pv == null ? "not run" : "no " + esc(m.label)) : pct(gap)}</td>` +
+        `<td class="num muted" title="${esc(tip)}">${tok(pv)} / ${tok(ov)}</td>` +
+        `<td class="num">${move == null ? "" : `<span class="${move > 0.005 ? "up" : move < -0.005 ? "down" : "muted"}" title="vs ${was.sha.slice(0, 7)}">${pct(move)}</span>`}</td></tr>`;
     }
+    if (m.unsupported) body = `<tr><td colspan="5" class="muted">${esc(m.unsupported)}; only ${esc(m.label)} is measured on this model.</td></tr>`;
+    rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2><span class="muted">pie vs ${esc(m.label)}</span></div>` +
+      `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"><col style="width:78px"></colgroup>` +
+      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th><th class="num" title="change from the commit before">commit</th></tr>${body}</table></div>`);
   }
-  if (!any) html += `<div class="card muted">No results for ${esc(modelName(shown))} on ${esc(macName(onMac))} at this commit.</div>`;
-  main.innerHTML = html;
-  document.getElementById("back").onclick = e => { e.preventDefault(); tab = "History"; draw(); };
+  const avg = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
+  const g = avg(gaps), mv = avg(moves);
+  html += `<div class="stats"><div class="card stat"><div class="label">pie vs Ollama, average</div><div class="big ${g == null ? "muted" : g >= 0 ? "up" : "down"}">${g == null ? "–" : pct(g)}</div><div class="muted">${gaps.length} of ${total} benchmarks measured</div></div>` +
+    `<div class="card stat"><div class="label">this commit vs the one before</div><div class="big ${mv == null ? "muted" : mv > 0.005 ? "up" : mv < -0.005 ? "down" : "muted"}">${mv == null ? "–" : pct(mv)}</div><div class="muted">${moves.length ? "average over " + moves.length + " benchmarks" : "no earlier commit to compare"}</div></div></div>`;
+  main.innerHTML = html + rows.join("");
+  document.getElementById("latest")?.addEventListener("click", e => { e.preventDefault(); sel = latest; draw(); });
 }
-
 function openRuns(shas) {
   if (!me) return openSignIn();
   const list = Array.isArray(shas) ? shas : [shas];
@@ -616,12 +625,11 @@ function renderWho() {
 function draw() {
   if (!me) tab = "Sign in";
   else if (tab === "Sign in") tab = back;
-  document.getElementById("tabs").innerHTML = me ? TABS.map(t => `<button class="${t === tab || (t === "History" && tab === "Overview") ? "on" : ""}">${t}</button>`).join("") : "";
+  document.getElementById("tabs").innerHTML = me ? TABS.map(t => `<button class="${t === tab ? "on" : ""}">${t}</button>`).join("") : "";
   document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => { tab = b.textContent; draw(); });
   document.getElementById("controls").hidden = tab !== "Overview" && tab !== "History";
-  document.getElementById("unit").hidden = tab !== "Overview";
   document.getElementById("fmac").hidden = tab !== "History" && tab !== "Overview";
-  document.getElementById("fmodel").hidden = tab !== "History" && tab !== "Overview";
+  document.getElementById("fmodel").hidden = tab !== "History";
   const bench = document.getElementById("bench");
   bench.hidden = tab !== "History";
   bench.disabled = !chosen.size;
@@ -695,7 +703,8 @@ def benchmarks(matrix: Matrix) -> list[dict]:
         n, prompt, out = int(w.params.get("concurrency") or 1), int(w.params.get("prefill") or 0), int(w.params.get("decode") or 0)
         head = "story prompt" if w.params.get("prompt") else f"{_tokens(prompt)}-token prompt"
         label = w.params.get("label") or f"{head}, {out} tokens out" + (f", {n} requests at once" if n > 1 else "")
-        tests.append({"id": w.id, "name": label, "description": w.params.get("description", ""), "concurrency": n})
+        metric = "prefill" if w.params.get("primary") == "prefill_tok_s" else "decode"
+        tests.append({"id": w.id, "name": label, "description": w.params.get("description", ""), "concurrency": n, "metric": metric})
     return tests
 
 
@@ -733,6 +742,10 @@ def quant_label(scheme: str) -> str:
 
 def mac_models(matrix: Matrix) -> list[dict]:
     macs = [p for p in matrix.platforms.values() if p.os == "macos"]
+    why = {}
+    for c in matrix.expand():
+        if str(c.engine) == "pie":
+            why.setdefault(c.artifact.id, set()).add(c.declared_unsupported_reason)
     out = []
     for a in matrix.artifacts.values():
         pie = matrix.artifacts.get(a.baseline_of or "")
@@ -740,7 +753,8 @@ def mac_models(matrix: Matrix) -> list[dict]:
             continue
         out.append({"id": a.id, "name": a.ollama_tag, "pie": pie.id, "label": a.baseline_label or "Ollama", "family": a.family,
                     "scheme": str(a.scheme), "format": str(a.source_format), "gib": a.expected_gib, "context": pie.max_context,
-                    "quant": quant_label(str(a.scheme))})
+                    "quant": quant_label(str(a.scheme)),
+                    "unsupported": next(iter(why[pie.id])) if pie.id in why and None not in why[pie.id] else None})
     return sorted(out, key=lambda m: m["name"])
 
 
@@ -801,10 +815,11 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
     for r in rows:
         if r["engine"] != "pie" and r["workload"] in concurrency:
             single = concurrency[r["workload"]] == 1
-            baselines.setdefault(r["platform"], {}).setdefault(baseline_of.get(r["artifact"], r["artifact"]), {}).setdefault(r["workload"], {})[label_of.get(r["artifact"], r["engine"])] = {
+            baselines.setdefault(r["platform"], {}).setdefault(baseline_of.get(r["artifact"], r["artifact"]), {}).setdefault(r["workload"], {}).setdefault(label_of.get(r["artifact"], r["engine"]), []).append({
+                "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "prefill": r["prefill_tok_s"] if single else None,
                 "decode": r["decode_tok_s"] if single else r["output_tok_s"],
-                "version": r["engine_version"] or ""}
+                "version": r["engine_version"] or ""})
     rows = [r for r in rows if r["engine"] == "pie"]
     failed = sorted({(r["pie_commit"], r["platform"], r["artifact"]) for r in every
                      if r["status"] == str(CellStatus.FAIL)
@@ -826,7 +841,8 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         single = concurrency[r["workload"]] == 1
         mac["models"][r["artifact"]][r["workload"]][r["pie_commit"]] = {
             "prefill": r["prefill_tok_s"] if single else None, "prefill_tflops": tf["prefill_tflops"],
-            "decode": r["decode_tok_s"] if single else r["output_tok_s"], "decode_tflops": tf["decode_tflops"], "output": r["output_tok_s"]}
+            "decode": r["decode_tok_s"] if single else r["output_tok_s"], "decode_tflops": tf["decode_tflops"], "output": r["output_tok_s"],
+            "at": r["started_at"].strftime("%Y-%m-%dT%H:%M:%SZ")}
         have.add(r["artifact"])
 
     known = {c["sha"]: c for c in (history(pie_repo) if lookup_commits else [])}
