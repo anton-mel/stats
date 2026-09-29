@@ -339,12 +339,12 @@ function overview() {
       ["gpqa", "GPQA Diamond", "graduate level science, multiple choice"],
       ["ifeval", "IFEval", "follows verifiable format instructions"],
     ];
-    const qcell = q => q?.score == null ? `<td class="num muted">–</td>` :
+    const qcell = q => q?.score == null ? `<td class="num muted">not run</td>` :
       `<td class="num" title="95% interval ${(q.ci95[0] * 100).toFixed(0)}–${(q.ci95[1] * 100).toFixed(0)}%, n=${q.n}${q.version ? ", " + esc(q.version) : ""}">${(q.score * 100).toFixed(0)}%</td>`;
-    const qrows = qtasks.filter(([t]) => DATA.quality?.[m.id]?.[t]);
-    const qhtml = qrows.length ? `<table class="compact fixed quality"><colgroup><col style="width:26%"><col><col style="width:120px"></colgroup>` +
+    const qrows = qtasks;
+    const qhtml = `<table class="compact fixed quality"><colgroup><col style="width:26%"><col><col style="width:120px"></colgroup>` +
       `<tr><th>quality</th><th></th><th class="num" title="scored on ${esc(m.label)}; the model's own quality, not the engine's">score</th></tr>` +
-      qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td><td class="muted">${esc(desc)}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table>` : "";
+      qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td><td class="muted">${esc(desc)}</td>${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table>`;
     rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
       `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table>${qhtml}</div>`);
