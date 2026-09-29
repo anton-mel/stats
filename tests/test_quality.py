@@ -42,3 +42,59 @@ def test_glimmer_answers_are_the_user_message():
     out = " to=self<|message|>We need to capitalize.<|eom|><|start|>assistant to=user<|message|>HELLO THERE<|eot|>"
     assert answer_part(out) == "HELLO THERE"
     assert answer_part(" to=self<|message|>still thinking when the budget ran out") == ""
+
+
+def test_choice_tasks_read_the_marked_letter():
+    from pie_evals.quality.tasks import score_choice
+
+    item = Item("q", "p", "C")
+    assert score_choice(item, "It is the third.\nAnswer: C") == 1.0
+    assert score_choice(item, "Answer: **C**") == 1.0
+    assert score_choice(item, "the answer is (C)") == 1.0
+    assert score_choice(item, "C") == 1.0
+    assert score_choice(item, "Answer: B") == 0.0
+    assert score_choice(item, "A looks right, then B, so\nAnswer: C") == 1.0
+    assert score_choice(item, "no idea") == 0.0
+    assert score_choice(item, "<think>Answer: B</think>Answer: C") == 1.0
+
+
+def test_math_tasks_compare_the_boxed_answer():
+    from pie_evals.quality.tasks import score_math
+
+    item = Item("q", "p", "\\frac{1}{2}")
+    assert score_math(item, "so \\boxed{\\dfrac{1}{2}}") == 1.0
+    assert score_math(item, "so \\boxed{ \\frac{1}{2} }.") == 1.0
+    assert score_math(item, "\\boxed{\\frac{1}{3}}") == 0.0
+    assert score_math(item, "the answer is 1/2") == 0.0
+    assert score_math(Item("q", "p", "\\left( 3, \\frac{\\pi}{2} \\right)"), "\\boxed{(3, \\frac{\\pi}{2})}") == 1.0
+    assert score_math(Item("q", "p", "10"), "\\boxed{\\text{10}}") == 1.0
+    assert score_math(Item("q", "p", "5"), "first \\boxed{4} then \\boxed{5}") == 1.0
+    assert score_math(Item("q", "p", "{1}"), "\\boxed{{1}}") == 1.0
+
+
+def test_choice_loaders_shuffle_deterministically_and_mark_the_gold_letter(monkeypatch, tmp_path):
+    import csv
+
+    from pie_evals.quality import tasks
+
+    path = tmp_path / "gpqa.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["Question", "Correct Answer", "Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"])
+        w.writeheader()
+        for i in range(5):
+            w.writerow({"Question": f"q{i}", "Correct Answer": f"right{i}", "Incorrect Answer 1": "a", "Incorrect Answer 2": "b", "Incorrect Answer 3": "c"})
+    monkeypatch.setattr(tasks, "_download", lambda repo, filename: path)
+    first, second = tasks.load_gpqa(5), tasks.load_gpqa(5)
+    assert [i.prompt for i in first] == [i.prompt for i in second]
+    for item in first:
+        lines = {l[0]: l[3:] for l in item.prompt.splitlines() if len(l) > 3 and l[1:3] == ". "}
+        assert lines[item.gold].startswith("right")
+        assert tasks.score_choice(item, f"Answer: {item.gold}") == 1.0
+
+
+def test_every_task_has_a_loader_scorer_and_budget():
+    from pie_evals.quality.tasks import TASKS
+
+    assert set(TASKS) == {"gsm8k", "ifeval", "mmlu", "arc", "math500", "gpqa"}
+    for load, score, budget in TASKS.values():
+        assert callable(load) and callable(score) and budget > 0
