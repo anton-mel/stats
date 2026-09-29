@@ -159,6 +159,8 @@ class OllamaEngine(Engine):
             args += ["--flush-slots", str(self.slots)]
         if r.get("request_timeout"):
             args += ["--request-timeout", str(r["request_timeout"])]
+        if workload.params.get("seed") is not None:
+            args += ["--seed", str(workload.params["seed"])]
         return args
 
     def serve(self, workload: WorkloadSpec, log_path: Path, timeout_s: int) -> None:

@@ -702,7 +702,7 @@ def benchmarks(matrix: Matrix) -> list[dict]:
     for w in order:
         n, prompt, out = int(w.params.get("concurrency") or 1), int(w.params.get("prefill") or 0), int(w.params.get("decode") or 0)
         head = "story prompt" if w.params.get("prompt") else f"{_tokens(prompt)}-token prompt"
-        label = f"{head}, {out} tokens out" + (f", {n} requests at once" if n > 1 else "") + (" (ollama-bench)" if w.id.startswith("ob-") else "")
+        label = w.params.get("label") or f"{head}, {out} tokens out" + (f", {n} requests at once" if n > 1 else "")
         tests.append({"id": w.id, "name": label, "concurrency": n})
     return tests
 
