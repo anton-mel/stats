@@ -125,6 +125,12 @@ def regressions_markdown(rows: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _close(a, b, rel: float = 0.01) -> bool:
+    if a is None or b is None:
+        return a == b
+    return abs(a - b) <= rel * max(a, b)
+
+
 def baseline_ratios(matrix: Matrix, store: Store, tier: Tier) -> list[dict]:
     """pie vs each baseline arm on the same (platform, model, workload, mode). A
     baseline arm is its own artifact (Ollama serves its own copy of the weights)
@@ -159,7 +165,7 @@ def baseline_ratios(matrix: Matrix, store: Store, tier: Tier) -> list[dict]:
                     "baseline": eng, "baseline_artifact": arm, "baseline_version": row["engine_version"], "metric": metric, "pie_value": pv,
                     "baseline_value": bv, "baseline_over_pie": ratio,
                     "pie_leads": (ratio is not None and ratio < 1.0), "pie_cov": pie["cov"], "baseline_cov": row["cov"],
-                    "input_ok": pie["prompt_tokens"] == row["prompt_tokens"] and pie["output_tokens"] == row["output_tokens"],
+                    "input_ok": _close(pie["prompt_tokens"], row["prompt_tokens"]) and pie["output_tokens"] == row["output_tokens"],
                     "baseline_recipe": row["engine_config_recipe"],
                 }
             )

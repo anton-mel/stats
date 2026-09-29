@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import random
 import statistics
 import sys
 import time
@@ -88,6 +89,12 @@ def flush(args: argparse.Namespace, endpoint: str) -> None:
         list(pool.map(one, range(max(1, args.flush_slots))))
 
 
+def shuffled(prompt: str, seed: int) -> str:
+    words = prompt.split()
+    random.Random(seed).shuffle(words)
+    return " ".join(words)
+
+
 def _median(xs: list[float]) -> float | None:
     return float(statistics.median(xs)) if xs else None
 
@@ -97,7 +104,11 @@ async def run(args: argparse.Namespace):
         sys.exit("--ollama-model is required")
     n = args.requests if args.mode == "latency" else args.num_requests
     batch = 1 if args.mode == "latency" else (args.concurrency or max(1, args.num_requests))
-    prompts, counts = hf_chat_prompts_and_counts(args.model, args.system, make_prompts(args, n + args.warmup), getattr(args, "think", None))
+    raw = make_prompts(args, n + args.warmup)
+    if args.flush_cache:
+        salt = random.SystemRandom().getrandbits(32)
+        raw = [shuffled(p, salt + i) for i, p in enumerate(raw)]
+    prompts, counts = hf_chat_prompts_and_counts(args.model, args.system, raw, getattr(args, "think", None))
     budgets = [request_max_tokens(args, i) for i in range(len(prompts))]
     endpoint = args.url.rstrip("/") + "/api/generate"
     server: list[dict[str, Any]] = []
@@ -142,6 +153,7 @@ async def run(args: argparse.Namespace):
             "client_in_flight": batch,
             "raw_prompt": True,
             "flush_cache": bool(args.flush_cache),
+            "prompt_shuffled": bool(args.flush_cache),
             "ignore_eos": "unsupported by Ollama; every request stopped at EOS or num_predict",
             "short_responses": sum(1 for s in server if s["eval_count"] < s["max_tokens"]),
             "cached_prompt_tokens": cached,
