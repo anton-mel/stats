@@ -432,3 +432,16 @@ def test_a_shape_can_score_on_prefill(tmp_path):
     pp = WorkloadSpec(id="lb-pp512", kind="single_stream", params={"prefill": 512, "decode": 1, "primary": "prefill_tok_s"})
     res = eng.run(pp, [], tmp_path / "out", 60)
     assert res.perf.primary == "prefill_tok_s" and res.perf.prefill_tok_s == 512 / 0.1
+
+
+def test_lifeline_stops_its_child_when_the_parent_goes_away():
+    import subprocess
+    import sys
+    import time
+
+    sup = subprocess.Popen([sys.executable, "-m", "pie_evals.node.engines.lifeline", sys.executable, "-c", "import time; time.sleep(60)"],
+                           stdin=subprocess.PIPE)
+    time.sleep(0.5)
+    sup.stdin.close()
+    assert sup.wait(timeout=30) != 0 or sup.returncode == 0
+    assert sup.poll() is not None
