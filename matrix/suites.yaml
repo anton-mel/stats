@@ -1,4 +1,4 @@
-job_budget_minutes: 60
+job_budget_minutes: 240
 kill_factor: 2.0
 
 suites:

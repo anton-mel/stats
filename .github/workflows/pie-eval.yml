@@ -3,7 +3,7 @@ run-name: pie eval ${{ github.event.client_payload.pie_commit || inputs.pie_comm
 permissions: { contents: write, actions: read }
 concurrency:
   group: pie-eval-${{ github.event.client_payload.pie_commit || github.event.inputs.pie_commit || 'main' }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 on:
   repository_dispatch:
     types: [pie-eval]
