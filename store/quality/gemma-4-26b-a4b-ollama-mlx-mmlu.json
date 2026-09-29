@@ -1,0 +1,520 @@
+{
+ "artifact": "gemma-4-26b-a4b-ollama-mlx",
+ "model": "gemma-4-26b-a4b-mlx4",
+ "engine": "ollama",
+ "label": "Ollama MLX",
+ "task": "mmlu",
+ "n": 100,
+ "correct": 86.0,
+ "score": 0.86,
+ "ci95": [
+  0.7786263961619276,
+  0.914737342455351
+ ],
+ "version": "0.34.4",
+ "empty": 0,
+ "minutes": 3.3,
+ "date": "2026-09-29T10:48:14Z",
+ "samples": [
+  {
+   "id": "mmlu-0",
+   "score": 1.0,
+   "text": "Information enters the cognitive system through the senses, which are briefly held in a buffer before being processed further. This initial, very brief stage of memory is known as sensory memory.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-1",
+   "score": 1.0,
+   "text": "Based on the context of discussions surrounding Ali Soufan's testimony regarding interrogation techniques, the core of his argument is that intelligence can be gathered through rapport-building and non-coercive methods, and that the use of torture is not a necessity for successful intelligence gathering.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-2",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must analyze the situation through the lens of Constitutional Law, specifically the Due Process Clause of the Fourteenth Amendment as applied to public school disciplinary actions.\n\n1.  **Due Process Requirements:** Under the Supreme Court's ruling in *Goss v. Lopez*, students facing suspension from a public school are entitled to \"due process.\" For short-term suspensions (10 days or fewer), due process requires:\n    *   Notice of the charges.\n    *   An explanation of the evidence the authorities have.\n    *   An opportunity for the student to present their side of the story.\n\n2.  **Application to the Facts:**\n    *   **Notice:** The student received a letter notifying the parents of the charges and the suspension.\n    *   **Opportunity to be heard:** The student and his mother met with the principal on January 19. During this meeting, the student was able to present his side (in this case, he admitted to the conduct).\n    *   **The Hearing:** While a formal hearing was scheduled and the parents did not attend, the student had already been given the opportunity to respond to the charges during the meeting with the principal. In the context of a short-term suspension, the informal meeting often satisfies the constitutional requirement.\n\n3.  **Evaluating the Options:**\n    *   **A:** Incorrect. While a suspension involves a deprivation of a property interest (the right to an education), the school provided notice and an opportunity to be heard, thus satisfying due process.\n    *   **B:** Incorrect. While speech is protected, the use of profanity and abusive language toward others is generally not protected speech in a school setting (it can be categorized as disruptive or harassing).\n    *   **C:** **Correct.** Because the student was notified of the charges and given an opportunity to explain his version of the events (during the meeting on Jan 19), the constitutional requirements for due process for a short-term suspension were met.\n    *   **D:** Incorrect. There is no constitutional right to a \"compulsory\" education that prevents schools from enforcing disciplinary codes.\n\nThe school followed the necessary procedural steps required for a short-term suspension.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-3",
+   "score": 0.0,
+   "text": "The primary reason for this phenomenon is the rate of heat transfer. While all the options touch on thermodynamic principles, the most significant factor in why water is so much more dangerous than air is how it facilitates the movement of heat away from the body.\n\nIn air, as your body warms the thin layer of gas immediately surrounding your skin, that warm air rises (convection), which is a relatively slow process. However, in water, the fluid is much denser and more efficient at carrying heat away. As your body warms the water in immediate contact with you, that water moves, but the sheer density and thermal conductivity of the water ensure a much more rapid and continuous extraction of heat from the body compared to air.\n\nOption C specifically describes the mechanism of convective heat transfer that accelerates the cooling process in a fluid medium.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-4",
+   "score": 1.0,
+   "text": "To determine the correct crime, we must analyze the senior associate's actions and the resulting death.\n\n1.  **Assault:** An assault occurs when a defendant intentionally creates a reasonable apprehension of imminent harmful or offensive contact. The senior associate raised a clenched fist and threatened physical violence (\"I'm going to punch you in the mouth\"), which constitutes an assault.\n2.  **The Death:** The young associate died due to a heart attack triggered by the fright of the threatened assault. Under the \"eggshell skull\" rule (or the principle that you take your victim as you find them), a defendant is liable for all foreseeable consequences of their criminal act, even if the specific physical reaction (the heart attack) was unexpected or caused by a pre-existing condition.\n3.  **Manslaughter vs. Murder:** \n    *   **Murder** requires malice aforethought (intent to kill or cause serious bodily harm). There is no evidence the senior associate intended to kill the associate or cause him physical harm; he intended only to intimidate him to get the briefcase.\n    *   **Voluntary Manslaughter** involves a \"heat of passion\" killing following adequate provocation, which does not apply here.\n    *   **Involuntary Manslaughter** involves a death resulting from criminal negligence or an unlawful act (the misdemeanor of assault). Since the senior associate committed an assault (an unlawful act) that resulted in a death, he is liable for the death under the doctrine of involuntary manslaughter.\n\nWhile the senior associate committed an assault, the most serious crime for which he is liable\u2014given that a death occurred\u2014is involuntary manslaughter.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-5",
+   "score": 1.0,
+   "text": "To create a tapestry, one must traditionally engage in the process of interlacing threads on a loom, which is known as weaving.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-6",
+   "score": 1.0,
+   "text": "To find the probability of rolling a three on a standard six-sided die, we use the formula for probability:\n\n$P(\\text{event}) = \\frac{\\text{Number of favorable outcomes}}{\\text{Total number of possible outcomes}}$\n\n1.  **Total number of possible outcomes:** Since it is a six-sided cube, there are 6 possible outcomes (1, 2, 3, 4, 5, or 6).\n2.  **Number of favorable outcomes:** There is only one face with the number 3.\n3.  **Calculation:** $P(3) = \\frac{1}{6}$\n\nLooking at the provided options, they appear to be formatted as dates (e.g., \"6-Jan\" represents January 6th), which is a common error in some automated systems when representing fractions like 1/6. In this context:\n*   A. 6-Jan $\\rightarrow$ 1/6\n*   B. 5-Jan $\\rightarrow$ 1/5\n*   C. 3-Jan $\\rightarrow$ 1/3\n*   D. 2-Jan $\\rightarrow$ 1/2\n\nThe correct probability is 1/6, which corresponds to option A.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-7",
+   "score": 1.0,
+   "text": "The description provided refers to a tool that crawls the web, indexes content, and retrieves it based on user queries to provide meaningful results. This is the definition of a search engine.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-8",
+   "score": 1.0,
+   "text": "To determine the effect of a leftward shift in the aggregate supply (AS) curve, we analyze the interaction between the aggregate supply and the aggregate demand (AD) curve:\n\n1.  **The Shift:** A leftward shift of the AS curve (also known as a negative supply shock) represents a decrease in supply. This can be caused by factors such as rising production costs (e.g., higher wages or raw material prices).\n2.  **Price Level:** As the supply curve moves to the left along the downward-sloping aggregate demand curve, the new intersection point occurs at a higher point on the vertical axis. Therefore, the **equilibrium price level increases** (a phenomenon often called cost-push inflation).\n3.  **Quantity of Output:** As the supply curve moves left, the new intersection point occurs at a lower point on the horizontal axis. Therefore, the **equilibrium quantity of output decreases**.\n\nThis combination of rising prices and falling output is often referred to as \"stagflation.\"\n\nA. The equilibrium price level increases while the equilibrium quantity of output decreases.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-9",
+   "score": 1.0,
+   "text": "In Ren\u00e9 Descartes' philosophy, particularly in his dualism, he distinguishes between the mind (*res cogitans*) and the body/physical matter (*res extensa*). For Descartes, the defining essence of physical matter is \"extension,\" meaning that physical things occupy space and have length, breadth, and depth.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-10",
+   "score": 1.0,
+   "text": "The passage describes a singular, all-encompassing entity called Brahman that \"enfolds the whole universe.\" The speaker mentions that they will \"come\" to this entity \"when I go beyond this life,\" which directly implies a transition from the current life to a different state or existence following death. This indicates a belief in an afterlife or a soul's journey beyond physical existence.\n\nA is incorrect because the text emphasizes faith and the nature of the Spirit rather than specific ritual completion.\nC is incorrect because the text focuses on the relationship between the individual spirit and Brahman rather than earning favor through speech/actions.\nD is incorrect because the text describes a singular, all-encompassing Brahman, which is characteristic of monism or monotheism rather than polytheism.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-11",
+   "score": 1.0,
+   "text": "In the story 'Jack and the Beanstalk', Jack trades his cow for the magic beans.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-12",
+   "score": 0.0,
+   "text": "Malware, short for \"malicious software,\" is a broad term that encompasses any software specifically designed to disrupt, damage, or gain unauthorized access to a computer system. This includes viruses, worms, Trojan horses, spyware, ransomware, and various other tools used by hackers. While the options provided are all related to malware, the term itself is a category that includes all of them. However, in the context of a multiple-choice question where one must select the most encompassing definition or a representative example, \"A virus or worm\" (A) and \"A Trojan horse\" (B) are types of malware, and \"A hacker tool\" (C) describes its purpose. \n\nIn most academic contexts, malware is defined as the category containing A and B. Since the question asks \"What is malware\" and provides specific types, it is often looking for the most common examples or the category itself. However, if this is a single-choice question where you must pick the most accurate description of what malware *is*, it is a type of software used for malicious purposes.\n\nGiven the options provided, all of them describe aspects of malware, but \"A\" and \"B\" are specific types. If the question implies \"Which of these are examples of malware,\" then A, B, and C are all valid. If the question is looking for the most common definition, it is often categorized by its types.\n\nHowever, looking at standard computer science definitions, malware is the umbrella term. If you must choose the most representative answer:\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-13",
+   "score": 0.0,
+   "text": "To find the number of trailing zeros in $k!$, we use Legendre's Formula to count the number of times the prime factor 5 divides $k!$ (since there are always more factors of 2 than 5). The number of trailing zeros $Z(k)$ is given by:\n$$Z(k) = \\sum_{i=1}^{\\infty} \\lfloor \\frac{k}{5^i} \\rfloor = \\lfloor \\frac{k}{5} \\rfloor + \\lfloor \\frac{k}{25} \\rfloor + \\lfloor \\frac{k}{125} \\rfloor + \\dots$$\n\nWe want to find $k$ such that $Z(k) = 99$.\nFirst, we estimate $k$. Since $Z(k) \\approx \\frac{k}{5} + \\frac{k}{25} + \\dots = \\frac{k}{5(1 - 1/5)} = \\frac{k}{4}$, we have $k \\approx 4 \\times 99 = 396$.\n\nLet's test $k = 400$:\n$Z(400) = \\lfloor \\frac{400}{5} \\rfloor + \\lfloor \\frac{400}{25} \\rfloor + \\lfloor \\frac{400}{125} \\rfloor = 80 + 16 + 3 = 99$.\n\nSince $Z(400) = 99$, we check the values around it. The number of trailing zeros only changes at multiples of 5.\n- For $k=400, 401, 402, 403, 404$, the value of $Z(k)$ remains the same because no new factor of 5 is introduced.\n- For $k=405$, $Z(405) = \\lfloor \\frac{405}{5} \\rfloor + \\dots = 81 + 16 + 3 = 100$.\n\nThus, the integers $k$ that satisfy $Z(k) = 99$ are $\\{400, 401, 402, 403, 404\\}$.\nThere are exactly 5 such integers.\n\nWait, let's double check"
+  },
+  {
+   "id": "mmlu-14",
+   "score": 0.0,
+   "text": "To determine the correct answer, we must look at the content of Alastair Norcross's essay, \"Puppies, Pigs, and People.\"\n\nIn the essay, Norcross uses the thought experiment of Fred (who tortures puppies for pleasure) to challenge the idea that consuming factory-farmed meat is morally excusable. He addresses several potential counter-arguments/differences:\n\n*   **Regarding A:** Norcross acknowledges that the animals involved are different (puppies vs. livestock), but he argues that the capacity for suffering is what matters, not the species.\n*   **Regarding B:** Norcross explicitly discusses the distinction between \"pleasure\" and \"by-product.\" He notes that Fred's suffering is a direct means to his pleasure, whereas in factory farming, the suffering is a side effect of a system designed for profit. He argues this distinction does not change the moral wrongness.\n*   **Regarding C:** Norcross addresses the \"agency\" or \"prevention\" argument. He notes that while a meat-eater might feel they cannot personally prevent the suffering of a specific animal, they can certainly change their consumption habits to avoid supporting the system. He argues that the ability to prevent suffering is a relevant moral factor that meat-eaters still possess.\n\nSince Norcross discusses the points raised in A, B, and C to refute them, none of these are \"undiscussed\" differences. However, looking closely at the options provided:\n\nOption **C** is actually a point Norcross *does* address (the idea that meat-eaters are not directly responsible for the specific suffering of an animal), but he argues that they are responsible for the system. Option **B** is a central part of his discussion regarding the \"necessity\" of suffering. Option **A** is the most basic distinction he acknowledges.\n\nWait\u2014re-evaluating the prompt: The question asks which difference he **does not** discuss. In his text, Norcross addresses the species difference (A), the necessity/by-product difference (B), and the agency/prevention difference (C). \n\nHowever, in many academic interpretations of this specific question (often found in philosophy curricula), the distinction in **C** is often framed as a point he *does* address (the \"I didn't do it/I couldn't stop it\" defense). \n\nIf we look at the options again, all three are actually themes he engages with. But if"
+  },
+  {
+   "id": "mmlu-15",
+   "score": 1.0,
+   "text": "To determine the correct order, we look at the anatomical structures of the anterior neck from superior (top) to inferior (bottom):\n\n1.  **Hyoid bone:** Located high in the neck, just below the mandible (chin).\n2.  **Thyroid cartilage:** Located below the hyoid; it forms the \"Adam's apple.\"\n3.  **Cricoid cartilage:** Located below the thyroid cartilage and above the sternal notch.\n\nFollowing the path from the chin down to the sternal notch, the sequence is: Hyoid bone $\\rightarrow$ Thyroid cartilage $\\rightarrow$ Cricoid cartilage.\n\nComparing this to the options:\nA. hyoid, cricoid, thyroid (Incorrect order)\nB. thyroid, cricoid, hyoid (Incorrect order)\nC. hyoid, thyroid, cricoid (Correct order)\nD. thyroid, hyoid, cricoid (Incorrect order)\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-16",
+   "score": 1.0,
+   "text": "According to Elisabeth K\u00fcbler-Ross's model of the five stages of grief, the stages typically follow this order: denial, anger, bargaining, depression, and acceptance. The first stage a person encounters when faced with a terminal illness is denial.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-17",
+   "score": 1.0,
+   "text": "The view that moral considerations do not apply to war\u2014specifically the idea that morality is irrelevant to the conduct of war or that there is no such thing as a \"just\" war\u2014is most closely associated with the concept of moral nihilism (the rejection of all moral principles). \n\nIn the context of the options provided:\n- **Jus ad bellum** refers to the morality of going to war.\n- **Antiwar pacifism** is the moral stance that war is always wrong.\n- **Just war theory** is the framework that applies moral considerations to war.\n- **Moral nihilism** is the philosophical view that morality does not exist or does not apply.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-18",
+   "score": 1.0,
+   "text": "The correct statement is **A**.\n\n**Explanation:**\n*   **A is correct:** Animal proteins (meat, eggs, milk) are generally considered \"complete\" proteins with high bioavailability. Plant proteins often have lower digestibility due to the presence of anti-nutritional factors (like phytates or tannins) and lower concentrations of essential amino acids.\n*   **B is incorrect:** This is the opposite of the biological reality; meat protein is highly digestible.\n*   **C is incorrect:** While ileal digestibility is a highly accurate method for measuring nutrient absorption, it is not the *only* way. Digestibility can also be measured via total tract digestibility (using feces) or through blood amino acid profiles.\n*   **D is incorrect:** Faecal digestibility (total tract digestibility) is a common method, but it is not the only one. As mentioned above, ileal digestibility is a more precise method used to account for endogenous losses.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-19",
+   "score": 1.0,
+   "text": "During moderate to high-intensity exercise, the body relies more heavily on carbohydrate metabolism because it can produce ATP more rapidly than fat oxidation. While blood glucose (supplied by liver glycogen) is important, the primary and most immediate source of energy for the working muscles during these intensities is the glycogen stored directly within the muscle tissue itself. Muscle glycogen can be mobilized very quickly to meet the high ATP demand of contracting muscle fibers.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-20",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at how these regularization techniques handle coefficients:\n\n1.  **Ridge Regression ($L_2$ regularization):** Adds a penalty equal to the square of the magnitude of coefficients. This shrinks coefficients toward zero but never actually makes them exactly zero. Therefore, it retains all features and is not used for feature selection.\n2.  **Lasso Regression ($L_1$ regularization):** Adds a penalty equal to the absolute value of the magnitude of coefficients. Due to the geometry of the $L_1$ norm, it can force some coefficients to be exactly zero. This effectively removes those features from the model, making it a built-in method for **feature selection**.\n\nSince only Lasso performs feature selection by zeroing out coefficients, the correct choice is B.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-21",
+   "score": 1.0,
+   "text": "To determine the type of tax system, we look at how the tax rate changes as income increases:\n\n1.  At **$20,000**, the tax rate is **20%**.\n2.  At **$25,000**, the tax rate is **24%**.\n\nSince the tax rate increases as the income increases, the tax system is classified as **progressive**.\n\n*   **Progressive:** Tax rate increases as income increases.\n*   **Regressive:** Tax rate decreases as income increases.\n*   **Proportional:** Tax rate remains constant regardless of income.\n\nIn this scenario, the rate rises from 20% to 24%, which fits the definition of a progressive tax.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-22",
+   "score": 1.0,
+   "text": "Normal adult hemoglobin (Hb A) is a tetramer composed of two alpha ($\\alpha$) globin chains and two beta ($\\beta$) globin chains.\n\nA. two $\\alpha$ and two $\\beta$ chains (Hb A)\nB. two $\\alpha$ and two $\\gamma$ chains (Hb A2 contains one $\\delta$ and one $\\alpha$, but this is not a standard major hemoglobin)\nC. two $\\alpha$ and two $\\delta$ chains (Hb A2 consists of two $\\alpha$, one $\\delta$, and one $\\beta$)\nD. four $\\gamma$ chains (Hb G is a variant)\n\nThe correct composition for Hb A is two $\\alpha$ and two $\\beta$ chains.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-23",
+   "score": 1.0,
+   "text": "In Judith Jarvis Thomson's \"A Defense of Abortion,\" she uses various versions of the violinist thought experiment to distinguish between moral obligation and rights. \n\nIn the specific variation where the violinist only needs your kidneys for a very short period (one hour), Thomson argues that while it might be considered a \"good\" or a moral duty to let the person live, this does not grant them a *right* to your body. She uses this to demonstrate that one can have a moral obligation to do something without the other person having a right to that action. This distinction is central to her argument that the right to life does not include the right to use another person's body against their will.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-24",
+   "score": 1.0,
+   "text": "Transcriptional activator proteins are regulatory proteins that bind to specific DNA sequences (such as enhancers or promoter-proximal elements) to facilitate the assembly of the transcription initiation complex. By doing so, they help recruit or assist RNA polymerase in starting the transcription of a gene into mRNA.\n\n*   **A is correct:** They bind near genes to allow RNA polymerase to transcribe them.\n*   **B is incorrect:** Ribosomes are involved in translation, not transcription.\n*   **C is incorrect:** This describes viral proteins or specific bacterial responses, not the general definition of transcriptional activators.\n*   **D is incorrect:** Transfer RNAs are involved in translation, whereas activators function during transcription.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-25",
+   "score": 1.0,
+   "text": "To determine whether the purchaser will prevail, we must look at the fundamental principles of contract law regarding real estate.\n\n1.  **The Statute of Frauds:** Real estate transactions are governed by the Statute of Frauds, which requires that any contract for the sale of land must be in writing and signed by the party against whom enforcement is sought to be legally binding. While the purchaser provided a written offer, the seller never signed it. An unsigned offer is merely an offer, not a contract.\n2.  **Offer and Acceptance:** For a contract to exist, there must be an offer and an acceptance. In this scenario, the purchaser made an offer (the written form and the check), but the seller had not yet accepted it. Until the seller signs the document or communicates acceptance, the seller retains the right to withdraw the offer or entertain other offers.\n3.  **Meeting of the Minds:** While there was an oral discussion, an oral agreement for the sale of real estate is generally unenforceable under the Statute of Frauds. The \"meeting of the minds\" must be evidenced by a signed writing.\n4.  **Specific Performance:** Specific performance is a remedy used to enforce a valid contract. Since no valid contract was formed (due to lack of written acceptance by the seller), there is no contract to perform.\n\n**Analysis of choices:**\n*   **A and C** are incorrect because they rely on the oral agreement or the existence of a \"meeting of the minds\" to bypass the requirement for a signed written agreement.\n*   **D** is incorrect because specific performance *is* a common remedy in residential real estate transactions once a valid contract exists.\n*   **B** is correct because it identifies the central legal issue: the seller had not yet accepted the offer, and therefore maintained the legal right to reject it or sell to another party.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-26",
+   "score": 1.0,
+   "text": "To find the correct equation, let's break down the problem:\n\n1.  **Identify the total number of people:** Elizabeth is dividing the stickers among herself and two friends. That is $1 + 2 = 3$ people.\n2.  **Identify the operation:** \"Divides... equally\" indicates division.\n3.  **Set up the expression:** The total number of stickers ($s$) divided by the number of people ($3$) equals the number of stickers each person receives ($4$).\n\nThis gives us the equation:\n$s / 3 = 4$\n\nLooking at the choices:\nA. $s + 3 = 4$ (Incorrect)\nB. $s - 3 = 4$ (Incorrect)\nC. $s / 3 = 4$ (Correct)\nD. $3s = 4$ (Incorrect)\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-27",
+   "score": 0.0,
+   "text": "The practical problems associated with applying coercive diplomacy in the West include the difficulty of countering asymmetric/irregular military strategies (A), the challenge of verification where technological advances make it easier to detect non-compliance after temporary concessions (B), and the inherent difficulty in maintaining credible, unified coalitions (C).\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-28",
+   "score": 1.0,
+   "text": "To determine the legal consequence, we must analyze the principles of contract formation, specifically regarding **mistake** and **objective theory of contracts**.\n\n1.  **The Objective Theory of Contracts:** Under the objective theory, a contract is formed based on how a reasonable person would interpret the outward manifestations of intent (the words and actions), not the secret, unexpressed intentions of a party. The buyer sent a written offer stating \"$2,200 an acre.\" To a reasonable person, this is a clear offer.\n2.  **Mistake:** For a contract to be voidable due to a mistake, there generally must be a **mutual mistake** (both parties are mistaken about a material fact) or a **unilateral mistake** that the other party knew or should have known about. \n3.  **Analysis of the Buyer's Mistake:** The buyer made a unilateral mistake (a clerical error). In such cases, the mistake does not prevent contract formation unless the other party (the owner) knew of the mistake or if the mistake was so obvious that the buyer should have known the owner would have rejected the offer had they known the truth.\n4.  **The \"Reasonableness\" Factor:** The prompt states that comparable land was selling between $2,000 and $2,400. Because $2,200 falls squarely within the market range, the offer is not \"absurd\" or an obvious error that would put the owner on notice that the buyer made a mistake. Therefore, the owner was entitled to rely on the written offer.\n5.  **Conclusion:** Since the owner accepted the offer as written, and the price was within a reasonable market range, a valid contract was formed at the price stated in the offer ($2,200).\n\n*   **A is incorrect** because the parties did not attach different meanings to the *term* itself; the buyer had a different *intent*, but the term \"$2,200\" has a clear objective meaning.\n*   **B is incorrect** because this was a unilateral mistake, not a mutual one, and it was not an obvious error that would allow for rescission.\n*   **C is incorrect** because contract law follows the objective manifestation of intent, not the subjective intent of the mistaken party.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-29",
+   "score": 1.0,
+   "text": "The correct choice is **A**.\n\nWhen psychologists recognize that traditional healers hold a significant and respected place in a community, the most culturally competent approach is to acknowledge that reality. This involves clarifying the psychologist's role and establishing how their services can complement, rather than compete with or dismiss, the client's existing belief systems and traditional practices. This helps build trust and ensures that the therapeutic relationship is respectful of the client's cultural identity.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-30",
+   "score": 0.0,
+   "text": "To find the time $t$ required for the polarization $p(t)$ to reach twice the thermal equilibrium polarization $p_{eq}$, we use the given relaxation equation:\n$p(t) = [p(0) - p_{eq}]e^{-t/T_1} + p_{eq}$\n\n**1. Determine the thermal equilibrium polarization ($p_{eq}$):**\nThe polarization of a nucleus at thermal equilibrium is given by the Boltzmann distribution:\n$p_{eq} \\approx \\frac{\\gamma \\hbar B_0}{k_B T}$\nHowever, we can express $p_{eq}$ relative to the maximum possible polarization. For a nucleus, the maximum polarization $p_{max}$ occurs when all spins are in the lower state. In this problem, we are told the initial polarization $p(0) = 1$ (100% polarized).\nThe ratio of $p_{eq}$ to the maximum polarization is approximately:\n$\\frac{p_{eq}}{p_{max}} \\approx \\frac{\\Delta E}{E_{max}} \\approx \\frac{\\gamma \\hbar B_0}{k_B T}$\n\nFor $^{13}\\text{C}$ at 600 MHz:\n$\\nu = 600 \\text{ MHz} \\implies B_0 \\approx 14.1 \\text{ T}$\n$\\gamma$ for $^{13}\\text{C} \\approx 6728 \\text{ rad s}^{-1}\\text{T}^{-1}$\n$p_{eq} \\approx \\frac{h \\nu \\gamma}{k_B T} \\cdot \\frac{1}{2\\pi} \\text{ (simplified approach)}$\nActually, a more direct way to find $p_{eq}$ is using the formula $p_{eq} = \\frac{\\gamma \\hbar B_0}{2 k_B T}$.\nAt 298 K for $^{13}\\text{C}$ at 600 MHz:\n$p_{eq} \\approx \\frac{\\hbar \\gamma B_0}{2 k_B T} = \\frac{h \\nu}{2 k_B T} \\cdot \\frac{\\gamma}{2\\pi \\nu} \\cdot 2\\pi \\dots$ \nActually, $p_{eq} = \\frac{\\gamma \\hbar B_0}{2 k_B T"
+  },
+  {
+   "id": "mmlu-31",
+   "score": 1.0,
+   "text": "To determine which pair can be used to make a buffer solution, we must recall the definition of a buffer: a buffer solution consists of a **weak acid and its conjugate base** OR a **weak base and its conjugate acid**.\n\nLet's evaluate each option:\n\n*   **A. NaCl and HCl:** HCl is a strong acid. A buffer cannot be made using a strong acid because its conjugate base ($Cl^-$) is too weak to react with $H^+$ to maintain pH.\n*   **B. $\\text{HC}_2\\text{H}_3\\text{O}_2$ and $\\text{KC}_2\\text{H}_3\\text{O}_2$:** $\\text{HC}_2\\text{H}_3\\text{O}_2$ (acetic acid) is a **weak acid**. $\\text{KC}_2\\text{H}_3\\text{O}_2$ (potassium acetate) provides the acetate ion ($\\text{C}_2\\text{H}_3\\text{O}_2^-$), which is the **conjugate base** of acetic acid. This pair satisfies the requirements for a buffer.\n*   **C. NaBr and KBr:** Both are salts of a strong acid (HBr) and a strong base (NaOH/KOH). Neither can act as a buffer component because they do not contain a weak acid or base.\n*   **D. $\\text{HIO}_3$ and $\\text{KClO}_3$:** These are two different salts/acids (Iodic acid and Potassium chlorate). They are not a conjugate acid-base pair.\n\nTherefore, option B is the correct choice.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-32",
+   "score": 1.0,
+   "text": "To maximize utility, a consumer should allocate their budget such that the marginal utility per dollar spent is equal across all goods. The formula for this equilibrium is:\n\n$$\\frac{MU_X}{P_X} = \\frac{MU_Y}{P_Y}$$\n\nIn Carmen's case:\n*   The marginal utility of the last dollar spent on **X** is **5**.\n*   The marginal utility of the last dollar spent on **Y** is **10**.\n\nSince $10 > 5$, Carmen is receiving more satisfaction from every additional dollar spent on good Y than she is on good X. To increase her total utility, she should shift her spending away from the good providing less marginal utility per dollar (X) and toward the good providing more marginal utility per dollar (Y).\n\nBy buying more of good Y, the marginal utility of Y will eventually decrease (due to the law of diminishing marginal utility), and by buying less of good X, the marginal utility of X will increase, until the two values are equalized.\n\nTherefore, Carmen should buy more of good Y and less of good X.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-33",
+   "score": 1.0,
+   "text": "The three stages of attitude formation correspond to the ABC model of attitudes: **A**ffect (feeling), **B**ehaviour (acting), and **C**ognition (thinking/learning). The stage involving learning, beliefs, and thoughts is the cognitive component.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-34",
+   "score": 1.0,
+   "text": "The correct term for a Read-Only Memory that is programmed during the manufacturing process itself is **MROM** (Mask ROM). Unlike other types of ROM, MROM cannot be modified or reprogrammed after it has been manufactured because the data is physically hardwired into the chip's structure during production.\n\nA. MROM (Mask ROM) - Programmed during manufacturing.\nB. PROM (Programmable ROM) - Programmed by the user after manufacturing.\nC. EPROM (Erasable Programmable ROM) - Can be erased using UV light.\nD. EEPROM (Electrically Erasable Programmable ROM) - Can be erased electrically.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-35",
+   "score": 1.0,
+   "text": "To find the number of subatomic particles in an atom of $^{52}\\text{Cr}$, we follow these steps:\n\n1.  **Identify the Atomic Number ($Z$):** Chromium (Cr) is the 24th element in the periodic table. Therefore, its atomic number is **24**.\n2.  **Protons:** The number of protons is equal to the atomic number. So, there are **24 protons**.\n3.  **Electrons:** In a neutral atom, the number of electrons equals the number of protons. So, there are **24 electrons**.\n4.  **Neutrons:** The mass number ($A$) is given as 52. The number of neutrons is calculated by subtracting the atomic number from the mass number ($A - Z$).\n    $52 - 24 = \\mathbf{28 \\text{ neutrons}}$.\n\nMatching these values to the options:\n*   24 electrons\n*   24 protons\n*   28 neutrons\n\nThis corresponds to choice D.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-36",
+   "score": 0.0,
+   "text": "To determine the correct answer, we can follow the economic chain of causality:\n\n1.  **Demand for Currency:** When the real interest rate in a country rises, financial assets (such as bonds and savings accounts) denominated in that country's currency offer a higher rate of return relative to other countries. This attracts foreign much more investment. To invest in these assets, foreign investors must buy the local currency, which **increases** the demand for that currency.\n2.  **Value of Currency:** An increase in the demand for a currency, shifting the demand curve to the right, causes the price of that currency to rise. In foreign exchange terms, this means the currency **appreciates**.\n3.  **Net Exports:** As the currency appreciates, it becomes more expensive for foreigners to buy the country's goods and services (exports decrease), and it becomes cheaper for domestic residents to buy foreign goods and services (imports increase). Therefore, the net effect is that net exports **decrease**.\n\nMatching these steps to the options provided:\n*   Demand for currency: **Increases**\n*   Value of currency: **Appreciate**\n*   Net exports: **Decreases**\n\nLooking at the choices:\nA. Decreases / Appreciate / Decreases\nB. Decreases / Depreciate / Decreases\nC. Decreases / Depreciate / Increases\nD. Increases / Appreciate / Decreases (Note: There is a slight discrepancy in the provided options; however, based on standard economic theory, the sequence is Increase $\\rightarrow$ Appreciate $\\rightarrow$ Decrease. Looking closely at the provided options, if we assume a typo in the prompt's options or a specific context, we look for the most logical flow. However, if we look at the provided list, Option D is the only one that correctly identifies the increase in demand and appreciation, even though the prompt's text for D ends in \"Increases\". Let's re-evaluate the standard logic: Increase Demand $\\rightarrow$ Appreciate $\\rightarrow$ Decrease Net Exports. \n\nWait, looking at the options provided in the prompt again:\nA. Decreases / Appreciate / Decreases\nB. Decreases / Depreciate / Decreases\nC. Decreases / Depreciate / Increases\nD. Increases / Appreciate / Increases\n\nActually, none of the options perfectly match the standard economic result (Increase $\\rightarrow$ Appreciate $\\rightarrow$ Decrease). However, in many textbook versions of this question,"
+  },
+  {
+   "id": "mmlu-37",
+   "score": 1.0,
+   "text": "To find the number of units to be produced in the first quarter, we use the following production budget formula:\n\n**Units to be Produced = Budgeted Sales + Desired Ending Inventory - Beginning Inventory**\n\n**1. Calculate Desired Ending Inventory for the First Quarter:**\nThe problem states that the ending inventory of each quarter must equal 30% of the next quarter's budgeted sales.\n*   Second Quarter Sales = 40,000 units\n*   First Quarter Ending Inventory = 40,000 units \u00d7 30% = **12,000 units**\n\n**2. Identify Beginning Inventory for the First Quarter:**\n*   The problem states the inventory at the beginning of the year was **9,000 units**.\n\n**3. Calculate Production for the First Quarter:**\n*   Budgeted Sales (First Quarter) = 30,000 units\n*   Add: Desired Ending Inventory = 12,000 units\n*   Total units needed = 42,000 units\n*   Subtract: Beginning Inventory = 9,000 units\n*   **Units to be produced = 33,000 units**\n\nComparing this to the given options:\nA. 36000\nB. 33000\nC. 24000\nD. 12000\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-38",
+   "score": 1.0,
+   "text": "The nonprofit group is using a technique where a small, unsolicited gift is provided to create a sense of obligation or to increase the likelihood of a positive response. In social psychology, this falls under **compliance strategies**, specifically the principle of **reciprocity** (the feeling that one should repay what another has provided).\n\nA. **Self-fulfilling prophecy** refers to a prediction that causes itself to become true due to the believer's behavior.\nB. **Stable attribution** refers to the tendency to attribute behavior to consistent, unchanging traits.\nC. **Compliance strategy** refers to techniques used to get people to agree to a request.\nD. **Fundamental attribution error** is the tendency to overestimate personality traits and underestimate situational factors when judging others' behavior.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-39",
+   "score": 1.0,
+   "text": "The correct choice is **A**.\n\nIn human resources and organizational management, a common trade-off for the flexibility provided by temporary workers is that they may lack the long-term institutional knowledge, specialized experience, or organizational commitment that permanent employees possess. Options B, C, and D are generally incorrect as they describe legal requirements or policies that do not universally apply to temporary employment.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-40",
+   "score": 1.0,
+   "text": "To round 836 to the nearest ten, look at the digit in the ones place:\n\n1. The number is **836**.\n2. The digit in the ones place is **6**.\n3. According to rounding rules, if the digit is 5 or greater, you round up. Since 6 is greater than 5, we increase the tens digit by 1.\n4. The tens digit changes from 3 to 4, and the ones digit becomes 0.\n\nThis gives us **840**.\n\nComparing this to the choices:\nA. 800\nB. 830\nC. 840\nD. 870\n\nThe correct choice is C.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-41",
+   "score": 1.0,
+   "text": "In Marx's theory, the **mode of production** consists of two main components: the *productive forces* (the means of production, such as tools, technology, and human labor) and the *relations of production* (the social relationships, such as property ownership and class structures, that govern how production is organized). Therefore, it refers to the specific way a society organizes its technical and human resources to produce goods.\n\nA is incorrect because it describes a specific process rather than the entire social system.\nB is incorrect because it refers to a metric of efficiency rather than a social structure.\nD is incorrect because the mode of production constitutes the *base*, not the superstructure.\n\nC is the correct choice as it encompasses both the technical means and the human/social organization.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-42",
+   "score": 1.0,
+   "text": "The fibula is one of the two bones in the lower leg (the other being the tibia). It runs parallel to the tibia and extends from the knee to the ankle.\n\n*   **A. Heel:** This involves the calcaneus bone.\n*   **B. Lower leg:** This is the correct anatomical location of the fibula.\n*   **C. Toes:** These involve the phalanges.\n*   **D. Thigh:** This involves the femur.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-43",
+   "score": 1.0,
+   "text": "To write the fraction $\\frac{60}{72}$ in simplest form, follow these steps:\n\n1.  **Find the Greatest Common Divisor (GCD):** We need to find the largest number that divides both 60 and 72.\n    *   Factors of 60: 1, 2, 3, 4, 5, 6, 10, **12**, 15, 20, 30, 60\n    *   Factors of 72: 1, 2, 3, 4, 6, 8, 9, **12**, 18, 24, 36, 72\n    *   The GCD is 12.\n\n2.  **Divide both the numerator and the denominator by the GCD:**\n    *   $60 \\div 12 = 5$\n    *   $72 \\div 12 = 6$\n\n3.  **Result:** The simplest form is $\\frac{5}{6}$.\n\nComparing this to the given choices:\nA. $\\frac{4}{6}$ (Not simplest form)\nB. $\\frac{10}{12}$ (Not simplest form)\nC. $\\frac{15}{17}$ (Incorrect value)\nD. $\\frac{5}{6}$ (Correct)\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-44",
+   "score": 1.0,
+   "text": "In his arguments regarding the abolition of the death penalty, particularly in the context of moral signaling and the value of human life, Nathanson emphasizes that the state's refusal to kill sends a powerful message about the inherent worth of individuals. By choosing not to execute, the state communicates a fundamental respect for the sanctity and dignity of human life, regardless of the crimes committed.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-45",
+   "score": 1.0,
+   "text": "The correct answer is **A**.\n\n**Reasoning:**\nThe distinction between the Copenhagen School and Critical Security Studies (CSS) lies primarily in their epistemological foundations. \n\n*   **The Copenhagen School** (represented by Buzan, W\u00e6ver, and de Wilde) utilizes a **positivist/objectivist** epistemology. They argue that while security is a social construct, it can be studied through objective, empirical frameworks (such as Securitization Theory) that identify how actors move issues from the political to the security realm.\n*   **Critical Security Studies** (often associated with the Welsh School or post-structuralist thinkers) is rooted in **post-structuralism and constructivism**. It rejects the idea that security can be studied as an objective, external reality, instead focusing on how power, discourse, and identity shape the very concept of security.\n\nOption B is incorrect because it mischaracterizes the Copenhagen School's relationship with social construction; they do not \"disregard\" it, but they approach it through a different epistemological lens. Option C reverses the definitions of the two schools. Option D is factually incorrect regarding the scope of both theories.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-46",
+   "score": 1.0,
+   "text": "To determine the correct answer, we evaluate each scenario based on ordinary moral standards in the US:\n\n**Scenario 1:** \"I did not laugh at the midget walking by me humming the willy wanka song.\"\nIn this scenario, the character is describing an *omission* (not laughing). Not laughing at someone is generally considered morally neutral or even respectful, rather than a moral wrong. Therefore, this is **Not wrong**.\n\n**Scenario 2:** \"I grabbed the grinning little boy, a stranger, while at the Mall.\"\nIn this scenario, the character describes a physical action involving a stranger (a child). Grabbing a stranger, especially a child, is a violation of personal space and physical autonomy, and could be perceived as predatory or threatening. Under ordinary moral and social standards, this is considered **Wrong**.\n\nComparing these to the options:\nScenario 1: Not wrong\nScenario 2: Wrong\n\nThis matches choice C.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-47",
+   "score": 1.0,
+   "text": "Zinc finger proteins and helix-turn-helix proteins are structural motifs characterized by their ability to bind to specific sequences of DNA. These motifs are widely used by transcription factors to regulate gene expression by binding to promoter or enhancer regions.\n\nA. types of DNA-binding proteins (Correct)\nB. involved in the control of translation (Incorrect; they primarily control transcription)\nC. components of ribosomes (Incorrect; ribosomes are made of rRNA and proteins)\nD. part of the hemoglobin in blood cells (Incorrect; hemoglobin is composed of globin proteins and heme groups)\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-48",
+   "score": 1.0,
+   "text": "The argument for American unilateralism is typically supported by several key theoretical and practical pillars:\n\n*   **Benevolent hegemony:** The idea that the United States can act as a global leader to maintain stability and promote democratic values without needing constant consensus from international bodies.\n*   **Ineffectiveness of multilateralism:** The belief that international organizations (like the UN) are often slow, bureaucratic, or paralyzed by competing interests, making unilateral action more efficient for achieving national interests.\n*   **American power:** The practical reality that the United States possesses unique military, economic, and cultural capabilities that allow it to act independently to shape global events.\n\nSince all these points serve as justifications for a unilateral approach, the correct choice is all of them.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-49",
+   "score": 1.0,
+   "text": "The term refers to the **Kouroi** (singular: *kouros*), which are free-standing statues of nude male youths from the Archaic period. These statues are characterized by a rigid, frontal stance, often with one foot forward and clenched fists, a style heavily influenced by Egyptian sculptural traditions.\n\nA. Caryatids are female figures used as architectural columns.\nB. Telamones are male figures used as architectural supports (the male equivalent of caryatids).\nC. Discoboloi refers to \"discus throwers,\" a subject matter rather than a specific stylistic category of rigid frontal statues.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-50",
+   "score": 1.0,
+   "text": "To determine the correct amount the driver of the car can recover from the driver of the truck, we must look at the principles of contribution in a comparative negligence jurisdiction.\n\n1.  **The Total Liability:** The total damages awarded were $100,000.\n2.  **The Apportionment of Fault:**\n    *   Motorcyclist: 55% ($55,000)\n    *   Driver of the Car: 25% ($25,000)\n    *   Driver of the Truck: 20% ($20,000)\n3.  **The Payment Made:** The driver of the car paid $45,000 to the motorcyclist. However, under the jury's findings, the car driver was only legally responsible for 25% of the damages ($25,000). In many jurisdictions, a defendant who pays more than their share of the fault can seek contribution from other liable tortfeasors for their proportional share.\n4.  **Calculating Contribution:** Contribution is intended to distribute the loss among the liable parties according to their degree of fault. The driver of the car has paid a total of $45,000. The driver of the truck was found to be 20% at fault for the total damages ($100,000).\n5.  **The Calculation:** The driver of the truck's share of the total damages is $20,000 (20% of $100,000). Since the driver of the car has already paid the plaintiff, the driver of the car is entitled to seek contribution from the driver of the truck for the truck driver's specific share of the liability.\n\nWhile the car driver paid $45,000 (which exceeds his $25,000 liability), the amount he can recover from the truck driver is limited to the truck driver's assigned share of the total damages.\n\nThe truck driver's share is 20% of $100,000 = $20,000.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-51",
+   "score": 1.0,
+   "text": "The correct answer is **D**.\n\n**Reasoning:**\nThe central legal issue here is whether the developer's actions constitute a legal wrong (such as a nuisance or a trespass) against the landowner. In modern property law, the right to build on one's land\u2014especially when all governmental approvals and zoning ordinances have been met\u2014is a protected right. \n\nA \"nuisance\" generally requires a substantial and unreasonable interference with the use and enjoyment of land. However, in many jurisdictions, the mere blocking of light or air (the \"right to light\") is not a recognized cause of action unless there is a specific easement or local ordinance protecting it. Since the developer complied with all governmental approvals and zoning laws, the shadow cast by the building is considered a natural consequence of the development of the land rather than a legal nuisance. Because the developer has a legal right to build to the height permitted by law, the landowner has no cause of action for the economic loss resulting from the shadow.\n\n*   **A is incorrect** because a mandatory injunction is an extraordinary remedy that would only be granted if a legal wrong had been committed.\n*   **B and C are incorrect** because they assume the landowner is entitled to damages, which requires a showing of legal liability that is not present here.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-52",
+   "score": 1.0,
+   "text": "The correct answer is **C**.\n\nIn tort law, when two or more people act in concert to commit a wrongful act (such as participating in an illegal drag race), they are held jointly and severally liable for any resulting harm caused by that shared activity. Even though the man did not personally cause the tire to blow or the car to crash, he was a participant in the dangerous, illegal activity that created the risk of harm. Because the man and the woman were acting in concert in a dangerous activity, the man is liable for the injuries caused during that activity.\n\nA is incorrect because acting in concert creates liability even if one party didn't personally perform the final act. B is incorrect because \"careful\" driving does not negate liability for participating in an illegal race. D is incorrect because, while true, it is not the legal basis for the man's liability to the pedestrian; the basis is the concerted action in a dangerous activity.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-53",
+   "score": 1.0,
+   "text": "The term used to describe a house where various functions and devices can be controlled centrally through integrated technology is a smarthouse.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-54",
+   "score": 1.0,
+   "text": "To determine the best argument, we must look at the Federal Rules of Civil Procedure regarding jury instructions and the preservation of errors.\n\n1.  **Preservation of Error:** Under Federal Rule of Civil Procedure 51, a party must file an objection to a jury instruction before the instructions are given to the jury to preserve the error for appeal. In this scenario, the attorney failed to object to the instruction the court actually gave.\n2.  **Evaluating the Options:**\n    *   **A is incorrect:** Most errors in a trial must be preserved through timely objection to be subject to review.\n    *   **B is incorrect:** Submitting a *proposed* instruction does not preserve the right to object to the *actual* instruction given by the court. The party must object to the specific instruction they believe is erroneous.\n    *   **D is incorrect:** The requirement for a formal objection to preserve an argument has not been eliminated; Rule 51 specifically mandates it.\n    *   **C is the strongest argument:** Because the attorney failed to object, the standard of review shifts. Under Rule 51(c)(2), if a party fails to object, the court may only grant a new trial if the error is a **\"plain error\"** that affects a substantial right. While difficult to prove, this is the only legal avenue left available to a party who failed to make a timely objection.\n\nTherefore, the only way the court can grant a new trial when an objection was not made is if the error was a plain error affecting substantial rights.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-55",
+   "score": 0.0,
+   "text": "To determine what happens to the image, we use the lens formula:\n$$\\frac{1}{f} = \\frac{1}{d_o} + \\frac{1}{d_i}$$\nwhere $f = 0.2\\text{ m}$ is the focal length, $d_o$ is the object distance (distance from the lens to the coin), and $d_i$ is the image distance.\n\nThe object distance $d_o$ changes from $0.3\\text{ m}$ to $0.1\\text{ m}$.\n\n**1. When $d_o = 0.3\\text{ m}$:**\nSince $d_o > f$ ($0.3 > 0.2$), the image is real, inverted, and located on the opposite side of the lens.\n$$\\frac{1}{0.2} = \\frac{1}{0.3} + \\frac{1}{d_i} \\implies 5 = 3.33 + \\frac{1}{d_i} \\implies \\frac{1}{d_i} = 1.67 \\implies d_i = 0.6\\text{ m}$$\nMagnification $M = -\\frac{d_i}{d_o} = -\\frac{0.6}{0.3} = -2$. (The image is twice the size of the coin and inverted).\n\n**2. As $d_o$ decreases towards $f$ ($0.2\\text{ m}$):**\nAs $d_o$ approaches $f$ from above, $d_i$ approaches infinity. The magnification $M = \\frac{d_i}{d_o} - 1$ (or more simply, the image size increases as the object moves toward the focal point).\n\n**3. When $d_o = f = 0.2\\text{ m}$:**\nThe image is formed at infinity. This is the point where the image \"flips\" from being real to being virtual.\n\n**4. When $d_o = 0.1\\text{ m}$:**\nSince $d_o < f$ ($0.1 < 0.2$), the image is now virtual, upright, and on the same side of the lens as the object.\n$$\\frac{1}{0.2} = \\frac{1"
+  },
+  {
+   "id": "mmlu-56",
+   "score": 1.0,
+   "text": "The provided excerpts from the Navigation Acts of 1651 describe a system of **mercantilism**. This policy aimed to restrict trade to English-owned ships and strictly control the flow of goods from colonies and foreign nations to ensure that the mother country (England) maintained a favorable balance of trade and a monopoly on colonial commerce.\n\n*   **A. Thomas Malthus** was a demographer known for his theories on population growth and resource scarcity.\n*   **B. Josiah Child** was a contemporary of these acts and a strong advocate for mercantilist policies and the expansion of English maritime power.\n*   **C. Adam Smith** was the father of classical economics. In his seminal work, *The Wealth of Nations* (1776), he launched a profound critique of mercantilism. He argued against trade restrictions, monopolies, and the Navigation Acts, advocating instead for **free trade** and the \"invisible hand\" of the market. Smith's theories directly conflict with the protectionist, restrictive trade policies described in the text.\n*   **D. Jean-Baptiste Colbert** was a French minister who was a practitioner of mercantilism (Colbertism), meaning his views aligned with the spirit of the Navigation Acts rather than conflicting with them.\n\nTherefore, the Navigation Acts conflict with the economic theories of Adam Smith.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-57",
+   "score": 1.0,
+   "text": "The process described refers to the stage in the innovation-decision process where an individual decides to make full use of a new idea, innovation, or proposition.\n\nA. **Decision** is the stage where the individual chooses to accept or reject.\nB. **Adoption** is the actual process of accepting and integrating the new proposition into one's behavior or practice.\nC. **Acquisition** generally refers to gaining possession of something.\nD. **Awareness** is merely the first stage, where the individual becomes cognizant of the existence of the innovation.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-58",
+   "score": 1.0,
+   "text": "According to Maslow's Hierarchy of Needs, the highest level of the pyramid involves the desire for self-fulfillment and the realization of one's full potential. This level is known as self-actualization.\n\nA. Self-actualization (Correct)\nB. Physiological (Basic needs like food and water)\nC. Social (Belongingness and love)\nD. Esteem (Respect, status, and recognition)\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-59",
+   "score": 0.0,
+   "text": "To find the mole fraction of sodium hydroxide ($\\text{NaOH}$), we follow these steps:\n\n1.  **Assume a total mass of the solution:** Let's assume we have $100\\text{ g}$ of the solution.\n2.  **Determine the mass of each component:**\n    *   Since the weight percent of $\\text{NaOH}$ is $50\\%$, the mass of $\\text{NaOH}$ is $50\\text{ g}$.\n    *   The remaining mass is water ($\\text{H}_2\\text{O}$), which is $100\\text{ g} - 50\\text{ g} = 50\\text{ g}$.\n3.  **Calculate the number of moles of each component:**\n    *   Molar mass of $\\text{NaOH} \\approx 22.99 (\\text{Na}) + 15.99 (\\text{O}) + 1.01 (\\text{H}) = 39.99\\text{ g/mol}$ (commonly rounded to $40\\text{ g/mol}$).\n    *   Moles of $\\text{NaOH} = \\frac{50\\text{ g}}{40\\text{ g/mol}} = 1.25\\text{ mol}$.\n    *   Molar mass of $\\text{H}_2\\text{O} \\approx 18.02\\text{ g/mol}$ (commonly rounded to $18\\text{ g/mol}$).\n    *   Moles of $\\text{H}_2\\text{O} = \\frac{50\\text{ g}}{18\\text{ g/mol}} \\approx 2.778\\text{ mol}$.\n4.  **Calculate the mole fraction of $\\text{NaOH}$ ($\\chi_{\\text{NaOH}}$):**\n    *   $\\chi_{\\text{NaOH}} = \\frac{\\text{moles of } \\text{NaOH}}{\\text{total moles}} = \\frac{1.25}{1.25 + 2.778}$\n    *   $\\chi_{\\text{NaOH}} = \\frac{1.25}{4.028} \\approx 0.3103$\n\nLooking at the provided options:\nA. 31.00% (This"
+  },
+  {
+   "id": "mmlu-60",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must analyze the legal standards applied to Equal Protection challenges under the Fourteenth Amendment.\n\n1.  **Standard of Review:** Classifications based on sex (gender) are subject to **intermediate scrutiny**. This means that for a gender-based classification to be constitutional, the government (or a private entity acting under the color of state law) must demonstrate that the classification is substantially related to an important government objective.\n2.  **State Action Doctrine:** The central issue here is whether the private company's actions are subject to the Equal Protection Clause. While the company is private, it is operating on land leased from the county, under a lease approved by the county, and is performing a public function (providing recreational facilities on public land). In many legal scenarios involving government-leased land and public-use facilities, the entity may be considered a \"state actor.\"\n3.  **Evaluating the Options:**\n    *   **A is incorrect:** Classifications based on sex *have* been held to violate the Equal Protection Clause (e.g., *United States v. Virginia*).\n    *   **B is incorrect:** This describes \"strict scrutiny\" (the \"compelling interest\" test), which is applied to suspect classifications like race or national origin, not gender. Gender requires \"intermediate scrutiny.\"\n    *   **C is incorrect:** The availability of other facilities does not excuse a discriminatory policy by a specific entity acting under state authority.\n    *   **D is correct:** This reflects the standard of **intermediate scrutiny**. Under this test, the plaintiff will prevail unless the defendant can show that the gender-based exclusion is substantially related to an important government objective (an \"important basis\").\n\nThe plaintiff's claim that the policy denies her equal protection rights will be evaluated under intermediate scrutiny, requiring the company to provide an important justification for the exclusion.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-61",
+   "score": 1.0,
+   "text": "To determine the most rapid method of ATP resynthesis, we look at the hierarchy of energy systems:\n\n1.  **Phosphagen System (ATP-PCr system):** This involves the breakdown of **phosphocreatine (PCr)** to rapidly donate a phosphate group to ADP. It is the fastest method because it involves a single chemical reaction and occurs directly in the cytosol, providing immediate energy for high-intensity, short-duration bursts (e.g., a 100m sprint).\n2.  **Glycolysis:** This is the second fastest method. It involves a series of enzymatic steps to break down glucose/glycogen. While fast, it is slower than the phosphagen system.\n3.  **Tricarboxylic acid (TCA) cycle / Oxidative Phosphorylation:** This is the slowest method because it requires oxygen and multiple complex steps within the mitochondria to produce large amounts of ATP.\n\nSince the question asks for the *most rapid* method, phosphocreatine breakdown is the correct choice.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-62",
+   "score": 1.0,
+   "text": "The correct choice is **C**.\n\n**Explanation:**\n*   **A is incorrect:** While stress and psychological factors can exacerbate symptoms, IBS is considered a functional gastrointestinal disorder involving complex interactions between the gut and the brain, not a purely psychological problem.\n*   **B is incorrect:** A colonoscopy is not contraindicated; in fact, it is often recommended to rule out other conditions (like inflammatory bowel disease or malignancy) if \"red flag\" symptoms are present.\n*   **C is correct:** IBS is categorized into subtypes: IBS-C (constipation-predominant), IBS-D (diarrhea-predominant), and IBS-M (mixed). Therefore, it is frequently associated with constipation.\n*   **D is incorrect:** While some patients find relief with a low-FODMAP or gluten-free diet, it is not a universal cure and does not \"always\" resolve the condition.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-63",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate the options provided:\n\n*   **A. DHEA (Dehydroepiandrosterone):** This is a precursor hormone that naturally declines with age. It has been extensively studied and claimed in various longevity circles to help combat senescence and maintain hormonal balance.\n*   **B. Human growth hormone (HGH):** This hormone is frequently associated with anti-aging treatments and has been claimed to promote tissue repair and combat the effects of aging.\n*   **C. Melatonin:** While primarily known as a sleep hormone, it is a potent antioxidant. Many studies claim it helps protect cells from oxidative stress, thereby warding off senescence.\n*   **D. Viasterol:** This is not a hormone. It is a phytosterol (a plant-derived compound) often found in certain plant extracts. While it may have health benefits, it does not fall under the category of a human hormone.\n\nSince the question asks which of the listed *hormones* has not been claimed to ward off senescence, and Viasterol is not a hormone, it is the outlier in the context of the biological category provided.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-64",
+   "score": 1.0,
+   "text": "The correct source of most meteor showers is the debris left behind by comets. As a comet approaches the Sun, it releases dust and ice, creating a trail of particles along its orbital path. When Earth passes through this trail, these particles enter our atmosphere and burn up, creating a meteor shower.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-65",
+   "score": 1.0,
+   "text": "To determine the cost of one gradient descent update, we look at the mathematical operation being performed.\n\nA gradient descent update follows the formula:\n$$\\theta_{new} = \\theta_{old} - \\eta \\cdot g$$\n\nWhere:\n*   $\\theta$ is the parameter vector.\n*   $\\eta$ is the learning rate (a scalar).\n*   $g$ is the gradient vector.\n\nIn this context:\n*   $D$ typically represents the number of dimensions (the number of parameters in the vector $\\theta$ and $g$).\n*   $N$ typically represents the number of training examples.\n\nThe update step involves a scalar-vector multiplication ($\\eta \\cdot g$) and a vector-vector subtraction ($\\theta - \\text{result}$). Both of these operations are performed element-wise across the $D$ dimensions. Therefore, the computational complexity of this specific step is proportional to the number of parameters, $D$. \n\nWhile the *computation of the gradient* itself often takes $O(ND)$ or $O(ND^2)$ time, the question specifically asks for the cost of the **update** given that the gradient has already been computed and stored.\n\nThe complexity of the update step is $O(D)$.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-66",
+   "score": 1.0,
+   "text": "To determine the effect of the Federal Reserve's action on the money supply, we follow these steps:\n\n1.  **Identify the type of operation:** The Fed is **selling** government securities. When the Fed sells securities, it receives money from banks/the public, which removes liquidity from the banking system. This is a contractionary monetary policy, meaning the money supply will **decrease**.\n2.  **Calculate the Money Multiplier:** The formula for the money multiplier is $1 / \\text{Reserve Requirement}$.\n    $$\\text{Multiplier} = \\frac{1}{0.05} = 20$$\n3.  **Calculate the potential change in money supply:** The change in the money supply is calculated by multiplying the initial change in reserves by the money multiplier.\n    $$\\text{Change in Money Supply} = \\$10\\text{ million} \\times 20 = \\$200\\text{ million}$$\n4.  **Determine the direction:** Since the Fed is selling securities, the money supply decreases by $200 million.\n\nComparing this to the given options:\nA. increase by $200 million.\nB. decrease by $200 million.\nC. increase by $50 million.\nD. decrease by $50 million.\n\nThe correct choice is B.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-67",
+   "score": 1.0,
+   "text": "The patient presents with an elevated maternal serum \u03b1-fetoprotein (MSAFP) level of 3 multiples of the median (MoM). In prenatal screening, an elevated MSAFP can be caused by several factors, including neural tube defects (NTDs), abdominal wall defects, incorrect gestational age, multiple gestations, or incorrect dating.\n\nThe first step in managing an elevated MSAFP is to confirm the gestational age via ultrasonography. Because the patient is unsure of her last menstrual period and her pregnancy occurred approximately 5 months ago, there is a significant risk of inaccurate dating. An ultrasound is necessary to:\n1. Confirm the gestational age (to ensure the MSAFP was measured at the correct time).\n2. Check for multiple gestations (which would naturally increase AFP).\n3. Evaluate for structural abnormalities (such as an open neural tube defect or abdominal wall defect).\n\nIf the ultrasound confirms a single fetus and the gestational age is correct, further steps like amniocentesis might be considered, but the immediate next step is ultrasonography.\n\nA. Repeating the test is not indicated as the elevation needs investigation.\nB. Triple screening is a screening tool, not a diagnostic follow-up for an already abnormal result.\nD. Amniocentesis is an invasive procedure and is typically performed after ultrasound has confirmed the findings or if ultrasound is inconclusive.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-68",
+   "score": 1.0,
+   "text": "In Scenario 1, hanging up on a telemarketer is considered a common, socially acceptable, and morally neutral action. In Scenario 2, blowing smoke towards a child's face is considered a harmful and disrespectful act that violates social norms regarding health and respect for others.\n\nA. Wrong, Wrong\nB. Wrong, Not wrong\nC. Not wrong, Wrong\nD. Not wrong, Not wrong\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-69",
+   "score": 1.0,
+   "text": "The correct statement reflects the ethical principles of animal research, which emphasize the \"Three Rs\": Replacement (using non-animal models when possible), Reduction (using fewer animals), and Refinement (minimizing pain and distress).\n\nWhile researchers must strive to minimize pain, the ethical guidelines (such as those from the APA) allow for procedures that cause discomfort if they are scientifically necessary, no alternative exists, and the potential benefits outweigh the costs.\n\n*   **A** is a component of the principle (Replacement), but it is not the complete description of the obligation regarding pain/stress.\n*   **B** is too restrictive; many essential scientific breakthroughs would be impossible if pain were strictly prohibited.\n*   **C** accurately captures the ethical balance required: pain is permissible only when no alternative exists and the scientific value justifies the procedure.\n*   **D** focuses on euthanasia, which is a part of humane endpoints, but does not address the fundamental justification for the research itself.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-70",
+   "score": 1.0,
+   "text": "The nutrition transition refers to the shift in dietary patterns from traditional, fiber-rich diets to those higher in fats, sugars, and processed foods, often accompanied by rising obesity rates. While many developing nations have experienced this, China has undergone one of the most dramatic and rapid shifts in caloric intake, dietary composition, and obesity prevalence due to extreme economic growth and urbanization over the last two decades.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-71",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the effects of removing a protective tariff on imported steel:\n\n*   **A. Imports fall:** This is incorrect. A tariff makes imports more expensive. Removing the tariff lowers the price of imports, which typically causes the quantity of imports to **increase**.\n*   **B. Income is transferred from steel consumers to domestic steel producers:** This is incorrect. A tariff raises the price of steel, benefiting producers at the expense of consumers. Removing the tariff lowers the price, which transfers income from **domestic producers to consumers**.\n*   **C. Income is transferred from foreign steel producers to domestic steel producers:** This is incorrect. A tariff acts as a tax that goes to the government; removing it simply allows more trade to occur. It does not represent a direct transfer of income between these two specific parties in this context.\n*   **D. Allocative efficiency is improved:** This is **correct**. Tariffs create \"deadweight loss\" by distorting market prices and causing overproduction by domestic firms and underconsumption by consumers. By removing the tariff, the market moves closer to the equilibrium price determined by global supply and demand, reducing the deadweight loss and improving allocative efficiency.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-72",
+   "score": 1.0,
+   "text": "To find the upper critical value of $z$ for a 94% confidence interval, follow these steps:\n\n1.  **Determine the confidence level**: The confidence level is $0.94$.\n2.  **Calculate the alpha ($\\alpha$) level**: $\\alpha = 1 - 0.94 = 0.06$.\n3.  **Determine the area in each tail**: Since a confidence interval is two-tailed, we divide $\\alpha$ by 2.\n    $\\alpha / 2 = 0.06 / 2 = 0.03$.\n4.  **Find the cumulative area**: To find the $z$-score using a standard normal distribution table, we look for the area to the left of the upper critical value, which is $1 - (\\alpha / 2)$ or $1 - 0.03 = 0.97$.\n5.  **Look up the $z$-score**: We look for the value $0.97$ in the standard normal distribution table (or use a calculator/Excel function like `NORM.S.INV(0.97)`).\n    *   The value $0.97$ falls between $z = 1.88$ (area $\\approx 0.9699$) and $z = 1.89$ (area $\\approx 0.9706$).\n    *   Specifically, $z \\approx 1.8808$.\n\nLooking at the given options:\nA. 0.9699 (This is the area under the curve for $z=1.88$)\nB. 1.96 (This is the $z$-score for a 95% confidence interval)\nC. 1.555 (Incorrect)\nD. 1.88 (This is the $z$-score corresponding to the area $0.9699$, which is the closest value to $0.97$)\n\nThe upper critical value $z$ for a 94% confidence interval is approximately 1.88.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-73",
+   "score": 1.0,
+   "text": "The quote provided by Saren (2011) refers to the field of **Critical marketing analysis** (or critical marketing studies), which seeks to challenge traditional marketing assumptions and uncover systemic issues within the discipline.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-74",
+   "score": 1.0,
+   "text": "To determine the best response, we must look at the standard for summary judgment under the Federal Rules of Civil Procedure (Rule 56).\n\nA motion for summary judgment is granted if the movant shows that there is no genuine dispute as to any material fact and the movant is entitled to judgment as a matter of law. In this scenario, the manufacturer has asserted a defense: that it never supplied the insulation to the worker's employer. The manufacturer's president has been deposed, providing the manufacturer's testimony on this matter.\n\n**Analysis of the options:**\n\n*   **A:** While a party can request more time for discovery under Rule 56(d) if they show they cannot present facts essential to justify their opposition, this is a secondary remedy. It is not a substantive argument against the motion itself, but rather a request for a stay or extension.\n*   **B:** This is the strongest legal argument in this specific context. The manufacturer's defense relies on the testimony of its president. When a party moves for summary judgment based on testimonial evidence (like a deposition), a \"genuine dispute\" exists if the opposing party can show that the testimony is subject to a question of credibility. Since the worker's attorney has already deposed the president, the worker can argue that the president's testimony is not an undisputed fact, but rather a matter of credibility that must be weighed by a jury.\n*   **C:** This is incorrect because the burden of proof shifts. Once the moving party has presented evidence (the president's testimony) that supports their position, the burden is on the non-moving party to present evidence to create a genuine dispute. The manufacturer does not have to \"prove a negative\" with more evidence if its testimony is sufficient to meet its initial burden.\n*   **D:** This is a weak response. The manufacturer's motion is not based on the *harm* caused, but on the *causation/link* (that the product was never there). Arguing that the manufacturer hasn't proven a lack of harm does not address the specific evidentiary gap the manufacturer is targeting.\n\nIn federal litigation, when a motion for summary judgment is based on a witness's testimony, the opposing party can defeat the motion by arguing that the testimony creates a genuine dispute of material fact that can only be resolved by a jury evaluating the witness's credibility.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-75",
+   "score": 1.0,
+   "text": "The scenario describes a situation where the differences observed between age groups in a cross-sectional study might not be due to age itself, but rather due to the specific characteristics or experiences of the generation (the \"cohort\") to which the participants belong. \n\nIn this case, younger participants have grown up with computers, while older participants may not have had the same level of exposure. This difference in experience is a characteristic of their specific generation, making it a **cohort effect**.\n\n*   **A. Rosenthal effect:** Refers to researcher bias where expectations influence the outcome.\n*   **B. Hawthorne effect:** Refers to participants changing their behavior because they know they are being observed.\n*   **C. Carryover effect:** Occurs in within-subject designs when the effect of one treatment persists and influences the next.\n*   **D. Cohort effect:** Occurs when a study group shares a common characteristic (like a birth year or era-specific experience) that influences the results, confounding the variable being studied (age).\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-76",
+   "score": 1.0,
+   "text": "The most widely accepted scientific consensus regarding the emergence of anatomically modern *Homo sapiens* points to a time frame starting approximately 200,000 to 300,000 years ago. While some older fossils have been debated, the most consistent evidence for the species as we define it today begins around the 200,000-year mark.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-77",
+   "score": 1.0,
+   "text": "While the term \"poisonous\" is often used colloquially to mean \"venomous,\" in biological terms, snakes that inject toxins through a bite are considered venomous. Among the choices provided, the copperhead is the only venomous snake; the others are constrictors.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-78",
+   "score": 1.0,
+   "text": "To determine whether the confession will be suppressed, we must evaluate two legal standards: the **Miranda** requirements and the **Voluntariness** requirement under the Due Process Clause.\n\n1.  **Miranda Waiver:** The facts state the suspect was read his rights, read them aloud, and affirmatively indicated he understood them. While he refused to sign the written waiver, a signature is not a constitutional requirement for a valid waiver; a waiver can be indicated through conduct or oral statements. Since he did not invoke his right to counsel or his right to remain silent, the *Miranda* requirements are satisfied.\n2.  **Voluntariness (Due Process):** A confession is involuntary if the police use coercive tactics that overbear the suspect's will. The central issue here is whether the detective's question about \"asking God for forgiveness\" constitutes illegal coercion or deception. Under prevailing case law, while police cannot use physical coercion or threats, they are generally permitted to use psychological tactics, including religious or emotional appeals, provided they do not cross the line into actual coercion or threats. Asking a question about religious forgiveness is generally considered a non-coercive, albeit manipulative, interrogation technique rather than a violation of due process.\n\n**Analysis of Options:**\n*   **A** is the most legally sound conclusion. It addresses the fact that the suspect was properly warned, understood his rights, and failed to invoke them.\n*   **B** is incorrect because a lack of a signature does not automatically prove full understanding; it is a matter of the totality of circumstances.\n*   **C** is incorrect because the length of interrogation alone does not render a confession involuntary.\n*   **D** is incorrect because, while controversial, religious questioning/deception of this nature has generally not been held to render a confession involuntary under the Due Process Clause.\n\nThe court will likely find that the suspect waived his *Miranda* rights and that the confession was not coerced through illegal means.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-79",
+   "score": 1.0,
+   "text": "The dish 'bangers and mash' consists of sausages (the bangers) and mashed potatoes (the mash).\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-80",
+   "score": 1.0,
+   "text": "The provided text describes a press law designed to require state approval for publications (daily issues or serials) and to hold states accountable for any publications that attack the honor, security, or administration of other states. This was a mechanism of censorship intended to prevent the spread of liberal and nationalist ideas.\n\nKlemens von Metternich was a leading figure of the conservative order in Europe. His policies, including the Carlsbad Resolutions, were aimed at maintaining the status quo by suppressing the revolutionary movements (nationalism and liberalism) that threatened the traditional monarchical structures of the German states and the broader European order.\n\n*   **A** is incorrect because Metternich was a staunch conservative who opposed democracy and Enlightenment-era liberal reforms.\n*   **B** is too broad; while he sought control, the specific focus of these resolutions was on political dissent and the press rather than every single aspect of private life.\n*   **C** is the most accurate description of his broader geopolitical goal. The Carlsbad Resolutions were specifically designed to stifle the nationalist and liberal sentiments that fueled revolutions.\n*   **D** is too narrow; while it mentions speech, the primary target was the political movement of nationalism/liberalism rather than just a religious or monarchical mandate.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-81",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must distinguish between the different types of sensation provided to the anterior two-thirds of the tongue:\n\n1.  **General Somatic Sensation (Touch, pain, temperature):** This is carried by the **lingual nerve**, which is a branch of the **mandibular division of the trigeminal nerve (CN V3)**.\n2.  **Special Sensory (Taste):** This is carried by the **chorda tympani**, which is a branch of the **facial nerve (CN VII)**.\n\nThe question specifically asks about the loss of **somatic sensation** (not taste). Therefore, the damage must involve the lingual branch of the mandibular trigeminal nerve.\n\n*   **A. Lingual branch of the mandibular trigeminal nerve:** Correct. This nerve provides general sensation to the anterior two-thirds of the tongue.\n*   **B. Chorda tympani branch of the facial nerve:** Incorrect. This provides taste (special sensation), not somatic sensation.\n*   **C. Lingual branch of the glossopharyngeal nerve:** Incorrect. The glossopharyngeal nerve (CN IX) provides sensation to the posterior one-third of the tongue.\n*   **D. Hypoglossal nerve:** Incorrect. This is a motor nerve responsible for tongue movement.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-82",
+   "score": 0.0,
+   "text": "To find the volume of KOH required to neutralize $H_3PO_4$, we must first look at the balanced chemical equation for a complete neutralization.\n\n**1. Balanced Chemical Equation:**\nPhosphoric acid ($H_3PO_4$) is a triprotic acid, meaning it has three acidic protons. For complete neutralization, all three protons must react with the hydroxide ions ($OH^-$) from the KOH:\n$$H_3PO_4 + 3KOH \\rightarrow K_3PO_4 + 3H_2O$$\n\n**2. Determine Moles of Acid ($H_3PO_4$):**\n$$\\text{Moles} = \\text{Molarity} \\times \\text{Volume (in L)}$$\n$$\\text{Moles of } H_3PO_4 = 0.150 \\, \\text{M} \\times 0.0500 \\, \\text{L} = 0.00750 \\, \\text{moles}$$\n\n**3. Determine Moles of Base ($KOH$) needed:**\nAccording to the stoichiometry of the reaction, 1 mole of $H_3PO_4$ requires 3 moles of $KOH$.\n$$\\text{Moles of } KOH = 0.00750 \\, \\text{moles } H_3PO_4 \\times \\left(\\frac{3 \\, \\text{moles } KOH}{1 \\, \\text{mole } H_3PO_4}\\right) = 0.0225 \\, \\text{moles } KOH$$\n\n**4. Calculate Volume of $KOH$:**\n$$\\text{Volume (L)} = \\frac{\\text{Moles}}{\\text{Molarity}}$$\n$$\\text{Volume of } KOH = \\frac{0.0225 \\, \\text{moles}}{0.250 \\, \\text{M}} = 0.0900 \\, \\text{L}$$\n\n**5. Convert to Milliliters:**\n$$0.0900 \\, \\text{L} \\times 1000 \\, \\text{mL/L} = 90.0 \\, \\text{mL}$$\n\nComparing this result to the given choices:\nA. 30.0 mL\nB. 27 mL\nC. 90.0 mL\nD. 270"
+  },
+  {
+   "id": "mmlu-83",
+   "score": 0.0,
+   "text": "To determine which country emitted the most CO2 in 2017 among the given options, we can look at historical emissions data:\n\n*   **Russia:** Historically a very large emitter due to its industrial base and energy sector. In 2017, its CO2 emissions were approximately 1,600\u20131,700 million tonnes.\n*   **Japan:** A major industrial economy, but its emissions in 2017 were approximately 1,200\u20131,300 million tonnes.\n*   **Canada:** Significantly lower than the others, approximately 550\u2013600 million tonnes.\n*   **Iran:** Approximately 600\u2013650 million tonnes.\n\nComparing these, Russia had the highest CO2 emissions of the four listed countries in 2017.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-84",
+   "score": 1.0,
+   "text": "To find the product of 32 x 67, you can use the distributive property:\n\n1. Multiply 32 by 7: $32 \\times 7 = 224$\n2. Multiply 32 by 60: $32 \\times 60 = 1,920$\n3. Add the two results together: $224 + 1,920 = 2,144$\n\nAlternatively, using long multiplication:\n  32\nx 67\n----\n 224 (7 x 32)\n1920 (60 x 32)\n----\n2144\n\nComparing this to the given options:\nA. 1,824\nB. 1,934\nC. 2,044\nD. 2,144\n\nThe correct choice is D.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-85",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must analyze the legal nature of the agreement:\n\n1.  **Bilateral vs. Unilateral:** A **bilateral contract** is a promise for a promise (e.g., \"I promise to fix them if you promise to pay me\"). A **unilateral contract** is a promise in exchange for an act (e.g., \"I will pay you $20 if you find my lost dog\"). In this scenario, the woman made a promise to repair the speakers by Tuesday, and the man made a promise to pay $20. Because both parties exchanged mutual promises, it is a bilateral contract.\n2.  **The UCC vs. Common Law:** The Uniform Commercial Code (UCC) governs the sale of **goods**. The Common Law governs the sale of **services**. Since the woman is being hired to perform a service (repairing the speakers), this agreement is governed by Common Law, not the UCC. Therefore, option A is incorrect.\n3.  **Unconscionability:** There is nothing in the text to suggest the contract is one-sided or unfair to the point of being unconscionable.\n\nThe man and woman exchanged mutual promises (the promise to repair and the promise to pay), which constitutes a bilateral contract.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-86",
+   "score": 0.0,
+   "text": "To determine the correct answer, let's evaluate the moral implications of each scenario based on ordinary US standards:\n\n**Scenario 1:** The character's toddler had an accident on a hotel mattress. Turning the mattress over is a common, practical way to hide a wet spot or allow it to dry/air out. While it might be considered slightly dishonest or a failure to notify housekeeping, it is not a \"clearly morally wrong\" act (like theft or violence). It is a minor social transgression at most.\n\n**Scenario 2:** Breaking a glass ceiling (a window or skylight) on a neighbor's house constitutes property damage and vandalism. This is a clear violation of law and moral standards regarding respect for others' property.\n\nTherefore:\nScenario 1: Not wrong\nScenario 2: Wrong\n\nThis corresponds to choice C.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-87",
+   "score": 1.0,
+   "text": "The title \"Dalai Lama\" is derived from the Mongolian words *dalai* (ocean) and *lama* (teacher/spiritual guide). In the context of the title, it signifies an \"Ocean of Wisdom.\"\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-88",
+   "score": 1.0,
+   "text": "To determine the correct statement, let's evaluate each option:\n\n*   **A is incorrect:** Natural selection does not *create* variation; it only acts upon existing variation by determining which traits are favorable for survival and reproduction.\n*   **B is incorrect:** Genetic variation arises primarily through mutations and genetic recombination (meiosis/sexual reproduction). While environmental changes can influence which traits are selected, they do not cause the underlying genetic mutations themselves.\n*   **C is correct:** Natural selection requires a \"menu\" of different traits to choose from. If every individual in a population were genetically identical, natural selection would have no way to favor one individual over another. Therefore, variation must exist first.\n*   **D is incorrect:** The processes involved in producing gametes (meiosis and fertilization) actually *increase* genetic variation through processes like crossing over, independent assortment, and the random combination of gametes.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-89",
+   "score": 1.0,
+   "text": "Nmap (Network Mapper) is an open-source tool used for network discovery and security auditing. It works by sending specially crafted packets to a target host and analyzing the responses to determine what hosts are available, what services (application name and version) they are running, what operating systems they are using, and what type of packet filters/firewalls are in place.\n\nA. It is a scanner which works by injecting packets to a range of addresses, and inferring what hosts and services might be at those addresses, based on the responses (Correct)\nB. It is a network fuzz testing tool (Incorrect - tools like Peach or Sulley are used for fuzzing)\nC. It is a map of the Internet (Incorrect)\nD. It is a suite of tools for scripting attacks (Incorrect - this describes a framework like Metasploit)\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-90",
+   "score": 0.0,
+   "text": "To determine the correct answer, let's look at the definitions of the programmable logic devices listed:\n\n*   **PLA (Programmable Logic Array):** Both the AND array and the OR array are programmable.\n*   **PAL (Programmable Array Logic):** The AND array is programmable, but the **OR array is fixed**.\n*   **PROM (Programmable Read-Only Memory):** The entire memory array is programmable, but the decoding logic is fixed.\n\nThe question describes a device with a **fixed OR array** and a **programmable AND array**. This matches the definition of a **PAL**.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-91",
+   "score": 1.0,
+   "text": "Opportunistic foraging is a strategy where individuals or groups focus on whatever food sources are currently available and abundant in their immediate environment, rather than relying on predictable, seasonal, or steady resources. This approach requires minimal preparation or long-term scheduling because the focus is on immediate acquisition.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-92",
+   "score": 1.0,
+   "text": "The description provided refers to the process of **Framing**. In communication theory, framing involves the way information is presented (the action of the communicator) and how that presentation influences the way an audience perceives, interprets, and integrates that information into their existing mental models or knowledge structures.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-93",
+   "score": 1.0,
+   "text": "To find the required acceleration, we can use the kinematic equation:\n$v^2 = u^2 + 2as$\n\nWhere:\n*   $v$ = final velocity\n*   $u$ = initial velocity (assumed to be $0\\text{ m/s}$ as the car starts from rest)\n*   $a$ = acceleration\n*   $s$ = distance\n\n**Step 1: Convert the velocity from km/h to m/s.**\n$v = 130\\text{ km/h}$\nTo convert to m/s, divide by $3.6$:\n$v = \\frac{130}{3.6} \\approx 36.11\\text{ m/s}$\n\n**Step 2: Plug the values into the kinematic equation.**\n$s = 50\\text{ m}$\n$u = 0\\text{ m/s}$\n$(36.11)^2 = 0^2 + 2 \\cdot a \\cdot 50$\n$1303.93 = 100a$\n\n**Step 3: Solve for $a$.**\n$a = \\frac{1303.93}{100}$\n$a \\approx 13.04\\text{ m/s}^2$\n\nComparing this result to the given options, $13\\text{ m/s}^2$ is the closest match.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-94",
+   "score": 0.0,
+   "text": "To determine the molecular geometry of thionyl chloride ($\\text{SOCl}_2$), we follow these steps:\n\n1.  **Determine the Lewis structure**: Sulfur (S) is the central atom. It has 6 valence electrons. Each Chlorine (Cl) atom provides 7 valence electrons, and Oxygen (O) provides 6. However, in the standard structure for $\\text{SOCl}_2$, sulfur forms a double bond with oxygen and single bonds with the two chlorine atoms.\n2.  **Count electron domains around the central atom (S)**:\n    *   One double bond to Oxygen ($\\text{S=O}$) counts as **one** electron domain.\n    *   One single bond to the first Chlorine ($\\text{S-Cl}$) counts as **one** electron domain.\n    *   One single bond to the second Chlorine ($\\text{S-Cl}$) counts as **one** electron domain.\n    *   Total electron domains = 3.\n3.  **Check for lone pairs on the central atom**: Sulfur uses 2 electrons for the double bond and 2 electrons for the two single bonds (total 4). Since sulfur has 6 valence electrons, there is $6 - 4 = 2$ electrons left over, which constitutes **one lone pair**.\n4.  **Determine Electron Geometry vs. Molecular Geometry**:\n    *   With 3 electron domains, the **electron geometry** is **trigonal planar**.\n    *   However, the **molecular geometry** describes the arrangement of the atoms only. With 3 bonding domains (treating the double bond as one direction) and 1 lone pair, the shape is determined by the positions of the atoms.\n    *   Wait, let's re-evaluate the domains: The sulfur atom has 3 bonding groups ($\\text{O, Cl, Cl}$) and **one lone pair**. This results in a total of **4 electron domains** (3 bonds + 1 lone pair).\n    *   With 4 electron domains, the electron geometry is **tetrahedral**.\n    *   With 3 bonding groups and 1 lone pair, the molecular geometry is **tripyramidal**.\n\nLet's re-verify:\nS has 6 valence electrons.\nO takes 2 (double bond).\nCl takes 1 (single bond).\nCl takes 1 (single bond).\nTotal used: 4. Remaining: 2 ("
+  },
+  {
+   "id": "mmlu-95",
+   "score": 1.0,
+   "text": "The biome described is characterized by trees that lose their leaves annually in response to the changing seasons (typically autumn/winter) to conserve water and energy. This is the defining characteristic of deciduous forests.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-96",
+   "score": 1.0,
+   "text": "To go from National Income (NI) to Gross Domestic Product (GDP), one must reverse the steps taken to arrive at NI from GDP. \n\nThe relationship is as follows:\n**GDP = NI + Depreciation + Indirect Taxes - Subsidies**\n\nTherefore, to move from NI to GDP, you must:\n1. **Add depreciation** (to move from Net National Income to Gross National Income).\n2. **Add indirect taxes** (to move from factor income to market prices).\n3. **Subtract subsidies** (to move from factor income to market prices).\n\nSince all three actions are required to bridge the gap between National Income and GDP, the correct choice is all of the above.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-97",
+   "score": 1.0,
+   "text": "To find the expected number of workers remaining at the end of the second year, we calculate the retention for each group of workers separately.\n\n**Group 1: The first 100 workers hired at the start of Year 1.**\n1.  **End of Year 1:** The agency knows that 20% leave during the first year.\n    Remaining workers = $100 - (0.20 \\times 100) = 80$ workers.\n2.  **End of Year 2:** Of those remaining, 5% leave during the second year.\n    Remaining workers = $80 - (0.05 \\times 80) = 80 - 4 = 76$ workers.\n\n**Group 2: The second 100 workers hired at the start of Year 2.**\n1.  **End of Year 2:** These workers have only been employed for one year. According to the data, 20% of workers leave during their first year.\n    Remaining workers = $100 - (0.20 \\times 100) = 80$ workers.\n\n**Total expected workers at the end of Year 2:**\nTotal = (Workers from Group 1) + (Workers from Group 2)\nTotal = $76 + 80 = 156$\n\nComparing this to the given options:\nA. 140\nB. 144\nC. 152\nD. 156\n\nThe correct choice is D.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-98",
+   "score": 1.0,
+   "text": "The practice described is known as gerrymandering, which involves manipulating the boundaries of an electoral constituency to favor one political party or group.\n\nA. front-loading refers to the timing of primary elections.\nB. prior restraint refers to government censorship of information.\nC. reapportionment is the process of redistributing seats in a legislative body based on population changes.\nD. gerrymandering is the correct term for drawing district lines for political advantage.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-99",
+   "score": 1.0,
+   "text": "To calculate the Earnings Per Share (EPS), we use the following formula:\n\n$$\\text{EPS} = \\frac{\\text{Net Income} - \\text{Preferred Dividends}}{\\text{Weighted Average Number of Common Shares Outstanding}}$$\n\n**Step 1: Calculate Net Income available to common stockholders**\n*   Net Income: $480,000\n*   Preferred Dividends: 10,000 shares $\\times$ $5/share = $50,000\n*   Net Income available to common stockholders: $480,000 - $50,000 = **$430,000**\n\n**Step 2: Calculate the Weighted Average Number of Common Shares Outstanding**\n*   January 1 to March 31 (3 months): 120,000 shares\n*   April 1 to December 31 (9 months): 120,000 + 40,000 = 160,000 shares\n\n$$\\text{Weighted Average} = (120,000 \\times \\frac{3}{12}) + (160,000 \\times \\frac{9}{12})$$\n$$\\text{Weighted Average} = 30,000 + 120,000 = \\mathbf{150,000 \\text{ shares}}$$\n\n**Step 3: Calculate EPS**\n$$\\text{EPS} = \\frac{\\$430,000}{150,000} = \\$2.8666...$$\n\nRounding to the nearest cent, we get **$2.87**.\n\nB. $2.87\n\nAnswer: B"
+  }
+ ]
+}

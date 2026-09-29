@@ -5,26 +5,26 @@
  "label": "Ollama",
  "task": "gsm8k",
  "n": 100,
- "correct": 76.0,
- "score": 0.76,
+ "correct": 75.0,
+ "score": 0.75,
  "ci95": [
-  0.6676748127670786,
-  0.8330878873454004
+  0.6569535362992417,
+  0.8245490599627573
  ],
  "version": "0.34.4",
  "empty": 0,
  "minutes": 1.2,
- "date": "2026-09-29T06:32:59Z",
+ "date": "2026-09-29T11:52:18Z",
  "samples": [
   {
    "id": "gsm8k-0",
    "score": 0.0,
-   "text": "To solve this problem, let's break it down step by step:\n\n1. Initially, Bob had 3 orange fish and 4 white fish in his pond.\n\n2. The sales assistant at the pet store removed 17 fish from the mixed tank. Since we don't know the exact distribution of the removed fish, we'll represent the number of white fish removed as 'w' and the number of orange fish removed as 'o'. We know that o + w = 17.\n\n3. After adding the new fish to the pond, Bob now has twice as many orange fish as white fish. Let's represent the number of new orange fish as 'x' and the number of new white fish as 'y'. We know that x = 2y.\n\n4. Initially, Bob had 3 orange fish, so the number of new orange fish is 3 + o. Similarly, he initially had 4 white fish, so the number of new white fish is 4 + w.\n\n5. Since the total number of fish in the pond is now 7 + x + y, we can set up the equation: 3 + o + 4 + w + x + y = 7 + x + y.\n\n6. We know that o + w = 17, so we can substitute this into the equation: 3 + 17 + x + y = 7 + x + y.\n\n7. Simplifying the equation, we get: 20 = 7.\n\n8. However, this equation doesn't make sense, so we need to go back to step 4 and re-examine our assumptions. Let's try a different approach.\n\n9. Let's represent the number of new orange fish as 'x' and the number of new white fish as 'y'. We know that x = 2y.\n\n10. The total number of fish in the pond is now 7 + x + y. We can set up the equation: 7 + x + y = 7 + 2y.\n\n11. Simplifying the equation, we get: x = y.\n\n12. Since x = 2y, we can substitute this into the equation: 7 + 2y + y = 7 + 2y.\n\n13. Simplifying the equation, we get: 7 = 7.\n\n14. This equation doesn't make sense, so we need to go back to step 4 and re-examine our assumptions. Let's try a different approach.\n\n15. Let"
+   "text": "To solve this problem, let's break it down step by step:\n\n1. Initially, Bob had 3 orange fish and 4 white fish in his pond.\n\n2. The sales assistant at the pet store removed 17 fish from the mixed tank. Since we don't know the exact distribution of the removed fish, we'll represent the number of white fish removed as 'w' and the number of orange fish removed as 'o'. We know that o + w = 17.\n\n3. After adding the new fish to the pond, Bob now has twice as many orange fish as white fish. Let's represent the number of new orange fish as 'x' and the number of new white fish as 'y'. We know that x = 2y.\n\n4. Initially, Bob had 3 orange fish, so the number of new orange fish is 3 + o. Similarly, he initially had 4 white fish, so the number of new white fish is 4 + w.\n\n5. Since the total number of fish in the pond is now 7 + x + y, we can set up the equation: 3 + o + 4 + w + x + y = 7 + x + y.\n\n6. We know that o + w = 17, so we can substitute this into the equation: 3 + 17 + x + y = 7 + x + y.\n\n7. Simplifying the equation, we get: 20 = 7.\n\n8. However, this equation doesn't make sense, so we need to go back to step 4 and re-examine our assumptions. Let's try a different approach.\n\n9. Let's represent the number of new orange fish as 'x' and the number of new white fish as 'y'. We know that x = 2y.\n\n10. The total number of fish in the pond is now 7 + x + y. We know that the total number of fish in the pond is equal to the sum of the initial fish and the new fish: 7 + x + y = 3 + 4 + x + y.\n\n11. Simplifying the equation, we get: 7 = 7.\n\n12. This equation doesn't give us any information about the number of white fish, so we need to go back to step 4 and re-examine our assumptions.\n\n13. Let's try a different approach. We know that the number of orange fish is now twice the number of white fish. Let's"
   },
   {
    "id": "gsm8k-1",
    "score": 1.0,
-   "text": "To solve this problem, let's break it down step by step.\n\n1. We know Becky ate 10 slices.\n2. Since Becky ate 3 more slices than Jake, we can set up an equation to find out how many slices Jake ate: \n   Jake's slices = Becky's slices - 3\n   Jake's slices = 10 - 3\n   Jake's slices = 7\n\n3. We also know Silvia ate twice as many slices as Jake did:\n   Silvia's slices = 2 * Jake's slices\n   Silvia's slices = 2 * 7\n   Silvia's slices = 14\n\n4. Now, we can find the total number of slices eaten by adding up the slices eaten by each person:\n   Total slices = Becky's slices + Jake's slices + Silvia's slices\n   Total slices = 10 + 7 + 14\n   Total slices = 31\n\n#### 31"
+   "text": "To solve this problem, let's start by identifying the information given:\n\n- Becky ate 10 slices.\n- Becky ate 3 more slices than Jake.\n- Silvia ate twice as many slices as Jake.\n\nSince Becky ate 10 slices and she ate 3 more slices than Jake, we can find out how many slices Jake ate by subtracting 3 from Becky's total:\n\nJake's slices = Becky's slices - 3\nJake's slices = 10 - 3\nJake's slices = 7\n\nNow that we know Jake's slices, we can find out how many slices Silvia ate by multiplying Jake's slices by 2:\n\nSilvia's slices = 2 * Jake's slices\nSilvia's slices = 2 * 7\nSilvia's slices = 14\n\nNow that we know how many slices each person ate, we can find the total number of slices eaten by adding up the slices each person ate:\n\nTotal slices = Becky's slices + Jake's slices + Silvia's slices\nTotal slices = 10 + 7 + 14\nTotal slices = 31\n\n#### 31"
   },
   {
    "id": "gsm8k-2",
@@ -49,7 +49,7 @@
   {
    "id": "gsm8k-6",
    "score": 1.0,
-   "text": "To find the total amount of money Stetson gave up, we need to calculate the number of oranges he ate and multiply it by the cost per orange.\n\nStep 1: Calculate the number of oranges Stetson ate.\nNumber of oranges picked = 60\nFraction of oranges eaten = 2/5\nNumber of oranges eaten = (2/5) * 60\n= (2 * 60) / 5\n= 120 / 5\n= 24\n\nStep 2: Calculate the total amount of money Stetson gave up.\nCost per orange = $10\nNumber of oranges eaten = 24\nTotal amount given up = 24 * 10\n= 240\n\nThe total amount of money Stetson gave up is $240."
+   "text": "To solve the problem, we need to find out how many oranges Stetson ate and then multiply that by the cost per orange.\n\nStep 1: Find out how many oranges Stetson ate.\nStetson ate 2/5 of the oranges they picked. Since they picked 60 oranges, we can multiply 2/5 by 60 to find out how many oranges he ate.\n\n2/5 * 60 = (2 * 60) / 5\n= 120 / 5\n= 24\n\nSo, Stetson ate 24 oranges.\n\nStep 2: Find out how much money Stetson gave up.\nSince Stetson gave up $10 for each orange he ate, we can multiply the number of oranges he ate by the cost per orange.\n\n24 * $10 = $240\n\nTherefore, Stetson gave up $240."
   },
   {
    "id": "gsm8k-7",
@@ -59,7 +59,7 @@
   {
    "id": "gsm8k-8",
    "score": 0.0,
-   "text": "To solve the problem, we need to first find out how many students are in each group. \n\nWe know that 54 students are to be separated into 12 groups. \n\nTo find the number of students in each group, we divide 54 by 12. \n\n54 \u00f7 12 = 4.5\n\nSince we can't have half a student, this means that the 12 groups are not of equal size. \n\nHowever, we are asked how many more groups are needed to form 12 groups. \n\nSince we already have 12 groups, we don't need any more groups. \n\n#### 0"
+   "text": "To solve the problem, we need to first find out how many students are in each group. \n\nWe know that 54 students are to be separated into 12 groups. \n\nTo find the number of students in each group, we divide 54 by 12. \n\n54 \u00f7 12 = 4.5\n\nSince we can't have half a student, this means that the 12 groups are not of equal size. \n\nHowever, we are asked how many more groups are needed to form 12 groups. \n\nSince we already have 12 groups, we don't need any more groups."
   },
   {
    "id": "gsm8k-9",
@@ -79,7 +79,7 @@
   {
    "id": "gsm8k-12",
    "score": 1.0,
-   "text": "To find out how many dozens of eggs Claire eats in 4 weeks, we need to calculate the total number of eggs she eats in 4 weeks and then convert it to dozens.\n\nStep 1: Calculate the number of eggs Claire eats in 1 day\nClaire makes 1 omelet every morning, and each omelet has 3 eggs. So, she eats 3 eggs per day.\n\nStep 2: Calculate the number of eggs Claire eats in 4 weeks\nThere are 7 days in a week. So, in 4 weeks, there are 4 x 7 = 28 days.\nSince Claire eats 3 eggs per day, she eats 3 x 28 = 84 eggs in 4 weeks.\n\nStep 3: Convert the total number of eggs to dozens\nSince 1 dozen = 12 eggs, we can divide the total number of eggs by 12 to get the number of dozens.\nSo, 84 eggs / 12 = 7.\n\n#### 7"
+   "text": "To find out how many dozens of eggs Claire eats in 4 weeks, we need to calculate the total number of eggs she eats in 4 weeks and then convert it to dozens.\n\nStep 1: Calculate the total number of eggs Claire eats in 4 weeks.\nSince Claire makes 3 eggs every morning, we multiply the number of eggs she makes per day by the number of days in 4 weeks.\nThere are 7 days in a week, so there are 4 x 7 = 28 days in 4 weeks.\nTotal eggs in 4 weeks = 3 eggs/day * 28 days = 84 eggs\n\nStep 2: Convert the total number of eggs to dozens.\nSince 1 dozen = 12 eggs, we divide the total number of eggs by 12 to get the number of dozens.\nTotal dozens = 84 eggs / 12 = 7\n\nSo, Claire will eat 7 dozens of eggs in 4 weeks. \n#### 7"
   },
   {
    "id": "gsm8k-13",
@@ -114,7 +114,7 @@
   {
    "id": "gsm8k-19",
    "score": 1.0,
-   "text": "To find out how much Colby earns in a typical eight-hour workday, we need to follow these steps:\n\n1. Calculate the number of packages Colby completes per hour: \n   Since Colby completes 10 less than 50 packages per hour, we subtract 10 from 50.\n   50 - 10 = 40 packages per hour.\n\n2. Calculate the total number of packages Colby completes in an 8-hour workday:\n   Multiply the number of packages Colby completes per hour by the number of hours worked.\n   40 * 8 = 320 packages.\n\n3. Calculate Colby's total earnings for the day:\n   Multiply the total number of packages Colby completes by the amount he earns per package.\n   320 * $0.20 = $64.\n\n#### 64"
+   "text": "To find out how much Colby earns in a typical eight-hour workday, we need to follow these steps:\n\n1. First, we need to find out how many packages Colby completes per hour. We know he completes 10 less than 50 packages per hour, so we subtract 10 from 50:\n50 - 10 = 40\n\n2. Now that we know Colby completes 40 packages per hour, we can find out how many packages he completes in 8 hours:\n40 * 8 = 320\n\n3. Since Colby gets paid $0.20 for every package he completes, we can multiply the total number of packages he completes by the payment per package:\n320 * 0.20 = 64\n\nTherefore, Colby earns $64 in a typical eight-hour workday. ###### 64"
   },
   {
    "id": "gsm8k-20",
@@ -139,7 +139,7 @@
   {
    "id": "gsm8k-24",
    "score": 0.0,
-   "text": "To find out how much Karan has to pay per month, we need to calculate the monthly interest and add it to the principal amount.\n\nStep 1: Calculate the total interest for 5 months.\nInterest = Principal * Rate * Time\nInterest = $3650 * 10% * 5 months\nInterest = $3650 * 0.1 * 5\nInterest = $1825\n\nStep 2: Calculate the total amount Karan has to pay.\nTotal Amount = Principal + Interest\nTotal Amount = $3650 + $1825\nTotal Amount = $5475\n\nStep 3: Calculate the monthly payment.\nMonthly Payment = Total Amount / Number of months\nMonthly Payment = $5475 / 5\nMonthly Payment = $1095\n\n#### 1095"
+   "text": "To solve this problem, we need to calculate the monthly payment amount.\n\nStep 1: Convert the interest rate to a decimal by dividing by 100.\n10% = 10/100 = 0.10\n\nStep 2: Calculate the total amount to be paid using the formula for simple interest:\nTotal Amount = Principal + (Principal * Rate * Time)\nTotal Amount = $3,650 + ($3,650 * 0.10 * 5)\nTotal Amount = $3,650 + $1,825\nTotal Amount = $5,475\n\nStep 3: Calculate the monthly payment amount by dividing the total amount by the number of months.\nMonthly Payment = Total Amount / Number of Months\nMonthly Payment = $5,475 / 5\nMonthly Payment = $1,105\n\n#### 1105"
   },
   {
    "id": "gsm8k-25",
@@ -154,7 +154,7 @@
   {
    "id": "gsm8k-27",
    "score": 1.0,
-   "text": "To find the total amount of money in Brady's piggy bank, we need to calculate the value of each type of coin and add them together.\n\n1. Pennies: 100 pennies = 100 x $0.01 = $1\n2. Nickels: 40 nickels = 40 x $0.05 = $2\n3. Dimes: 20 dimes = 20 x $0.10 = $2\n4. Dollar bills: 40 dollar bills = 40 x $1 = $40\n\nNow, let's add the values together:\n$1 + $2 + $2 + $40 = $45\n\nSo, Brady has $45 in his piggy bank. ######45"
+   "text": "To find the total amount of money in Brady's piggy bank, we need to calculate the value of each type of coin and add them together.\n\n1. Pennies: 100 pennies = 100 cents = $1\n2. Nickels: 40 nickels = 40 x 5 cents = 200 cents = $2\n3. Dimes: 20 dimes = 20 x 10 cents = 200 cents = $2\n4. Dollar bills: 40 dollar bills = 40 x $1 = $40\n\nNow, let's add the values together:\n$1 + $2 + $2 + $40 = $45\n\nSo, Brady has $45 in his piggy bank. ######45"
   },
   {
    "id": "gsm8k-28",
@@ -189,7 +189,7 @@
   {
    "id": "gsm8k-34",
    "score": 0.0,
-   "text": "To solve this problem, we need to break it down into steps.\n\nStep 1: Calculate the time it takes to heat up the oil to 400 degrees.\nIt takes 20 minutes to heat up to 300 degrees. \nThen, it takes 40% longer to heat up to 400 degrees. \n40% of 20 minutes is 0.4 * 20 = 8 minutes. \nSo, it takes 20 + 8 = 28 minutes to heat up to 400 degrees.\n\nStep 2: Calculate the time it takes to cook the chicken.\nIt takes 5 minutes less time to cook than it took to warm up the oil. \nSo, it takes 28 - 5 = 23 minutes to cook the chicken.\n\nStep 3: Calculate the total time from starting the oil to having cooked chicken.\nThe total time is the sum of the time it takes to heat up the oil and the time it takes to cook the chicken. \nSo, the total time is 28 + 23 = 51 minutes.\n\n#### 51"
+   "text": "To solve this problem, we need to break it down into steps.\n\nStep 1: Calculate the time it takes to heat up the oil to 300 degrees.\nTime taken to heat up the oil = 20 minutes.\n\nStep 2: Calculate the time it takes to heat up the oil to 400 degrees.\nSince it takes 40% longer than 20 minutes, we need to calculate 40% of 20 minutes and add it to 20 minutes.\n40% of 20 minutes = 0.4 * 20 = 8 minutes.\nTime taken to heat up the oil to 400 degrees = 20 + 8 = 28 minutes.\n\nStep 3: Calculate the time it takes to cook the chicken.\nTime taken to cook the chicken = Time taken to heat up the oil to 300 degrees - 5 minutes\nTime taken to cook the chicken = 20 - 5 = 15 minutes.\n\nStep 4: Calculate the total time from starting the oil to having cooked chicken.\nTotal time = Time taken to heat up the oil to 300 degrees + Time taken to heat up the oil to 400 degrees + Time taken to cook the chicken\nTotal time = 20 + 28 + 15 = 63 minutes.\n\n#### 63"
   },
   {
    "id": "gsm8k-35",
@@ -209,12 +209,12 @@
   {
    "id": "gsm8k-38",
    "score": 1.0,
-   "text": "To find the average total distance spat, we need to calculate the total distance each girl spat and then find the average.\n\nStep 1: Calculate the total distance Zoey spat.\nZoey has 40 seeds and spits each one 10 feet.\nTotal distance spat by Zoey = 40 * 10 = 400 feet\n\nStep 2: Calculate the total distance Sydney spat.\nSydney has 35 seeds and spits each one 12 feet.\nTotal distance spat by Sydney = 35 * 12 = 420 feet\n\nStep 3: Find the total distance spat by both girls.\nTotal distance spat by both girls = Total distance spat by Zoey + Total distance spat by Sydney\nTotal distance spat by both girls = 400 + 420 = 820 feet\n\nStep 4: Find the average total distance spat.\nAverage total distance spat = Total distance spat by both girls / 2\nAverage total distance spat = 820 / 2\nAverage total distance spat = 410 feet\n\n#### 410"
+   "text": "To find the average total distance spat, we need to calculate the total distance each girl spat and then find the average.\n\nStep 1: Calculate the total distance Zoey spat.\nZoey has 40 seeds and spits each one 10 feet.\nTotal distance spat by Zoey = 40 * 10 = 400 feet\n\nStep 2: Calculate the total distance Sydney spat.\nSydney has 35 seeds and spits each one 12 feet.\nTotal distance spat by Sydney = 35 * 12 = 420 feet\n\nStep 3: Find the total distance spat by both girls.\nTotal distance spat by both girls = 400 + 420 = 820 feet\n\nStep 4: Find the average total distance spat.\nAverage total distance spat = Total distance spat by both girls / 2\n= 820 / 2\n= 410 feet\n\n#### 410"
   },
   {
    "id": "gsm8k-39",
    "score": 1.0,
-   "text": "To solve the problem, we need to find out how much money Jayden has after receiving the money from his sister and then subtract the cost of the camera from that amount.\n\nStep 1: Jayden initially has $70.\n\nStep 2: Ava gives him half of her $90 allowance, which is $90 / 2 = $45.\n\nStep 3: Now, Jayden has $70 + $45 = $115.\n\nStep 4: The cost of the camera is $200.\n\nStep 5: To find out how much more Jayden needs, we subtract the cost of the camera from the total amount he has: $115 - $200 = -$85.\n\nSince Jayden doesn't have enough money, we need to find out how much more he needs. To do that, we take the absolute value of the result, which is |-85| = 85.\n\n#### 85"
+   "text": "To solve the problem, we need to find out how much money Jayden has after receiving the money from his sister and then subtract the cost of the camera from that amount.\n\nStep 1: Jayden initially has $70.\n\nStep 2: Ava gives him half of her $90 allowance, which is $90 / 2 = $45. Now, Jayden has $70 + $45 = $115.\n\nStep 3: The cost of the camera is $200. To find out how much more Jayden needs, we subtract the amount he has from the cost of the camera: $200 - $115 = $85.\n\nSo, Jayden needs $85 more to buy the camera."
   },
   {
    "id": "gsm8k-40",
@@ -244,7 +244,7 @@
   {
    "id": "gsm8k-45",
    "score": 1.0,
-   "text": "To find the total amount of potato salad needed, we need to calculate the amount for adults and children separately and then add them together.\n\nFirst, let's calculate the amount for the adults:\n10 lbs/adult * 20 adults = 200 lbs\n\nSince children eat half as much as adults, we can calculate the amount for children as follows:\n10 lbs/adult / 2 = 5 lbs/child\n5 children * 5 lbs/child = 25 lbs\n\nNow, let's add the amounts for adults and children:\n200 lbs + 25 lbs = 225 lbs\n\nTed needs to bring 225 lbs of potato salad to the picnic."
+   "text": "To find the total amount of potato salad needed, we need to calculate the amount for adults and children separately and then add them together.\n\nFirst, let's calculate the amount for the adults:\nAdults: 20 * 10 lbs = 200 lbs\n\nSince children eat half as much as adults, we'll multiply the number of children by 5 (half of 10 lbs):\nChildren: 5 * 5 lbs = 25 lbs\n\nNow, let's add the amounts together:\n200 lbs (adults) + 25 lbs (children) = 225 lbs\n\nTed needs to bring 225 lbs of potato salad to the picnic."
   },
   {
    "id": "gsm8k-46",
@@ -254,7 +254,7 @@
   {
    "id": "gsm8k-47",
    "score": 1.0,
-   "text": "To solve the problem, we need to find out how much money Sam needs to spend to make 4 liters of juice.\n\nStep 1: Find out how many kilograms of oranges Sam needs to make 4 liters of juice.\nSince Sam needs 5 kilograms of oranges to make 1 liter of juice, he needs 5 x 4 = 20 kilograms of oranges to make 4 liters of juice.\n\nStep 2: Find out how much money Sam needs to spend on 20 kilograms of oranges.\nEach kilogram of oranges costs $3, so 20 kilograms of oranges will cost 20 x $3 = $60.\n\nTherefore, Sam needs to spend $60 to make 4 liters of juice. \n\n#### 60"
+   "text": "To solve the problem, we need to find out how much money Sam needs to spend to make 4 liters of juice.\n\nStep 1: Find out how many kilograms of oranges Sam needs to make 4 liters of juice.\nSince Sam needs 5 kilograms of oranges to make 1 liter of juice, he needs 5 x 4 = 20 kilograms of oranges to make 4 liters of juice.\n\nStep 2: Find out how much money Sam needs to spend on 20 kilograms of oranges.\nEach kilogram of oranges costs $3, so 20 kilograms of oranges will cost 20 x $3 = $60.\n\nTherefore, Sam needs to spend $60 to make 4 liters of juice. \n#### 60"
   },
   {
    "id": "gsm8k-48",
@@ -284,7 +284,7 @@
   {
    "id": "gsm8k-53",
    "score": 1.0,
-   "text": "To solve this problem, we need to set up an equation that represents the cost of each venue and then solve for the number of guests.\n\nLet's denote the number of guests as 'x'. \n\nThe cost of the first venue is a flat fee of $200, regardless of the number of guests. The cost of the second venue is $25 per person, so the total cost for this venue is $25x.\n\nSince the first venue does not include food, Mark will need to add $5x to the cost of the first venue to cover the cost of food. The total cost of the first venue is $200 + $5x.\n\nThe second venue includes food, so the total cost is just $25x.\n\nTo find the point at which the two venues are equal in cost, we set the two equations equal to each other:\n\n200 + 5x = 25x\n\nSubtract 5x from both sides:\n\n200 = 20x\n\nDivide both sides by 20:\n\n10 = x\n\nSo, 10 guests are necessary for the two venues to be equal in cost."
+   "text": "To solve this problem, we need to set up an equation that represents the cost of each venue and then solve for the number of guests.\n\nLet's denote the number of guests as 'x'. \n\nThe cost of the first venue is a flat fee of $200, regardless of the number of guests. The cost of the second venue is $25 per person, so the total cost for the second venue is $25x.\n\nSince the first venue does not include food, Mark will need to pay an additional $5 per guest, so the total cost for the first venue is $200 + $5x.\n\nWe want to find when the two venues are equal in cost, so we set up the equation:\n\n$200 + $5x = $25x\n\nSubtract $5x from both sides of the equation:\n\n$200 = $20x\n\nDivide both sides by $20:\n\n$200 / $20 = $x\n\n$x = 10\n\nSo, 10 guests are necessary for the two venues to be equal in cost. \n\n#### 10"
   },
   {
    "id": "gsm8k-54",
@@ -314,7 +314,7 @@
   {
    "id": "gsm8k-59",
    "score": 0.0,
-   "text": "To solve this problem, let's start by identifying the information given:\n\n- One pair of heels costs $33.\n- The other pair of heels costs twice as much as the first pair.\n- The boots cost $5 less than the two pairs of heels combined.\n\nStep 1: Calculate the cost of the second pair of heels.\nSince the second pair costs twice as much as the first pair, we multiply the cost of the first pair by 2.\nCost of the second pair = 2 * $33 = $66\n\nStep 2: Calculate the combined cost of the two pairs of heels.\nCombined cost of heels = Cost of the first pair + Cost of the second pair\n= $33 + $66\n= $99\n\nStep 3: Calculate the cost of the boots.\nSince the boots cost $5 less than the combined cost of the two pairs of heels, we subtract $5 from the combined cost.\nCost of the boots = Combined cost of heels - $5\n= $99 - $5\n= $94\n\nThe final answer is: 94"
+   "text": "To solve this problem, let's start by identifying the information given:\n\n- One pair of heels costs $33.\n- The other pair of heels costs twice as much as the first pair.\n- The boots cost $5 less than the two pairs of heels combined.\n\nStep 1: Calculate the cost of the second pair of heels.\nSince the second pair costs twice as much as the first pair, we multiply the cost of the first pair by 2.\nCost of the second pair of heels = 2 * $33 = $66.\n\nStep 2: Calculate the combined cost of the two pairs of heels.\nCombined cost of the two pairs of heels = $33 + $66 = $99.\n\nStep 3: Calculate the cost of the boots.\nSince the boots cost $5 less than the combined cost of the two pairs of heels, we subtract $5 from the combined cost.\nCost of the boots = $99 - $5 = $94.\n\nTherefore, the boots cost $94."
   },
   {
    "id": "gsm8k-60",
@@ -328,8 +328,8 @@
   },
   {
    "id": "gsm8k-62",
-   "score": 1.0,
-   "text": "To solve this problem, we need to first find the current ages of Mico and Marco. \n\nLet's denote Mico's age as 'm' and Marco's age as 'c'. We know that the sum of their ages is 20, so we can write an equation:\n\nm + c = 20\n\nWe also know that in 10 years, their ages will be m + 10 and c + 10, respectively. The sum of their ages in 10 years will be (m + 10) + (c + 10).\n\nSince we want to find the sum of their ages in 10 years, we can write an equation:\n\nm + 10 + c + 10 = (m + c) + 20\n\nNow, we can substitute the value of m + c from the first equation into the second equation:\n\nm + 10 + c + 10 = 20 + 10\nm + 10 + c + 10 = 30\n\nNow, simplify the equation:\n\nm + c + 20 = 30\n\nSubtract 20 from both sides:\n\nm + c = 10\n\nNow we have two equations:\n\nm + c = 20\nm + c = 10\n\nSince both equations are equal, we can set them equal to each other:\n\n20 = 10\n\nThis is not possible, so we need to go back to the first equation and try a different approach.\n\nLet's try to find the ages of Mico and Marco. We can write an equation for each of them:\n\nm = 20 - c\nc = 20 - m\n\nNow, we can substitute the value of c into the equation for m:\n\nm = 20 - (20 - m)\nm = 20 - 20 + m\nm = m\n\nThis doesn't help us, so let's try a different approach.\n\nLet's say Mico's age is x. Then Marco's age is 20 - x. \n\nWe know that in 10 years, Mico's age will be x + 10 and Marco's age will be (20 - x) + 10.\n\nThe sum of their ages in 10 years will be (x + 10) + (20 - x + 10).\n\nWe can simplify this expression:\n\n(x + 10) + (20 - x + 10) = x + 20 + 10 - x + 10\n= 40\n\nSo, the sum of their ages in "
+   "score": 0.0,
+   "text": "To solve this problem, we need to first find the current ages of Mico and Marco. \n\nLet's denote Mico's age as 'm' and Marco's age as 'c'. We know that the sum of their ages is 20, so we can write an equation:\n\nm + c = 20\n\nWe also know that in 10 years, their ages will be m + 10 and c + 10, respectively. The sum of their ages in 10 years will be (m + 10) + (c + 10).\n\nSince we want to find the sum of their ages in 10 years, we can write an equation:\n\nm + 10 + c + 10 = (m + c) + 20\n\nNow, we can substitute the value of m + c from the first equation into the second equation:\n\nm + 10 + c + 10 = 20 + 10\nm + 10 + c + 10 = 30\n\nNow, simplify the equation:\n\nm + c + 20 = 30\n\nSubtract 20 from both sides:\n\nm + c = 10\n\nNow we have two equations:\n\nm + c = 20\nm + c = 10\n\nSince both equations are equal, we can set them equal to each other:\n\n20 = 10\n\nThis is not possible, so we need to go back to the first equation and try a different approach.\n\nLet's try to find the ages of Mico and Marco. We can write an equation for each of them:\n\nm = 20 - c\nc = 20 - m\n\nNow, we can substitute the value of c into the equation for m:\n\nm = 20 - (20 - m)\nm = m\n\nNow, we can substitute the value of m into the equation for c:\n\nc = 20 - (20 - c)\nc = c\n\nThis doesn't help us, so let's try a different approach.\n\nLet's say Mico's age is x. Then Marco's age is 20 - x. \n\nWe know that in 10 years, Mico's age will be x + 10 and Marco's age will be (20 - x) + 10.\n\nThe sum of their ages in 10 years will be (x + 10) + ((20 - x) + 10).\n\nWe can simplify this expression:\n\n(x + 10) + (20 - x) + 10\n= x + 20 -"
   },
   {
    "id": "gsm8k-63",
@@ -429,7 +429,7 @@
   {
    "id": "gsm8k-82",
    "score": 1.0,
-   "text": "To find the total number of stickers Leo has in his collection, we need to calculate the stickers he collected each year and add them up.\n\nStep 1: Two years ago, Leo had 100 stickers.\n\nStep 2: Last year, Leo collected 50 stickers. So, he now has 100 + 50 = 150 stickers.\n\nStep 3: This year, Leo collected twice the number of stickers as the previous year. So, he collected 2 * 50 = 100 stickers.\n\nStep 4: Now, we add the stickers collected this year to the total: 150 + 100 = 250.\n\nLeo has 250 stickers in his collection."
+   "text": "To find the total number of stickers Leo has in his collection, we need to calculate the stickers he collected each year and add them up.\n\nStep 1: Two years ago, Leo had 100 stickers.\n\nStep 2: Last year, Leo collected 50 stickers. So, he now has 100 + 50 = 150 stickers.\n\nStep 3: This year, Leo collected twice the number of stickers as the previous year. So, he collected 2 * 50 = 100 stickers.\n\nStep 4: Now, we add the stickers collected this year to the total number of stickers he had last year. 150 + 100 = 250.\n\nLeo has 250 stickers in his collection."
   },
   {
    "id": "gsm8k-83",
@@ -444,12 +444,12 @@
   {
    "id": "gsm8k-85",
    "score": 1.0,
-   "text": "To find the total number of points Ara has scored, we need to multiply the number of games she played each year by her score for each game, and then add up the results.\n\nStep 1: Calculate the total points scored in one year\nScore per game = 21 points\nNumber of games played per year = 40\nTotal points scored in one year = Score per game * Number of games played per year\nTotal points scored in one year = 21 * 40\nTotal points scored in one year = 840\n\nStep 2: Calculate the total points scored in four years\nTotal points scored in four years = Total points scored in one year * 4\nTotal points scored in four years = 840 * 4\nTotal points scored in four years = 3360\n\nTherefore, Ara has scored 3360 points in the four years."
+   "text": "To find the total number of points Ara has scored, we need to multiply the number of games she played each year by her score for each game, and then add up the results.\n\nStep 1: Calculate the total points scored in one year\nScore per game = 21 points\nNumber of games played per year = 40\nTotal points per year = Score per game * Number of games played per year\nTotal points per year = 21 * 40\nTotal points per year = 840\n\nStep 2: Calculate the total points scored in four years\nTotal points in four years = Total points per year * 4\nTotal points in four years = 840 * 4\nTotal points in four years = 3360\n\nTherefore, Ara has scored 3360 points in the four years."
   },
   {
    "id": "gsm8k-86",
    "score": 0.0,
-   "text": "To solve this problem, we need to break it down into steps.\n\nStep 1: Calculate the total amount of lemon juice needed for 4 gallons of lemonade.\nSince 1 gallon requires 1 cup of lemon juice, 4 gallons will require 4 cups of lemon juice.\n\nStep 2: Calculate the number of lemons needed for 4 cups of lemon juice.\nSince 6 lemons yield 1 cup of juice, we can divide 4 cups by 1 cup to find the number of lemons needed for 4 cups.\n4 cups / 1 cup = 4\nSo, 4 cups of lemon juice will require 4 lemons.\n\nStep 3: Calculate the number of lemons needed for 1 extra gallon of lemonade that is twice as tart.\nSince the extra gallon is twice as tart, it will require half the amount of lemon juice as the other gallons.\nHalf of 4 cups is 2 cups.\nSince 6 lemons yield 1 cup of juice, we can divide 2 cups by 1 cup to find the number of lemons needed for 2 cups.\n2 cups / 1 cup = 2\nSo, 2 cups of lemon juice will require 2 lemons.\n\nStep 4: Calculate the total number of lemons needed.\nWe need 4 lemons for the 4 gallons and 2 lemons for the extra gallon.\n4 + 2 = 6\nSo, Tim will need 6 lemons in total.\n\nThe final answer is: 6"
+   "text": "To solve this problem, we need to break it down into steps.\n\nStep 1: Calculate the total amount of lemon juice needed for 4 gallons of lemonade.\nSince 1 gallon requires 1 cup of lemon juice, 4 gallons will require 4 cups of lemon juice.\n\nStep 2: Calculate the number of lemons needed for 4 cups of lemon juice.\nSince 6 lemons yield 1 cup of juice, we can divide 4 cups by 1 cup to find the number of lemons needed for 4 cups.\n4 cups / 1 cup = 4\nSo, 4 cups of lemon juice will require 4 lemons.\n\nStep 3: Calculate the number of lemons needed for 1 extra gallon of lemonade that is twice as tart.\nSince the extra gallon is twice as tart, it will require half the amount of lemon juice as the other gallons.\nHalf of 4 cups is 2 cups.\nSince 6 lemons yield 1 cup of juice, we can divide 2 cups by 1 cup to find the number of lemons needed for 2 cups.\n2 cups / 1 cup = 2\nSo, 2 cups of lemon juice will require 2 lemons.\n\nStep 4: Calculate the total number of lemons needed.\nWe need 4 lemons for the 4 gallons and 2 lemons for the extra gallon.\n4 + 2 = 6\nSo, Tim will need 6 lemons in total.\n\n#### 6"
   },
   {
    "id": "gsm8k-87",
@@ -459,7 +459,7 @@
   {
    "id": "gsm8k-88",
    "score": 1.0,
-   "text": "To solve this problem, let's break it down step by step:\n\n1. The first side takes 5 minutes.\n2. The second and third sides each take twice as long as the first side, so each of these sides takes 5 x 2 = 10 minutes.\n3. The last two sides each take half as long as the first side, so each of these sides takes 5 / 2 = 2.5 minutes.\n4. Since there are two last sides, the total time for these sides is 2.5 x 2 = 5 minutes.\n5. The total time for all six sides is the sum of the time for each side: 5 + 10 + 10 + 2.5 + 2.5 = 30 minutes.\n\n#### 30"
+   "text": "To solve the problem, let's break it down step by step:\n\n1. The first side takes 5 minutes.\n2. The second and third sides each take twice as long as the first side, so each of these sides takes 5 x 2 = 10 minutes.\n3. The last two sides each take half as long as the first side, so each of these sides takes 5 / 2 = 2.5 minutes.\n4. Since there are two last sides, the total time for these sides is 2.5 x 2 = 5 minutes.\n5. The total time for all six sides is the sum of the time for each side: 5 + 10 + 10 + 2.5 + 2.5 = 30 minutes.\n\n#### 30"
   },
   {
    "id": "gsm8k-89",
@@ -494,7 +494,7 @@
   {
    "id": "gsm8k-95",
    "score": 1.0,
-   "text": "To solve this problem, we need to find the time it takes for Grandma to walk on the sidewalk and then add it to the time it takes for her to walk on the beach.\n\nFirst, we need to find the time it takes for Grandma to walk on the beach. We know that she walks 2 miles on the beach and spends 40 minutes on the beach. \n\nTime = Distance / Speed\nWe don't know her speed on the beach, but we know that she walks twice as fast on the sidewalk. Let's call her speed on the beach 'x'. Then, her speed on the sidewalk is 2x.\n\nWe know that 40 minutes is the time it takes for her to walk 2 miles on the beach. We can set up an equation:\n\n40 = 2 / x\n\nTo solve for x, we can multiply both sides by x:\n\n40x = 2\nx = 2 / 40\nx = 1/20 miles per minute\n\nNow that we know her speed on the beach, we can find her speed on the sidewalk:\n\nSpeed on sidewalk = 2x\n= 2 * (1/20)\n= 1/10 miles per minute\n\nNow we can find the time it takes for her to walk 1 mile on the sidewalk:\n\nTime = Distance / Speed\n= 1 / (1/10)\n= 10 minutes\n\nNow we know that it takes her 10 minutes to walk 1 mile on the sidewalk. Since she walks 1 mile on the sidewalk, it will take her 10 minutes to walk the entire sidewalk.\n\nNow we can find the total time it takes for her to complete the entire 3-mile walk:\n\nTime on beach = 40 minutes\nTime on sidewalk = 10 minutes\nTotal time = 40 + 10\n= 50 minutes\n\n#### 50"
+   "text": "To solve this problem, we need to find the time it takes for Grandma to walk on the sidewalk and then add it to the time it takes for her to walk on the beach.\n\nFirst, we need to find the time it takes for Grandma to walk on the beach. We know that she walks 2 miles on the beach and spends 40 minutes on the beach. To find the time it takes for her to walk 2 miles, we can divide the time spent on the beach by the distance walked on the beach:\n\nTime on beach = 40 minutes / 2 miles = 20 minutes per mile\n\nNow, we know that Grandma walks 1 mile on the sidewalk at twice the rate of speed that she does on the beach. This means that she walks 1 mile on the sidewalk in half the time it takes her to walk 1 mile on the beach. Since it takes her 20 minutes to walk 1 mile on the beach, it takes her 20 / 2 = 10 minutes to walk 1 mile on the sidewalk.\n\nNow, we can find the total time it takes for Grandma to walk on the sidewalk:\n\nTime on sidewalk = 1 mile * 10 minutes per mile = 10 minutes\n\nNow, we can add the time it takes for Grandma to walk on the beach and the sidewalk to find the total time it takes for her to complete the entire 3-mile walk:\n\nTotal time = Time on beach + Time on sidewalk\n= 40 minutes + 10 minutes\n= 50 minutes\n\n#### 50"
   },
   {
    "id": "gsm8k-96",

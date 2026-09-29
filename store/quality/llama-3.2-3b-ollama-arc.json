@@ -1,0 +1,520 @@
+{
+ "artifact": "llama-3.2-3b-ollama",
+ "model": "llama-3.2-3b-mlx4",
+ "engine": "ollama",
+ "label": "Ollama",
+ "task": "arc",
+ "n": 100,
+ "correct": 61.0,
+ "score": 0.61,
+ "ci95": [
+  0.5120283616749817,
+  0.699832780680298
+ ],
+ "version": "0.34.4",
+ "empty": 0,
+ "minutes": 0.5,
+ "date": "2026-09-29T11:55:06Z",
+ "samples": [
+  {
+   "id": "arc-Mercury_7116183",
+   "score": 1.0,
+   "text": "B. decreases the amount of resources\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7016258",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_SC_410971",
+   "score": 1.0,
+   "text": "A. The air stays cleaner.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_LBS10273",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "arc-MCAS_1998_4_12",
+   "score": 1.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7018410",
+   "score": 1.0,
+   "text": "C. They both travel at the same speed.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_405161",
+   "score": 1.0,
+   "text": "D. contains air pockets.\n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_405778",
+   "score": 0.0,
+   "text": "D. hydroelectric\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_SC_407383",
+   "score": 0.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7034843",
+   "score": 0.0,
+   "text": "A. number of protons\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7263638",
+   "score": 1.0,
+   "text": "B. \n\nAnswer: B."
+  },
+  {
+   "id": "arc-MDSA_2007_8_3",
+   "score": 1.0,
+   "text": "A. the price of boards will increase\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7138915",
+   "score": 0.0,
+   "text": "C. Purple martins will decrease and starlings will increase.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_4_12",
+   "score": 1.0,
+   "text": "C. has thick, dark clouds.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7139650",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_7263183",
+   "score": 1.0,
+   "text": "B. central nervous system\n\nAnswer: B"
+  },
+  {
+   "id": "arc-AKDE&ED_2008_8_34",
+   "score": 0.0,
+   "text": "C. \n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7210508",
+   "score": 1.0,
+   "text": "C. if the snowfall was consistent with weather in December over time\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7234360",
+   "score": 1.0,
+   "text": "A. Convergent margins create depressions.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-MCAS_2000_4_36",
+   "score": 0.0,
+   "text": "D\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7215828",
+   "score": 1.0,
+   "text": "A. table salt\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_401373",
+   "score": 0.0,
+   "text": "C. flipping a switch to turn on a light\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7138460",
+   "score": 1.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_412774",
+   "score": 1.0,
+   "text": "C. decrease in pH toward a pH of 7\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7004743",
+   "score": 0.0,
+   "text": "B. \n\nAnswer: B."
+  },
+  {
+   "id": "arc-MSA_2015_8_30",
+   "score": 1.0,
+   "text": "A. Fertilizers may wash into streams.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-ACTAAP_2007_7_36",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "arc-ACTAAP_2013_5_17",
+   "score": 0.0,
+   "text": "B. allowing an iron chain to remain in salt water until it rusts\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_SC_401585",
+   "score": 0.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7029558",
+   "score": 1.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7247065",
+   "score": 0.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_SC_402257",
+   "score": 0.0,
+   "text": "B.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MCAS_1998_4_13",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-ACTAAP_2013_7_16",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-Mercury_7150343",
+   "score": 1.0,
+   "text": "B. Available energy decreases as trophic levels increase.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7082320",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_401312",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_SC_401324",
+   "score": 1.0,
+   "text": "D. There would be fewer sparrows seen in the fields.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_8_17",
+   "score": 1.0,
+   "text": "A. There is greater variation among the offspring.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7185343",
+   "score": 1.0,
+   "text": "D. Populations of plants consumed by elk and bison will increase.\n\nAnswer: D."
+  },
+  {
+   "id": "arc-MEAP_2005_8_45",
+   "score": 0.0,
+   "text": "B. The piece of cardboard will scatter the most light because it is opaque, meaning it blocks most of the light that hits it, rather than reflecting or transmitting it."
+  },
+  {
+   "id": "arc-Mercury_7084665",
+   "score": 1.0,
+   "text": "A. the Milky Way galaxy\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_412605",
+   "score": 0.0,
+   "text": "The relative sizes of each state have the greatest impact on the difference in precipitation between Nevada and Washington state. Larger states tend to have more land area, which can result in greater variations in precipitation due to topography, climate patterns, and other geographical factors. This can lead to a greater difference in average annual precipitation between the two states.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7174213",
+   "score": 1.0,
+   "text": "D. the distance between molecules in the medium\n\nAnswer: D."
+  },
+  {
+   "id": "arc-NAEP_2005_4_S14+3",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "arc-Mercury_SC_401678",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_401926",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_7247678",
+   "score": 0.0,
+   "text": "Diversity would increase initially, but as the deer population grows, it can lead to overgrazing, which can cause degradation of the habitat and lead to a decrease in biodiversity and sustainability.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MCAS_1999_4_27",
+   "score": 0.0,
+   "text": "D. using DNA to identify a criminal\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_417593",
+   "score": 1.0,
+   "text": "A mutation is a sudden, heritable change in the DNA of an organism. In this case, the fish having longer spines is an example of a beneficial mutation, as it provides protection from predators and increases the chances of survival and reproduction. Therefore, the correct answer is:\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7172270",
+   "score": 1.0,
+   "text": "A. the ability of the snake to survive to reproduce\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_402171",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-Mercury_400687",
+   "score": 0.0,
+   "text": "A. Wood is porous.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_416459",
+   "score": 0.0,
+   "text": "B\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MDSA_2007_5_16",
+   "score": 0.0,
+   "text": "D. newspaper\n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_SC_409673",
+   "score": 1.0,
+   "text": "D. Answer: D."
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2015_8_29",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_415083",
+   "score": 1.0,
+   "text": "To find Anna's average speed, we need to divide the distance she ran (100 meters) by the time it took her to run that distance (20 seconds).\n\nAverage speed = Distance / Time\nAverage speed = 100 meters / 20 seconds\nAverage speed = 5 m/s\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_409647",
+   "score": 1.0,
+   "text": "D. Bottom dwellers will die and fish will swim away.\n\nAnswer: D."
+  },
+  {
+   "id": "arc-MCAS_2005_9_17",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "arc-Mercury_7142520",
+   "score": 1.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7027160",
+   "score": 0.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-MEAP_2005_8_21",
+   "score": 1.0,
+   "text": "D. create recreational ponds and lakes.\n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_400880",
+   "score": 0.0,
+   "text": "B. gain of a proton\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_416505",
+   "score": 1.0,
+   "text": "B. an enzyme in a lysosome\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7018270",
+   "score": 0.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-Mercury_406800",
+   "score": 0.0,
+   "text": "A. different from the traits of the single parent\n\nAnswer: A"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_4_15",
+   "score": 0.0,
+   "text": "B.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MCAS_2004_9_21-v1",
+   "score": 1.0,
+   "text": "C. Answer: C."
+  },
+  {
+   "id": "arc-MDSA_2009_5_39",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "arc-Mercury_7221988",
+   "score": 1.0,
+   "text": "C. It controls the amount of current.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_SC_415457",
+   "score": 0.0,
+   "text": "B.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MCAS_2013_8_29425",
+   "score": 1.0,
+   "text": "A. The pressure at the core is very high.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-LEAP_2007_4_10280",
+   "score": 0.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_SC_401142",
+   "score": 1.0,
+   "text": "B. stay hidden.\n\nAnswer: B."
+  },
+  {
+   "id": "arc-Mercury_LBS10131",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "arc-Mercury_400407",
+   "score": 0.0,
+   "text": "C. The planets are arranged in order of increasing size.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_409301",
+   "score": 1.0,
+   "text": "B. \n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7095060",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_SC_408042",
+   "score": 1.0,
+   "text": "B. \n\nAnswer: B."
+  },
+  {
+   "id": "arc-TIMSS_2003_4_pg82",
+   "score": 0.0,
+   "text": "C.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_7213413",
+   "score": 0.0,
+   "text": "B. \n\nAnswer: B"
+  },
+  {
+   "id": "arc-LEAP_2000_8_2",
+   "score": 0.0,
+   "text": "C. Mountain building is slower than erosion at El Cajon Pass.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_401168",
+   "score": 1.0,
+   "text": "C.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_407097",
+   "score": 0.0,
+   "text": "B. Both samples in the cups will be in the same state.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7082845",
+   "score": 0.0,
+   "text": "D. was stopped by the hard surface.\n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_7201740",
+   "score": 1.0,
+   "text": "A. the ability to revolve around the central ball\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7171570",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "arc-Mercury_7026355",
+   "score": 1.0,
+   "text": "A. solar heating is greatest near the equator.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-MCAS_2016_8_15",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "arc-Mercury_SC_407592",
+   "score": 0.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-Mercury_7027720",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_7041423",
+   "score": 0.0,
+   "text": "B. dryer conditions.\n\nAnswer: B."
+  },
+  {
+   "id": "arc-Mercury_7140333",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "arc-Mercury_7038028",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7032620",
+   "score": 1.0,
+   "text": "B. are in the same family.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_SC_407382",
+   "score": 1.0,
+   "text": "C. They both reproduce by laying eggs.\n\nAnswer: C."
+  },
+  {
+   "id": "arc-Mercury_SC_401309",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-MDSA_2011_5_3",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "arc-Mercury_416380",
+   "score": 0.0,
+   "text": "B."
+  }
+ ]
+}

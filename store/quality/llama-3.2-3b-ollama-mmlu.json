@@ -1,0 +1,520 @@
+{
+ "artifact": "llama-3.2-3b-ollama",
+ "model": "llama-3.2-3b-mlx4",
+ "engine": "ollama",
+ "label": "Ollama",
+ "task": "mmlu",
+ "n": 100,
+ "correct": 55.0,
+ "score": 0.55,
+ "ci95": [
+  0.45244427031643447,
+  0.6438562489359654
+ ],
+ "version": "0.34.4",
+ "empty": 0,
+ "minutes": 0.6,
+ "date": "2026-09-29T11:54:39Z",
+ "samples": [
+  {
+   "id": "mmlu-0",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "mmlu-1",
+   "score": 0.0,
+   "text": "A."
+  },
+  {
+   "id": "mmlu-2",
+   "score": 0.0,
+   "text": "A."
+  },
+  {
+   "id": "mmlu-3",
+   "score": 0.0,
+   "text": "C. As heat flows out of the person and warms the fluid surrounding the person, the warmer fluid rises, allowing fresh cool fluid to come in contact with the person and increasing the rate of heat transfer.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-4",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-5",
+   "score": 1.0,
+   "text": "A. Weaving\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-6",
+   "score": 0.0,
+   "text": "To find the probability of rolling a three, we need to divide the number of favorable outcomes (rolling a 3) by the total number of possible outcomes (rolling any number from 1 to 6).\n\nThere is 1 favorable outcome (rolling a 3) and 6 possible outcomes (rolling 1, 2, 3, 4, 5, or 6).\n\nProbability = Number of favorable outcomes / Total number of possible outcomes\n= 1 / 6\n= 1/6\n\nSince 1/6 is equal to 0.1667, we can convert it to a percentage by multiplying by 100:\n(1/6) * 100 = 16.67%\n\nNow, looking at the answer choices, we can see that 1/6 is closest to 1/6, which is 0.1667 or 16.67%. However, the answer choices are given in a different format. \n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-7",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "mmlu-8",
+   "score": 0.0,
+   "text": "B. The equilibrium price level decreases while the equilibrium quantity of output increases.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-9",
+   "score": 1.0,
+   "text": "D. they have extension\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-10",
+   "score": 1.0,
+   "text": "B. There is an expectation of an afterlife.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-11",
+   "score": 1.0,
+   "text": "A\nAnswer: A"
+  },
+  {
+   "id": "mmlu-12",
+   "score": 0.0,
+   "text": "A. A virus or worm\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-13",
+   "score": 0.0,
+   "text": "To determine the number of positive integers k for which the ordinary decimal representation of k! ends in exactly 99 zeros, we need to find the number of multiples of 10^99 in k!.\n\nThe number of trailing zeros in k! is determined by the number of factors of 10 in k!, which is equivalent to the number of factors of 2 and 5 in k!. Since there are usually more factors of 2 than 5, we only need to count the number of factors of 5.\n\nThe number of factors of 5 in k! is given by the formula:\n\nnumber of factors of 5 = floor(k/5) + floor(k/25) + floor(k/125) + ...\n\nWe want to find the number of k such that the number of factors of 5 is equal to 99.\n\nLet's calculate the number of factors of 5 for different values of k:\n\n- For k = 1, the number of factors of 5 is 0.\n- For k = 2, the number of factors of 5 is 0.\n- For k = 3, the number of factors of 5 is 0.\n- For k = 4, the number of factors of 5 is 0.\n- For k = 5, the number of factors of 5 is 1.\n- For k = 6, the number of factors of 5 is 1.\n- For k = 7, the number of factors of 5 is 2.\n- For k = 8, the number of factors of 5 is 2.\n- For k = 9, the number of factors of 5 is 2.\n- For k = 10, the number of factors of 5 is 2.\n- For k = 11, the number of factors of 5 is 3.\n- For k = 12, the number of factors of 5 is 3.\n- For k = 13, the number of factors of 5 is 3.\n- For k = 14, the number of factors of 5 is 4.\n- For k = 15, the number of factors of 5 is 4.\n- For k = 16, the number of factors of 5 is 4.\n- For k = 17, the number of factors of 5 is 4.\n- For k = 18, the number of factors of 5 is 4.\n- For k"
+  },
+  {
+   "id": "mmlu-14",
+   "score": 0.0,
+   "text": "A\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-15",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "mmlu-16",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-17",
+   "score": 0.0,
+   "text": "C.\n\nAnswer: C."
+  },
+  {
+   "id": "mmlu-18",
+   "score": 1.0,
+   "text": "A. The digestibility of plant proteins is generally less good compared to animal proteins.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-19",
+   "score": 1.0,
+   "text": "B. Muscle glycogen\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-20",
+   "score": 0.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-21",
+   "score": 0.0,
+   "text": "To determine the type of tax system, we need to analyze the relationship between the tax rate and the taxable income.\n\nIn the given scenario:\n\n- For a single person with $25,000 in taxable income, the tax rate is 24%.\n- For a single person with $20,000 in taxable income, the tax rate is 20%.\n\nSince the tax rate decreases as the taxable income increases, this indicates that the tax rate is lower for a higher income. This is the opposite of a progressive tax system, where the tax rate increases as the taxable income increases.\n\nA regressive tax system would have a higher tax rate for a lower income and a lower tax rate for a higher income, which is not the case here.\n\nA proportional tax system would have the same tax rate for all income levels, which is also not the case here.\n\nA revenue-neutral tax system would have the same total tax revenue regardless of the income level, which is not the case here.\n\nTherefore, the tax rate over this income range is regressive.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-22",
+   "score": 1.0,
+   "text": "A. two \u03b1 (alpha) and two \u03b2 (beta) chains.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-23",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-24",
+   "score": 1.0,
+   "text": "A. bind regions near a eukaryotic gene and allow an RNA polymerase to transcribe a gene\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-25",
+   "score": 1.0,
+   "text": "B"
+  },
+  {
+   "id": "mmlu-26",
+   "score": 0.0,
+   "text": "To find the total number of stickers, we need to consider that Elizabeth and her two friends are sharing the stickers equally. Since each person gets 4 stickers, we can set up the equation as follows:\n\nTotal number of stickers = Number of people x Number of stickers per person\ns = 3 x 4\ns = 12\n\nHowever, we are given the options in terms of 's' and the number of stickers each person gets. To match the options, we can rewrite the equation as:\n\n3s = 12\n\nNow, comparing this with the given options, we can see that:\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-27",
+   "score": 0.0,
+   "text": "D\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-28",
+   "score": 0.0,
+   "text": "A\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-29",
+   "score": 1.0,
+   "text": "A."
+  },
+  {
+   "id": "mmlu-30",
+   "score": 0.0,
+   "text": "To solve this problem, we need to find the time it takes for the polarization to reach a value equal to twice the thermal equilibrium polarization.\n\nFirst, we need to find the thermal equilibrium polarization (peq). We can use the equation:\n\npeq = (1 - exp(-1/T1)) / (1 - exp(-1/T1))\n\nwhere T1 is the spin-lattice relaxation time.\n\nPlugging in the given value of T1 = 5.0 s, we get:\n\npeq = (1 - exp(-1/5.0)) / (1 - exp(-1/5.0)) \u2248 0.9999\n\nNow, we want to find the time it takes for the polarization to reach a value equal to twice the thermal equilibrium polarization, which is 2peq \u2248 1.9998.\n\nWe can use the equation:\n\np(t) = [p(0) - peq]exp(-t/T1) + peq\n\nSince the initial polarization p(0) is 1, we can simplify the equation to:\n\n1 - peq = [1 - peq]exp(-t/T1) + peq\n\nSubtracting peq from both sides gives:\n\n1 - 2peq = [1 - peq]exp(-t/T1)\n\nDividing both sides by (1 - peq) gives:\n\n(1 - 2peq) / (1 - peq) = exp(-t/T1)\n\nTaking the natural logarithm of both sides gives:\n\nln((1 - 2peq) / (1 - peq)) = -t/T1\n\nNow, we can plug in the values of peq and T1:\n\nln((1 - 2peq) / (1 - peq)) = -t/5.0\n\nSolving for t, we get:\n\nt \u2248 56.6 s\n\nTherefore, the correct answer is:\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-31",
+   "score": 1.0,
+   "text": "B. HC2H3O2 and KC2H3O2\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-32",
+   "score": 0.0,
+   "text": "To maximize her utility, Carmen should buy fewer units of Y and more units of X. This is because the marginal utility of the last dollar spent on good X (5) is less than the marginal utility of the last dollar spent on good Y (10). By increasing the consumption of good X and decreasing the consumption of good Y, Carmen can allocate her income in a way that maximizes her overall utility.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-33",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "mmlu-34",
+   "score": 0.0,
+   "text": "B."
+  },
+  {
+   "id": "mmlu-35",
+   "score": 0.0,
+   "text": "To determine the number of electrons, protons, and neutrons in an atom of 52Cr, we need to know the atomic number and mass number of the element.\n\nThe atomic number of Chromium (Cr) is 24, which represents the number of protons in the nucleus. \n\nThe mass number of 52Cr is 52, which is the sum of protons and neutrons in the nucleus.\n\nLet's calculate the number of neutrons:\n52 (mass number) - 24 (protons) = 28 neutrons\n\nSince the number of electrons in a neutral atom is equal to the number of protons, the number of electrons in 52Cr is also 24.\n\nTherefore, the correct answer is:\nAnswer: C"
+  },
+  {
+   "id": "mmlu-36",
+   "score": 0.0,
+   "text": "C. Decreases \u00a0\u00a0\u00a0\u00a0  \u00a0\u00a0\u00a0\u00a0 Depreciate \u00a0\u00a0\u00a0\u00a0 Increases\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-37",
+   "score": 0.0,
+   "text": "To determine the production budget for the first quarter, we need to calculate the finished goods inventory at the end of the first quarter, which is 30% of the second quarter's budgeted sales.\n\nThe second quarter's budgeted sales is 40,000 units. \n30% of 40,000 is 0.3 x 40,000 = 12,000 units.\n\nSince the inventory at the beginning of the year was 9,000 units, and we want the finished goods inventory at the end of the first quarter to be 12,000 units, we need to add the difference to the beginning inventory.\n\n12,000 - 9,000 = 3,000 units\n\nThis means that 3,000 units need to be produced during the first quarter to meet the requirement.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-38",
+   "score": 1.0,
+   "text": "C."
+  },
+  {
+   "id": "mmlu-39",
+   "score": 0.0,
+   "text": "D. are required to receive pay equal to that of regular full-time employees doing the same job.\n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-40",
+   "score": 0.0,
+   "text": "B. 830\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-41",
+   "score": 1.0,
+   "text": "C. the organization of a society's technical and human resources\n\nAnswer: C."
+  },
+  {
+   "id": "mmlu-42",
+   "score": 1.0,
+   "text": "B. Lower leg\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-43",
+   "score": 1.0,
+   "text": "To simplify 60 over 72, we need to find the greatest common divisor (GCD) of 60 and 72.\n\nThe GCD of 60 and 72 is 12.\n\nNow, divide both the numerator and the denominator by the GCD:\n\n60 \u00f7 12 = 5\n72 \u00f7 12 = 6\n\nSo, 60 over 72 simplifies to 5 over 6.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-44",
+   "score": 0.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-45",
+   "score": 1.0,
+   "text": "A. The theory and knowledge that underpin each approach are fundamentally at odds with one another. Whilst Critical Security Studies is post-structuralist and constructivist, the Copenhagen School is based on an objectivist epistemology.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-46",
+   "score": 0.0,
+   "text": "B. Wrong, Not wrong\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-47",
+   "score": 1.0,
+   "text": "A. types of DNA-binding proteins\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-48",
+   "score": 1.0,
+   "text": "D\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-49",
+   "score": 1.0,
+   "text": "D. \n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-50",
+   "score": 0.0,
+   "text": "B\n\nExplanation: The driver of the car is entitled to contribution from the driver of the truck because the driver of the truck was more at fault than the driver of the car. Contribution is a remedy for a defendant who has paid more than his share of the damages than he should have. Here, the driver of the car paid $45,000, while the driver of the truck should have paid $25,000 (25% of $100,000). Therefore, the driver of the car is entitled to $20,000 in contribution from the driver of the truck."
+  },
+  {
+   "id": "mmlu-51",
+   "score": 0.0,
+   "text": "B\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-52",
+   "score": 0.0,
+   "text": "A."
+  },
+  {
+   "id": "mmlu-53",
+   "score": 1.0,
+   "text": "Answer: D."
+  },
+  {
+   "id": "mmlu-54",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-55",
+   "score": 0.0,
+   "text": "The image of the coin will get smaller at first and then bigger in size. \n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-56",
+   "score": 1.0,
+   "text": "C. Adam Smith\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-57",
+   "score": 0.0,
+   "text": "C."
+  },
+  {
+   "id": "mmlu-58",
+   "score": 1.0,
+   "text": "A. Self-actualization.\n\nAnswer: A."
+  },
+  {
+   "id": "mmlu-59",
+   "score": 1.0,
+   "text": "To find the mole fraction of sodium hydroxide, we need to know the molar mass of sodium hydroxide (NaOH) and the molar mass of water (H2O).\n\nThe molar mass of NaOH is 40 g/mol, and the molar mass of H2O is 18 g/mol.\n\nGiven that the weight percent of sodium hydroxide dissolved in water is 50%, we can set up the following equation:\n\nWeight of NaOH / (Weight of NaOH + Weight of H2O) = 0.5\n\nLet's assume the total weight of the solution is 100 g. Then, the weight of NaOH is 50 g and the weight of H2O is 50 g.\n\nNow, we can calculate the number of moles of NaOH and H2O:\n\nNumber of moles of NaOH = Weight of NaOH / Molar mass of NaOH = 50 g / 40 g/mol = 1.25 mol\nNumber of moles of H2O = Weight of H2O / Molar mass of H2O = 50 g / 18 g/mol = 2.78 mol\n\nNow, we can calculate the mole fraction of NaOH:\n\nMole fraction of NaOH = Number of moles of NaOH / (Number of moles of NaOH + Number of moles of H2O)\n= 1.25 mol / (1.25 mol + 2.78 mol)\n= 1.25 mol / 3.98 mol\n= 0.314\n\nRounding to three decimal places, we get 0.314 \u2248 0.314, which is closest to 0.311.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-60",
+   "score": 1.0,
+   "text": "D. The plaintiff will prevail unless the company can prove some important basis for the exclusion of women.\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-61",
+   "score": 1.0,
+   "text": "B.\n\nAnswer: B."
+  },
+  {
+   "id": "mmlu-62",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-63",
+   "score": 1.0,
+   "text": "D\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-64",
+   "score": 0.0,
+   "text": "A. Asteroid impacts elsewhere in the solar system throw sand-sized particles into space and occasionally the Earth passes through a cloud of these particles which burn up in our atmosphere and cause a meteor shower.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-65",
+   "score": 0.0,
+   "text": "C\n\nExplanation: In gradient descent, we update the parameters using the formula: parameters = parameters - learning_rate * gradient. Since we have computed the gradient of the cost function and stored it in a vector, the cost of one gradient descent update is O(1), which is equivalent to O(D), where D is the dimension of the gradient vector."
+  },
+  {
+   "id": "mmlu-66",
+   "score": 1.0,
+   "text": "To determine the effect of the FED's open market operation on the money supply, we need to consider the reserve requirement. \n\nWhen the FED sells government securities, it absorbs cash from the market, which reduces the money supply. Since the reserve requirement is 5%, the FED will require 5% of the $10 million in reserves to be held in reserve, leaving $9.5 million in the commercial banks' vaults. \n\nThe $10 million in government securities sold will be used to meet the reserve requirement, so the money supply will decrease by $10 million. \n\nAnswer: B."
+  },
+  {
+   "id": "mmlu-67",
+   "score": 1.0,
+   "text": "C. \n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-68",
+   "score": 0.0,
+   "text": "B. Wrong, Not wrong\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-69",
+   "score": 1.0,
+   "text": "C. Inflicting pain or stress on animals is acceptable in research only when an alternative (nonpainful) procedure is unavailable and the use of the procedure is justified by the potential value of the study.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-70",
+   "score": 1.0,
+   "text": "A. China\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-71",
+   "score": 0.0,
+   "text": "C. \n\nAnswer: C."
+  },
+  {
+   "id": "mmlu-72",
+   "score": 0.0,
+   "text": "Answer: B"
+  },
+  {
+   "id": "mmlu-73",
+   "score": 1.0,
+   "text": "D. Critical marketing analysis\n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-74",
+   "score": 1.0,
+   "text": "B."
+  },
+  {
+   "id": "mmlu-75",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-76",
+   "score": 0.0,
+   "text": "B. 800,000 years ago to present\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-77",
+   "score": 1.0,
+   "text": "C\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-78",
+   "score": 1.0,
+   "text": "A. \n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-79",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-80",
+   "score": 1.0,
+   "text": "C. Suppress all nationalist revolutions across the continent.\n\nAnswer: C."
+  },
+  {
+   "id": "mmlu-81",
+   "score": 0.0,
+   "text": "C.\n\nAnswer: C."
+  },
+  {
+   "id": "mmlu-82",
+   "score": 1.0,
+   "text": "To solve this problem, we need to use the concept of neutralization reactions. The reaction between KOH (potassium hydroxide) and H3PO4 (phosphoric acid) is:\n\nH3PO4 + 3KOH \u2192 K3PO4 + 3H2O\n\nFrom the equation, we can see that 1 mole of H3PO4 reacts with 3 moles of KOH. \n\nFirst, we need to find the number of moles of H3PO4 in 50.0 mL of 0.150 M solution:\n\nmoles H3PO4 = molarity * volume (in liters) \nmoles H3PO4 = 0.150 M * 0.050 L = 0.0075 mol\n\nSince 1 mole of H3PO4 requires 3 moles of KOH, we need:\n\nmoles KOH = 3 * moles H3PO4 = 3 * 0.0075 mol = 0.0225 mol\n\nNow, we can find the volume of 0.250 M KOH solution required to provide 0.0225 mol of KOH:\n\nvolume KOH = moles KOH / molarity \nvolume KOH = 0.0225 mol / 0.250 M = 0.09 L = 90.0 mL\n\nTherefore, the correct answer is C. 90.0 mL. \n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-83",
+   "score": 0.0,
+   "text": "B.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-84",
+   "score": 1.0,
+   "text": "To find the product of 32 and 67, we multiply the two numbers:\n\n32 * 67 = 2,144\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-85",
+   "score": 0.0,
+   "text": "A."
+  },
+  {
+   "id": "mmlu-86",
+   "score": 0.0,
+   "text": "B. Wrong, Not wrong\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-87",
+   "score": 1.0,
+   "text": "C. Ocean of Wisdom\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-88",
+   "score": 1.0,
+   "text": "C. It must be present in a population before natural selection can act upon the population.\n\nAnswer: C"
+  },
+  {
+   "id": "mmlu-89",
+   "score": 1.0,
+   "text": "A. It is a scanner which works by injecting packets to a range of addresses, and inferring what hosts and services might be at those addresses, based on the responses\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-90",
+   "score": 0.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-91",
+   "score": 1.0,
+   "text": "D. little planning\n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-92",
+   "score": 1.0,
+   "text": "D. Framing.\n\nAnswer: D."
+  },
+  {
+   "id": "mmlu-93",
+   "score": 1.0,
+   "text": "To solve this problem, we need to use the equation of motion:\n\nv\u00b2 = u\u00b2 + 2as\n\nwhere:\nv = final velocity (130 km/h)\nu = initial velocity (0 m/s, since it starts from rest)\na = acceleration (which we need to find)\ns = distance (50 m)\n\nFirst, convert the final velocity from km/h to m/s:\n130 km/h = 130,000 m/3600 s = 36.11 m/s\n\nNow, plug in the values:\n(36.11)\u00b2 = 0\u00b2 + 2(50)a\n1322.4721 = 100a\na = 1322.4721 / 100\na = 13.24 m/s\u00b2\n\nRounding to two decimal places, we get approximately 13.24 m/s\u00b2, which is closest to option A.\n\nAnswer: A"
+  },
+  {
+   "id": "mmlu-94",
+   "score": 0.0,
+   "text": "The molecular geometry of thionyl chloride, SOCl2, is best described as T-shaped.\n\nAnswer: B"
+  },
+  {
+   "id": "mmlu-95",
+   "score": 1.0,
+   "text": "D. Deciduous forests\n\nAnswer: D"
+  },
+  {
+   "id": "mmlu-96",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-97",
+   "score": 0.0,
+   "text": "To solve this problem, we need to calculate the number of workers who will still be on the job at the end of the second year.\n\nInitially, 100 workers are hired, and 20% of them leave after the first year, which means 80% of 100 workers remain. \n\n80% of 100 workers = 0.8 * 100 = 80 workers.\n\nAt the start of the second year, 100 more workers are hired, making the total 80 + 100 = 180 workers.\n\nNow, 5% of the remaining workers leave during the second year. 5% of 180 workers = 0.05 * 180 = 9 workers.\n\nSo, the total number of workers who will still be on the job at the end of the second year is 180 - 9 = 171.\n\nHowever, we need to consider the 100 workers who were hired at the start of the first year. 20% of them leave after the first year, which means 80% of 100 workers remain. \n\n80% of 100 workers = 0.8 * 100 = 80 workers.\n\nThese 80 workers will still be on the job at the start of the second year.\n\nAdding the 171 workers who were hired at the start of the second year and the 80 workers who were hired at the start of the first year, we get 171 + 80 = 251 workers.\n\nHowever, we need to subtract the 9 workers who leave during the second year, so the total number of workers who will still be on the job at the end of the second year is 251 - 9 = 242.\n\nHowever, we need to subtract the 100 workers who were hired at the start of the first year, so the total number of workers who will still be on the job at the end of the second year is 242 - 100 = 142.\n\nHowever, we need to add the 9 workers who leave during the second year, so the total number of workers who will still be on the job at the end of the second year is 142 + 9 = 151.\n\nHowever, we need to add the 100 workers who were hired at the start of the first year, so the total number of workers who will still be on the job at the end of the second year is 151 + 100 = 251.\n\nHowever, we need to subtract the 9 workers who leave during the second year, so the"
+  },
+  {
+   "id": "mmlu-98",
+   "score": 1.0,
+   "text": "D."
+  },
+  {
+   "id": "mmlu-99",
+   "score": 0.0,
+   "text": "To calculate the earnings per share (EPS) for Toft Co., we need to first calculate the total earnings and then subtract the preferred stock dividends.\n\n1. Total earnings: $480,000\n2. Preferred stock dividends: 10,000 shares * $5 per share = $50,000\n3. Net earnings: $480,000 - $50,000 = $430,000\n4. Total shares outstanding: 120,000 (initial shares) + 40,000 (additional shares) = 160,000\n5. Earnings per share: $430,000 / 160,000 shares = $2.69\n\nAnswer: A"
+  }
+ ]
+}

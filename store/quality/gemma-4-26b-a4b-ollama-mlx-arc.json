@@ -1,0 +1,520 @@
+{
+ "artifact": "gemma-4-26b-a4b-ollama-mlx",
+ "model": "gemma-4-26b-a4b-mlx4",
+ "engine": "ollama",
+ "label": "Ollama MLX",
+ "task": "arc",
+ "n": 100,
+ "correct": 97.0,
+ "score": 0.97,
+ "ci95": [
+  0.915479219195973,
+  0.9897456617765851
+ ],
+ "version": "0.34.4",
+ "empty": 0,
+ "minutes": 2.3,
+ "date": "2026-09-29T10:50:33Z",
+ "samples": [
+  {
+   "id": "arc-Mercury_7116183",
+   "score": 1.0,
+   "text": "As the human population increases, the demand for essential resources such as food, water, fresh air, and energy also increases. Because the Earth has a finite amount of these natural resources, a larger population consumes the existing supply more quickly, leading to a depletion of those resources.\n\nA. Incorrect: Population growth consumes resources rather than creating them.\nB. Correct: Increased consumption leads to the depletion of available natural resources.\nC. Incorrect: More people result in a higher demand for resources.\nD. Incorrect: Increased demand and human activity often lead to the degradation of resource quality (e.g., pollution).\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7016258",
+   "score": 1.0,
+   "text": "The proper procedure for disposing of an acid solution depends on the specific concentration and type of acid, but in a general laboratory safety context, the standard procedure is to neutralize the acid to a safe pH before disposal. Pouring concentrated acids down the sink can damage plumbing and harm the environment, while adding more acid (C) or absorbing it with paper towels (D) without neutralization is unsafe or incorrect.\n\nB\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_SC_410971",
+   "score": 1.0,
+   "text": "Controlling the amount of pollution from cars directly impacts the quality of the air by reducing harmful emissions. This results in cleaner air for the population to breathe.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_LBS10273",
+   "score": 1.0,
+   "text": "A fossil is the preserved remains or impression of a once-living organism. Among the choices provided, a bone is the only part of a living organism.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MCAS_1998_4_12",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate the components of soil:\n\n*   **A is incorrect** because the sun is a source of energy, not a physical component of soil.\n*   **B is incorrect** because wind is a weather element/force that moves soil, not a substance that makes up soil.\n*   **C is correct** because soil is composed of inorganic mineral particles (like sand and clay) and organic matter (decaying plants and animals/humus).\n*   **D is incorrect** because the sun and wind are environmental factors, not substances within the soil.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7018410",
+   "score": 1.0,
+   "text": "Both radio waves and infrared waves are forms of electromagnetic radiation. In a vacuum, all electromagnetic waves\u2014regardless of their frequency or wavelength\u2014travel at the same constant speed, which is the speed of light ($c \\approx 3 \\times 10^8$ m/s).\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_405161",
+   "score": 1.0,
+   "text": "Pumice floats because the rapid cooling of gas-rich magma creates a structure filled with numerous tiny bubbles or vesicles. These air pockets significantly reduce the density of the rock, allowing it to float on water.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_405778",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must evaluate the environmental impact of each option:\n\n*   **A. Coal:** This is the most damaging option due to high carbon dioxide emissions, sulfur dioxide (acid rain), and heavy metal pollution.\n*   **B. Nuclear:** While it has very low carbon emissions, it produces radioactive waste that requires long-term storage and carries risks of catastrophic accidents.\n*   **C. Solar electric:** This is a renewable energy source with very low operational emissions. While manufacturing has an impact, it does not produce waste products or emissions during operation and has a minimal footprint compared to the others.\n*   **D. Hydroelectric:** While renewable, large-scale hydroelectric plants can cause significant damage to local ecosystems, disrupt fish migrations, and alter river habitats.\n\nAmong the choices provided, solar electric is generally considered to have the least overall negative impact on the environment.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_407383",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must distinguish between **structural**, **behavioral**, and **physiological** adaptations:\n\n*   **A. A bird builds its nest in a cactus:** This is a **behavioral** adaptation (the act of building a nest).\n*   **B. A rattlesnake shakes its tail when threatened:** This is a **behavioral** adaptation (an action taken in response to a stimulus).\n*   **C. A lizard crawls under a rock for shelter:** This is a **behavioral** adaptation (seeking shade to regulate temperature).\n*   **D. The ears of a jackrabbit release heat:** This is a **structural** adaptation. The large surface area of the jackrabbit's ears is a physical body part specifically designed to dissipate heat, helping the animal stay cool in the desert.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7034843",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate the options provided:\n\n*   **A. Number of protons:** This is the atomic number. It increases as you move across a period, but it does not distinguish the left side from the right side as a general property of those regions.\n*   **B. State of matter:** This is a physical property. Elements on the left side of the periodic table (metals) are predominantly solids at room temperature. Elements on the right side (non-metals) include solids, liquids, and gases. While not a perfect rule, it is a distinguishing physical characteristic often taught in chemistry.\n*   **C. Atomic mass:** This generally increases from left to right, but it is not a property that distinguishes the two sides as a category.\n*   **D. Temperature:** Temperature is a measurement of thermal energy, not an inherent physical property of an element itself.\n\nIn many introductory chemistry contexts, the distinction between the left side (metals) and the right side (non-metals) is characterized by physical properties such as conductivity, malleability, and **state of matter**. Metals (left) are typically solid, while non-metals (right) can be gases or liquids.\n\nHowever, looking at the options provided, none are perfect \"universal\" distinctions, but **B** is the only physical property listed that varies significantly between the two groups.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7263638",
+   "score": 1.0,
+   "text": "To determine which observation provides evidence of an iron core, let's evaluate the options:\n\n*   **A. The presence of a fluid mantle:** While a mantle can exist on many planets, its fluidity does not specifically indicate the composition of the core.\n*   **B. The presence of Van Allen belts:** Van Allen belts are zones of energetic charged particles trapped by a planet's **magnetic field**. A planetary magnetic field is typically generated by a \"dynamo effect,\" which requires a rotating, electrically conducting fluid layer\u2014most commonly a molten iron core. Therefore, observing a strong magnetic field (evidenced by radiation belts) is strong indirect evidence of a metallic, conducting core.\n*   **C. The presence of gravitational force:** Gravity is a function of total mass and density, but it does not specify the chemical composition of the interior.\n*   **D. The presence of water in three states:** This relates to surface temperature and atmospheric pressure, not the internal composition.\n\nSince magnetic fields are generated by moving conductive metals (like iron) in the core, the presence of Van Allen belts is the correct indicator.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MDSA_2007_8_3",
+   "score": 1.0,
+   "text": "If logging companies do not plant new seedlings, the supply of trees will decrease over time. As the supply of raw materials (trees) decreases, the cost of producing boards increases, which leads to a higher market price for the finished product.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7138915",
+   "score": 1.0,
+   "text": "In this scenario, the starlings are acting as a predator/competitor to the purple martins. Because the starlings eat the purple martin's eggs and nestlings, the purple martin population will struggle to reproduce, leading to a **decrease** in their numbers. Meanwhile, the starlings are gaining a food source from the martins, which allows their population to **increase**.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_4_12",
+   "score": 1.0,
+   "text": "Precipitation occurs when water vapor in the atmosphere condenses into water droplets or ice crystals that become heavy enough to fall to the ground. This process is typically associated with thick, dark clouds (such as cumulonimbus or nimbostratus), which indicate a high concentration of moisture and vertical development.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7139650",
+   "score": 0.0,
+   "text": "The process described is known as **regenerative braking**. When a car is moving, it possesses **kinetic energy** (the energy of motion). As the brakes are applied in this system, the electric motor acts as a generator to slow the vehicle down, converting that kinetic energy into electrical energy which is then stored in the battery.\n\nA. Gravitational energy relates to height/position.\nB. Kinetic energy is the energy of motion.\nC. Potential energy is stored energy based on position or state.\nD. Thermal energy is heat (which is what traditional friction brakes produce).\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7263183",
+   "score": 1.0,
+   "text": "The nucleus of a cell acts as the control center, containing the genetic information that directs all cellular activities and processes. In the human body, the system that serves as the primary control center\u2014processing information and sending out instructions to coordinate all bodily functions\u2014is the central nervous system (which includes the brain and spinal cord).\n\nA. The circulatory system transports nutrients and oxygen.\nB. The central nervous system controls and coordinates body activities.\nC. The skeletal system provides structure and protection.\nD. The integumentary system acts as a protective barrier.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-AKDE&ED_2008_8_34",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's look at the waste products of cellular energy production (cellular respiration). The primary waste products are **carbon dioxide ($CO_2$)** and **water ($H_2O$)**.\n\n1.  **Carbon Dioxide ($CO_2$):** This gas is transported through the blood to the lungs, where it is expelled from the body via exhalation. This involves the **respiratory system** (to exchange the gas) and the **circulatory system** (to transport the gas).\n2.  **Water ($H_2O$):** While water is also managed by the excretory system, it is transported throughout the body via the **circulatory system** to reach the various organs that will eliminate it.\n\nWhile the excretory system (kidneys) removes nitrogenous wastes like urea, the most immediate and direct wastes resulting from the chemical process of cellular respiration itself are $CO_2$ and $H_2O$, which rely heavily on the movement of gases and fluids through the blood and lungs.\n\nTherefore, the respiratory system handles the gas exchange of $CO_2$, and the circulatory system acts as the primary transport mechanism for these wastes to reach their exit points.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7210508",
+   "score": 1.0,
+   "text": "To understand the difference between weather and climate, it is important to remember that **weather** refers to short-term atmospheric conditions (like a single snowstorm), while **climate** refers to the long-term patterns and averages of those conditions over many years (typically 30 years or more).\n\n*   **A and B** describe \"weather events\" that are outliers or unusual, which are the opposite of what defines a stable climate.\n*   **D** describes a physical state of the snow, which does not define a climatic pattern.\n*   **C** is correct because climate is defined by what is expected or \"consistent\" based on historical data. If 20 cm of snow is a typical occurrence for December in that region, it helps describe the climate.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7234360",
+   "score": 1.0,
+   "text": "Convergent margins involve the movement of tectonic plates toward one another. This process leads to crustal shortening, folding, and faulting. As the crust is compressed, it can create structural depressions, such as foreland basins that form adjacent to mountain belts. These depressions provide the space (accommodation space) necessary for the accumulation of sediments.\n\nWhile option C describes a process that occurs at convergent margins, the formation of a basin specifically requires the creation of a depression or a lowering of the surface to allow sediment to collect.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-MCAS_2000_4_36",
+   "score": 1.0,
+   "text": "A radio tower is used for transmitting signals (information/data), whereas roads, runways, and pipelines are physical pathways used to transport goods, people, or fluids.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7215828",
+   "score": 1.0,
+   "text": "To determine which substance produces the best conductor of electricity when mixed with water, we must look at how each substance behaves in an aqueous solution:\n\n*   **A. Table salt (Sodium chloride, NaCl):** This is an ionic compound. When dissolved in water, it dissociates into free-moving ions ($Na^+$ and $Cl^-$). These ions act as charge carriers, making the solution an excellent conductor of electricity (an electrolyte).\n*   **B. Granulated sugar (Sucrose):** This is a molecular compound. While it dissolves in water, it does not dissociate into ions; it remains as neutral molecules. Therefore, sugar water is a very poor conductor.\n*   **C. Carbon dioxide ($CO_2$):** When dissolved in water, it forms a weak acid (carbonic acid), which provides a very small number of ions, but it is not a strong conductor compared to salt.\n*   **D. Motor oil:** This is a non-polar hydrocarbon and is immiscible (does not mix) with water. It does not provide ions to conduct electricity.\n\nSince table salt provides a high concentration of mobile ions, it produces the best conductor among the choices.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_401373",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate each option based on the outcome described:\n\n*   **A. pushing a button to make a doorbell ring:** A doorbell uses an electrical circuit to power a mechanism (like a striker or a digital speaker) that creates **sound**.\n*   **B. stepping on a mat to make a door open:** This describes a motion or mechanical action, not a sound.\n*   **C. flipping a switch to turn on a light:** This produces light, not sound.\n*   **D. sliding a lever to turn on an electric blanket:** This produces heat, not sound.\n\nSince the question specifically asks for electricity flowing to produce **sound**, the doorbell is the correct example.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7138460",
+   "score": 1.0,
+   "text": "The algae living within coral tissues (zooxanthellae) are photosynthetic organisms. Photosynthesis is the process by which organisms convert light energy into chemical energy. Since light is a form of electromagnetic radiation, these algae use radiant energy from the sun to produce food and survive.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_412774",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the chemical process described:\n\n1.  **Initial State:** The student is blowing into a **calcium hydroxide** solution. Calcium hydroxide ($\\text{Ca(OH)}_2$) is a strong base. Therefore, the initial pH of the solution is high (well above 7).\n2.  **The Reaction:** The carbon dioxide ($\\text{CO}_2$) from the breath reacts with water ($\\text{H}_2\\text{O}$) to form carbonic acid ($\\text{H}_2\\text{CO}_3$). This acid then reacts with the calcium hydroxide to neutralize it.\n3.  **The Change:** As the base is neutralized by the acid, the concentration of hydroxide ions ($\\text{OH}^-$) decreases, and the concentration of hydrogen ions ($\\text{H}^+$) increases. This causes the pH of the solution to drop.\n4.  **Direction of Change:** Since the starting pH is highly basic (greater than 7), a decrease in pH means the value is moving down from its high starting point **toward a pH of 7** (the neutral point).\n\nLooking at the options:\n*   A and B are incorrect because the pH is decreasing, not increasing.\n*   D is incorrect because \"away from a pH of 7\" would imply the pH is increasing (if starting from a neutral point) or decreasing further into the acidic range (which is not the direction of the movement from a high base).\n*   **C** correctly identifies that the pH decreases and moves toward the neutral value of 7.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7004743",
+   "score": 1.0,
+   "text": "To determine which option results in the least loss of mass, we compare the relative masses of the subatomic particles involved:\n\n1.  **Proton:** Mass $\\approx 1.6726 \\times 10^{-27}$ kg\n2.  **Neutron:** Mass $\\approx 1.6749 \\times 10^{-27}$ kg (slightly heavier than a proton)\n3.  **Nucleus:** Contains many protons and neutrons; its mass is significantly larger than a single particle.\n4.  **Electron:** Mass $\\approx 9.109 \\times 10^{-31}$ kg\n\nComparing these values, the mass of an electron is approximately 1,836 times smaller than the mass of a proton. Therefore, losing an electron results in the smallest reduction in the atom's total mass.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MSA_2015_8_30",
+   "score": 1.0,
+   "text": "The correct statement is A. When excess fertilizer is used, it often washes away during rain or irrigation (a process called runoff) into nearby streams, rivers, and lakes. This can lead to water pollution and eutrophication, which causes harmful algae blooms and depletes oxygen in the water.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-ACTAAP_2007_7_36",
+   "score": 1.0,
+   "text": "Oil, coal, and natural gas are fossil fuels that take millions of years to form, making them non-renewable. Trees, however, can be replanted and grown within a human lifetime, making them a renewable resource.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-ACTAAP_2013_5_17",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze each option:\n\n*   **A. Breaking an object into smaller pieces by using a hammer:** This is a change in shape and size, but the chemical composition of the object remains the same. This is a **physical change**.\n*   **B. Allowing an iron chain to remain in salt water until it rusts:** Rusting is a chemical reaction between iron and oxygen (oxidation), creating a new substance (iron oxide). This is a **chemical change**.\n*   **C. Heating a brown substance until it changes into a gray powder:** A change in color and the formation of a new substance through heating typically indicates a chemical reaction. This is a **chemical change**.\n*   **D. Reacting vinegar and baking soda to make white foam and a gas:** The production of gas (bubbles) during a reaction between two substances is a clear sign of a chemical reaction. This is a **chemical change**.\n\nTherefore, the only example of a physical change is option A.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_401585",
+   "score": 1.0,
+   "text": "In the Northern Hemisphere, the summer solstice marks the longest day of the year, meaning the sun sets at its latest time of day during this season. While the specific time of sunset depends on your exact latitude and longitude, the trend of increasing day length culminates in summer.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7029558",
+   "score": 1.0,
+   "text": "Aphids feed on plants, which are producers. In a food web, organisms that eat producers are classified as primary consumers, also known as first-level consumers.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7247065",
+   "score": 1.0,
+   "text": "The correct answer is **C**.\n\nA storm surge is a phenomenon associated with hurricanes and tropical storms, not tornadoes. While tornadoes can cause significant damage, they are not the cause of storm surges.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_402257",
+   "score": 1.0,
+   "text": "To determine the best heat insulator among the choices provided, we can look at their thermal conductivity:\n\n*   **Metal (B):** Metals are excellent conductors of heat, making them very poor insulators.\n*   **Water (C):** Water has a relatively high specific heat capacity and conducts heat better than many solids, making it a poor insulator compared to wood or glass.\n*   **Glass (A):** Glass is a good insulator, but it still conducts heat more readily than wood.\n*   **Wood (D):** Wood has very low thermal conductivity due to its cellular structure, which traps air. This makes it a much better insulator than glass, water, or metal.\n\nTherefore, wood is the best insulator among the options given.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MCAS_1998_4_13",
+   "score": 1.0,
+   "text": "Acid rain is caused by pollutants (such as sulfur dioxide and nitrogen oxides) being carried through the atmosphere. Once these gases are released, they can be transported over long distances by air currents. The specific location where the pollutants react with water vapor and fall as precipitation is primarily determined by the movement of the air mass. Therefore, the wind direction dictates the path the pollutants take from the factory to the area where they eventually fall.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-ACTAAP_2013_7_16",
+   "score": 1.0,
+   "text": "To determine which substance is a compound, let's analyze each option:\n\n*   **A. Butter:** This is a complex mixture of fats, water, and other organic molecules, not a single chemical compound.\n*   **B. Nitrogen:** This is an element (typically found as $N_2$ molecules), not a compound.\n*   **C. Hydrogen:** This is an element (typically found as $H_2$ molecules), not a compound.\n*   **D. Ammonia:** This is a chemical substance composed of nitrogen and hydrogen atoms chemically bonded together ($NH_3$). Therefore, it is a compound.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7150343",
+   "score": 1.0,
+   "text": "In an ecosystem, energy flows from producers to various consumer levels. According to the second law of thermodynamics, energy is lost as heat at each transfer between trophic levels (typically only about 10% of energy is passed on to the next level). Therefore, as you move up the food chain, the amount of available energy decreases significantly.\n\n*   **A is incorrect** because energy decreases, not increases.\n*   **B is correct** because energy is lost at each step.\n*   **C is incorrect** because producers (the first level) have the most energy, and primary consumers have more energy than secondary or tertiary consumers.\n*   **D is incorrect** because tertiary consumers are at a high trophic level and thus have very little energy available compared to lower levels.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7082320",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the physics of an object sliding down a ramp:\n\n1.  **Friction (The student's claim):** Friction acts in the opposite direction of motion. High friction slows an object down.\n2.  **The Incline (Option A):** The component of gravity that pulls an object down a ramp is calculated as $F = mg \\sin(\\theta)$, where $\\theta$ is the angle of the incline. If the angle is very small, the force pulling the object down the ramp is much smaller, resulting in slower movement.\n3.  **Smooth Surface (Option B):** A smooth surface typically reduces friction, which would make the object slide *faster*, not slower.\n4   **Round and Polished (Option C):** This usually implies less friction, which would also lead to faster movement.\n5.  **Pull of Gravity (Option D):** Gravity is a constant determined by the mass of the Earth; it does not change based on the ramp setup.\n\nTherefore, a small incline angle is a valid physical explanation for why an object would move slowly down a ramp, as it reduces the acceleration provided by gravity.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_401312",
+   "score": 1.0,
+   "text": "Coal is a fossil fuel that forms from the accumulation of organic matter, specifically dead plant material (such as ferns, trees, and mosses) that lived in ancient swamps. Over millions of years, this material is buried under layers of sediment and subjected to intense heat and pressure, which causes it to chemically change into coal.\n\nA. Seas that have evaporated (This describes salt/evaporites).\nB. Natural gas subjected to heat (Natural gas is a product of decomposition, not the cause).\nC. Melted and cooled metamorphic rock (This describes igneous rock).\nD. Plant remains decomposed under pressure (This is the correct process for coal formation).\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_SC_401324",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the food chain: **Wheat $\\rightarrow$ Insects $\\rightarrow$ Sparrows $\\rightarrow$ Hawks**.\n\n1.  **The Action:** The farmer applies an insecticide to the wheat. Insecticides are designed to kill insects.\n2.  **The Impact on the Food Chain:**\n    *   **Insects:** Their population will decrease significantly because the insecticide kills them.\n    *   **Sparrows:** Since insects are the primary food source for the sparrows in this chain, a decrease in insects means less food for the birds. This leads to a decline in the sparrow population.\n    *   **Hawks:** As the sparrow population declines, the hawks will eventually have less food available.\n3.  **Evaluating the Options:**\n    *   **A:** The grass is not part of this specific food chain, so we cannot conclude it would become greener.\n    *   **B:** Birds would likely leave or die due to lack of food, not move in.\n    *   **C:** Hawks are carnivores/predators; they do not eat grass.\n    *   **D:** Because the insect population (their food source) is decreasing, there would be fewer sparrows seen in the fields.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_8_17",
+   "score": 1.0,
+   "text": "The primary advantage of sexual reproduction is that it combines genetic material from two different individuals, resulting in offspring with unique genetic combinations. This genetic diversity allows populations to better adapt to changing environments and increases the likelihood that some individuals will survive environmental shifts or diseases. In contrast, asexual reproduction produces genetically identical clones, which makes the entire population vulnerable to the same threats.\n\nA. There is greater variation among the offspring.\nB. The offspring are identical to the parents. (This is a characteristic of asexual reproduction)\nC. Only one parent is necessary for reproduction. (This is an advantage of asexual reproduction)\nD. No sex cells are needed for reproduction. (This is a characteristic of asexual reproduction)\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7185343",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at the ecological concept of a **trophic cascade**.\n\n1.  **The Mechanism:** Wolves are apex predators. When they are reintroduced, they hunt herbivores like elk and bison.\n2.  **The Effect on Herbivores:** As the prompt states, the populations of these herbivores are decreasing due to predation.\n3.  **The Effect on Vegetation:** Herbivores consume plants (such as willow, aspen, and cottonwood trees). When the number of herbivores decreases, the \"grazing pressure\" on these plants is reduced.\n4.  **The Result:** With fewer animals eating them, the plant populations are able to grow and recover more robustly. This is a classic example of a top-down trophic cascade observed in Yellowstone.\n\nLet's evaluate the options:\n*   **A:** Extinction is unlikely; the populations are decreasing, but they are still present.\n*   **B:** Scavengers (like ravens or eagles) actually tend to *increase* because wolves leave behind carcasses.\n*   **C:** Coyotes often face *increased* competition or predation from wolves, which can lead to a decrease in coyote populations.\n*   **D:** This is the direct ecological consequence of reduced herbivory.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MEAP_2005_8_45",
+   "score": 1.0,
+   "text": "To determine which object scatters the most light, we must look at how light interacts with each surface:\n\n*   **A mirror** reflects light specularly (smoothly), meaning the light rays stay parallel and do not scatter in many directions.\n*   **Clear window glass** is transparent, allowing light to pass through in a straight line with minimal deviation.\n*   **Cardboard** is opaque; it absorbs or reflects light at the surface, but it does not allow light to pass through and scatter within the material.\n*   **Frosted window glass** is translucent. This means it allows light to pass through, but the surface is uneven, causing the light rays to deviate in many different directions. This phenomenon is known as **scattering**.\n\nTherefore, the frosted glass will scatter the most light.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7084665",
+   "score": 1.0,
+   "text": "On a clear night, away from significant light pollution, the human eye can perceive the diffuse band of light that makes up our own galaxy. While the individual stars within it are too distant to be seen separately, the collective glow of billions of stars is visible as a cloudy, luminous band. The other options\u2014moons of other planets, asteroids, and Pluto\u2014are too small or too distant to be resolved by the naked eye.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_412605",
+   "score": 1.0,
+   "text": "The difference in precipitation between Nevada and Washington is primarily driven by their geographic locations and the resulting weather patterns. Washington is located in the Pacific Northwest, where moist air from the Pacific Ocean is pushed upward by mountain ranges (orographic lift), leading to high precipitation. Nevada is located in the rain shadow of those mountains and is further inland, resulting in a much more arid climate.\n\nA. The size of the state does not dictate precipitation levels.\nB. Industry does not significantly influence annual precipitation.\nC. The location on the continent (proximity to the ocean and mountain ranges) is the primary driver of climate and precipitation.\nD. Volcanic activity does not determine annual precipitation averages.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7174213",
+   "score": 1.0,
+   "text": "The speed of a sound wave is determined by the properties of the medium through which it travels. In a solid, liquid, or gas, the speed depends on the medium's density and its elasticity (stiffness). The distance between molecules (which relates to density and how closely they are packed) is a fundamental characteristic of the medium that dictates how quickly mechanical energy can be transferred from one particle to the next.\n\nWhile frequency and wavelength are related to speed ($v = f \\lambda$), they are properties of the wave itself, not the medium; changing the frequency of a sound does not change its speed in a given substance. The source determines the initial frequency/wavelength, but not the speed. Therefore, the physical characteristics of the medium\u2014specifically how the molecules are spaced and interact\u2014are the determining factors.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-NAEP_2005_4_S14+3",
+   "score": 1.0,
+   "text": "To determine which plant food is more effective, Pat needs to conduct a controlled experiment. This means that all variables\u2014except for the type of plant food\u2014must remain the same so that the results are fair and accurate.\n\n*   **A is incorrect** because the plants are in different rooms (living room vs. bedroom). Differences in light, temperature, or humidity between the rooms could affect growth, making it impossible to know if the food or the location caused the difference.\n*   **B is incorrect** because price is not a scientific measure of effectiveness.\n*   **C is correct** because it uses a larger sample size (a few plants) and keeps the environment constant (all plants in the same place). This ensures that any difference in growth is likely due to the plant food itself.\n*   **D is incorrect** because advertisements are biased and not a scientific test.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_401678",
+   "score": 1.0,
+   "text": "To ensure accuracy in measurements with a triple-beam balance, the instrument must be \"zeroed\" before each new measurement. This process involves adjusting the riders (the weights) so that they all sit at the zero mark and the pointer aligns perfectly with the zero mark on the scale. This ensures that the balance is starting from a neutral position and that any weight measured is solely from the sample itself.\n\nA. Adjusting the height of the pan is not a standard calibration step.\nB. Moving all riders to zero is the correct procedure to zero the balance.\nC. Moving the beams rapidly could damage the instrument and does not zero it.\nD. Mass markings are fixed parts of the scale and cannot be adjusted.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_401926",
+   "score": 1.0,
+   "text": "To determine the most likely reason for the extinction of the last giant sloths on Caribbean islands, we must look at the context provided. The text notes that these sloths survived the end of the Ice Age (ruling out large-scale climate change as the primary driver for this specific group) and lived alongside humans.\n\nIn island ecosystems, the arrival of humans often brings two things: hunting and invasive species (like rats or dogs) that prey on eggs or young animals. However, in the context of historical and archaeological studies regarding the extinction of megafauna that lived alongside humans, human activity\u2014either through direct hunting or by introducing competitors/predators\u2014is the most frequently cited cause for the final disappearance of these specific populations.\n\nAmong the choices provided:\n- **A (Disease):** Possible, but usually requires a massive introduction of livestock.\n- **B (Lack of food):** Less likely as they had survived for thousands of years on the islands.\n- **C (Climate change):** The text implies they survived the major climate shifts of the Ice Age.\n- **D (Humans as predators):** This aligns with the specific detail provided that they \"lived alongside humans,\" suggesting human interaction was the key variable in their final disappearance.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7247678",
+   "score": 1.0,
+   "text": "When a single species, such as deer, undergoes rapid population growth in a grassland ecosystem, they often overgraze the available vegetation. This intense grazing pressure can lead to the depletion of various plant species, which in turn reduces the variety of habitats and food sources available for other organisms. As certain plant and animal species disappear due to the lack of resources or habitat, the overall **biodiversity decreases**.\n\nFurthermore, the depletion of the primary producers (plants) undermines the ecosystem's ability to support life in the long term, meaning the ecosystem's capacity to regenerate and maintain itself is compromised, thus **sustainability decreases**.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-MCAS_1999_4_27",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate each option:\n\n*   **A. Landing a human on Mars:** While we have landed rovers and probes on Mars, landing a human being involves significant technological hurdles regarding life support, radiation shielding, and landing heavy payloads safely. This remains a major goal for space agencies like NASA and SpaceX that has not yet been achieved.\n*   **B. Using solar power to produce electricity:** This is a mature, widely used technology currently powering millions of homes and businesses worldwide.\n*   **C. Replacing human body parts with artificial parts:** This is a current medical reality (prosthetics, artificial hearts, cochlear implants, etc.), though it continues to evolve.\n*   **D. Using DNA to identify a criminal:** This is a standard forensic technique used by law enforcement agencies globally.\n\nTherefore, landing a human on Mars is the significant technological challenge among the choices provided that has yet to be solved.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_417593",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the biological principles involved:\n\n1.  **The nature of the change:** The fish has longer spines that provide a survival advantage (protection from predators). In biology, a new trait that increases an organism's fitness is considered a **beneficial mutation**.\n2.  **The inheritance of the trait:** The fact that the offspring also have long spines indicates that the trait is **genetic** (passed down through DNA), not just a temporary physical change caused by the environment.\n3.  **Cause and effect:** In evolution, mutations cause changes in DNA, which then result in new physical traits (phenotypes). A physical trait (like longer spines) cannot cause a genetic change; rather, the genetic change causes the trait.\n\n*   **A is correct:** A mutation provided a new trait that helped the fish survive and reproduce.\n*   **B is incorrect:** The change is beneficial, not harmful.\n*   **C is incorrect:** This reverses cause and effect; traits do not cause mutations.\n*   **D is incorrect:** Because the offspring have the trait, the change is permanent/heritable, not temporary.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7172270",
+   "score": 1.0,
+   "text": "The correct answer is **A**.\n\nIn evolutionary biology, the frequency of a trait in a population is determined by natural selection. For a new trait (like white spots) to become common, the individuals possessing it must have a higher fitness\u2014meaning they must be more likely to survive and successfully reproduce in their environment compared to those without the trait. If the white spots provide a survival advantage (such as better camouflage or warning coloration), the trait will be passed on to more offspring, eventually becoming common in the population.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_402171",
+   "score": 1.0,
+   "text": "To organize the data effectively in a scientific experiment, you need to include all the variables being measured and the conditions under which they are being measured.\n\nIn this experiment:\n1. **Soil type** is the independent variable (the factor being changed).\n2. **Plant height** is the dependent variable (the factor being measured).\n3. **Date** (or time intervals) is necessary to track the growth progress over the course of the study.\n\nWithout the date, you cannot show growth over time; without the height, you have no data to record; and without the soil type, you cannot distinguish which plant belongs to which group. Therefore, all three pieces of information are required to organize the data completely.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_400687",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at the scientific principles of buoyancy.\n\n*   **A. Wood is porous:** While wood is indeed porous (containing many tiny air pockets), porosity itself is a characteristic of the material, not the direct explanation for why it floats.\n*   **B. Wood is buoyant:** Buoyancy is the upward force exerted by a fluid that opposes the weight of an immersed object. An object floats because it is less dense than the fluid, creating a buoyant force greater than its weight. In many educational contexts, \"buoyant\" is used to describe the property of an object that allows it to float.\n*   **C. Wood is light:** \"Light\" is a relative term referring to mass or weight, but it does not explain the physical mechanism of floating (which is density-dependent).\n*   **D. Wood is magnetic:** This is incorrect; wood does not have magnetic properties that affect its ability to float.\n\nWhile \"buoyancy\" is the force and \"density\" is the property, in the context of these specific choices, the ability to float is described by the term buoyant.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_SC_416459",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at the complexity of the organisms listed:\n\n*   **A. Amoeba:** A single-celled organism that absorbs nutrients directly from its environment through its cell membrane (diffusion/phagocytosis).\n*   **B. Euglena:** A single-celled organism that can produce its own food via photosynthesis or absorb nutrients directly.\n*   **C. Skin cell:** While a skin cell is part of a multicellular organism (a human), an individual cell does not have its own transport system; it relies on the blood/circulatory system of the organism to deliver nutrients to it. In the context of biology questions regarding \"transport systems,\" this refers to multicellular organisms that require a specialized system (like blood vessels) because cells are too far from the environment to rely on simple diffusion.\n*   **D. Bacterial cell:** A single-celled organism that absorbs nutrients directly from its surroundings.\n\nIn biological terms, single-celled organisms (A, B, and D) do not require a specialized transport system because they are small enough for nutrients to reach them via diffusion. Multicellular organisms require a transport system to move nutrients to cells that are not in direct contact with the environment.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-MDSA_2007_5_16",
+   "score": 1.0,
+   "text": "To determine which industry has the least need for trees, let's look at the primary uses of wood in each field:\n\n*   **B. Home building:** Wood is a fundamental structural material for framing, flooring, and cabinetry.\n*   **C. Landscaping:** This industry relies heavily on trees for planting, shade, and aesthetic design.\n*   **D. Newspaper:** Paper is manufactured directly from wood pulp.\n*   **A. Automobile manufacturing:** While modern cars use many materials (steel, aluminum, plastic), wood is rarely used as a primary structural or functional component. Any wood used is typically for minor decorative trim, making its overall requirement significantly lower than the other industries listed.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_409673",
+   "score": 1.0,
+   "text": "The reason plants grow more in summer than in winter is due to the tilt of the Earth's axis. During the summer months, the hemisphere experiencing summer is tilted toward the Sun, resulting in more direct sunlight and longer daylight hours, which provides the energy and warmth necessary for plant growth.\n\nA is incorrect because Earth's distance from the Sun does not cause the seasons; in fact, Earth is often at its farthest point (aphelion) during the Northern Hemisphere's summer.\nB is incorrect because the Earth's rotation speed remains relatively constant.\nC is incorrect because the Earth's internal structure does not change with the seasons.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2015_8_29",
+   "score": 1.0,
+   "text": "To determine which change is a physical change, we must look for the option where the chemical composition of the substance remains the same, even if its state or appearance changes.\n\n*   **A. A cookie baking:** This is a chemical change. Heat causes a reaction between ingredients (like flour, eggs, and sugar) to create a new substance.\n*   **B. Paper burning:** This is a chemical change. The paper reacts with oxygen to create ash, smoke, and carbon dioxide.\n*   **C. Ice cream melting:** This is a **physical change**. The ice cream is changing its state from a solid to a liquid, but it is still the same substance.\n*   **D. A nail rusting:** This is a chemical change. The iron reacts with oxygen and moisture to form iron oxide (rust).\n\nThe correct choice is C.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_415083",
+   "score": 1.0,
+   "text": "To find the average speed, use the formula:\n**Average Speed = Total Distance / Total Time**\n\nGiven:\nDistance = 100 meters\nTime = 20 seconds\n\nCalculation:\nAverage Speed = 100 m / 20 s = 5 m/s\n\nComparing this to the choices:\nA. 2 m/s\nB. 5 m/s\nC. 20 m/s\nD. 25 m/s\n\nThe correct choice is B.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_409647",
+   "score": 1.0,
+   "text": "The process described is known as **eutrophication**. When algae die and decay, bacteria consume the available dissolved oxygen in the water to break down the organic matter. This creates a \"hypoxic\" or \"dead zone.\"\n\nBecause bottom-dwelling organisms (like crabs, shrimp, and worms) are often unable to move quickly to escape the low-oxygen areas, they die off. Fish, which are more mobile, will attempt to swim away to areas with higher oxygen levels to survive.\n\nD. Bottom dwellers will die and fish will swim away.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-MCAS_2005_9_17",
+   "score": 1.0,
+   "text": "To determine the correct type of wave, let's analyze the physical interaction described:\n\n1.  **The Mechanism:** When the first ball is struck, it moves forward and pushes the second ball, which pushes the third, and so on. This creates a series of compressions and rarefactions (areas of high and low density) that travel through the line of objects.\n2.  **Direction of Motion:** In this scenario, the particles (the bowling balls) move in the same direction as the wave's propagation (along the line). \n3.  **Wave Types:**\n    *   **Electromagnetic waves** consist of oscillating electric and magnetic fields and do not require a medium.\n    *   **Heat** is a form of energy transfer, not a mechanical wave type.\n    *   **Transverse waves** involve particle motion perpendicular to the direction of the wave (like a wave on a string).\n    *   **Longitudinal waves** involve particle motion parallel to the direction of the wave (like a sound wave or a compression spring).\n\nSince the movement of the balls occurs along the same axis as the transmission of the force, it is a longitudinal wave.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7142520",
+   "score": 1.0,
+   "text": "The correct answer is the endocrine system. While the nervous system (specifically the hypothalamus) acts as the thermostat, the endocrine system plays a crucial role in maintaining body temperature through the release of hormones that regulate metabolism and heat production.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7027160",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at what constitutes a fertilizer versus what a plant produces itself.\n\n1.  **Nitrogen (D), Phosphorus (B), and Potassium (A)** are the three primary macronutrients required by plants for growth. They are commonly referred to as N-P-K and are the standard ingredients found in commercial fertilizers.\n2.  **Carbohydrates (C)** are organic compounds (like sugars and starches) that plants produce themselves through the process of **photosynthesis**. Plants use sunlight, water, and carbon dioxide to create carbohydrates to fuel their growth; they do not absorb carbohydrates from the soil or fertilizer to grow.\n\nTherefore, while a fertilizer provides the minerals needed to facilitate growth, it does not include the carbohydrates, as those are manufactured by the plant.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-MEAP_2005_8_21",
+   "score": 1.0,
+   "text": "Surface mining often involves the removal of large amounts of earth and the creation of large pits or excavations. Once mining operations are completed, these pits are frequently filled with water through precipitation or groundwater seepage, resulting in the formation of artificial bodies of water that can be used for fishing, boating, or other recreational activities.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_400880",
+   "score": 1.0,
+   "text": "To determine the change that has taken place, we look at the chemical notation:\n\n1.  **Identify the species:** $K$ is a neutral Potassium atom. $K^+$ is a Potassium ion with a positive charge.\n2.  **Analyze the charge change:** The charge has changed from $0$ to $+1$.\n3.  **Relate charge to electrons:** Electrons carry a negative charge. \n    *   If an atom **gains** an electron, it becomes more negative (e.g., $K \\rightarrow K^-$).\n    *   If an atom **loses** an electron, it becomes more positive (e.g., $K \\rightarrow K^+$).\n4.  **Evaluate the options:**\n    *   A and B involve protons. Protons are located in the nucleus and do not change during standard chemical reactions/ionizations.\n    *   C (loss of an electron) results in a positive charge.\n    *   D (gain of an electron) results in a negative charge.\n\nSince the potassium atom has become a positive ion, it has lost one electron.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_416505",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must follow the biological process described:\n\n1.  **The starting material:** The scientist is labeling **amino acids**.\n2.  **The process:** Amino acids are the building blocks of **proteins**. When a cell incorporates amino acids into a large molecule, it is performing translation (protein synthesis).\n3.  **Evaluating the options:**\n    *   **A. A lipid in a membrane:** Lipids are composed of fatty acids and glycerol, not amino acids.\n    *   **B. An enzyme in a lysosome:** Enzymes are specialized **proteins**. Since proteins are made of amino acids, the chemical marker will be found here.\n    *   **C. A polysaccharide in a cell wall:** Polysaccharides are carbohydrates, which are composed of sugar monomers, not amino acids.\n    *   **D. A DNA molecule in a mitochondrion:** DNA is a nucleic acid, which is composed of nucleotides, not amino acids.\n\nSince an enzyme is a protein, it is the only molecule listed that is constructed from amino acids.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7018270",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's analyze the physics of a person on a moving Ferris wheel:\n\n1.  **Mass (A):** The mass of the person remains constant regardless of their position or motion.\n2.  **Speed (B):** A standard Ferris wheel rotates at a constant angular velocity, meaning the linear speed of the rider remains constant throughout the ride.\n3.  **Net Force (C):** Because the rider is moving in a circle, they are undergoing centripetal acceleration ($a_c = v^2/r$). According to Newton's Second Law ($F_{net} = ma$), there must be a net force acting toward the center of the circle. However, the *direction* of this force is constantly changing as the rider moves around the circle. In physics, a vector that changes direction is considered a changing quantity. Furthermore, the components of the forces (like gravity vs. normal force) change relative to the rider's orientation, but the net force vector itself is constantly changing its direction to keep the rider in circular motion.\n4.  **Rate of rotation (D):** The angular velocity (rate of rotation) of a Ferris wheel is typically constant.\n\nIn the context of circular motion, while the speed is constant, the **velocity** is constantly changing because its direction changes. This change in velocity requires a constantly changing **net force** vector (pointing toward the center).\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_406800",
+   "score": 1.0,
+   "text": "Asexual reproduction involves a single organism producing offspring that are genetically identical to itself. Because the process relies on a single parent replicating its DNA and dividing, the offspring inherit the exact same genetic information and traits as the parent.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-NYSEDREGENTS_2008_4_15",
+   "score": 1.0,
+   "text": "Water has a definite shape and volume when it is in its solid state (ice). In the liquid state, it has a definite volume but takes the shape of its container, and in the gaseous state, it has neither a definite shape nor a definite volume.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-MCAS_2004_9_21-v1",
+   "score": 1.0,
+   "text": "To explain the observation, we must look at the relationship between temperature and gas volume. According to Charles's Law, the volume of a gas is directly proportional to its absolute temperature (when pressure is constant).\n\n1.  **On hot summer days:** The temperature is high. If the balloons were fully inflated at the shop, the helium inside would expand as it warms up, increasing the internal pressure and causing the balloon to pop. Therefore, they must be inflated only three-quarters full to allow for this expansion.\n2.  **On cold winter days:** The temperature is low. The helium will contract as it cools, so they can be fully inflated without the risk of the gas expanding too much and bursting the balloon.\n\nLooking at the choices:\n*   **A** is incorrect; gas activity (kinetic energy) increases with temperature, so it is more active in summer, not winter.\n*   **B** is incorrect; helium is used because it is lighter than air and typically leaks *out* of the balloon, not in.\n*   **C** correctly identifies the physical principle: as temperature increases, the gas expands.\n*   **D** is irrelevant to the volume change of the gas inside the balloon.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-MDSA_2009_5_39",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must identify which option involves a **nonrenewable resource**.\n\n*   **A. heat their homes with wood:** Wood is a renewable resource because trees can be replanted and grown again.\n*   **B. wash vegetables before cooking:** Water is a natural resource, but the act of washing is not a consumption of a nonrenewable fuel source in this context.\n*   **C. drive gasoline-powered automobiles:** Gasoline is derived from fossil fuels (petroleum), which are nonrenewable resources because they take millions of years to form and cannot be replaced once used.\n*   **D. grow flowers in the community garden:** This is a renewable activity involving natural biological processes.\n\nSince the goal of a green community is to reduce energy use and reliance on nonrenewable resources, driving a gasoline-powered car would be the action that contradicts those principles by using a nonrenewable resource.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7221988",
+   "score": 1.0,
+   "text": "A resistor is a component designed to impede or resist the flow of electrical current. By increasing the resistance, it limits how much current can flow through a specific part of the circuit, which is essential for protecting components and controlling voltage levels.\n\nA. Incorrect: Opening a circuit is done by a switch.\nB. Incorrect: Electric fields are created by charges and voltages.\nC. Correct: Resistors limit/control the flow of current.\nD. Incorrect: Energy is provided by a power source (like a battery).\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_415457",
+   "score": 0.0,
+   "text": "To determine which alternative energy resource is used most like coal, we must look at how energy is generated and delivered to the grid.\n\n*   **Coal** is a fossil fuel used primarily in large-scale thermal power plants to produce steam, which turns a turbine to generate electricity. It provides \"baseload\" power, meaning it can run continuously.\n*   **A. Geothermal energy** uses heat from the earth to create steam to turn turbines. Like coal, it provides steady baseload power and uses a similar thermal process.\n*   **B. Nuclear energy** also uses heat to create steam to turn turbines and provides baseload power. However, nuclear is often categorized separately from \"alternative\" or \"renewable\" energy in many contexts, though it is a low-carbon alternative to coal.\n*   **C. Hydropower** uses the kinetic energy of moving water rather than heat/steam.\n*   **D. Biofuel energy** is a fuel source (like coal) that can be burned, but it is often used for transportation or heating rather than primarily for large-scale grid electricity via steam turbines in the same manner as coal.\n\nWhile both Nuclear and Geothermal are very similar in their mechanical process (heat $\\rightarrow$ steam $\\rightarrow$ turbine), **Nuclear energy** is the most direct functional equivalent to coal in terms of its role in the electrical grid (large-scale, high-output, baseload thermal power). However, in many academic contexts regarding \"alternative\" or \"renewable\" energy, **Geothermal** is highlighted as the renewable version of a thermal steam plant. \n\nLooking at the standard comparison of energy profiles, **Nuclear energy** is the resource that most closely mimics the massive, steady, thermal-to-electric output of coal-fired power plants.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MCAS_2013_8_29425",
+   "score": 1.0,
+   "text": "The Earth's inner core is composed primarily of iron and nickel. While the temperature at the center of the Earth is extremely high (hot enough to melt metal), the pressure exerted by the weight of the rest of the planet is so immense that it forces the atoms together into a solid state, preventing them from melting.\n\nA. The pressure at the core is very high.\nB. The metals in the core are very heavy.\nC. The temperature of the core is very low.\nD. The chemicals in the core are very reactive.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-LEAP_2007_4_10280",
+   "score": 1.0,
+   "text": "When Jake breathes out, the air he exhales is warm and contains a high amount of water vapor (which is a gas). When this warm, moist air hits the much colder outside air, the water vapor loses thermal energy and undergoes **condensation**. During condensation, the water vapor turns into tiny liquid water droplets, which are what create the visible \"cloud.\"\n\nA. Gas changes to liquid.\nB. Solid changes to gas.\nC. Liquid changes to gas.\nD. Liquid changes to solid.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_401142",
+   "score": 1.0,
+   "text": "The characteristic described is known as camouflage. Animals use camouflage to blend into their surroundings to avoid being seen by predators or to sneak up on prey, both of which fall under the category of staying hidden.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_LBS10131",
+   "score": 1.0,
+   "text": "The scenario describes heat being transferred through direct physical contact between the flame/stove and the pot, and subsequently from the pot to the substance inside. In physics, the transfer of heat through direct contact between objects is known as conduction.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_400407",
+   "score": 1.0,
+   "text": "To determine the correct statement, let's evaluate each option:\n\n*   **A. The gas planets are closer to the Sun.** This is incorrect. The gas giants (Jupiter, Saturn, Uranus, and Neptune) are located in the outer solar system.\n*   **B. The solid planets are closer to the Sun.** This is correct. The terrestrial (solid) planets\u2014Mercury, Venus, Earth, and Mars\u2014make up the inner solar system.\n*   **C. The planets are arranged in order of increasing size.** This is incorrect. The planets are typically ordered by their distance from the Sun, and their sizes vary significantly throughout the sequence.\n*   **D. The solid planets are much larger than the gas planets.** This is incorrect. The gas giants are significantly larger than the terrestrial planets.\n\nThe correct statement is B.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_409301",
+   "score": 1.0,
+   "text": "To determine the correct answer, we must look at the physics of tidal forces.\n\n1.  **Tidal Forces:** The tides on Earth are caused by the gravitational gradient (the difference in gravitational pull) exerted by a celestial body. The strength of the tidal force is directly proportional to the mass of the object and inversely proportional to the cube of the distance between the objects ($F_{tidal} \\propto \\frac{M}{d^3}$).\n2.  **The Scenario:** If the Moon were increased from 1/80th of Earth's mass to the same mass as Earth, the gravitational pull exerted by the Moon would increase significantly.\n3.  **Impact on Tides:** Because the mass of the Moon would be much greater, the gravitational gradient across the Earth would be much stronger, leading to much larger tidal bulges in the oceans.\n4.  **Evaluating Options:**\n    *   **A:** Incorrect. Larger mass increases tidal force.\n    *   **B:** Correct. Increased mass leads to larger tides.\n    *   **C & D:** Incorrect. While the Moon's gravity affects weight slightly, the primary and most significant effect of a Moon-sized object near Earth would be the massive tidal shifts. Weight on Earth is primarily determined by Earth's own mass.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7095060",
+   "score": 1.0,
+   "text": "The process described involves evaporation, which is a change in the state of matter (liquid to gas). When the water evaporates, the salt remains behind in its original form; no new chemical substance is created, and the chemical composition of the salt and the water remains the same. Therefore, this is a change in physical state rather than a chemical reaction.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_408042",
+   "score": 1.0,
+   "text": "Sunflowers, like other plants, use a process called photosynthesis to make their own food. This process requires sunlight, which is captured by chlorophyll located in the plant's leaves. While the flower attracts pollinators and the roots absorb water, the leaves are the primary organs responsible for collecting sunlight for food production.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-TIMSS_2003_4_pg82",
+   "score": 1.0,
+   "text": "To determine which activity results in a different kind of material being formed, we must distinguish between **physical changes** and **chemical changes**.\n\n*   **A. A nail is left outside and it rusts:** This is a **chemical change**. Rust (iron oxide) is a new substance formed through a chemical reaction between iron, oxygen, and water. The chemical composition of the nail has changed.\n*   **B. A glass is dropped and it shatters:** This is a **physical change**. The glass is still glass; it has simply changed shape and size.\n*   **C. A rubber band is stretched until it breaks:** This is a **physical change**. The rubber remains rubber; the physical structure has just been altered.\n*   **D. A pencil is sharpened to a point:** This is a **physical change**. The wood and graphite are simply being reshaped.\n\nSince only option A involves the formation of a new substance, it is the correct choice.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7213413",
+   "score": 1.0,
+   "text": "To separate a mixture of salt and sand, the students must follow a specific sequence of steps based on the properties of the substances:\n\n1.  **Dissolve the salt:** Salt is soluble in water, while sand is not. To separate them, the salt must first be dissolved into a liquid state so it can be separated from the solid sand.\n2.  **Filter the mixture:** Once the salt is dissolved, the mixture is poured through filter paper. The sand (the residue) stays on the paper, while the saltwater (the filtrate) passes through.\n3.  **Evaporate the water:** Finally, the saltwater is heated on a hot plate to evaporate the water, leaving the solid salt behind.\n\nSince the salt must be in a solution before it can be filtered or before the water can be evaporated, the first step is adding water.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-LEAP_2000_8_2",
+   "score": 1.0,
+   "text": "To determine the correct statement, we must analyze the relationship between the rate of uplift and the rate of erosion.\n\n1.  **Analyze the given data:** The problem states that the land is becoming higher than the surrounding area at a rate of one centimeter per year. This means the net elevation is increasing.\n2.  **Understand the geological processes:**\n    *   **Uplift** is the process that pushes land upward (mountain building).\n    *   **Erosion** is the process that wears land down.\n3.  **Evaluate the net change:** If the land is gaining height, the rate of uplift must be greater than the rate of erosion ($Uplift > Erosion$).\n4.  **Evaluate the choices:**\n    *   **A. Erosion is slower than uplift at El Cajon Pass:** This matches our finding ($Uplift > Erosion$).\n    *   **B. Plates are separating at El Cajon Pass:** While tectonic activity causes uplift, the prompt specifically describes a change in elevation that is best explained by the balance of uplift and erosion.\n    *   **C. Mountain building is slower than erosion at El Cajon Pass:** If this were true, the land would be getting lower, not higher.\n    *   **D. Erosion and uplift are balanced at El Cajon Pass:** If they were balanced, the elevation would remain constant.\n\nTherefore, statement A is the only logical conclusion.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_SC_401168",
+   "score": 1.0,
+   "text": "In an electrical circuit, a device used to interrupt or divert the flow of electricity is called a switch. When a switch is opened, it creates a gap in the circuit, which stops the current from flowing.\n\nA. A wire provides a path for the current.\nB. A battery provides the energy/voltage to move the current.\nC. A switch can be used to open or close the circuit to stop or start current.\nD. A bulb consumes the energy to produce light but does not inherently stop the current unless it burns out.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_407097",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate each option based on the principles of physics and chemistry:\n\n*   **A. The temperature of both cups will be the same:** This is unlikely. The first group is freezing water (which involves removing heat), and the second group is melting ice (which involves adding heat). Depending on the ambient temperature and the starting points, their final temperatures will likely differ.\n*   **B. Both samples in the cups will be in the same state:** Not necessarily. The first group is freezing water, which results in ice. The second group is melting ice, which results in liquid water. While they are both $H_2O$, one is a solid and one is a liquid.\n*   **C. Both groups will have the same mass with which they started:** This follows the **Law of Conservation of Mass**, which states that mass is neither created nor destroyed in a closed system during a physical change (like a change in state). Since the water is simply changing from liquid to solid or solid to liquid, the mass remains constant.\n*   **D. The time required for the changes in states of matter will be the same:** This is incorrect because the masses are different (100g vs 50g). It takes more energy (and thus more time) to change the state of a larger mass than a smaller mass.\n\nTherefore, the only scientific certainty is that the mass remains the same.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7082845",
+   "score": 1.0,
+   "text": "When a sledgehammer strikes a solid steel wall, the kinetic energy of the hammer is not lost, but rather transformed into different forms of energy according to the law of conservation of energy. \n\nThe impact causes microscopic vibrations in the steel and the hammer (sound energy) and creates friction between the molecules of the two objects, which results in a rise in temperature (thermal energy). Therefore, a significant portion of the mechanical energy is converted into heat.\n\nA. Incorrect: Energy cannot be destroyed.\nB. Correct: Kinetic energy is converted into thermal energy (heat) and sound.\nC. Incorrect: Energy does not simply disappear.\nD. Incorrect: \"Stopped\" is not a scientific term for energy transformation.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7201740",
+   "score": 1.0,
+   "text": "To demonstrate a solar eclipse, the model must show the movement of celestial bodies relative to one another. A solar eclipse occurs when one celestial body (the Moon) moves between another (the Earth) and a light source (the Sun), casting a shadow. Therefore, the model must allow the smaller ball to move around the larger central ball to show how the alignment occurs.\n\nA. the ability to revolve around the central ball\nB. a magnet in each ball\nC. a representation of oceans on each ball\nD. a source of thermal energy\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7171570",
+   "score": 1.0,
+   "text": "The digestive system is controlled by both the autonomic nervous system and the enteric nervous system. The nervous system sends signals to regulate processes such as peristalsis (the movement of food through the digestive tract) and the secretion of digestive enzymes, determining how quickly or slowly food moves through the body.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7026355",
+   "score": 1.0,
+   "text": "The primary driver for the formation of hurricanes (tropical cyclones) is the presence of warm ocean waters, which provide the necessary energy. Solar radiation hits the Earth most directly at the equator, leading to intense solar heating of the ocean surface. This heat causes warm, moist air to rise, creating the low-pressure systems that fuel hurricane development.\n\nA. solar heating is greatest near the equator.\nB. the Moon's plane of orbit is close to the equator.\nC. Earth's volcanic activity is clustered around the equator.\nD. the rate of rotation of Earth's surface is less at the equator.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-MCAS_2016_8_15",
+   "score": 1.0,
+   "text": "To solve this problem using the **universal systems model**, one must follow the logical flow of a system: **Input $\\rightarrow$ Process $\\rightarrow$ Output $\\rightarrow$ Feedback**.\n\n1.  **Input:** This involves gathering the necessary information or resources required to address the problem. In this scenario, gathering parking data and receiving input from community meetings are the inputs.\n2.  **Process:** This is the action taken to transform the inputs into a result. Building an additional parking lot is the process/action.\n3.  **Output:** This is the result of the process.\n4.  **Feedback:** This is the mechanism used to evaluate the output to see if the problem was solved. Gathering more parking data after the construction serves as the feedback loop to determine if the new lot resolved the congestion.\n\nLooking at the choices:\n*   **A** starts with the process (building), which violates the model.\n*   **B** focuses on restriction rather than solving the need for more spaces and lacks the proper input/feedback structure.\n*   **C** follows the sequence: **Input** (data/community input) $\\rightarrow$ **Process** (build lot) $\\rightarrow$ **Feedback** (gather more data).\n*   **D** starts with a process/restriction and does not follow the logical flow of a system.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_407592",
+   "score": 1.0,
+   "text": "To identify the correct answer, we must distinguish between renewable and non-renewable energy sources:\n\n*   **Sunlight (B)** is a renewable source; it is constantly available.\n*   **Water (C)** is a renewable source; the water cycle replenishes it.\n*   **Wind (D)** is a renewable source; it is caused by atmospheric changes and is not depleted by use.\n*   **Coal (A)** is a fossil fuel. It takes millions of years to form, meaning it cannot be easily or quickly replaced once it is consumed. Therefore, it is a non-renewable energy source.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7027720",
+   "score": 1.0,
+   "text": "In plate tectonics, oceanic plates are composed of denser rock (such as basalt) compared to continental plates (which are composed of lighter rock like granite). In a model using floating objects, density is represented by how deeply an object sits in the water.\n\nTo make the model more accurate, the \"oceanic plate\" needs to be denser so that it sits lower in the water than the \"continental plate.\" Attaching small weights to the cork will increase its density and cause it to sink deeper into the water, simulating the behavior of a dense oceanic plate relative to a lighter continental plate.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_7041423",
+   "score": 1.0,
+   "text": "When winds blow from the ocean toward the shore (onshore winds), they carry moisture evaporated from the ocean surface. As this moist air reaches the land, it is often forced upward by terrain or cools as it moves inland, leading to condensation and precipitation. This process typically results in increased moisture levels and more frequent precipitation compared to winds blowing from the land to the sea.\n\nAnswer: A"
+  },
+  {
+   "id": "arc-Mercury_7140333",
+   "score": 1.0,
+   "text": "The scenario described is a classic example of **eutrophication**. \n\nWhen fertilizer runoff enters a lake, it provides a massive influx of nutrients (like nitrogen and phosphorus), which causes a population explosion of primary producers (algae). This is known as an algal bloom. As the algae eventually die, they sink to the bottom of the lake. Aerobic bacteria then begin to decompose this large amount of organic matter. This decomposition process consumes vast amounts of **dissolved oxygen** from the water. As oxygen levels drop (hypoxia), the higher trophic levels\u2014the heterotrophs such as fish and invertebrates\u2014can no longer survive and their populations decline.\n\nA. There is no mention of predator introduction.\nB. The runoff actually increases nutrient levels; it does not deplete them.\nC. This is a seasonal cycle, not a direct result of fertilizer runoff.\nD. This correctly describes the biological process of eutrophication.\n\nAnswer: D"
+  },
+  {
+   "id": "arc-Mercury_7038028",
+   "score": 1.0,
+   "text": "While all the options represent good laboratory practices, the most critical rule specifically regarding the handling and identification of chemicals to prevent accidents (such as mixing the wrong substances) is labeling.\n\nC\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_7032620",
+   "score": 1.0,
+   "text": "In the periodic table, vertical columns are known as **groups** or **families**. Elements within the same family share similar chemical and physical properties because they have the same number of valence electrons.\n\n*   **A is incorrect** because periods are the horizontal rows.\n*   **B is correct** because columns are called families.\n*   **C is incorrect** because elements in a column have different total numbers of electrons (as their atomic numbers differ).\n*   **D is incorrect** because atomic mass increases as you move down a column.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_SC_407382",
+   "score": 1.0,
+   "text": "To determine the correct answer, let's evaluate each option:\n\n*   **A. They both hibernate:** While some turtles hibernate, ducks generally do not; they are more likely to migrate.\n*   **B. They both have feathers:** Ducks have feathers, but turtles have shells and skin; they do not have feathers.\n*   **C. They both reproduce by laying eggs:** Ducks (birds) and turtles (reptiles) both reproduce by laying eggs. This is a shared characteristic.\n*   **D. They both provide milk for their young:** Providing milk is a characteristic of mammals. Neither ducks nor turtles are mammals.\n\nTherefore, the correct similarity is that they both lay eggs.\n\nAnswer: C"
+  },
+  {
+   "id": "arc-Mercury_SC_401309",
+   "score": 0.0,
+   "text": "Sunlight is a natural resource that is replenished constantly by the sun and will not run out within a human timeframe, making it a renewable resource. While it is often considered inexhaustible on a human scale, in scientific and environmental contexts, \"renewable\" is the standard classification for energy sources like solar, wind, and water.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-MDSA_2011_5_3",
+   "score": 1.0,
+   "text": "The process described is the change of liquid water into a gas (water vapor). \n\n*   **Condensation** is the change from gas to liquid.\n*   **Evaporation** is the change from liquid to gas.\n*   **Freezing** is the change from liquid to solid.\n*   **Melting** is the change from solid to liquid.\n\nSince Beaker 2 was heated to turn the liquid into water vapor, the process is evaporation.\n\nAnswer: B"
+  },
+  {
+   "id": "arc-Mercury_416380",
+   "score": 1.0,
+   "text": "The process described is known as **eutrophication**. When fertilizers (which are rich in nitrogen and phosphorus) enter a body of water like an ocean bay, they trigger a massive growth of algae, known as an **algal bloom**.\n\nAs the algae eventually die, they are decomposed by bacteria. This decomposition process is aerobic, meaning the bacteria consume large amounts of **dissolved oxygen** from the water to break down the organic matter. This leads to hypoxic conditions (low oxygen), which can create \"dead zones\" where fish and other marine life cannot survive.\n\nA. oxygen\nB. nitrogen\nC. carbon dioxide\nD. carbon monoxide\n\nAnswer: A"
+  }
+ ]
+}
