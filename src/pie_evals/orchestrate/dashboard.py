@@ -45,9 +45,9 @@ PAGE = """<!doctype html>
   .controls [hidden] { display: none; }
   .controls .grow { flex: 1; }
   tr.push.flat { cursor: default; }
-  input.rowpick { width: 18px; height: 18px; margin: 0; cursor: pointer; }
-  td.pickcell { padding: 0; }
-  td.pickcell label { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 36px; padding: 0 10px; cursor: pointer; }
+  input.rowpick { width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle; }
+  table.compact td.pickcell { padding: 0; }
+  td.pickcell label { display: flex; align-items: center; justify-content: center; height: calc(14px * 1.4); padding: 3px 8px; cursor: pointer; }
   td.pickcell:hover { background: #eef1f4; }
   .dot.wait { background: #d4a72c; }
   .dot.bad { background: #cf222e; }
