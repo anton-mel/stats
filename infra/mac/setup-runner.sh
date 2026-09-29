@@ -39,6 +39,10 @@ NAME="$(scutil --get ComputerName | tr ' ' '-')-$PLATFORM_ID"
 ./config.sh --unattended --url "https://github.com/$REPO" --token "$TOKEN" --name "$NAME" \
   --labels "self-hosted,macos,$PLATFORM_ID" --work _work --replace >/dev/null
 ok "registered as $NAME"
+SDK=$(readlink -f /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk 2>/dev/null || xcrun --show-sdk-path)
+{ grep -v '^SDKROOT=' .env 2>/dev/null; echo "SDKROOT=$SDK"; } > .env.new && mv .env.new .env
+grep -q "$HOME/.cargo/bin" .path 2>/dev/null || { printf '%s:' "$HOME/.cargo/bin"; cat .path 2>/dev/null; } > .path.new && [ -f .path.new ] && mv .path.new .path
+ok "builds link against $(basename "$SDK") with cargo from ~/.cargo/bin"
 
 step 5 "Starting the runner service"
 ./svc.sh install >/dev/null 2>&1 || true
