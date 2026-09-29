@@ -127,6 +127,15 @@ def quality_cmd(artifacts, tasks, n, matrix_dir, store_dir, pie_root):
         run_quality(a, list(tasks), n, matrix_dir=matrix_dir, store_dir=store_dir, pie_root=Path(pie_root), log=lambda m_: click.echo(m_, err=True))
 
 
+@main.command("rescore", help="Grade saved quality answers again with the current scorers.")
+@click.argument("files", nargs=-1, type=click.Path(exists=True))
+def rescore_cmd(files):
+    from pie_evals.quality.run import rescore
+
+    for f in files:
+        rescore(Path(f), log=lambda m_: click.echo(m_, err=True))
+
+
 @main.command("preflight")
 def preflight_cmd():
     """Print the hardware fingerprint and machine state checks."""

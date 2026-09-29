@@ -108,3 +108,17 @@ def run_quality(artifact_id: str, tasks: list[str], n: int, *, matrix_dir: str =
         log(f"quality {art.id} {task}: {correct:.0f}/{len(scores)} = {summary['score']:.1%} (95% {lo:.1%}..{hi:.1%}) in {summary['minutes']} min")
         written.append(path)
     return written
+
+
+def rescore(path: Path, log=print) -> dict:
+    q = json.loads(Path(path).read_text())
+    load, score, _ = TASKS[q["task"]]
+    items = {i.id: i for i in load(q["n"])}
+    for s in q["samples"]:
+        s["score"] = score(items[s["id"]], s["text"])
+    q["correct"] = sum(s["score"] for s in q["samples"])
+    q["score"] = q["correct"] / len(q["samples"]) if q["samples"] else None
+    q["ci95"] = list(wilson(q["correct"], len(q["samples"])))
+    Path(path).write_text(json.dumps(q, indent=1))
+    log(f"rescored {q['artifact']} {q['task']}: {q['score']:.1%}")
+    return q
