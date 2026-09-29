@@ -7,6 +7,7 @@ workloads:
   - id: ob-story-200
     kind: single_stream
     params:
+      label: "default: story prompt, 200 tokens out"
       prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
       decode: 200
       requests: 6
@@ -14,30 +15,20 @@ workloads:
     est_minutes: 1
   - id: ob-512-200
     kind: single_stream
-    params: {prefill: 512, decode: 200, requests: 6, warmup: 1}
+    params: {label: "-prompt-tokens 512, 200 tokens out", prefill: 512, decode: 200, requests: 6, warmup: 1}
     est_minutes: 1
-  - id: ob-2048-200
+  - id: ob-short-100
     kind: single_stream
-    params: {prefill: 2048, decode: 200, requests: 6, warmup: 1}
-    est_minutes: 1.5
-
-  - id: ss-128-64
-    kind: single_stream
-    params: {prefill: 128, decode: 64}
+    params: {label: "-p \"Write me a short story\" -max-tokens 100", prompt: "Write me a short story", decode: 100, requests: 6, warmup: 1}
     est_minutes: 0.5
-  - id: lc-1k-128
-    kind: long_context
-    params: {prefill: 1024, decode: 128, concurrency: 1}
-    est_minutes: 0.7
-  - id: lc-2k-128
-    kind: long_context
-    params: {prefill: 2048, decode: 128, concurrency: 1}
-    est_minutes: 1
-  - id: c8
-    kind: concurrency
-    params: {concurrency: 8, num_requests: 32, prefill: 128, decode: 128}
-    est_minutes: 1
-  - id: c32
-    kind: concurrency
-    params: {concurrency: 32, num_requests: 128, prefill: 128, decode: 128}
-    est_minutes: 1.5
+  - id: ob-advanced-500
+    kind: single_stream
+    params:
+      label: "-epochs 10 -temperature 0.7 -max-tokens 500 -seed 42 -warmup 2"
+      prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
+      decode: 500
+      requests: 10
+      warmup: 2
+      temperature: 0.7
+      seed: 42
+    est_minutes: 2
