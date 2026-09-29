@@ -180,6 +180,7 @@ PAGE = """<!doctype html>
   .gapbar .fill.ahead { left: 50%; background: #2da44e; border-radius: 0 5px 5px 0; }
   .gapbar .fill.behind { right: 50%; background: #cf222e; border-radius: 5px 0 0 5px; }
   .gapbar.noisy .fill { opacity: .4; }
+  table.quality { margin-top: 14px; }
   .running { color: #9a6700; background: #fff8c5; border-radius: 999px; padding: 0 8px; font-size: 12px; }
   .legend { display: flex; justify-content: space-between; font-weight: 400; font-size: 11px; color: #7a838d; }
   table.rmlist { width: 100%; }
@@ -330,9 +331,16 @@ function overview() {
         return `<tr title="${esc(b.description)}"><td class="clip">${esc(b.name)}</td><td>${gapBar(null)}</td>` +
           `<td class="num muted" title="pie does not run this model">–</td><td class="num muted" title="${esc(tip)}">– / ${ol?.noisy ? "~" : ""}${tok(ol?.[key])}</td></tr>`;
       }).join("");
+    const qtasks = [["gsm8k", "GSM8K", "grade school math, exact final answer"], ["ifeval", "IFEval", "follows verifiable format instructions"]];
+    const qcell = q => q?.score == null ? `<td class="num muted">–</td>` :
+      `<td class="num" title="95% interval ${(q.ci95[0] * 100).toFixed(0)}–${(q.ci95[1] * 100).toFixed(0)}%, n=${q.n}${q.version ? ", " + esc(q.version) : ""}">${(q.score * 100).toFixed(0)}%</td>`;
+    const qrows = qtasks.filter(([t]) => DATA.quality?.[m.pie]?.[t] || DATA.quality?.[m.id]?.[t]);
+    const qhtml = qrows.length ? `<table class="compact fixed quality"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
+      `<tr><th>quality</th><th></th><th class="num">pie</th><th class="num">${esc(m.label)}</th></tr>` +
+      qrows.map(([t, name, desc]) => `<tr title="${esc(desc)}"><td>${name}</td><td class="muted">${esc(desc)}</td>${qcell(DATA.quality?.[m.pie]?.[t])}${qcell(DATA.quality?.[m.id]?.[t])}</tr>`).join("") + `</table>` : "";
     rows.push(`<div class="card"><div class="model-head"><h2>${modelTag(m)}</h2></div>` +
       `<table class="compact fixed ov"><colgroup><col style="width:26%"><col><col style="width:78px"><col style="width:120px"></colgroup>` +
-      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table></div>`);
+      `<tr><th>benchmark</th><th><span class="legend"><span>behind</span><span>ahead</span></span></th><th class="num">gap</th><th class="num" title="pie / ${esc(m.label)}">tok/s</th></tr>${body}</table>${qhtml}</div>`);
   }
   main.innerHTML = html + rows.join("");
   document.getElementById("latest")?.addEventListener("click", e => { e.preventDefault(); sel = home; draw(); });
@@ -796,6 +804,14 @@ def people(repo: str, authors: dict[str, str]) -> list[dict]:
     return sorted(rows, key=lambda p: p["last"], reverse=True)
 
 
+def quality(store: Store) -> dict[str, dict]:
+    out: dict[str, dict] = {}
+    for f in sorted((store.root / "quality").glob("*.json")) if (store.root / "quality").exists() else []:
+        q = json.loads(f.read_text())
+        out.setdefault(q["artifact"], {})[q["task"]] = {k: q.get(k) for k in ("score", "ci95", "n", "version", "date", "engine", "empty")}
+    return out
+
+
 def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, pie_repo: str,
           lookup_commits: bool = True) -> dict:
     tests = benchmarks(matrix)
@@ -874,6 +890,7 @@ def build(store: Store, matrix: Matrix, live: list[dict] | None, *, repo: str, p
         "benchmarks": tests,
         "verdicts": verdicts(results, commits), "baselines": baselines,
         "baseline_labels": sorted(set(label_of.values())),
+        "quality": quality(store),
         "ollama_icon": OLLAMA_ICON,
         "commits": commits, "history": all_commits, "results": results, "models": models,
         "failed": [{"sha": sha, "mac": mac, "model": model} for sha, mac, model in failed],
