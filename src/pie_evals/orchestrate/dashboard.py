@@ -46,8 +46,8 @@ PAGE = """<!doctype html>
   .controls .grow { flex: 1; }
   tr.push.flat { cursor: default; }
   input.rowpick { width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle; }
-  table.compact td.pickcell { padding: 0; }
-  td.pickcell label { display: flex; align-items: center; justify-content: center; height: calc(14px * 1.4); padding: 3px 8px; cursor: pointer; }
+  table.compact td.pickcell { vertical-align: middle; }
+  td.pickcell label { display: flex; align-items: center; justify-content: center; height: calc(14px * 1.4); margin: -3px -8px; padding: 3px 8px; cursor: pointer; }
   td.pickcell:hover { background: #eef1f4; }
   .dot.wait { background: #d4a72c; }
   .dot.bad { background: #cf222e; }
@@ -425,6 +425,7 @@ function pushes() {
   }
   document.getElementById("main").innerHTML = html + `</table>${pager(pages)}</div>`;
   document.querySelectorAll("tr.push").forEach(tr => tr.onclick = e => {
+    if (e.target.classList.contains("pickcell")) return e.target.querySelector("input.rowpick").click();
     if (e.target.closest(".pickcell")) return;
     if (!isMeasured.has(tr.dataset.sha)) return;
     sel = tr.dataset.sha; tab = "Overview"; draw();
