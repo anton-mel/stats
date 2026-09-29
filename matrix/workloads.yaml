@@ -38,12 +38,13 @@ workloads:
     kind: single_stream
     params:
       label: Sampled 500
-      description: "ollama-bench advanced: temperature 0.7, seed 42, 500 tokens out, 10 runs"
+      description: "ollama-bench advanced: temperature 0.7, top-p 0.95, seed 42, 500 tokens out, 10 runs"
       prompt: "Please write a descriptive story about a llama named Alonso who grows up to be President of the Land of Llamas. Include details about Alonso's childhood, adolescent years, and how he grew up to be a political mover and shaker. Write the story with a sense of whimsy."
       decode: 500
       requests: 10
       warmup: 2
       temperature: 0.7
+      top_p: 0.95
       seed: 42
     est_minutes: 2
   - id: ctx-4k-256

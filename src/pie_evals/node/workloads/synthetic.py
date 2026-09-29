@@ -48,7 +48,7 @@ def common_args_for(workload: WorkloadSpec, warmup: int = 2) -> list[str]:
     """common.py flags shared by every engine for this shape."""
     p = workload.params
     kind = str(workload.kind)
-    args: list[str] = ["--temperature", str(p.get("temperature", 0)), "--top-p", "1", "--ignore-eos", "--warmup", str(warmup), "--no-think"]
+    args: list[str] = ["--temperature", str(p.get("temperature", 0)), "--top-p", str(p.get("top_p", 1)), "--ignore-eos", "--warmup", str(warmup), "--no-think"]
     if kind == "long_context":
         # a 32k-word prompt does not fit one argv element (E2BIG at 128 KB): the bench
         # synthesizes the bulk itself from --shared-prefix-words, deterministically and

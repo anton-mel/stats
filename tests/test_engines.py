@@ -320,11 +320,17 @@ def test_ollama_flushes_every_slot_it_booted(tmp_path):
 
 
 def test_advanced_shape_carries_temperature_and_ollama_seed(tmp_path):
-    adv = WorkloadSpec(id="ob-advanced-500", kind="single_stream", params={"prompt": "p", "decode": 500, "temperature": 0.7, "seed": 42})
+    adv = WorkloadSpec(id="ob-advanced-500", kind="single_stream", params={"prompt": "p", "decode": 500, "temperature": 0.7, "top_p": 0.95, "seed": 42})
     assert flag_value(common_args_for(adv), "--temperature") == "0.7"
+    assert flag_value(common_args_for(adv), "--top-p") == "0.95"
     argv = argv_for(make(OllamaEngine), adv, tmp_path)
     assert flag_value(argv, "--seed") == "42"
     assert "--seed" not in argv_for(make(PieEngine), adv, tmp_path)
+
+
+def test_top_p_defaults_to_one():
+    plain = WorkloadSpec(id="ob-story-200", kind="single_stream", params={"prompt": "p", "decode": 200})
+    assert flag_value(common_args_for(plain), "--top-p") == "1"
 
 
 def test_ollama_keeps_its_cache_on_the_cached_prompt_shape():
