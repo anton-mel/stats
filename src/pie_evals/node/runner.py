@@ -224,6 +224,9 @@ class NodeRunner:
             from .reclaim import LOW_WATER_GIB, reclaim
 
             reclaim(self.job, self.hf_cache, low_water_gib=max(LOW_WATER_GIB, float(cell.artifact.expected_gib or 0) * 1.2 + 10), log=self.log)
+            pending = getattr(self, "_prefetch", {}).get(cell.artifact.id)
+            if pending is not None:
+                pending.result()
             return ensure_snapshot(cell.artifact, self.hf_cache, download=self.download, log=self.log)
         except EngineLaunchError:
             raise
@@ -233,6 +236,21 @@ class NodeRunner:
             # the hub unreachable, or a full disk, says nothing of the model: a re-dispatch measures it
             unreachable = isinstance(e, (LocalEntryNotFoundError, ConnectionError, TimeoutError)) or type(e).__module__.split(".")[0] in ("requests", "httpx", "urllib3") or (isinstance(e, OSError) and e.errno == 28)
             raise EngineLaunchError(ErrorClass.HARNESS_INVALID if unreachable else ErrorClass.LOAD_FAIL, f"checkpoint unavailable for {cell.artifact.id}: {str(e).strip().splitlines()[-1][:300] if str(e).strip() else e!r}") from e
+
+    def _start_prefetch(self, artifacts) -> None:
+        if not self.download:
+            return
+        from concurrent.futures import ThreadPoolExecutor
+
+        from .snapshots import ensure_snapshot
+
+        pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="prefetch")
+        self._prefetch = {}
+        for art in {a.id: a for a in artifacts}.values():
+            def fetch(a=art):
+                ensure_snapshot(a, self.hf_cache, download=True, log=lambda m: self.log(f"prefetch: {m}"))
+            self._prefetch[art.id] = pool.submit(fetch)
+        pool.shutdown(wait=False)
 
     # ------------------------------------------------------------------ run
     def run(self) -> list[Record]:
@@ -263,6 +281,7 @@ class NodeRunner:
         records: list[Record] = []
         groups = split_heavy_processes(job.cells_by_process())
         self.log(f"{len(groups)} engine processes to run")
+        self._start_prefetch([cells[0].artifact for cells in groups.values()])
         for gkey, cells in groups.items():
             engine_name, artifact_key, mode_key = gkey
             if self.over_budget():

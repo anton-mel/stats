@@ -258,3 +258,21 @@ def test_a_slow_first_round_is_confirmed_away_not_withheld(job, patched, tmp_pat
     assert ss.status == CellStatus.PASS and len(ss.perf.rounds) == 5 and ss.perf.decode_tok_s == 100.0
     c8 = next(r for r in recs if r.cell.workload.id == "c8")
     assert c8.status == CellStatus.NOISY and len(c8.perf.rounds) == 4
+
+
+def test_checkpoints_download_in_the_background(job, patched, tmp_path, monkeypatch):
+    import threading
+
+    from pie_evals.node import snapshots
+
+    real = snapshots.ensure_snapshot
+    threads = []
+
+    def spy(art, hf, **kw):
+        threads.append(threading.current_thread().name)
+        return real(art, hf, download=False)
+
+    monkeypatch.setattr(snapshots, "ensure_snapshot", spy)
+    r = runner_mod.NodeRunner(job, pie_root=tmp_path / "pie", out_dir=tmp_path / "out", hf_cache=patched, build=False, download=True)
+    recs = r.run()
+    assert recs and any(t.startswith("prefetch") for t in threads)
