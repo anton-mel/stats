@@ -28,3 +28,12 @@ def test_ensure_artifact_runs_import_once(tmp_path, monkeypatch):
     assert calls[0][:3] == ["/pie/target/release/pie", "model", "import"] and "--sku" in calls[0]
     zt2 = im.ensure_artifact(_art(), tmp_path / "snap", Path("/pie/target/release/pie"), "e06ff359377b", root=tmp_path / "cache", log=lambda *_: None)
     assert zt2 == zt and len(calls) == 1
+
+
+def test_a_pinned_sku_is_always_imported():
+    from pie_evals.node.importer import needs_import
+    from pie_evals.schema import ArtifactSpec
+
+    base = {"id": "g", "base_model": "meta-models/Muse-Glimmer-30B", "family": "muse_glimmer", "scheme": "affine_u4_g64"}
+    assert needs_import(ArtifactSpec(**base, pie_sku="muse-glimmer-30b-u4g64-kv-bf16"))
+    assert not needs_import(ArtifactSpec(**base))

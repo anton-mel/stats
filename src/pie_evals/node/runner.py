@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import os
 import random
+import re
 import signal
 import threading
 import time
@@ -311,7 +312,7 @@ class NodeRunner:
                 engine_version = engine.version()
                 # one boot per model: the bench then attaches to this server for every
                 # cell and round instead of reloading the weights each time
-                serve_log = self.out / "serve" / f"{artifact_key.replace('/', '_')}-{mode_key}.log"
+                serve_log = self.out / "serve" / f"{re.sub(r'[^A-Za-z0-9._-]', '_', artifact_key)}-{mode_key}.log"
 
                 try:
                     engine, model_path = self._boot(engine, serve_envelope([c.workload for c in cells]), serve_log, cls=cls, first=first, recipe=recipe, num_layers=num_layers, snapshot=snapshot, model_path=model_path)

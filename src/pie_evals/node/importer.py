@@ -25,7 +25,7 @@ def needs_import(artifact: ArtifactSpec) -> bool:
     # pie serve reads safetensors and .zt only; mlx and gguf checkpoints go
     # through `pie model import` (nightly 35967154121: the GGUF snapshot dir
     # "holds no .safetensors and no .zt container")
-    return artifact.source_format in (SourceFormat.MLX, SourceFormat.GGUF)
+    return artifact.source_format in (SourceFormat.MLX, SourceFormat.GGUF) or bool(artifact.pie_sku)
 
 
 def artifact_root(root: Path | None = None) -> Path:
