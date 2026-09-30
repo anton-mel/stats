@@ -1,1 +1,56 @@
-[]
+[
+ {
+  "cell_id": "ce467436dab660a0",
+  "cell_key": "pie|m5-max-48g|mlx-community/gemma-4-26b-a4b-it-4bit@affine_u4_g64/mlx|ob-512-200|text-completion-bench|tp1",
+  "engine": "pie",
+  "platform": "m5-max-48g",
+  "artifact": "gemma-4-26b-a4b-mlx4",
+  "workload": "ob-512-200",
+  "program": "text-completion-bench",
+  "mode": "tp1",
+  "metric": "decode_tok_s",
+  "value": 135.67930103422248,
+  "delta_rel": -0.0389890409338196,
+  "threshold_rel": 0.02,
+  "kind": "regression",
+  "pie_commit": "2195fa8aa93af86cd2d9297d2b8af1cebef14426",
+  "engine_version": "2195fa8aa",
+  "family": "gemma4_moe"
+ },
+ {
+  "cell_id": "1b786b4dabe678b5",
+  "cell_key": "pie|m5-max-48g|mlx-community/gemma-4-26b-a4b-it-4bit@affine_u4_g64/mlx|ob-story-200|text-completion-bench|tp1",
+  "engine": "pie",
+  "platform": "m5-max-48g",
+  "artifact": "gemma-4-26b-a4b-mlx4",
+  "workload": "ob-story-200",
+  "program": "text-completion-bench",
+  "mode": "tp1",
+  "metric": "decode_tok_s",
+  "value": 144.8645170478315,
+  "delta_rel": -0.0252555047828551,
+  "threshold_rel": 0.02,
+  "kind": "regression",
+  "pie_commit": "2195fa8aa93af86cd2d9297d2b8af1cebef14426",
+  "engine_version": "2195fa8aa",
+  "family": "gemma4_moe"
+ },
+ {
+  "cell_id": "92776083decbd338",
+  "cell_key": "pie|m5-max-48g|mlx-community/gemma-4-26b-a4b-it-4bit@affine_u4_g64/mlx|control-aa|text-completion-bench|tp1",
+  "engine": "pie",
+  "platform": "m5-max-48g",
+  "artifact": "gemma-4-26b-a4b-mlx4",
+  "workload": "control-aa",
+  "program": "text-completion-bench",
+  "mode": "tp1",
+  "metric": "decode_tok_s",
+  "value": 149.84210739997482,
+  "delta_rel": -0.023080461204335084,
+  "threshold_rel": 0.02,
+  "kind": "regression",
+  "pie_commit": "2195fa8aa93af86cd2d9297d2b8af1cebef14426",
+  "engine_version": "2195fa8aa",
+  "family": "gemma4_moe"
+ }
+]
