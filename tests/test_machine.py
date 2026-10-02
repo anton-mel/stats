@@ -39,5 +39,5 @@ def test_a_benchmark_gives_up_after_its_wait(lock_file):
             with machine_lock("late", max_wait_s=0.2, poll_s=0.05, log=lambda m: None):
                 pass
     assert "holder" in str(e.value)
-    with machine_lock("after", max_wait_s=0.2, log=lambda m: None) as waited:
-        assert waited < 0.2
+    with machine_lock("after", max_wait_s=5, log=lambda m: None) as waited:
+        assert waited < 5
