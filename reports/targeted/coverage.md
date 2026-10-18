@@ -12,22 +12,22 @@
 
 | engine | platform | artifact | workload | program | mode | status | error | message |
 |---|---|---|---|---|---|---|---|---|
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | control-aa | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-story-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-512-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-short-100 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | c4 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | control-aa | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-story-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-512-200 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-short-100 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
-| pie | m5-max-48g | muse-glimmer-30b-mlx4 | c4 | text-completion-bench | tp1 | fail | load_fail | artifact import: For more information, try '--help'. |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | control-aa | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-story-200 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-512-200 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-short-100 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | gemma-4-26b-a4b-mlx4 | c4 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | control-aa | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-story-200 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-512-200 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-short-100 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ob-advanced-500 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-4k-256 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | ctx-8k-256 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
+| pie | m5-max-48g | muse-glimmer-30b-mlx4 | c4 | text-completion-bench | tp1 | fail | load_fail | pie build failed: Command '['cargo', 'build', '--release', '--target', 'wasm32-wasip2', '--workspace']' returned non-zer |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ob-story-200 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | gemma-4-26b-a4b-ollama | ctx-4k-256 | text-completion-bench | tp1 | noisy |  |  |
 | ollama | m5-max-48g | llama-3.2-3b-ollama | c4 | text-completion-bench | tp1 | noisy |  |  |
